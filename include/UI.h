@@ -1,15 +1,16 @@
 #ifndef UI_H
 #define UI_H
 
-#include <iostream>
 
-using namespace std;
-
-/// Class for providing the User Interface
 class UI
 {
-public:
-    UI();
+    public:
+        UI();
+        virtual ~UI();
+
+    protected:
+
+    private:
 };
 
 #endif // UI_H
