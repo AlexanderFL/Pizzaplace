@@ -19,7 +19,7 @@ private:
 public:
     Files();
 
-    bool AddOrder(Pizza pizza);
+    bool AddOrder(Pizza pizza, string phone, string address="");
 };
 
 #endif // FILES_H

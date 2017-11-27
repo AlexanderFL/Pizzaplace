@@ -7,7 +7,15 @@ Files::Files()
     this->orders = "OrdersFile.txt";
 }
 
-bool Files::AddOrder()
+/*
+    Creates a new order in the system
+*/
+bool Files::AddOrder(Pizza pizza, string phone, string address="")
 {
+    ofstream fout;
+    fout.open(orders, ios::app);
 
+
+
+    fout.close();
 }

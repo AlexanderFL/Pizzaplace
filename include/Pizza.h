@@ -4,13 +4,10 @@
 
 class Pizza
 {
-    public:
-        Pizza();
-        virtual ~Pizza();
+public:
+    Pizza();
 
-    protected:
-
-    private:
+    // TODO: Override << operator for files.cpp
 };
 
 #endif // PIZZA_H
