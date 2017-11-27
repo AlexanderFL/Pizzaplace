@@ -6,3 +6,8 @@ Files::Files()
     this->menu = "MenuFile.txt";
     this->orders = "OrdersFile.txt";
 }
+
+bool Files::AddOrder()
+{
+
+}
