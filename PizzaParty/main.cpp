@@ -1,9 +1,12 @@
 #include <iostream>
 
 using namespace std;
+#include "MainUI.h"
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    MainUI mainUI;
+    mainUI.startUI();
+
     return 0;
 }
