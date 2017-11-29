@@ -2,5 +2,4 @@
 Debug/
 .vs/
 *.vcxproj.user
-*.vcxproj
 *.vcxproj.filters
