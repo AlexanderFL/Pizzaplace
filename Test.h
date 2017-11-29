@@ -6,6 +6,7 @@
 #define PIZZAPLACE_TEST_H
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Test {

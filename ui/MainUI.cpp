@@ -25,7 +25,7 @@ void MainUI::startUI()
 
         cin >> input;
 
-        transform(input.begin(), input.end(), input.begin(),::tolower);
+        transform(input.begin(), input.end(), input.begin(), ::tolower);
 
         if(input == "manager")
         {

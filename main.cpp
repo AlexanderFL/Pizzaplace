@@ -1,7 +1,7 @@
 #include <iostream>
 
 using namespace std;
-#include "MainUI.h"
+#include "ui/MainUI.h"
 
 int main()
 {

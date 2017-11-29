@@ -23,7 +23,7 @@
     <ProjectGuid>{0D302E74-1B8C-4010-8842-704C31F8E17E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PizzaPlace</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,7 +97,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -143,25 +143,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="MainUI.h" />
-    <ClInclude Include="Order.h" />
-    <ClInclude Include="OrderRepository.h" />
-    <ClInclude Include="Pizza.h" />
-    <ClInclude Include="PizzaRepository.h" />
-    <ClInclude Include="Topping.h" />
-    <ClInclude Include="ToppingRepository.h" />
-    <ClInclude Include="User.h" />
+    <ClInclude Include="ui\MainUI.h" />
+    <ClInclude Include="order\Order.h" />
+    <ClInclude Include="order\OrderRepository.h" />
+    <ClInclude Include="pizza\Pizza.h" />
+    <ClInclude Include="pizza\PizzaRepository.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="TestRepo.h" />
+    <ClInclude Include="pizza\Topping.h" />
+    <ClInclude Include="pizza\ToppingRepository.h" />
+    <ClInclude Include="user\User.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainUI.cpp" />
-    <ClCompile Include="Order.cpp" />
-    <ClCompile Include="OrderRepository.cpp" />
-    <ClCompile Include="Pizza.cpp" />
+    <ClCompile Include="ui\MainUI.cpp" />
+    <ClCompile Include="order\Order.cpp" />
+    <ClCompile Include="order\OrderRepository.cpp" />
+    <ClCompile Include="pizza\Pizza.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PizzaRepository.cpp" />
-    <ClCompile Include="Topping.cpp" />
-    <ClCompile Include="ToppingRepository.cpp" />
-    <ClCompile Include="User.cpp" />
+    <ClCompile Include="pizza\PizzaRepository.cpp" />
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="TestRepo.cpp" />
+    <ClCompile Include="pizza\Topping.cpp" />
+    <ClCompile Include="pizza\ToppingRepository.cpp" />
+    <ClCompile Include="user\User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
