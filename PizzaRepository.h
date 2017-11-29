@@ -5,7 +5,7 @@
 #ifndef PIZZAPLACE_PIZZAREPOSITORY_H
 #define PIZZAPLACE_PIZZAREPOSITORY_H
 
-#include "Pizza.h";
+#include "Pizza.h"
 
 class PizzaRepository {
     private:

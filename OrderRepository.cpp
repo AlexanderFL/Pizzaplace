@@ -5,14 +5,14 @@
 #include <fstream>
 #include "OrderRepository.h"
 
-OrderRepository::OrderRepository() const {
+OrderRepository::OrderRepository() {
     this->file = "orders.dat";
 }
 
 void OrderRepository::storeOrder(const Order &order) const {
     ofstream fout;
     fout.open(this->file, ios::binary | ios::app);
-    order.write(fout);
+    //order.write(fout);
     fout.close();
 }
 
@@ -20,7 +20,7 @@ Order OrderRepository::retrieveOrder() const {
     ifstream fin;
     Order order;
     fin.open(this->file, ios::binary);
-    order.read();
+    //order.read();
     fin.close();
     return order;
 }
