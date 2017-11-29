@@ -147,12 +147,14 @@
     <ClInclude Include="Pizza.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Topping.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Pizza.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Topping.cpp" />
+    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,17 +2,14 @@
 
 Topping::Topping(){}
 
-void Topping::NewTopping(string name, double price, int level)
+void Topping::NewTopping(string name, double price)
 {
-    if(level == 1)
-    {
-        //@todo append topping to file
-    }
+	//@todo append topping to file
 }
 
-Topping Topping::instanciate()
+Topping* Topping::getAllToppings()
 {
-	Topping t;
+	Topping* t = new Topping[9];
 	return t;
 }
 

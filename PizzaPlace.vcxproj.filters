@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Users">
+      <UniqueIdentifier>{01e0bc06-106b-46ae-bf4f-18a7c6b8e441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -27,19 +30,25 @@
     <ClInclude Include="Pizza.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Topping.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Order.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Pizza.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Topping.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Resource Files\Users</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
