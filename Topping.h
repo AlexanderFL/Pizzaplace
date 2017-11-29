@@ -12,8 +12,8 @@ private:
 public:
 	Topping();
 
-	void NewTopping(string name, double price, int level);
-	Topping instanciate();
+	void NewTopping(string name, double price);
+	Topping* getAllToppings();
 
 	friend ostream& operator << (ostream& out, const Topping topping);
 };

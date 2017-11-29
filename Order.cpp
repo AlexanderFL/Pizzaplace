@@ -1,21 +1,34 @@
 #include "Order.h"
 
-Order::Order()
-{
-	//ctor
+/*
+	PUBLIC FUNCTIONS
+*/
+
+Order::Order() 
+{ 
+	totalCost = 0;
 }
 
-Order::~Order()
+void Order::MakeOrder()
 {
-	//dtor
+	Pizza tempPizza;
+	cout << "New Order" << endl;
+	cin >> tempPizza;
+
 }
 
-void Order::AddOrder(Pizza pizza)
-{
-	// @todo Append order to file
-}
+/*
+	PRIVATE FUNCTIONS
+*/
 
-void Order::AddOrder()
+
+/*
+FRIEND FUNCTIONS
+*/
+
+ostream& operator<<(ostream& out, const Order& order)
 {
-	// @todo Make order and append to file
+	out << order.pizza;
+
+	return out;
 }
