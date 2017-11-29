@@ -14,7 +14,6 @@ void Order::MakeOrder()
 	Pizza tempPizza;
 	cout << "New Order" << endl;
 	cin >> tempPizza;
-
 }
 
 /*
@@ -28,7 +27,7 @@ FRIEND FUNCTIONS
 
 ostream& operator<<(ostream& out, const Order& order)
 {
-	out << order.pizza;
+	out << order;
 
 	return out;
 }
