@@ -2,27 +2,24 @@
 #include "Pizza.h"
 
 /*
-	PUBLIC FUNCTIONS
+*************************************************
+				PUBLIC FUNCTIONS
+*************************************************
 */
 
 Pizza::Pizza()
 {
-	this->toppings = nullptr;
 	this->nrOfToppings = 0;
 }
 
 Pizza::Pizza(int numberOfToppings)
 {
-	this->toppings = nullptr;
 	this->nrOfToppings = numberOfToppings;
 }
 
-Pizza::~Pizza() {
-	if (this->toppings != nullptr) {
-		delete[] toppings;
-	}
-}
-
+/*
+	Writes the pizza to a binary file
+*/
 void Pizza::write(ofstream& fout) const {
 	fout.write((char*)(&this->nrOfToppings), sizeof(int));
 	for (int i = 0; i < nrOfToppings; ++i) {
@@ -32,26 +29,33 @@ void Pizza::write(ofstream& fout) const {
 	fout.write((char*)(&this->cost), sizeof(double));
 }
 
+/*
+	Reads the pizza from a binary file
+*/
 void Pizza::read(ifstream& fin) {
 	fin.read((char*)(&this->nrOfToppings), sizeof(int));
-	if (this->toppings != nullptr) {
-		delete[] toppings;
-	}
-	toppings = new Topping[this->nrOfToppings];
+	this->toppings.clear();
+	Topping topping;
 	for (int i = 0; i < this->nrOfToppings; ++i) {
-		toppings[i].read(fin);
+		topping.read(fin);
+		this->toppings.push_back(topping);
 	}
 	fin.read((char*)(&this->size), sizeof(int));
 	fin.read((char*)(&this->cost), sizeof(double));
 }
 
+/*
+	Calculates the cost for the pizza.
+*/
 double Pizza::getCost() {
 	this->calculateCost();
 	return this->cost;
 }
 
 /*
-	PRIVATE FUNCTIONS
+*************************************************
+*****			PRIVATE FUNCTIONS			*****
+*************************************************
 */
 
 void Pizza::calculateCost() {
@@ -69,17 +73,19 @@ void Pizza::calculateCost() {
 }
 
 /*
-	FRIEND FUNCTIONS
+*************************************************
+				FRIEND FUNCTIONS
+*************************************************
 */
 ostream& operator<< (ostream& out, const Pizza& pizza)
 {
-	out << pizza.toppings;
-
 	return out;
 }
 
 istream& operator>> (istream& in, Pizza& pizza)
 {
+	// TODO: Make this a function call to UI layer
+
 	cout << "Select pizza size:" << endl;
 	cout << " 1: Small\t\t950kr.-" << endl;
 	cout << " 2: Medium\t\t1150kr.-" << endl;
@@ -89,8 +95,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 
 	cout << "Select toppings: " << endl;
 
-	// TODO: change i < x, to corrisponding topping number
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < pizza.toppings.size(); i++)
 	{
 
 	}
