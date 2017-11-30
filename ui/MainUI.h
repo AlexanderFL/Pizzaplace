@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <algorithm> //tolower case string in MainUI cpp ( start ui)
+#include <algorithm> //tolower case string in MainUI cpp (start ui)
 
 using namespace std;
 

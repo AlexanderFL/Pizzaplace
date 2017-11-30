@@ -1,5 +1,6 @@
 #include "MainUI.h"
 #include "DeliveryUI.h"
+#include "ManagerUI.h"
 
 MainUI::MainUI()
 {
@@ -30,15 +31,8 @@ void MainUI::startUI()
 
         if(input == "manager")
         {
-            /*
-            skráir mismunandi gerðir af pizzum (stærð og botn)
-            skráir áleggstegunir
-            ská ákveðnar samsetningar undir nafni (matseðill)
-            ská aðrar vörur, td gos og brauðstangir
-            sk´ra verð
-            skrá afhendingarstaði
-            */
-           cout << "bib";
+			ManagerUI managerUI;
+			managerUI.managerMenu();
         }
         else if(input == "salesman")
         {
