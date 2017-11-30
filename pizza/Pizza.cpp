@@ -46,12 +46,15 @@ void Pizza::addTopping(const Topping& top) {
 	this->toppings.push_back(top);
 }
 
+/*
+	Returns the number of toppings in the pizza
+*/
 int Pizza::nrToppings() const {
 	return this->toppings.size();
 }
 
 /*
-	Calculates the cost for the pizza.
+	Returns the cost of the pizza
 */
 double Pizza::getCost() {
 	this->calculateCost();
@@ -64,6 +67,9 @@ double Pizza::getCost() {
 *************************************************
 */
 
+/*
+	Calculates the cost for the pizza and sets the price of the pizza
+*/
 void Pizza::calculateCost() {
 	this->cost = 0;
 	for (int i = 0; i < this->nrToppings(); ++i) {
@@ -108,6 +114,9 @@ istream& operator>> (istream& in, Pizza& pizza)
 	return in;
 }
 
+/*
+	Compares whether the two pizzas have the same toppings
+*/
 bool operator == (const Pizza& left, const Pizza& right) {
 	Pizza pizza = left * right;
 	if (pizza.nrToppings() == left.nrToppings() && pizza.nrToppings() == right.nrToppings()) {
@@ -116,11 +125,13 @@ bool operator == (const Pizza& left, const Pizza& right) {
 	return false;
 }
 
-
+/*
+	Returns a pizza with the intersection for the toppings of two Pizzas
+*/
 Pizza operator * (const Pizza& left, const Pizza& right) {
 	Pizza pizza;
-	for (unsigned int i = 0; i < left.nrToppings(); ++i) {
-		for (unsigned int j = 0; j < right.nrToppings(); ++j) {
+	for (int i = 0; i < left.nrToppings(); ++i) {
+		for (int j = 0; j < right.nrToppings(); ++j) {
 			if (left.toppings.at(i) == right.toppings.at(j)) {
 				pizza.addTopping(left.toppings.at(i));
 			}
@@ -129,9 +140,12 @@ Pizza operator * (const Pizza& left, const Pizza& right) {
 	return pizza;
 }
 
+/*
+	Returns a pizza with the compenation for the toppings of two Pizzas
+*/
 Pizza operator + (const Pizza& left, const Pizza& right) {
 	Pizza pizza = left;
-	for (unsigned int i = 0; i < right.nrToppings(); ++i) {
+	for (int i = 0; i < right.nrToppings(); ++i) {
 		pizza.addTopping(right.toppings.at(i));
 	}
 	return pizza;
