@@ -1,6 +1,7 @@
 #ifndef TOPPINGREPOSITORY_H
 #define TOPPINGREPOSITORY_H
 
+#include <vector>
 #include "Topping.h"
 
 class ToppingRepository {
@@ -8,8 +9,8 @@ class ToppingRepository {
         string file;
     public:
         ToppingRepository();
-        void storeTopping(const Topping& topping) const;
-        Topping retrieveTopping() const;
+        void storeToppings(const vector<Topping> &toppings) const;
+        vector<Topping> retrieveToppings() const;
 };
 
 
