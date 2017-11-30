@@ -12,7 +12,5 @@ public:
 	User();
 	User(int level);
 	User(string name, int level);
-
-
 };
 
