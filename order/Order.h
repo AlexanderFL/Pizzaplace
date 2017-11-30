@@ -18,6 +18,8 @@ public:
 
 	friend ostream& operator<< (ostream& out, const Order& order);
 	void MakeOrder();
+	void write(ofstream&  fout) const;
+	void read(ifstream& fin);
 
 private:
 };

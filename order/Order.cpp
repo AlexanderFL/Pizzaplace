@@ -1,3 +1,4 @@
+#include <fstream>
 #include "Order.h"
 
 /*
@@ -14,6 +15,27 @@ void Order::MakeOrder()
 	Pizza tempPizza;
 	cout << "New Order" << endl;
 	cin >> tempPizza;
+}
+
+void Order::write(ofstream& fout) const {
+	int size = this->pizzas.size();
+	fout.write((char*)(&size), sizeof(int));
+	for (int i = 0; i < size; ++i) {
+		pizzas[i].write(fout);
+	}
+	fout.write((char*)(&this->totalCost), sizeof(double));
+}
+
+void Order::read(ifstream& fin) {
+	this->pizzas.clear();
+	int size;
+	Pizza pizza;
+	fin.read((char*)(&size), sizeof(int));
+	for (int i = 0; i < size; ++i) {
+		pizza.read(fin);
+		this->pizzas.push_back(pizza);
+	}
+	fin.read((char*)(&this->totalCost), sizeof(double));
 }
 
 /*
