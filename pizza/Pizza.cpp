@@ -1,3 +1,4 @@
+#include <fstream>
 #include "Pizza.h"
 
 Pizza::Pizza()
@@ -10,6 +11,28 @@ Pizza::Pizza(int numberOfToppings)
 {
 	this->toppings = nullptr;
 	this->nrOfToppings = numberOfToppings;
+}
+
+void Pizza::write(ofstream& fout) const {
+	fout.write((char*)(&this->nrOfToppings), sizeof(int));
+	for (int i = 0; i < nrOfToppings; ++i) {
+		toppings[i].write(fout);
+	}
+	fout.write((char*)(&this->size), sizeof(int));
+	fout.write((char*)(&this->cost), sizeof(int));
+}
+
+void Pizza::read(ifstream& fin) {
+	fin.read((char*)(&this->nrOfToppings), sizeof(int));
+	if (this->toppings != nullptr) {
+		delete[] toppings;
+	}
+	toppings = new Topping[this->nrOfToppings];
+	for (int i = 0; i < this->nrOfToppings; ++i) {
+		toppings[i].read(fin);
+	}
+	fin.read((char*)(&this->size), sizeof(int));
+	fin.read((char*)(&this->cost), sizeof(int));
 }
 
 ostream& operator<< (ostream& out, const Pizza& pizza)
