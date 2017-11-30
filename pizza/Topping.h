@@ -16,6 +16,7 @@ public:
 	Topping* getAllToppings();
 	void write(ofstream& fout) const;
 	void read(ifstream& fin);
+	double getPrice();
 
 	friend ostream& operator << (ostream& out, const Topping topping);
 };

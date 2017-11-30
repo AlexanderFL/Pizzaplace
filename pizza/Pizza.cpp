@@ -1,6 +1,10 @@
 #include <fstream>
 #include "Pizza.h"
 
+/*
+	PUBLIC FUNCTIONS
+*/
+
 Pizza::Pizza()
 {
 	this->toppings = nullptr;
@@ -25,7 +29,7 @@ void Pizza::write(ofstream& fout) const {
 		toppings[i].write(fout);
 	}
 	fout.write((char*)(&this->size), sizeof(int));
-	fout.write((char*)(&this->cost), sizeof(int));
+	fout.write((char*)(&this->cost), sizeof(double));
 }
 
 void Pizza::read(ifstream& fin) {
@@ -38,9 +42,35 @@ void Pizza::read(ifstream& fin) {
 		toppings[i].read(fin);
 	}
 	fin.read((char*)(&this->size), sizeof(int));
-	fin.read((char*)(&this->cost), sizeof(int));
+	fin.read((char*)(&this->cost), sizeof(double));
 }
 
+double Pizza::getCost() {
+	this->calculateCost();
+	return this->cost;
+}
+
+/*
+	PRIVATE FUNCTIONS
+*/
+
+void Pizza::calculateCost() {
+	this->cost = 0;
+	for (int i = 0; i < this->nrOfToppings; ++i) {
+		this->cost += toppings[i].getPrice();
+	}
+	if (size == 1) {
+		this->cost += 950;
+	} else if (size == 2) {
+		this->cost += 1150;
+	} else if (size == 3) {
+		this->cost += 1450;
+	}
+}
+
+/*
+	FRIEND FUNCTIONS
+*/
 ostream& operator<< (ostream& out, const Pizza& pizza)
 {
 	out << pizza.toppings;

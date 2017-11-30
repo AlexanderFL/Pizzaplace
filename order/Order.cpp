@@ -38,10 +38,21 @@ void Order::read(ifstream& fin) {
 	fin.read((char*)(&this->totalCost), sizeof(double));
 }
 
+double Order::getTotalCost() {
+	this->calculateCost();
+	return this->totalCost;
+}
+
 /*
 	PRIVATE FUNCTIONS
 */
 
+void Order::calculateCost() {
+	this->totalCost = 0;
+	for (int i = 0; i < pizzas.size(); ++i) {
+		this->totalCost += pizzas[i].getCost();
+	}
+}
 
 /*
 FRIEND FUNCTIONS

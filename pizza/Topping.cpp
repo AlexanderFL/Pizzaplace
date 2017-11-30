@@ -35,6 +35,10 @@ void Topping::read(ifstream& fin) {
 	fin.read((char*)(&this->price), sizeof(double));
 }
 
+double Topping::getPrice() {
+	return this->price;
+}
+
 ostream& operator<< (ostream& out, const Topping topping)
 {
     out << topping.name << " " << topping.price;

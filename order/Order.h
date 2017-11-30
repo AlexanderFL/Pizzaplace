@@ -13,6 +13,7 @@ class Order
 private:
 	vector<Pizza> pizzas;
 	double totalCost;
+	void calculateCost();
 public:
 	Order();
 
@@ -20,6 +21,7 @@ public:
 	void MakeOrder();
 	void write(ofstream&  fout) const;
 	void read(ifstream& fin);
+	double getTotalCost();
 
 private:
 };
