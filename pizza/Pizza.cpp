@@ -7,22 +7,15 @@
 *************************************************
 */
 
-Pizza::Pizza()
-{
-	this->nrOfToppings = 0;
-}
-
-Pizza::Pizza(int numberOfToppings)
-{
-	this->nrOfToppings = numberOfToppings;
-}
+Pizza::Pizza() {}
 
 /*
 	Writes the pizza to a binary file
 */
 void Pizza::write(ofstream& fout) const {
-	fout.write((char*)(&this->nrOfToppings), sizeof(int));
-	for (int i = 0; i < nrOfToppings; ++i) {
+	int size = this->toppings.size();
+	fout.write((char*)(&size), sizeof(int));
+	for (int i = 0; i < toppings.size(); ++i) {
 		toppings[i].write(fout);
 	}
 	fout.write((char*)(&this->size), sizeof(int));
@@ -33,10 +26,11 @@ void Pizza::write(ofstream& fout) const {
 	Reads the pizza from a binary file
 */
 void Pizza::read(ifstream& fin) {
-	fin.read((char*)(&this->nrOfToppings), sizeof(int));
+	int size;
+	fin.read((char*)(&size), sizeof(int));
 	this->toppings.clear();
 	Topping topping;
-	for (int i = 0; i < this->nrOfToppings; ++i) {
+	for (int i = 0; i < size; ++i) {
 		topping.read(fin);
 		this->toppings.push_back(topping);
 	}
@@ -60,7 +54,7 @@ double Pizza::getCost() {
 
 void Pizza::calculateCost() {
 	this->cost = 0;
-	for (int i = 0; i < this->nrOfToppings; ++i) {
+	for (int i = 0; i < this->toppings.size(); ++i) {
 		this->cost += toppings[i].getPrice();
 	}
 	if (size == 1) {
