@@ -98,6 +98,16 @@ istream& operator>> (istream& in, Pizza& pizza)
 }
 
 bool operator == (const Pizza& left, const Pizza& right) {
+	Pizza pizza = left * right;
+	
+	if (pizza.toppings.size() == left.toppings.size() && pizza.toppings.size() == right.toppings.size()) {
+		return true;
+	}
+	return false;
+}
+
+
+Pizza operator * (const Pizza& left, const Pizza& right) {
 	Pizza pizza;
 	for (unsigned int i = 0; i < left.toppings.size(); ++i) {
 		for (unsigned int j = 0; j < right.toppings.size(); ++j) {
@@ -106,8 +116,13 @@ bool operator == (const Pizza& left, const Pizza& right) {
 			}
 		}
 	}
-	if (pizza.toppings.size() == left.toppings.size() && pizza.toppings.size() == right.toppings.size()) {
-		return true;
+	return pizza;
+}
+
+Pizza operator + (const Pizza& left, const Pizza& right) {
+	Pizza pizza = left;
+	for (unsigned int j = 0; j < right.toppings.size(); ++j) {
+		pizza.toppings.push_back(right.toppings.at(i));
 	}
-	return false;
+	return pizza;
 }
