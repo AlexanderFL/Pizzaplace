@@ -1,11 +1,12 @@
 #include "Topping.h"
 
-Topping::Topping(){}
-
-void Topping::NewTopping(string name, double price)
+Topping::Topping(string name, double price)
 {
-	//@todo append topping to file
+	this->name = name;
+	this->price = price;
 }
+
+Topping::Topping(){}
 
 vector<Topping> Topping::getAllToppings()
 {
