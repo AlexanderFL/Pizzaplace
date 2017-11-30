@@ -5,6 +5,10 @@ PizzaRepository::PizzaRepository() {
     this->file = "pizzas.dat";
 }
 
+/*
+	todo: Do the storing and retrieving of pizzas
+*/
+
 void PizzaRepository::storePizza(const Pizza &pizza) const {
     ofstream fout;
     fout.open(this->file, ios::binary | ios::app);
