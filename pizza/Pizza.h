@@ -9,13 +9,11 @@ class Pizza
 private:
 	// Change to vector
 	vector<Topping> toppings;
-	int nrOfToppings;
 	int size;
 	double cost;
 	void calculateCost();
 public:
 	Pizza();
-	Pizza(int numberOfToppings);
 	//~Pizza();
 	void write(ofstream& fout) const;
 	void read(ifstream& fin);
