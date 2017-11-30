@@ -1,11 +1,13 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include "Topping.h"
 using namespace std;
 
 class Pizza
 {
 private:
+	// Change to vector
 	Topping* toppings;
 	int nrOfToppings;
 	int size;

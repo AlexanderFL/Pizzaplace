@@ -6,7 +6,8 @@
 using namespace std;
 
 /*
-	Makes the user input the order
+	Keeps the user order, which can be multiple pizzas 
+	and allows the user to edit his order.
 */
 class Order
 {

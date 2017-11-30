@@ -2,7 +2,9 @@
 #include "Pizza.h"
 
 /*
-	PUBLIC FUNCTIONS
+*************************************************
+				PUBLIC FUNCTIONS
+*************************************************
 */
 
 Pizza::Pizza()
@@ -23,6 +25,9 @@ Pizza::~Pizza() {
 	}
 }
 
+/*
+	Writes the pizza to a binary file
+*/
 void Pizza::write(ofstream& fout) const {
 	fout.write((char*)(&this->nrOfToppings), sizeof(int));
 	for (int i = 0; i < nrOfToppings; ++i) {
@@ -32,6 +37,9 @@ void Pizza::write(ofstream& fout) const {
 	fout.write((char*)(&this->cost), sizeof(double));
 }
 
+/*
+	Reads the pizza from a binary file
+*/
 void Pizza::read(ifstream& fin) {
 	fin.read((char*)(&this->nrOfToppings), sizeof(int));
 	if (this->toppings != nullptr) {
@@ -45,13 +53,18 @@ void Pizza::read(ifstream& fin) {
 	fin.read((char*)(&this->cost), sizeof(double));
 }
 
+/*
+	Calculates the cost for the pizza.
+*/
 double Pizza::getCost() {
 	this->calculateCost();
 	return this->cost;
 }
 
 /*
-	PRIVATE FUNCTIONS
+*************************************************
+*****			PRIVATE FUNCTIONS			*****
+*************************************************
 */
 
 void Pizza::calculateCost() {
@@ -69,7 +82,9 @@ void Pizza::calculateCost() {
 }
 
 /*
-	FRIEND FUNCTIONS
+*************************************************
+				FRIEND FUNCTIONS
+*************************************************
 */
 ostream& operator<< (ostream& out, const Pizza& pizza)
 {
