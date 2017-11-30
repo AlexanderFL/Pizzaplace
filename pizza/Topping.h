@@ -21,4 +21,5 @@ public:
 	double getPrice();
 
 	friend ostream& operator << (ostream& out, const Topping topping);
+	friend bool operator == (const Topping& left, const Topping& right);
 };

@@ -1,4 +1,5 @@
 #include <fstream>
+#include <cmath>
 #include "Pizza.h"
 
 /*
@@ -94,4 +95,19 @@ istream& operator>> (istream& in, Pizza& pizza)
 
 	}
 	return in;
+}
+
+bool operator == (const Pizza& left, const Pizza& right) {
+	Pizza pizza;
+	for (unsigned int i = 0; i < left.toppings.size(); ++i) {
+		for (unsigned int j = 0; j < right.toppings.size(); ++j) {
+			if (left.toppings.at(i) == right.toppings.at(j)) {
+				pizza.toppings.push_back(left.toppings.at(i));
+			}
+		}
+	}
+	if (pizza.toppings.size() == left.toppings.size() && pizza.toppings.size() == right.toppings.size()) {
+		return true;
+	}
+	return false
 }
