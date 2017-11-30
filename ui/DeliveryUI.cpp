@@ -45,6 +45,6 @@ void DeliveryUI::deliveryMenu() {
 	if (tolower(input) == 'y') {
 		//call the function to add an order
 	}
-	//Also add if they want to delete an Order (only if they have 1 or more orders)
+	//Also add if they want to delete an Order (only if they have 1 or more orders).
 	
 }
