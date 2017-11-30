@@ -59,7 +59,7 @@ void Order::read(ifstream& fin) {
 	SideOrder side;
 	for (int i = 0; i < size; ++i) {
 		side.read(fin);
-		this->pizzas.push_back(side);
+		this->sides.push_back(side);
 	}
 	fin.read((char*)(&this->totalCost), sizeof(double));
 }
