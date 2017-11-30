@@ -4,8 +4,3 @@
 ManagerUI::ManagerUI()
 {
 }
-
-
-ManagerUI::~ManagerUI()
-{
-}

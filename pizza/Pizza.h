@@ -19,4 +19,7 @@ public:
 	double getCost();
 	friend ostream& operator<< (ostream& out, const Pizza& pizza);
 	friend istream& operator>> (istream& in, Pizza& pizza);
+	friend bool operator == (const Pizza& left, const Pizza& right);
+	friend Pizza operator * (const Pizza& left, const Pizza& right);
+	friend Pizza operator + (const Pizza& left, const Pizza& right);
 };
