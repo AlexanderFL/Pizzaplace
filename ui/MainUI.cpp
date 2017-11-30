@@ -1,6 +1,7 @@
 #include "MainUI.h"
 #include "DeliveryUI.h"
 #include "ManagerUI.h"
+#include "SalesmanUI.h"
 
 MainUI::MainUI()
 {
@@ -36,7 +37,8 @@ void MainUI::startUI()
         }
         else if(input == "salesman")
         {
-            cout << "gf";
+			SalesmanUI salesmanUI;
+			salesmanUI.salesmanMenu();
         }
         else if(input == "kitchen")
         {

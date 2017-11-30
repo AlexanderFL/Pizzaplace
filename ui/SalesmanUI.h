@@ -7,5 +7,6 @@ class SalesmanUI
 {
 public:
 	SalesmanUI();
+	void salesmanMenu();
 };
 
