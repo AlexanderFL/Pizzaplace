@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -13,7 +15,7 @@ public:
 	Topping();
 
 	void NewTopping(string name, double price);
-	Topping* getAllToppings();
+	vector<Topping> getAllToppings();
 	void write(ofstream& fout) const;
 	void read(ifstream& fin);
 	double getPrice();
