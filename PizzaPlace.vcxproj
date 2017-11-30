@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DeliveryUI.h" />
     <ClInclude Include="ui\MainUI.h" />
     <ClInclude Include="order\Order.h" />
     <ClInclude Include="order\OrderRepository.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="user\User.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DeliveryUI.cpp" />
     <ClCompile Include="ui\MainUI.cpp" />
     <ClCompile Include="order\Order.cpp" />
     <ClCompile Include="order\OrderRepository.cpp" />
