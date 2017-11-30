@@ -25,6 +25,4 @@ public:
 	void write(ofstream&  fout) const;
 	void read(ifstream& fin);
 	double getTotalCost();
-
-private:
 };
