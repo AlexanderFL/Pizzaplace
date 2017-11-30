@@ -22,11 +22,9 @@ Test::Test(string name, double d, int size) {
 }
 
 void Test::write(ofstream& fout) const {
-    int len = this->name.length();
+    int len = this->name.length() + 1;
     fout.write((char*)(&len), sizeof(int));
-    for (int i = 0; i < len; ++i) {
-        fout.write((char*)(&this->name[i]), sizeof(char));
-    }
+	fout.write(this->name.c_str(), len);
     fout.write((char*)(&this->d), sizeof(double));
     fout.write((char*)(&this->size), sizeof(int));
     fout.write((char*)(this->point), sizeof(int) * size);
@@ -35,12 +33,10 @@ void Test::write(ofstream& fout) const {
 void Test::read(ifstream& fin) {
     int len;
     this->name = "";
-    char n;
     fin.read((char*)(&len), sizeof(int));
-    for (int i = 0; i < len; ++i) {
-        fin.read(&n, sizeof(char));
-        this->name += n;
-    }
+	char* str = new char[len];
+	fin.read(str, len);
+	this->name = str;
     fin.read((char*)(&this->d), sizeof(double));
     fin.read((char*)(&this->size), sizeof(int));
     this->point = new int[size];

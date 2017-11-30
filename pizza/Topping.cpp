@@ -29,6 +29,7 @@ void Topping::read(ifstream& fin) {
 	fin.read(str, len);
 	this->name = str;
 	fin.read((char*)(&this->price), sizeof(double));
+	delete[] str;
 }
 
 double Topping::getPrice() {
