@@ -9,7 +9,7 @@ void ToppingRepository::storeToppings(const vector<Topping> &toppings) const {
 	ofstream fout;
 	fout.open(this->file, ios::binary);
 	int size = toppings.size();
-	fout.write((char*)(size), sizeof(int));
+	fout.write((char*)(&size), sizeof(int));
 	for (int i = 0; i < size; ++i) {
 		toppings[i].write(fout);
 	}
