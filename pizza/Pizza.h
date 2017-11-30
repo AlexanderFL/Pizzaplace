@@ -16,6 +16,8 @@ public:
 	Pizza();
 	void write(ofstream& fout) const;
 	void read(ifstream& fin);
+	void addTopping(const Topping& top);
+	int nrToppings() const;
 	double getCost();
 	friend ostream& operator<< (ostream& out, const Pizza& pizza);
 	friend istream& operator>> (istream& in, Pizza& pizza);

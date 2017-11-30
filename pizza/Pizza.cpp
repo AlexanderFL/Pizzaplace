@@ -14,9 +14,9 @@ Pizza::Pizza() {}
 	Writes the pizza to a binary file
 */
 void Pizza::write(ofstream& fout) const {
-	int size = this->toppings.size();
+	int size = this->nrToppings();
 	fout.write((char*)(&size), sizeof(int));
-	for (int i = 0; i < toppings.size(); ++i) {
+	for (int i = 0; i < this->nrToppings(); ++i) {
 		toppings[i].write(fout);
 	}
 	fout.write((char*)(&this->size), sizeof(int));
@@ -33,10 +33,21 @@ void Pizza::read(ifstream& fin) {
 	Topping topping;
 	for (int i = 0; i < size; ++i) {
 		topping.read(fin);
-		this->toppings.push_back(topping);
+		this->addTopping(topping);
 	}
 	fin.read((char*)(&this->size), sizeof(int));
 	fin.read((char*)(&this->cost), sizeof(double));
+}
+
+/*
+	Add a topping to the toppings vector
+*/
+void Pizza::addTopping(const Topping& top) {
+	this->toppings.push_back(top);
+}
+
+int Pizza::nrToppings() const {
+	return this->toppings.size();
 }
 
 /*
@@ -55,7 +66,7 @@ double Pizza::getCost() {
 
 void Pizza::calculateCost() {
 	this->cost = 0;
-	for (int i = 0; i < this->toppings.size(); ++i) {
+	for (int i = 0; i < this->nrToppings(); ++i) {
 		this->cost += toppings[i].getPrice();
 	}
 	if (size == 1) {
@@ -90,7 +101,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 
 	cout << "Select toppings: " << endl;
 
-	for (int i = 0; i < pizza.toppings.size(); i++)
+	for (int i = 0; i < pizza.nrToppings(); i++)
 	{
 
 	}
@@ -99,7 +110,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 
 bool operator == (const Pizza& left, const Pizza& right) {
 	Pizza pizza = left * right;
-	if (pizza.toppings.size() == left.toppings.size() && pizza.toppings.size() == right.toppings.size()) {
+	if (pizza.nrToppings() == left.nrToppings() && pizza.nrToppings() == right.nrToppings()) {
 		return true;
 	}
 	return false;
@@ -108,10 +119,10 @@ bool operator == (const Pizza& left, const Pizza& right) {
 
 Pizza operator * (const Pizza& left, const Pizza& right) {
 	Pizza pizza;
-	for (unsigned int i = 0; i < left.toppings.size(); ++i) {
-		for (unsigned int j = 0; j < right.toppings.size(); ++j) {
+	for (unsigned int i = 0; i < left.nrToppings(); ++i) {
+		for (unsigned int j = 0; j < right.nrToppings(); ++j) {
 			if (left.toppings.at(i) == right.toppings.at(j)) {
-				pizza.toppings.push_back(left.toppings.at(i));
+				pizza.addTopping(left.toppings.at(i));
 			}
 		}
 	}
@@ -120,8 +131,8 @@ Pizza operator * (const Pizza& left, const Pizza& right) {
 
 Pizza operator + (const Pizza& left, const Pizza& right) {
 	Pizza pizza = left;
-	for (unsigned int j = 0; j < right.toppings.size(); ++j) {
-		pizza.toppings.push_back(right.toppings.at(i));
+	for (unsigned int i = 0; i < right.nrToppings(); ++i) {
+		pizza.addTopping(right.toppings.at(i));
 	}
 	return pizza;
 }
