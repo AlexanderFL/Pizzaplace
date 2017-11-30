@@ -1,6 +1,7 @@
 #ifndef ORDERREPOSITORY_H
 #define ORDERREPOSITORY_H
 
+#include <vector>
 #include "Order.h"
 
 class OrderRepository {
@@ -8,8 +9,8 @@ class OrderRepository {
         string file;
     public:
         OrderRepository();
-        void storeOrder(const Order& order) const;
-        Order retrieveOrder() const;
+        void storeOrders(const vector<Order> &orders) const;
+        vector<Order> retrieveOrders() const;
 };
 
 
