@@ -53,6 +53,9 @@ void MainUI::startUI()
         {
             cout << "ma";
         }
+		else if (input == "quit") {
+			break;
+		}
         else{
             cout << "Not a valid option." << endl;
         }
