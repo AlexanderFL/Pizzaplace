@@ -13,6 +13,12 @@ Pizza::Pizza(int numberOfToppings)
 	this->nrOfToppings = numberOfToppings;
 }
 
+Pizza::~Pizza() {
+	if (this->toppings != nullptr) {
+		delete[] toppings;
+	}
+}
+
 void Pizza::write(ofstream& fout) const {
 	fout.write((char*)(&this->nrOfToppings), sizeof(int));
 	for (int i = 0; i < nrOfToppings; ++i) {
