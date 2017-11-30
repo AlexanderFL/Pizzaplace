@@ -9,9 +9,9 @@ private:
 	string name;
 	int level;
 public:
-	User(string name, int level);
-	User(int level);
 	User();
+	User(int level);
+	User(string name, int level);
 
 
 };
