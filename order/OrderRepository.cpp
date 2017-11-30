@@ -5,6 +5,10 @@ OrderRepository::OrderRepository() {
     this->file = "orders.dat";
 }
 
+/*
+	todo: Do the storing and retrieving of orders
+*/
+
 void OrderRepository::storeOrder(const Order &order) const {
     ofstream fout;
     fout.open(this->file, ios::binary | ios::app);
