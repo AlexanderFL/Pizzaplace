@@ -1,9 +1,5 @@
-//
-// Created by Thomas Ari Bech on 29.11.17.
-//
-
-#ifndef PIZZAPLACE_TOPPINGREPOSITORY_H
-#define PIZZAPLACE_TOPPINGREPOSITORY_H
+#ifndef TOPPINGREPOSITORY_H
+#define TOPPINGREPOSITORY_H
 
 #include "Topping.h"
 
@@ -17,4 +13,4 @@ class ToppingRepository {
 };
 
 
-#endif //PIZZAPLACE_TOPPINGREPOSITORY_H
+#endif //TOPPINGREPOSITORY_H

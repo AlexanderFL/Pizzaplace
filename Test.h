@@ -1,9 +1,5 @@
-//
-// Created by Thomas Ari Bech on 29.11.17.
-//
-
-#ifndef PIZZAPLACE_TEST_H
-#define PIZZAPLACE_TEST_H
+#ifndef TEST_H
+#define TEST_H
 
 #include <iostream>
 #include <string>
@@ -24,4 +20,4 @@ class Test {
 };
 
 
-#endif //PIZZAPLACE_TEST_H
+#endif //TEST_H

@@ -1,7 +1,3 @@
-//
-// Created by Thomas Ari Bech on 29.11.17.
-//
-
 #include <fstream>
 #include "PizzaRepository.h"
 

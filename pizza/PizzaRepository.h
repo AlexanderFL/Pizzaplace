@@ -1,9 +1,5 @@
-//
-// Created by Thomas Ari Bech on 29.11.17.
-//
-
-#ifndef PIZZAPLACE_PIZZAREPOSITORY_H
-#define PIZZAPLACE_PIZZAREPOSITORY_H
+#ifndef PIZZAREPOSITORY_H
+#define PIZZAREPOSITORY_H
 
 #include "Pizza.h"
 
@@ -17,4 +13,4 @@ class PizzaRepository {
 };
 
 
-#endif //PIZZAPLACE_PIZZAREPOSITORY_H
+#endif //PIZZAREPOSITORY_H

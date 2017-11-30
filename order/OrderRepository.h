@@ -1,9 +1,5 @@
-//
-// Created by Thomas Ari Bech on 29.11.17.
-//
-
-#ifndef PIZZAPLACE_ORDERREPOSITORY_H
-#define PIZZAPLACE_ORDERREPOSITORY_H
+#ifndef ORDERREPOSITORY_H
+#define ORDERREPOSITORY_H
 
 #include "Order.h"
 
@@ -17,4 +13,4 @@ class OrderRepository {
 };
 
 
-#endif //PIZZAPLACE_ORDERREPOSITORY_H
+#endif //ORDERREPOSITORY_H
