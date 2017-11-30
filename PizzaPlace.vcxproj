@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="order\SideOrder.h" />
     <ClInclude Include="ui\KitchenUI.h" />
     <ClInclude Include="ui\SalesmanUI.h" />
     <ClInclude Include="ui\ManagerUI.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="user\User.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="order\SideOrder.cpp" />
     <ClCompile Include="ui\KitchenUI.cpp" />
     <ClCompile Include="ui\SalesmanUI.cpp" />
     <ClCompile Include="ui\ManagerUI.cpp" />
