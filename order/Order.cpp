@@ -34,6 +34,11 @@ void Order::write(ofstream& fout) const {
 	for (int i = 0; i < size; ++i) {
 		pizzas[i].write(fout);
 	}
+	size = this->sides.size();
+	fout.write((char*)(&size), sizeof(int));
+	for (int i = 0; i < size; ++i) {
+		sides[i].write(fout);
+	}
 	fout.write((char*)(&this->totalCost), sizeof(double));
 }
 
@@ -42,12 +47,19 @@ void Order::write(ofstream& fout) const {
 */
 void Order::read(ifstream& fin) {
 	this->pizzas.clear();
+	this->sides.clear();
 	int size;
 	Pizza pizza;
 	fin.read((char*)(&size), sizeof(int));
 	for (int i = 0; i < size; ++i) {
 		pizza.read(fin);
 		this->pizzas.push_back(pizza);
+	}
+	fin.read((char*)(&size), sizeof(int));
+	SideOrder side;
+	for (int i = 0; i < size; ++i) {
+		side.read(fin);
+		this->pizzas.push_back(side);
 	}
 	fin.read((char*)(&this->totalCost), sizeof(double));
 }

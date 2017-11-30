@@ -3,6 +3,7 @@
 #include <vector>
 #include <stdlib.h>
 #include "../pizza/Pizza.h"
+#include "SideOrder.h"
 using namespace std;
 
 /*
@@ -13,6 +14,7 @@ class Order
 {
 private:
 	vector<Pizza> pizzas;
+	vector<SideOrder> sides;
 	double totalCost;
 	void calculateCost();
 public:
