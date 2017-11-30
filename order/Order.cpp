@@ -86,7 +86,7 @@ void Order::calculateCost() {
 /*
 	Prints the order from a user.
 */
-ostream& operator<<(ostream& out, const Order& order)
+ostream& operator <<(ostream& out, const Order& order)
 {
 	out << order;
 
