@@ -8,7 +8,7 @@ class Pizza
 {
 private:
 	// Change to vector
-	Topping* toppings;
+	vector<Topping> toppings;
 	int nrOfToppings;
 	int size;
 	double cost;

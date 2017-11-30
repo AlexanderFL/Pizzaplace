@@ -1,6 +1,5 @@
 #include "User.h"
 
-
 User::User(string name, int level)
 {
 	this->name = name;
