@@ -14,7 +14,6 @@ private:
 	void calculateCost();
 public:
 	Pizza();
-	//~Pizza();
 	void write(ofstream& fout) const;
 	void read(ifstream& fin);
 	double getCost();
