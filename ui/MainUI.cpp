@@ -1,4 +1,5 @@
 #include "MainUI.h"
+#include "DeliveryUI.h"
 
 MainUI::MainUI()
 {
@@ -51,7 +52,8 @@ void MainUI::startUI()
         }
         else if(input == "delivery")
         {
-            cout << "ma";
+			DeliveryUI deliveryUI;
+			deliveryUI.deliveryMenu();
         }
 		else if (input == "quit") {
 			break;
