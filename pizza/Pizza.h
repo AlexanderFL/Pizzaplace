@@ -16,7 +16,7 @@ private:
 public:
 	Pizza();
 	Pizza(int numberOfToppings);
-	~Pizza();
+	//~Pizza();
 	void write(ofstream& fout) const;
 	void read(ifstream& fin);
 	double getCost();
