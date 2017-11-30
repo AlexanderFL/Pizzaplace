@@ -148,7 +148,6 @@
     <ClInclude Include="order\Order.h" />
     <ClInclude Include="order\OrderRepository.h" />
     <ClInclude Include="pizza\Pizza.h" />
-    <ClInclude Include="pizza\PizzaRepository.h" />
     <ClInclude Include="pizza\Topping.h" />
     <ClInclude Include="pizza\ToppingRepository.h" />
     <ClInclude Include="user\User.h" />
@@ -160,7 +159,6 @@
     <ClCompile Include="order\OrderRepository.cpp" />
     <ClCompile Include="pizza\Pizza.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="pizza\PizzaRepository.cpp" />
     <ClCompile Include="pizza\Topping.cpp" />
     <ClCompile Include="pizza\ToppingRepository.cpp" />
     <ClCompile Include="user\User.cpp" />
