@@ -37,8 +37,6 @@ void MainUI::startUI()
         else if(input == "salesman")
         {
             cout << "gf";
-            //Pizza newPizza;
-            //newPizza.toppingsAmount();
         }
         else if(input == "kitchen")
         {
