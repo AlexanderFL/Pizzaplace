@@ -109,5 +109,5 @@ bool operator == (const Pizza& left, const Pizza& right) {
 	if (pizza.toppings.size() == left.toppings.size() && pizza.toppings.size() == right.toppings.size()) {
 		return true;
 	}
-	return false;
+	return false
 }
