@@ -15,23 +15,19 @@ Topping* Topping::getAllToppings()
 }
 
 void Topping::write(ofstream& fout) const {
-	int len = this->name.length();
+	int len = this->name.length() + 1;
 	fout.write((char*)(&len), sizeof(int));
-	for (int i = 0; i < len; ++i) {
-		fout.write((char*)(&this->name[i]), sizeof(char));
-	}
+	fout.write(this->name.c_str(), len);
 	fout.write((char*)(&this->price), sizeof(double));
 }
 
 void Topping::read(ifstream& fin) {
 	int len;
 	this->name = "";
-	char n;
 	fin.read((char*)(&len), sizeof(int));
-	for (int i = 0; i < len; ++i) {
-		fin.read(&n, sizeof(char));
-		this->name += n;
-	}
+	char* str = new char[len];
+	fin.read(str, len);
+	this->name = str;
 	fin.read((char*)(&this->price), sizeof(double));
 }
 
