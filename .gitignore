@@ -3,3 +3,6 @@ Debug/
 .vs/
 *.vcxproj.user
 *.vcxproj.filters
+.html
+.htm
+.php
