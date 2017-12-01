@@ -36,12 +36,12 @@ void Order::MakeOrder()
 void Order::write(ofstream& fout) const {
 	int size = pizzas.size();
 	fout.write((char*)(&size), sizeof(int));
-	for (unsigned int i = 0; i < size; ++i) {
+	for (int i = 0; i < size; ++i) {
 		pizzas.at(i).write(fout);
 	}
 	size = sides.size();
 	fout.write((char*)(&size), sizeof(int));
-	for (unsigned int i = 0; i < size; ++i) {
+	for (int i = 0; i < size; ++i) {
 		sides.at(i).write(fout);
 	}
 	fout.write((char*)(&totalCost), sizeof(double));

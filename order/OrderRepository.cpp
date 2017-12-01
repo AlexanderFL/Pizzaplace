@@ -35,7 +35,7 @@ vector<Order> OrderRepository::retrieveOrders() const {
 void OrderRepository::storeOrder(const Order& order) const {
 	vector<Order> orders = retrieveOrders();
 	orders.push_back(order);
-	this->storeOrders(orders);
+	storeOrders(orders);
 }
 
 Order OrderRepository::retrieveOrder(int& loc) const {

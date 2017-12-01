@@ -16,7 +16,7 @@ class Order
 private:
 	vector<Pizza> pizzas;
 	vector<SideOrder> sides;
-	int totalCost;
+	double totalCost;
 	int status;
 	int location;
 	string comment;
