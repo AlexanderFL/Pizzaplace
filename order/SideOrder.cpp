@@ -1,6 +1,7 @@
 #include <fstream>
 #include "SideOrder.h"
 
+const string SideOrder::filename = "sideOrder.dat";
 
 SideOrder::SideOrder() {
 	this->name = "";

@@ -8,10 +8,13 @@ using namespace std;
 
 class Topping
 {
+public:
+	static const string filename;
 private:
 	string name;
 	//change price to an int
 	double price;
+
 public:
 	Topping();
 	Topping(string name, double price);

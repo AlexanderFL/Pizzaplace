@@ -1,5 +1,7 @@
 #include "Topping.h"
 
+const string Topping::filename = "toppings.dat";
+
 Topping::Topping() {
 	name = "";
 	price = 0;

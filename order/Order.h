@@ -13,6 +13,8 @@ using namespace std;
 
 class Order
 {
+public:
+	static const string filename;
 private:
 	vector<Pizza> pizzas;
 	vector<SideOrder> sides;

@@ -1,12 +1,21 @@
 #include <iostream>
 
+#include "data/Data.h"
+
 using namespace std;
 #include "ui/MainUI.h"
 
 int main()
 {
-    MainUI mainUI;
-    mainUI.startUI();
+	//MainUI mainUI;
+	//mainUI.startUI();
 
-    return 0;
+	Topping t("Ananas", 350);
+
+	Data d;
+	d.WriteToFile(t);
+
+	system("PAUSE");
+
+	return 0;
 }

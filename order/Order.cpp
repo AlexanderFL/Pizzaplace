@@ -7,6 +7,8 @@
 *************************************************
 */
 
+const string Order::filename = "orders.dat";
+
 Order::Order() 
 { 
 	totalCost = 0;
