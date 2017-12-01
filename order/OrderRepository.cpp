@@ -17,18 +17,24 @@ void OrderRepository::storeOrders(const vector<Order> &orders) const {
 }
 
 vector<Order> OrderRepository::retrieveOrders() const {
-	//Todo: make sure the file isn't empty
+	vector<Order> vec;
     ifstream fin;
     Order order;
-    fin.open(file, ios::binary);
-	int size;
-	fin.read((char*)(&size), sizeof(int));
-	vector<Order> vec;
-	for (int i = 0; i < size; ++i) {
-		order.read(fin);
-		vec.push_back(order);
+    fin.open(this->file, ios::binary);
+	if (fin.is_open()) {
+		fin.seekg(0, fin.end);
+		int endpos = fin.tellg();
+		if (endpos != 0) {
+			fin.seekg(0);
+			int size;
+			fin.read((char*)(&size), sizeof(int));
+			for (int i = 0; i < size; ++i) {
+				order.read(fin);
+				vec.push_back(order);
+			}
+		}
+		fin.close();
 	}
-    fin.close();
     return vec;
 }
 
