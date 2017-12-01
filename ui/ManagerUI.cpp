@@ -16,7 +16,7 @@ void ManagerUI::managerMenu() {
 			 << " \t----------------------------\n"
 			 << " \t|  3: Price |  4: Delivery |\n"
 			 << " \t----------------------------\n"
-			 << " \t|  5: Other |  6: Quit    |\n"
+			 << " \t|  5: Other |  6: Quit     |\n"
 			 << " \t----------------------------\n" << endl;
 
 		cout << "What would you like to register? ";
