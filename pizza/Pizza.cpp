@@ -8,7 +8,10 @@
 *************************************************
 */
 
-Pizza::Pizza() {}
+Pizza::Pizza() {
+	this->size = 0;
+	this->cost = 0;
+}
 
 /*
 	Writes the pizza to a binary file
@@ -17,7 +20,7 @@ void Pizza::write(ofstream& fout) const {
 	int size = this->nrToppings();
 	fout.write((char*)(&size), sizeof(int));
 	for (int i = 0; i < this->nrToppings(); ++i) {
-		toppings[i].write(fout);
+		toppings.at(i).write(fout);
 	}
 	fout.write((char*)(&this->size), sizeof(int));
 	fout.write((char*)(&this->cost), sizeof(double));
@@ -73,7 +76,7 @@ double Pizza::getCost() {
 void Pizza::calculateCost() {
 	this->cost = 0;
 	for (int i = 0; i < this->nrToppings(); ++i) {
-		this->cost += toppings[i].getPrice();
+		this->cost += toppings.at(i).getPrice();
 	}
 	if (size == 1) {
 		this->cost += 950;

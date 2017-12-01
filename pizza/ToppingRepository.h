@@ -9,8 +9,10 @@ class ToppingRepository {
         string file;
     public:
         ToppingRepository();
-        void storeToppings(const vector<Topping> &toppings) const;
+        void storeToppings(const vector<Topping>& toppings) const;
         vector<Topping> retrieveToppings() const;
+		void storeTopping(const Topping& topping) const;
+		Topping retrieveTopping(int& loc) const;
 };
 
 

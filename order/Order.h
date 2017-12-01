@@ -16,6 +16,9 @@ private:
 	vector<Pizza> pizzas;
 	vector<SideOrder> sides;
 	double totalCost;
+	int status;
+	int location;
+	string comment;
 	void calculateCost();
 public:
 	Order();
