@@ -10,6 +10,7 @@ using namespace std;
 	Keeps the user order, which can be multiple pizzas 
 	and allows the user to edit his order.
 */
+
 class Order
 {
 private:
@@ -20,9 +21,9 @@ private:
 	int location;
 	string comment;
 	void calculateCost();
+
 public:
 	Order();
-
 	friend ostream& operator << (ostream& out, const Order& order);
 	void MakeOrder();
 	void write(ofstream&  fout) const;

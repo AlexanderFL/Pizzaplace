@@ -7,5 +7,6 @@ class KitchenUI
 {
 public:
 	KitchenUI();
+	void kitchenMenu();
 };
 
