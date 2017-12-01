@@ -1,17 +1,18 @@
 #include "DeliveryUI.h"
 
+//TODO: Fix home address! 
 
 DeliveryUI::DeliveryUI()
 {
-	bool ignore = true;
+	ignore = true;
 }
-
 
 DeliveryUI::~DeliveryUI()
 {
 }
+
 void DeliveryUI::setIgnore(bool ignore) {
-	this->ignore = ignore;
+	this-> ignore = ignore;
 }
 
 void DeliveryUI::deliveryMenu() {

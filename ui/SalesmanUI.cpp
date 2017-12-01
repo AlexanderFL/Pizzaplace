@@ -34,7 +34,7 @@ void SalesmanUI::salesmanMenu() {
 
 		//so that it doesn't matter if the string is all caps or not
 		transform(option.begin(), option.end(), option.begin(), ::tolower);
-
+		cout << endl;
 		//TODO: Fix the look of these statements and add functions to them
 		if (option == "1" || option == "2") {
 			Order order;
@@ -42,6 +42,9 @@ void SalesmanUI::salesmanMenu() {
 			break;
 		}
 		else if (option == "3") {
+			Order order;
+			double totalCost = order.getTotalCost();
+			cout << "The total cost is: " << totalCost << " kr" << endl;
 			break;
 		}
 		else if (option == "4") {
