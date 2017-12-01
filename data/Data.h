@@ -10,20 +10,77 @@ class Data
 {
 public:
 	template <class Repos>
-	void WriteToFile(Repos r);
+	void WriteToFile(Repos rep) const;
 
-	void WriteMultipleLinesToFile(vector<Topping> t);
-	void WriteMultipleLinesToFile(vector<Order> o);
+	template <class Repos>
+	void WriteMultipleLinesToFile(vector<Repos> rep) const;
 
-private:
-	void Write(Topping t);
+	template <class Repos>
+	Repos RetrieveFromFile(int loc);
+
+	template <class Repos>
+	vector<Repos> RetrieveAllFromFile();
 };
 
 template<class Repos>
-inline void Data::WriteToFile(Repos r)
+inline void Data::WriteToFile(Repos rep) const
 {
 	ofstream fout;
-	fout.open(r.filename, ios::binary);
-	r.write(fout);
+	fout.open(rep.filename, ios::binary | ios::app);
+	rep.write(fout);
 	fout.close();
+}
+
+template <class Repos>
+inline void Data::WriteMultipleLinesToFile(vector<Repos> repVec) const
+{
+	Repos rep;
+	ofstream fout;
+	fout.open(rep.filename, ios::binary);
+	for (unsigned int i = 0; i < repVec.size(); i++){
+		repVec.at(i).write(fout);
+	}
+	fout.close();
+}
+
+template<class Repos>
+inline Repos Data::RetrieveFromFile(int loc)
+{
+	Repos rep;
+	ifstream fin;
+
+	fin.open(rep.filename, ios::binary);
+	if (fin.is_open())
+	{
+		getline(sizeof(rep) * loc, sizeof(rep));
+		fin >> rep
+	}
+	
+	rep.self();
+	return rep;
+}
+
+template<class Repos>
+inline vector<Repos> Data::RetrieveAllFromFile()
+{
+	vector<Repos> vec;
+	Repos rep;
+	ifstream fin;
+	
+	fin.open(rep.filename, ios::binary);
+	if (fin.is_open())
+	{
+		fin.seekg(0, fin.end);
+		int endpos = fin.tellg();
+		fin.seekg(0, fin.beg);
+		int pos = 0;
+		while (pos != endpos)
+		{
+			rep.read(fin);
+			vec.push_back(rep);
+			pos = fin.tellg();
+		}
+	}
+	fin.close();
+	return vec;
 }

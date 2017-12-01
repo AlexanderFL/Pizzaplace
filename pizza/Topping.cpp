@@ -26,6 +26,15 @@ void Topping::write(ofstream& fout) const {
 	fout.write((char*)(&price), sizeof(double));
 }
 
+/*
+	Returns itself
+*/
+Topping Topping::self()
+{
+	Topping t(name, price);
+	return t;
+}
+
 void Topping::read(ifstream& fin) {
 	int len;
 	this->name = "";
@@ -42,10 +51,8 @@ double Topping::getPrice() {
 }
 
 istream& operator >> (istream& in, Topping topping) {
-	cout << "What topping would you like? ";
-	in >> topping.name;
+	in >> topping.name >> topping.price;
 	return in;
-
 }
 
 ostream& operator<< (ostream& out, const Topping topping)

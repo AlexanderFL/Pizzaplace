@@ -6,15 +6,7 @@
 *************************************************
 */
 
-void Data::WriteMultipleLinesToFile(vector<Topping> t)
-{
 
-}
-
-void Data::WriteMultipleLinesToFile(vector<Order> o)
-{
-
-}
 
 /*
 *************************************************
