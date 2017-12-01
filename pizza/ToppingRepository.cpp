@@ -33,7 +33,8 @@ vector<Topping> ToppingRepository::retrieveToppings() const {
 				vec.push_back(topping);
 			}
 		}
-		fin.close();	}
+		fin.close();	
+	}
 	return vec;
 }
 

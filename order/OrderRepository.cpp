@@ -20,7 +20,7 @@ vector<Order> OrderRepository::retrieveOrders() const {
 	vector<Order> vec;
     ifstream fin;
     Order order;
-    fin.open(this->file, ios::binary);
+    fin.open(file, ios::binary);
 	if (fin.is_open()) {
 		fin.seekg(0, fin.end);
 		int endpos = fin.tellg();
