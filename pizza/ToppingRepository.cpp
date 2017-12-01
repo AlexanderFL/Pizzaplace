@@ -24,6 +24,7 @@ vector<Topping> ToppingRepository::retrieveToppings() const {
 	if (fin.is_open()) {
 		fin.seekg(0, fin.end);
 		int endpos = fin.tellg();
+		fin.seekg(0, fin.beg);
 		int pos = 0;
 		while (pos != endpos) {
 			topping.read(fin);
