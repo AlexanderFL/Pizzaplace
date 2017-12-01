@@ -2,12 +2,12 @@
 #include "ToppingRepository.h"
 
 ToppingRepository::ToppingRepository() {
-    this->file = "toppings.dat";
+    file = "toppings.dat";
 }
 
 void ToppingRepository::storeToppings(const vector<Topping> &toppings) const {
 	ofstream fout;
-	fout.open(this->file, ios::binary);
+	fout.open(file, ios::binary);
 	int size = toppings.size();
 	fout.write((char*)(&size), sizeof(int));
 	for (int i = 0; i < size; ++i) {
@@ -20,7 +20,7 @@ vector<Topping> ToppingRepository::retrieveToppings() const {
 	//Todo: make sure the file isn't empty
 	ifstream fin;
 	Topping topping;
-	fin.open(this->file, ios::binary);
+	fin.open(file, ios::binary);
 	int size;
 	fin.read((char*)(&size), sizeof(int));
 	vector<Topping> vec;
@@ -33,9 +33,9 @@ vector<Topping> ToppingRepository::retrieveToppings() const {
 }
 
 void ToppingRepository::storeTopping(const Topping& topping) const {
-	vector<Topping> toppings = this->retrieveToppings();
+	vector<Topping> toppings = retrieveToppings();
 	toppings.push_back(topping);
-	this->storeToppings(toppings);
+	storeToppings(toppings);
 }
 
 Topping ToppingRepository::retrieveTopping(int& loc) const {

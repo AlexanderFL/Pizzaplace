@@ -1,5 +1,5 @@
 #include "ManagerUI.h"
-
+#include "../pizza/Topping.h"
 
 ManagerUI::ManagerUI()
 {
@@ -33,7 +33,8 @@ void ManagerUI::managerMenu() {
 			break;
 		}
 		else if (registration == "toppings" || registration == "t") {
-			cout << "b";
+			Topping topping;
+			cout << topping;
 			break;
 		}
 		else if (registration == "price" || registration == "k") {
@@ -49,7 +50,6 @@ void ManagerUI::managerMenu() {
 			break;
 		}
 		else if (registration == "quit" || registration == "q") {
-			cout << "f";
 			break;
 		}
 		cin.clear();

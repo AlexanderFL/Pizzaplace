@@ -1,8 +1,8 @@
 #include "Topping.h"
 
 Topping::Topping() {
-	this->name = "";
-	this->price = 0;
+	name = "";
+	price = 0;
 }
 
 Topping::Topping(string name, double price)
@@ -18,10 +18,10 @@ vector<Topping> Topping::getAllToppings()
 }
 
 void Topping::write(ofstream& fout) const {
-	int len = this->name.length() + 1;
+	int len = name.length() + 1;
 	fout.write((char*)(&len), sizeof(int));
-	fout.write(this->name.c_str(), len);
-	fout.write((char*)(&this->price), sizeof(double));
+	fout.write(name.c_str(), len);
+	fout.write((char*)(&price), sizeof(double));
 }
 
 void Topping::read(ifstream& fin) {
@@ -42,7 +42,6 @@ double Topping::getPrice() {
 ostream& operator<< (ostream& out, const Topping topping)
 {
     out << topping.name << " " << topping.price;
-
     return out;
 }
 

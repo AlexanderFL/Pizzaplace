@@ -10,6 +10,7 @@ class Topping
 {
 private:
 	string name;
+	//change price to an int
 	double price;
 public:
 	Topping();
