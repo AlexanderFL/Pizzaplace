@@ -13,6 +13,7 @@ Order::Order()
 	comment = "";
 	status = 0;
 	location = 0;
+	homeAddress = "none";
 
 }
 
@@ -111,6 +112,14 @@ void Order::calculateCost() {
 	}
 }
 
+//To get the home address of a person (TODO: fix)
+void Order::setHomeAddress(string address) {
+	homeAddress = address;
+}
+
+string Order::getHomeAddress() {
+	return homeAddress;
+}
 /*
 *************************************************
 				OVERLOAD FUNCTIONS
@@ -135,3 +144,4 @@ bool operator == (const Order& left, const Order& right) {
 	}
 	return true;
 }
+

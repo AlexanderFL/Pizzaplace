@@ -21,6 +21,7 @@ private:
 	int location;
 	string comment;
 	void calculateCost();
+	string homeAddress;
 
 public:
 	Order();
@@ -30,4 +31,7 @@ public:
 	void write(ofstream&  fout) const;
 	void read(ifstream& fin);
 	double getTotalCost();
+	//TODO: Fix homeaddress
+	void setHomeAddress(string address);
+	string getHomeAddress();
 };
