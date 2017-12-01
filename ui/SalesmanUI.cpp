@@ -27,12 +27,15 @@ void SalesmanUI::salesmanMenu() {
 			ignore = false;
 		}
 		getline(cin, option);
+
 		//so that it doesn't matter if the string is all caps or not
 		transform(option.begin(), option.end(), option.begin(), ::tolower);
+
 		if (option == "q") {
 			cout << "gs";
 			break;
 		}
+		cin.clear();
+		cin.sync();
 	}
-
 }

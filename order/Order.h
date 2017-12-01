@@ -10,19 +10,20 @@ using namespace std;
 	Keeps the user order, which can be multiple pizzas 
 	and allows the user to edit his order.
 */
+
 class Order
 {
 private:
 	vector<Pizza> pizzas;
 	vector<SideOrder> sides;
-	double totalCost;
+	int totalCost;
 	int status;
 	int location;
 	string comment;
 	void calculateCost();
+
 public:
 	Order();
-
 	friend ostream& operator << (ostream& out, const Order& order);
 	void MakeOrder();
 	void write(ofstream&  fout) const;
