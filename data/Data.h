@@ -46,18 +46,8 @@ inline void Data::WriteMultipleLinesToFile(vector<Repos> repVec) const
 template<class Repos>
 inline Repos Data::RetrieveFromFile(int loc)
 {
-	Repos rep;
-	ifstream fin;
-
-	fin.open(rep.filename, ios::binary);
-	if (fin.is_open())
-	{
-		getline(sizeof(rep) * loc, sizeof(rep));
-		fin >> rep
-	}
-	
-	rep.self();
-	return rep;
+	vector<Repos> repository = RetrieveAllFromFile<Repos>();
+	return repository.at(loc);
 }
 
 template<class Repos>

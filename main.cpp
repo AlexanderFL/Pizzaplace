@@ -20,13 +20,8 @@ int main()
 
 	d.WriteMultipleLinesToFile(vec);
 
-	vector<Topping> vec2;
-	vec2 = d.RetrieveAllFromFile<Topping>();
-
-	for (int i = 0; i < vec2.size(); i++)
-	{
-		cout << vec2[i] << endl;
-	}
+	Topping top = d.RetrieveFromFile<Topping>(1);
+	cout << top;
 
 	system("PAUSE");
 
