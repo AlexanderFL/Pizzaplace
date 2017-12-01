@@ -26,7 +26,8 @@ Order::Order()
 void Order::MakeOrder()
 {
 	Pizza tempPizza;
-	cout << "New Order" << endl;
+	//Maybe skip the comment "New Order". Commented it out at least for now
+	//cout << "New Order" << endl;
 	cin >> tempPizza; // TODO: Finish this.
 }
 

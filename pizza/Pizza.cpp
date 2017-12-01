@@ -100,13 +100,16 @@ ostream& operator<< (ostream& out, const Pizza& pizza)
 istream& operator>> (istream& in, Pizza& pizza)
 {
 	// TODO: Make this a function call to UI layer
-
-	cout << "Select pizza size:" << endl;
-	cout << " 1: Small\t\t950kr.-" << endl;
-	cout << " 2: Medium\t\t1150kr.-" << endl;
-	cout << " 3: Large\t\t1450kr.-" << endl;
-	cout << " Insert number: ";
-	in >> pizza.size;
+	int size;
+	do {
+		cout << "Select pizza size:" << endl;
+		cout << " 1: Small\t\t950kr.-"  << endl;
+		cout << " 2: Medium\t\t1150kr.-" << endl;
+		cout << " 3: Large\t\t1450kr.-" << endl;
+		cout << " Insert number: ";
+		in >> size;
+	} while (size < 1 || 3 < size);
+	pizza.size = size;
 
 	cout << "Select toppings: " << endl;
 

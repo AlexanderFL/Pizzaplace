@@ -19,6 +19,7 @@ void KitchenUI::kitchenMenu() {
 		if (tolower(input) == 'y') {
 			break;
 		}
+
 		//To be able to use getline again without error
 		cin.clear();
 		cin.sync();
