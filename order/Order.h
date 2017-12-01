@@ -27,6 +27,7 @@ public:
 	Order();
 	friend ostream& operator << (ostream& out, const Order& order);
 	friend bool operator == (const Order& left, const Order& right);
+	friend bool operator != (const Order& left, const Order& right);
 	friend Order operator * (const Order& left, const Order& right);
 	void MakeOrder();
 	void write(ofstream&  fout) const;

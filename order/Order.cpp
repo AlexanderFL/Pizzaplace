@@ -136,17 +136,34 @@ ostream& operator <<(ostream& out, const Order& order)
 }
 
 bool operator == (const Order& left, const Order& right) {
-	if (left.pizzas.size() != right.pizzas.size() || left.sides.size() != right.sides.size()) {
+	Order order = left * right;
+	if (left.pizzas.size() != order.pizzas.size() || left.sides.size() != order.sides.size()) {
 		return false;
-	}
-	for (int i = 0; i < left.pizzas.size(); ++i) {
-		
 	}
 	return true;
 }
 
+bool operator != (const Order& left, const Order& right) {
+	return !(left == right);
+}
+
 Order operator * (const Order& left, const Order& right) {
 	Order order;
-
+	for (int i = 0; i < left.pizzas.size(); ++i) {
+		for (int j = 0; j < right.pizzas.size(); ++j) {
+			if (left.pizzas.at(i) == right.pizzas.at(j)) {
+				order.pizzas.push_back(left.pizzas.at(i));
+				j = right.pizzas.size();
+			}
+		}
+	}
+	for (int i = 0; i < left.sides.size(); ++i) {
+		for (int j = 0; j < right.sides.size(); ++j) {
+			if (left.sides.at(i) == right.sides.at(j)) {
+				order.sides.push_back(left.sides.at(i));
+				j = right.sides.size();
+			}
+		}
+	}
 	return order;
 }
