@@ -121,7 +121,6 @@ void Order::calculateCost() {
 */
 ostream& operator <<(ostream& out, const Order& order)
 {
-	out << order;
-
+	out << "order";
 	return out;
 }

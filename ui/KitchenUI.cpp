@@ -10,7 +10,7 @@ void KitchenUI::kitchenMenu() {
 	string workplace;
 	char input;
 	while (true) {
-		//Only a handful of valid workplaces? or all allowed
+		//Only a handful of valid workplaces?
 		cout << "Where do you work? ";
 		cin.ignore();
 		getline(cin, workplace);

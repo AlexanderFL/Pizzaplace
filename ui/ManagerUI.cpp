@@ -1,6 +1,8 @@
 #include "ManagerUI.h"
 #include "../pizza/Topping.h"
-
+#include "../pizza/ToppingRepository.h"
+#include "../order/SideOrder.h"
+#include "DeliveryUI.h"
 ManagerUI::ManagerUI()
 {
 }
@@ -26,27 +28,31 @@ void ManagerUI::managerMenu() {
 		//so that it doesn't matter if the string is all caps or not
 		transform(registration.begin(), registration.end(), registration.begin(), ::tolower);
 
-
-		//Breyta í switch statement
 		if (registration == "pizza" || registration == "p") {
 			cout << "a";
 			break;
 		}
 		else if (registration == "toppings" || registration == "t") {
+			//TODO: fix and add (also be able to delete a toping)
+			ToppingRepository toppingRepo;
 			Topping topping;
+			cin >> topping;
+			toppingRepo.storeTopping(topping);
 			cout << topping;
 			break;
 		}
 		else if (registration == "price" || registration == "k") {
-			cout << "c";
+			//TODO: get the total price of an order
 			break;
-		}
+		} 
 		else if (registration == "delivery" || registration == "d") {
-			cout << "d";
+			DeliveryUI deliveryUI;
+			deliveryUI.deliveryMenu();
 			break;
 		}
 		else if (registration == "other" || registration == "o") {
-			cout << "e";
+			SideOrder sideOrder;
+			cout << sideOrder;
 			break;
 		}
 		else if (registration == "quit" || registration == "q") {

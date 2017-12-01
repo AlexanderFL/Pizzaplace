@@ -15,8 +15,7 @@ class MainUI
     private:
 
     public:
-        MainUI();
-        virtual ~MainUI();
+   //     MainUI();
         void startUI();
 };
 

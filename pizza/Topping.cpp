@@ -39,6 +39,13 @@ double Topping::getPrice() {
 	return this->price;
 }
 
+istream& operator >> (istream& in, Topping topping) {
+	cout << "What topping would you like? ";
+	in >> topping.name;
+	return in;
+
+}
+
 ostream& operator<< (ostream& out, const Topping topping)
 {
     out << topping.name << " " << topping.price;

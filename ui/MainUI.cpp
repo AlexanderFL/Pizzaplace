@@ -4,15 +4,10 @@
 #include "SalesmanUI.h"
 #include "KitchenUI.h"
 
-MainUI::MainUI()
+/*MainUI::MainUI()
 {
     //ctor
-}
-
-MainUI::~MainUI()
-{
-    //dtor
-}
+}*/
 
 void MainUI::startUI()
 {
@@ -20,38 +15,39 @@ void MainUI::startUI()
     while(true)
     {
         cout << "\nPlease Pick one of the following jobs:\n"
-             << "\t-----------------------\n"
-             << "\t| Manager  | Salesman |\n"
-             << "\t-----------------------\n"
-             << "\t| Kitchen  | Delivery |\n"
-             << "\t-----------------------\n"
+             << "\t-----------------------------\n"
+             << "\t| Manager: M  | Salesman: S |\n"
+             << "\t-----------------------------\n"
+             << "\t| Kitchen: K  | Delivery: D |\n"
+             << "\t-----------------------------\n"
+			 << "Press 'q' to Quit\n"
              << "Job: ";
 
         cin >> input;
 
         transform(input.begin(), input.end(), input.begin(), ::tolower);
 
-        if(input == "manager")
+		if(input == "manager" ||input == "m")
         {
 			ManagerUI managerUI;
 			managerUI.managerMenu();
         }
-        else if(input == "salesman")
+        else if(input == "salesman" || input == "s")
         {
 			SalesmanUI salesmanUI;
 			salesmanUI.salesmanMenu();
         }
-        else if(input == "kitchen")
+        else if(input == "kitchen" || input == "k")
         {
 			KitchenUI kitchenUI;
 			kitchenUI.kitchenMenu();
         }
-        else if(input == "delivery")
+        else if(input == "delivery" || input == "d")
         {
 			DeliveryUI deliveryUI;
 			deliveryUI.deliveryMenu();
         }
-		else if (input == "quit") {
+		else if (input == "quit" || input  == "q") {
 			break;
 		}
         else{

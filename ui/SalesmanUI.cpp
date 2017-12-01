@@ -31,8 +31,7 @@ void SalesmanUI::salesmanMenu() {
 		//so that it doesn't matter if the string is all caps or not
 		transform(option.begin(), option.end(), option.begin(), ::tolower);
 
-		if (option == "q") {
-			cout << "gs";
+		if (option == "quit" ||option == "q") {
 			break;
 		}
 		cin.clear();
