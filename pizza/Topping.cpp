@@ -1,12 +1,15 @@
 #include "Topping.h"
 
+Topping::Topping() {
+	this->name = "";
+	this->price = 0;
+}
+
 Topping::Topping(string name, double price)
 {
 	this->name = name;
 	this->price = price;
 }
-
-Topping::Topping(){}
 
 vector<Topping> Topping::getAllToppings()
 {
