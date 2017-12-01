@@ -8,7 +8,10 @@
 *************************************************
 */
 
-Pizza::Pizza() {}
+Pizza::Pizza() {
+	this->size = 0;
+	this->cost = 0;
+}
 
 /*
 	Writes the pizza to a binary file
