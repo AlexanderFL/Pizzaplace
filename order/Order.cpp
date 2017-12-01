@@ -137,14 +137,16 @@ ostream& operator <<(ostream& out, const Order& order)
 
 bool operator == (const Order& left, const Order& right) {
 	Order order = left * right;
-	if (left.pizzas.size() != order.pizzas.size() || left.sides.size() != order.sides.size()) {
-		return false;
-	}
-	return true;
+	return left.pizzas.size() == order.pizzas.size() && left.sides.size() == order.sides.size();
 }
 
 bool operator != (const Order& left, const Order& right) {
 	return !(left == right);
+}
+
+bool operator <= (const Order& left, const Order& right) {
+	Order order = left * right;
+	return left == order;
 }
 
 Order operator * (const Order& left, const Order& right) {

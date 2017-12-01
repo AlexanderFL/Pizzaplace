@@ -48,8 +48,5 @@ ostream& operator<< (ostream& out, const SideOrder& side) {
 }
 
 bool operator == (const SideOrder& left, const SideOrder& right) {
-	if (left.name == right.name && left.price == right.price) {
-		return true;
-	}
-	return false;
+	return left.name == right.name && left.price == right.price;
 }
