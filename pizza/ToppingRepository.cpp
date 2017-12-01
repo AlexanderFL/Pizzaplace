@@ -17,18 +17,24 @@ void ToppingRepository::storeToppings(const vector<Topping> &toppings) const {
 }
 
 vector<Topping> ToppingRepository::retrieveToppings() const {
-	//Todo: make sure the file isn't empty
+	vector<Topping> vec;
 	ifstream fin;
 	Topping topping;
 	fin.open(this->file, ios::binary);
-	int size;
-	fin.read((char*)(&size), sizeof(int));
-	vector<Topping> vec;
-	for (int i = 0; i < size; ++i) {
-		topping.read(fin);
-		vec.push_back(topping);
+	if (fin.is_open()) {
+		fin.seekg(0, fin.end);
+		int endpos = fin.tellg();
+		if (endpos != 0) {
+			fin.seekg(0);
+			int size;
+			fin.read((char*)(&size), sizeof(int));
+			for (int i = 0; i < size; ++i) {
+				topping.read(fin);
+				vec.push_back(topping);
+			}
+		}
+		fin.close();
 	}
-	fin.close();
 	return vec;
 }
 
