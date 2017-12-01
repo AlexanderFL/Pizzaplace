@@ -3,21 +3,31 @@
 
 DeliveryUI::DeliveryUI()
 {
+	bool ignore = true;
 }
 
 
 DeliveryUI::~DeliveryUI()
 {
 }
+void DeliveryUI::setIgnore(bool ignore) {
+	this->ignore = ignore;
+}
 
 void DeliveryUI::deliveryMenu() {
 	string homeAddress;
-	//Nota annað notafjölda orders hér, setti numberOfOrders = 0 bara til að skrifa fallið upp
+	//TODO: Kalla í fallið numberOfOrders þegar það er tilbúið og setja útkomuna í int numberOfOrders 
 	int numberOfOrders = 0;
 	char input;
 	while (true) {
 		cout << "Where would you like it delivered? ";
-		cin.ignore();
+		//Using the bool ignore, so that it doesn't accidently ignore an input
+		if (ignore) {
+			cin.ignore();
+		}
+		else {
+			ignore = true;
+		}
 		getline(cin, homeAddress);
 		cout << "Your home address is " << homeAddress << ". Is this correct? (y/n): ";
 		cin >> input;
@@ -45,6 +55,5 @@ void DeliveryUI::deliveryMenu() {
 	if (tolower(input) == 'y') {
 		//call the function to add an order
 	}
-	//Also add if they want to delete an Order (only if they have 1 or more orders).
-	
+	//TODO: Call a function to delete an Order, if orders  >= 1.
 }

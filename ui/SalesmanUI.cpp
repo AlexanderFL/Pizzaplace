@@ -1,4 +1,6 @@
 #include "SalesmanUI.h"
+#include "DeliveryUI.h"
+#include "../order/Order.h"
 
 SalesmanUI::SalesmanUI()
 {
@@ -8,20 +10,22 @@ SalesmanUI::SalesmanUI()
 void SalesmanUI::salesmanMenu() {
 	bool ignore = true;
 	string option;
+
 	while (true) {
-		cout << "\n\t---------------------------------------------------\n"
-			<< " \t|  Register a pizza: P    |  Add another order: A |\n"
+		cout << "\n\t--------------------------------------------------\n"
+			<< " \t|  1: Register an Order   | 2: Add another order |\n"
 			<< " \t---------------------------------------------------\n"
-			<< " \t|  Price of the order: K  |  Delivery: D          |\n"
+			<< " \t|  3: Price of the order  | 4: Home address      |\n"
 			<< " \t---------------------------------------------------\n"
-			<< " \t|  Food delivered: L      |  Paid for: S          |\n"
+			<< " \t|  5: Food delivered      | 6: Food picked up    |\n"
 			<< " \t---------------------------------------------------\n"
-			<< " \t|  Home address: H        |  Comments: C          |\n"
+			<< " \t|  7: Mark paid for       | 8: Comments          |\n"
 			<< " \t---------------------------------------------------\n"
-			<< " \t|  Quit : Q               |                       |\n"
+			<< " \t|  9: Quit                |                      |\n"
 			<< " \t---------------------------------------------------\n" << endl;
 		
 		cout << "What would you like to do? "; 
+
 		if (ignore) {
 			cin.ignore();
 			ignore = false;
@@ -31,9 +35,34 @@ void SalesmanUI::salesmanMenu() {
 		//so that it doesn't matter if the string is all caps or not
 		transform(option.begin(), option.end(), option.begin(), ::tolower);
 
-		if (option == "quit" ||option == "q") {
+		//TODO: Fix the look of these statements and add functions to them
+		if (option == "1" || option == "2") {
+			Order order;
+			order.MakeOrder();
 			break;
 		}
+		else if (option == "3") {
+			break;
+		}
+		else if (option == "4") {
+			break;
+		}
+		else if (option == "5") {
+			break;
+		}
+		else if (option == "6") {
+			break;
+		}
+		else if (option == "7") {
+			break;
+		}
+		else if (option == "8") {
+			break;
+		}
+		else if (option == "9" || option == "q") {
+			break;
+		}
+
 		cin.clear();
 		cin.sync();
 	}
