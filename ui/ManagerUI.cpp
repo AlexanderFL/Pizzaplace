@@ -12,11 +12,11 @@ void ManagerUI::managerMenu() {
 	bool ignore = true;
 	while (true) {
 		cout << "\n\t----------------------------\n"
-			 << " \t|  Pizza: P |  Toppings: T |\n"
+			 << " \t|  1: Pizza |  2: Toppings |\n"
 			 << " \t----------------------------\n"
-			 << " \t|  Price: K |  Delivery: D |\n"
+			 << " \t|  3: Price |  4: Delivery |\n"
 			 << " \t----------------------------\n"
-			 << " \t|  Other: O |  Quit: Q     |\n"
+			 << " \t|  5: Other |  6: Quit    |\n"
 			 << " \t----------------------------\n" << endl;
 
 		cout << "What would you like to register? ";
@@ -24,15 +24,16 @@ void ManagerUI::managerMenu() {
 			cin.ignore();
 			ignore = false;
 		}
+
 		getline(cin, registration);
-		//so that it doesn't matter if the string is all caps or not
+		//String size set to lower
 		transform(registration.begin(), registration.end(), registration.begin(), ::tolower);
 
-		if (registration == "pizza" || registration == "p") {
+		if (registration == "pizza" || registration == "1") {
 			cout << "a";
 			break;
 		}
-		else if (registration == "toppings" || registration == "t") {
+		else if (registration == "toppings" || registration == "2") {
 			//TODO: fix and add (also be able to delete a toping)
 			ToppingRepository toppingRepo;
 			Topping topping;
@@ -41,21 +42,23 @@ void ManagerUI::managerMenu() {
 			cout << topping;
 			break;
 		}
-		else if (registration == "price" || registration == "k") {
+		else if (registration == "price" || registration == "3") {
 			//TODO: get the total price of an order
 			break;
 		} 
-		else if (registration == "delivery" || registration == "d") {
+		else if (registration == "delivery" || registration == "4") {
+			bool ignore = false;
 			DeliveryUI deliveryUI;
+			deliveryUI.setIgnore(ignore);
 			deliveryUI.deliveryMenu();
 			break;
 		}
-		else if (registration == "other" || registration == "o") {
+		else if (registration == "other" || registration == "5") {
 			SideOrder sideOrder;
 			cout << sideOrder;
 			break;
 		}
-		else if (registration == "quit" || registration == "q") {
+		else if (registration == "quit" || registration == "6") {
 			break;
 		}
 		cin.clear();
