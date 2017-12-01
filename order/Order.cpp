@@ -32,12 +32,12 @@ void Order::write(ofstream& fout) const {
 	int size = this->pizzas.size();
 	fout.write((char*)(&size), sizeof(int));
 	for (int i = 0; i < size; ++i) {
-		pizzas[i].write(fout);
+		pizzas.at(i).write(fout);
 	}
 	size = this->sides.size();
 	fout.write((char*)(&size), sizeof(int));
 	for (int i = 0; i < size; ++i) {
-		sides[i].write(fout);
+		sides.at(i).write(fout);
 	}
 	fout.write((char*)(&this->totalCost), sizeof(double));
 }
@@ -85,7 +85,7 @@ double Order::getTotalCost() {
 void Order::calculateCost() {
 	this->totalCost = 0;
 	for (int i = 0; i < pizzas.size(); ++i) {
-		this->totalCost += pizzas[i].getCost();
+		this->totalCost += pizzas.at(i).getCost();
 	}
 }
 

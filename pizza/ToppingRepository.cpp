@@ -11,7 +11,7 @@ void ToppingRepository::storeToppings(const vector<Topping> &toppings) const {
 	int size = toppings.size();
 	fout.write((char*)(&size), sizeof(int));
 	for (int i = 0; i < size; ++i) {
-		toppings[i].write(fout);
+		toppings.at(i).write(fout);
 	}
 	fout.close();
 }

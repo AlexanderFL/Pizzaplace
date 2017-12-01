@@ -11,7 +11,7 @@ void OrderRepository::storeOrders(const vector<Order> &orders) const {
 	int size = orders.size();
 	fout.write((char*)(&size), sizeof(int));
 	for (int i = 0; i < size; ++i) {
-		orders[i].write(fout);
+		orders.at(i).write(fout);
 	}
     fout.close();
 }
