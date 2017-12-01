@@ -17,6 +17,7 @@ void ToppingRepository::storeToppings(const vector<Topping> &toppings) const {
 }
 
 vector<Topping> ToppingRepository::retrieveToppings() const {
+	//Todo: make sure the file isn't empty
 	ifstream fin;
 	Topping topping;
 	fin.open(this->file, ios::binary);
@@ -31,7 +32,6 @@ vector<Topping> ToppingRepository::retrieveToppings() const {
 	return vec;
 }
 
-
 void ToppingRepository::storeTopping(const Topping& topping) const {
 	vector<Topping> toppings = this->retrieveToppings();
 	toppings.push_back(topping);
@@ -39,6 +39,7 @@ void ToppingRepository::storeTopping(const Topping& topping) const {
 }
 
 Topping ToppingRepository::retrieveTopping(int& loc) const {
+	//Todo: make sure that loc exists
 	vector<Topping> toppings = this->retrieveToppings();
 	return toppings.at(loc);
 }
