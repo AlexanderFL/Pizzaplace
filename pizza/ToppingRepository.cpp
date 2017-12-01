@@ -24,22 +24,22 @@ vector<Topping> ToppingRepository::retrieveToppings() const {
 	if (fin.is_open()) {
 		fin.seekg(0, fin.end);
 		int endpos = fin.tellg();
-		if (endpos != 0) {
+		int pos = 0;
+		while (pos != endpos) {
+			topping.read(fin);
+			vec.push_back(topping);
+			pos = fin.tellg();
+		}
+		/*if (endpos != 0) {
 			fin.seekg(0);
-			/*int size;
+			int size;
 			fin.read((char*)(&size), sizeof(int));
 			for (int i = 0; i < size; ++i) {
 				topping.read(fin);
 				vec.push_back(topping);
-			}*/
-			int pos = 0;
-			while (pos != endpos) {
-				topping.read(fin);
-				vec.push_back(topping);
-				pos = fin.tellg();
 			}
-		}
-		cout << endpos << endl;
+			
+		}*/
 		fin.close();	
 	}
 	return vec;
