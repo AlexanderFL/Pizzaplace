@@ -10,7 +10,7 @@ void ToppingRepository::storeToppings(const vector<Topping> &toppings) const {
 	fout.open(file, ios::binary);
 	int size = toppings.size();
 	fout.write((char*)(&size), sizeof(int));
-	for (int i = 0; i < size; ++i) {
+	for (unsigned int i = 0; i < size; ++i) {
 		toppings.at(i).write(fout);
 	}
 	fout.close();

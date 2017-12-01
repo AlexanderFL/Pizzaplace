@@ -10,7 +10,7 @@ void OrderRepository::storeOrders(const vector<Order> &orders) const {
     fout.open(file, ios::binary);
 	int size = orders.size();
 	fout.write((char*)(&size), sizeof(int));
-	for (int i = 0; i < size; ++i) {
+	for (unsigned int i = 0; i < size; ++i) {
 		orders.at(i).write(fout);
 	}
     fout.close();
