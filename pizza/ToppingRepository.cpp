@@ -8,9 +8,9 @@ ToppingRepository::ToppingRepository() {
 void ToppingRepository::storeToppings(const vector<Topping> &toppings) const {
 	ofstream fout;
 	fout.open(file, ios::binary);
-	int size = toppings.size();
-	fout.write((char*)(&size), sizeof(int));
-	for (unsigned int i = 0; i < size; ++i) {
+	/*int size = toppings.size();
+	fout.write((char*)(&size), sizeof(int));*/
+	for (unsigned int i = 0; i < toppings.size(); ++i) {
 		toppings.at(i).write(fout);
 	}
 	fout.close();
@@ -26,22 +26,33 @@ vector<Topping> ToppingRepository::retrieveToppings() const {
 		int endpos = fin.tellg();
 		if (endpos != 0) {
 			fin.seekg(0);
-			int size;
+			/*int size;
 			fin.read((char*)(&size), sizeof(int));
 			for (int i = 0; i < size; ++i) {
 				topping.read(fin);
 				vec.push_back(topping);
+			}*/
+			int pos = 0;
+			while (pos != endpos) {
+				topping.read(fin);
+				vec.push_back(topping);
+				pos = fin.tellg();
 			}
 		}
+		cout << endpos << endl;
 		fin.close();	
 	}
 	return vec;
 }
 
 void ToppingRepository::storeTopping(const Topping& topping) const {
-	vector<Topping> toppings = retrieveToppings();
+	/*vector<Topping> toppings = retrieveToppings();
 	toppings.push_back(topping);
-	storeToppings(toppings);
+	storeToppings(toppings);*/
+	ofstream fout;
+	fout.open(file, ios::binary | ios::app);
+	topping.write(fout);
+	fout.close();
 }
 
 Topping ToppingRepository::retrieveTopping(int& loc) const {
