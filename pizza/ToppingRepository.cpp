@@ -30,3 +30,15 @@ vector<Topping> ToppingRepository::retrieveToppings() const {
 	fin.close();
 	return vec;
 }
+
+
+void ToppingRepository::storeTopping(const Topping& topping) const {
+	vector<Topping> toppings = this->retrieveToppings();
+	toppings.push_back(topping);
+	this->storeToppings(toppings);
+}
+
+Topping ToppingRepository::retrieveTopping(int& loc) const {
+	vector<Topping> toppings = this->retrieveToppings();
+	return toppings.at(loc);
+}
