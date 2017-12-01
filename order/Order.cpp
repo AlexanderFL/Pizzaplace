@@ -135,3 +135,9 @@ bool operator == (const Order& left, const Order& right) {
 	}
 	return true;
 }
+
+Order operator * (const Order& left, const Order& right) {
+	Order order;
+
+	return order;
+}

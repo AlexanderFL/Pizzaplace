@@ -94,6 +94,9 @@ void Pizza::calculateCost() {
 */
 ostream& operator<< (ostream& out, const Pizza& pizza)
 {
+	for (int i = 0; i < pizza.nrToppings(); ++i) {
+		out << pizza.toppings.at(i) << " ";
+	}
 	return out;
 }
 
@@ -124,9 +127,11 @@ istream& operator>> (istream& in, Pizza& pizza)
 	Compares whether the two pizzas have the same toppings
 */
 bool operator == (const Pizza& left, const Pizza& right) {
-	Pizza pizza = left * right;
-	if (pizza.nrToppings() == left.nrToppings() && pizza.nrToppings() == right.nrToppings()) {
-		return true;
+	if (left.size == right.size) {
+		Pizza pizza = left * right;
+		if (pizza.nrToppings() == left.nrToppings() && pizza.nrToppings() == right.nrToppings()) {
+			return true;
+		}
 	}
 	return false;
 }
@@ -147,6 +152,7 @@ Pizza operator * (const Pizza& left, const Pizza& right) {
 		for (int j = 0; j < right.nrToppings(); ++j) {
 			if (left.toppings.at(i) == right.toppings.at(j)) {
 				pizza.addTopping(left.toppings.at(i));
+				j = right.nrToppings();
 			}
 		}
 	}
