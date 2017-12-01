@@ -129,6 +129,13 @@ bool operator == (const Pizza& left, const Pizza& right) {
 }
 
 /*
+	Compares whether the two pizzas do not have the same toppings
+*/
+bool operator != (const Pizza& left, const Pizza& right) {
+	return !(left == right);
+}
+
+/*
 	Returns a pizza with the intersection for the toppings of two Pizzas
 */
 Pizza operator * (const Pizza& left, const Pizza& right) {

@@ -25,6 +25,7 @@ private:
 public:
 	Order();
 	friend ostream& operator << (ostream& out, const Order& order);
+	friend bool operator == (const Order& left, const Order& right);
 	void MakeOrder();
 	void write(ofstream&  fout) const;
 	void read(ifstream& fin);

@@ -124,3 +124,13 @@ ostream& operator <<(ostream& out, const Order& order)
 	out << "order";
 	return out;
 }
+
+bool operator == (const Order& left, const Order& right) {
+	if (left.pizzas.size() != right.pizzas.size() || left.sides.size() != right.sides.size()) {
+		return false;
+	}
+	for (int i = 0; i < left.pizzas.size(); ++i) {
+		
+	}
+	return true;
+}
