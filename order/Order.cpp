@@ -157,7 +157,7 @@ Order operator * (const Order& left, const Order& right) {
 		for (int j = 0; j < right.pizzas.size(); ++j) {
 			if (left.pizzas.at(i) == right.pizzas.at(j)) {
 				order.pizzas.push_back(left.pizzas.at(i));
-				j = right.pizzas.size();
+				break;
 			}
 		}
 	}
@@ -165,7 +165,7 @@ Order operator * (const Order& left, const Order& right) {
 		for (int j = 0; j < right.sides.size(); ++j) {
 			if (left.sides.at(i) == right.sides.at(j)) {
 				order.sides.push_back(left.sides.at(i));
-				j = right.sides.size();
+				break;
 			}
 		}
 	}

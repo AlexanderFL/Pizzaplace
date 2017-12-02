@@ -151,7 +151,7 @@ Pizza operator * (const Pizza& left, const Pizza& right) {
 		for (int j = 0; j < right.nrToppings(); ++j) {
 			if (left.toppings.at(i) == right.toppings.at(j)) {
 				pizza.addTopping(left.toppings.at(i));
-				j = right.nrToppings();
+				break;
 			}
 		}
 	}
