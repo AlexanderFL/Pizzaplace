@@ -151,10 +151,8 @@
     <ClInclude Include="ui\DeliveryUI.h" />
     <ClInclude Include="ui\MainUI.h" />
     <ClInclude Include="model\Order.h" />
-    <ClInclude Include="data\OrderRepository.h" />
     <ClInclude Include="model\Pizza.h" />
     <ClInclude Include="model\Topping.h" />
-    <ClInclude Include="data\ToppingRepository.h" />
     <ClInclude Include="model\User.h" />
   </ItemGroup>
   <ItemGroup>
@@ -166,11 +164,9 @@
     <ClCompile Include="ui\DeliveryUI.cpp" />
     <ClCompile Include="ui\MainUI.cpp" />
     <ClCompile Include="model\Order.cpp" />
-    <ClCompile Include="data\OrderRepository.cpp" />
     <ClCompile Include="model\Pizza.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="model\Topping.cpp" />
-    <ClCompile Include="data\ToppingRepository.cpp" />
     <ClCompile Include="model\User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

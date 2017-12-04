@@ -1,6 +1,6 @@
 #include "ManagerUI.h"
 #include "../model/Topping.h"
-#include "../data/ToppingRepository.h"
+#include "../data/Data.h"
 #include "../model/SideOrder.h"
 #include "DeliveryUI.h"
 ManagerUI::ManagerUI()
@@ -35,10 +35,10 @@ void ManagerUI::managerMenu() {
 		}
 		else if (registration == "toppings" || registration == "2") {
 			//TODO: fix and add (also be able to delete a toping)
-			ToppingRepository toppingRepo;
+			Data toppingRepo;
 			Topping topping;
 			cin >> topping;
-			toppingRepo.storeTopping(topping);
+			toppingRepo.WriteToFile(topping);
 			cout << topping;
 			break;
 		}
