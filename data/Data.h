@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "../pizza/Topping.h"
-#include "../order/Order.h"
+#include "../model/Topping.h"
+#include "../model/Order.h"
 using namespace std;
 
 class Data

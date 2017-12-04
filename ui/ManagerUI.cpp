@@ -1,7 +1,7 @@
 #include "ManagerUI.h"
-#include "../pizza/Topping.h"
-#include "../pizza/ToppingRepository.h"
-#include "../order/SideOrder.h"
+#include "../model/Topping.h"
+#include "../data/ToppingRepository.h"
+#include "../model/SideOrder.h"
 #include "DeliveryUI.h"
 ManagerUI::ManagerUI()
 {

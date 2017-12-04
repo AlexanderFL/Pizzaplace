@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
-#include "../pizza/Pizza.h"
+#include "Pizza.h"
 #include "SideOrder.h"
 using namespace std;
 

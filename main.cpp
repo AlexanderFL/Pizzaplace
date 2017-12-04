@@ -7,10 +7,10 @@ using namespace std;
 
 int main()
 {
-	//MainUI mainUI;
-	//mainUI.startUI();
+	MainUI mainUI;
+	mainUI.startUI();
 
-	Topping t1("Ananas", 350);
+	/*Topping t1("Ananas", 350);
 	Topping t2("Pepperoni", 400);
 	Topping t3("Spinach", 345);
 
@@ -20,12 +20,12 @@ int main()
 	Data d;
 
 	d.WriteMultipleLinesToFile(vec);
-	//d.WriteToFile(t3);
+	d.WriteToFile(t3);
 
 	Topping top = d.RetrieveFromFile<Topping>(2);
 	cout << top;
 
-	system("PAUSE");
+	system("PAUSE");*/
 
 	return 0;
 }

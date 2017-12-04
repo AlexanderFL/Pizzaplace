@@ -1,6 +1,6 @@
 #include "SalesmanUI.h"
 #include "DeliveryUI.h"
-#include "../order/Order.h"
+#include "../model/Order.h"
 
 SalesmanUI::SalesmanUI()
 {

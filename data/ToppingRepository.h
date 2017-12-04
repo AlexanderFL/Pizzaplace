@@ -2,7 +2,7 @@
 #define TOPPINGREPOSITORY_H
 
 #include <vector>
-#include "Topping.h"
+#include "../model/Topping.h"
 
 class ToppingRepository {
     private:
