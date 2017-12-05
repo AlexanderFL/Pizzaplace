@@ -13,10 +13,6 @@ SideOrder::SideOrder(string name, double price) {
 	this->price = price;
 }
 
-
-SideOrder::~SideOrder() {
-}
-
 void SideOrder::write(ofstream& fout) const {
 	int len = this->name.length() + 1;
 	fout.write((char*)(&len), sizeof(int));

@@ -31,32 +31,37 @@ void ManagerUI::managerMenu() {
 
 		if (registration == "pizza" || registration == "1") {
 			cout << "a";
-			break;
 		}
 		else if (registration == "toppings" || registration == "2") {
 			//TODO: fix and add (also be able to delete a toping)
+			int numberOfToppings;
 			Data toppingRepo;
 			Topping topping;
-			cin >> topping;
-			toppingRepo.WriteToFile(topping);
-			cout << topping;
-			break;
+			cout << "How many topings would you like to add? ";
+			cin >> numberOfToppings;
+			cout << "What would you like as a topping? " << endl;
+
+			//TODO: FIX LOOP
+			string toppings;
+			for (int i = 0; i < numberOfToppings; ++i) {
+				cout << "Topping number " << i + 1 << ": ";
+				cin >> toppings;
+				toppingRepo.WriteToFile(topping);
+			}
 		}
+
 		else if (registration == "price" || registration == "3") {
 			//TODO: get the total price of an order
-			break;
 		} 
 		else if (registration == "delivery" || registration == "4") {
 			bool ignore = false;
 			DeliveryUI deliveryUI;
 			deliveryUI.setIgnore(ignore);
 			deliveryUI.deliveryMenu();
-			break;
 		}
 		else if (registration == "other" || registration == "5") {
 			SideOrder sideOrder;
 			cout << sideOrder;
-			break;
 		}
 		else if (registration == "quit" || registration == "6") {
 			break;

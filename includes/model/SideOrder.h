@@ -14,7 +14,6 @@ private:
 public:
 	SideOrder();
 	SideOrder(string name, double price);
-	~SideOrder();
 	void write(ofstream& fout) const;
 	void read(ifstream& fin);
 	string getName() const;

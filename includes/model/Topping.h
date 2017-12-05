@@ -18,7 +18,6 @@ private:
 public:
 	Topping();
 	Topping(string name, double price);
-
 	vector<Topping> getAllToppings();
 	Topping self();
 	void write(ofstream& fout) const;
