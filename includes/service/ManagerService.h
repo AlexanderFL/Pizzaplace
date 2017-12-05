@@ -9,6 +9,7 @@ private:
 public:
 	ManagerService();
 	void addTopping(const Topping& topping);
+	void addSideOrder(const SideOrder& side);
 	vector<Topping> getToppings();
 };
 

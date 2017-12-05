@@ -8,6 +8,12 @@ void ManagerService::addTopping(const Topping& topping) {
 	repo.WriteToFile(topping);
 }
 
+void MangerService::addSideOrder(const SideOrder& side) {
+	//Validate sideorder
+
+	repo.WriteTofile(side);
+}
+
 vector<Topping> ManagerService::getToppings() {
 	return repo.RetrieveAllFromFile<Topping>();
 }
