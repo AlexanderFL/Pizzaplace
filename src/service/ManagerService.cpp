@@ -2,12 +2,12 @@
 
 ManagerService::ManagerService() {}
 
-void ManagerService::addTopping(const Topping& topping) const {
+void ManagerService::addTopping(const Topping& topping) {
 	//Validate topping
 
 	repo.WriteToFile(topping);
 }
 
-vector<Topping> ManagerService::getToppings() const {
-	return RetrieveAllFromFile<Topping>();
+vector<Topping> ManagerService::getToppings() {
+	return repo.RetrieveAllFromFile<Topping>();
 }
