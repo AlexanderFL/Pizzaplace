@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "data/Data.h"
+#include "Data.h"
 
 using namespace std;
-#include "ui/MainUI.h"
+#include "MainUI.h"
 
 int main()
 {
