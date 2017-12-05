@@ -7,25 +7,32 @@ using namespace std;
 
 int main()
 {
-	MainUI mainUI;
-	mainUI.startUI();
+	//MainUI mainUI;
+	//mainUI.startUI();
 
-	/*Topping t1("Ananas", 350);
-	Topping t2("Pepperoni", 400);
-	Topping t3("Spinach", 345);
-
-	vector<Topping> vec;
-	vec.push_back(t1);
-	vec.push_back(t2);
 	Data d;
 
-	d.WriteMultipleLinesToFile(vec);
-	d.WriteToFile(t3);
+	Topping t("Shoelace", 450);
+	Topping t1("Another one", 700);
 
-	Topping top = d.RetrieveFromFile<Topping>(2);
-	cout << top;
+	vector<Topping> all = d.RetrieveAllFromFile<Topping>();
+	
+	for (int i = 0; i < all.size(); i++)
+	{
+		cout << i+1 << ": " << all[i] << endl;
+	}
 
-	system("PAUSE");*/
+	d.RemoveFromFileAtIndex<Topping>(5);
+	all = d.RetrieveAllFromFile<Topping>();
+
+	cout << endl;
+
+	for (int i = 0; i < all.size(); i++)
+	{
+		cout << i + 1 << ": " << all[i] << endl;
+	}
+
+	system("PAUSE");
 
 	return 0;
 }
