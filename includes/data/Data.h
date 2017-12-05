@@ -21,6 +21,12 @@ public:
 
 	template <class Repos>
 	vector<Repos> RetrieveAllFromFile();
+
+	template <class Repos>
+	void RemoveFromFileAtIndex(int index);
+
+	template <class Repos>
+	void ModifyFileAtIndex(int index);
 };
 
 template<class Repos>
@@ -74,4 +80,22 @@ inline vector<Repos> Data::RetrieveAllFromFile()
 	}
 	fin.close();
 	return vec;
+}
+
+template<class Repos>
+inline void Data::RemoveFromFileAtIndex(int index)
+{
+	vector<Repos> vec = RetrieveAllFromFile<Repos>();
+	vec.erase(vec.begin() + index);
+	WriteMultipleLinesToFile(vec);
+}
+
+template<class Repos>
+inline void Data::ModifyFileAtIndex(int index)
+{
+	vector<Repos> vec = RetrieveAllFromFile<Repos>();
+	Repos rep;
+	cin >> rep;
+	vec[index] = rep;
+	WriteMultipleLinesToFile(vec);
 }

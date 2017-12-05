@@ -28,6 +28,7 @@ private:
 public:
 	Order();
 	friend ostream& operator << (ostream& out, const Order& order);
+	friend istream& operator >> (istream& in, Order& order);
 	friend bool operator == (const Order& left, const Order& right);
 	friend bool operator != (const Order& left, const Order& right);
 	friend bool operator <= (const Order& left, const Order& right);

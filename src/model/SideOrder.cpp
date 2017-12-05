@@ -40,8 +40,30 @@ double SideOrder::getPrice() const {
 }
 
 ostream& operator<< (ostream& out, const SideOrder& side) {
-	out << side.name << " " << side.price;
+	if (&out != &cout) {
+		int len = side.name.length() + 1;
+		out.write((char*)(&len), sizeof(int));
+		out.write(side.name.c_str(), len);
+		out.write((char*)(&side.price), sizeof(double));
+	}
+	else {
+		out << side.name << " " << side.price;
+	}
 	return out;
+}
+
+istream& operator>> (istream& in, SideOrder& side) {
+	if (&in != &cin) {
+		int len;
+		side.name = "";
+		in.read((char*)(&len), sizeof(int));
+		char* str = new char[len];
+		in.read(str, len);
+		side.name = str;
+		in.read((char*)(&side.price), sizeof(double));
+		delete[] str;
+	}
+	return in;
 }
 
 bool operator == (const SideOrder& left, const SideOrder& right) {

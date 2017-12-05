@@ -93,8 +93,19 @@ void Pizza::calculateCost() {
 */
 ostream& operator<< (ostream& out, const Pizza& pizza)
 {
-	for (int i = 0; i < pizza.nrToppings(); ++i) {
-		out << pizza.toppings.at(i) << " ";
+	if (&out != &cout) {
+		int size = pizza.nrToppings();
+		out.write((char*)(&size), sizeof(int));
+		for (int i = 0; i < size; ++i) {
+			out << pizza.toppings.at(i);
+		}
+		out.write((char*)(&pizza.size), sizeof(int));
+		out.write((char*)(&pizza.cost), sizeof(double));
+	}
+	else {
+		for (int i = 0; i < pizza.nrToppings(); ++i) {
+			out << pizza.toppings.at(i) << " ";
+		}
 	}
 	return out;
 }
@@ -102,22 +113,36 @@ ostream& operator<< (ostream& out, const Pizza& pizza)
 istream& operator>> (istream& in, Pizza& pizza)
 {
 	// TODO: Make this a function call to UI layer
-	int size;
-	do {
-		cout << "Select pizza size:" << endl;
-		cout << " 1: Small\t\t950kr.-"  << endl;
-		cout << " 2: Medium\t\t1150kr.-" << endl;
-		cout << " 3: Large\t\t1450kr.-" << endl;
-		cout << " Insert number: ";
-		in >> size;
-	} while (size < 1 || 3 < size);
-	pizza.size = size;
+	if (&in != &cin) {
+		int size;
+		in.read((char*)(&size), sizeof(int));
+		pizza.toppings.clear();
+		Topping topping;
+		for (int i = 0; i < size; ++i) {
+			in >> topping;
+			pizza.addTopping(topping);
+		}
+		in.read((char*)(&pizza.size), sizeof(int));
+		in.read((char*)(&pizza.cost), sizeof(double));
+	}
+	else {
+		int size;
+		do {
+			cout << "Select pizza size:" << endl;
+			cout << " 1: Small\t\t950kr.-" << endl;
+			cout << " 2: Medium\t\t1150kr.-" << endl;
+			cout << " 3: Large\t\t1450kr.-" << endl;
+			cout << " Insert number: ";
+			in >> size;
+		} while (size < 1 || 3 < size);
+		pizza.size = size;
 
-	cout << "Select toppings: " << endl;
+		cout << "Select toppings: " << endl;
 
-	for (int i = 0; i < pizza.nrToppings(); i++)
-	{
+		for (int i = 0; i < pizza.nrToppings(); i++)
+		{
 
+		}
 	}
 	return in;
 }
