@@ -20,6 +20,7 @@ public:
 	string getName() const;
 	double getPrice() const;
 	friend ostream& operator<< (ostream& out, const SideOrder& side);
+	friend istream& operator>> (istream& out, SideOrder& side);
 	friend bool operator == (const SideOrder& left, const SideOrder& right);
 };
 

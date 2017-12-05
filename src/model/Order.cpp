@@ -133,8 +133,58 @@ string Order::getHomeAddress() {
 */
 ostream& operator <<(ostream& out, const Order& order)
 {
-	out << "order";
+	if (&out != &cout) {
+		int size = order.pizzas.size();
+		out.write((char*)(&size), sizeof(int));
+		for (int i = 0; i < size; ++i) {
+			out << order.pizzas.at(i);
+		}
+		size = order.sides.size();
+		out.write((char*)(&size), sizeof(int));
+		for (int i = 0; i < size; ++i) {
+			out << order.sides.at(i);
+		}
+		out.write((char*)(&order.totalCost), sizeof(double));
+		out.write((char*)(&order.status), sizeof(int));
+		out.write((char*)(&order.location), sizeof(int));
+		int len = order.comment.length() + 1;
+		out.write((char*)(&len), sizeof(int));
+		out.write(order.comment.c_str(), len);
+	}
+	else {
+		out << "order";
+	}
 	return out;
+}
+
+istream& operator >> (istream& in, Order& order) {
+	if (&in != &cin) {
+		order.pizzas.clear();
+		order.sides.clear();
+		int size;
+		Pizza pizza;
+		in.read((char*)(&size), sizeof(int));
+		for (int i = 0; i < size; ++i) {
+			in >> pizza;
+			order.pizzas.push_back(pizza);
+		}
+		in.read((char*)(&size), sizeof(int));
+		SideOrder side;
+		for (int i = 0; i < size; ++i) {
+			in >> side;
+			order.sides.push_back(side);
+		}
+		in.read((char*)(&order.totalCost), sizeof(double));
+		in.read((char*)(&order.status), sizeof(int));
+		in.read((char*)(&order.location), sizeof(int));
+		int len;
+		in.read((char*)(&len), sizeof(int));
+		char* str = new char[len];
+		in.read(str, len);
+		order.comment = str;
+		delete[] str;
+	}
+	return in;
 }
 
 bool operator == (const Order& left, const Order& right) {
