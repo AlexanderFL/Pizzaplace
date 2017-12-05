@@ -77,8 +77,8 @@ inline vector<Repos> Data::RetrieveAllFromFile()
 			vec.push_back(rep);
 			pos = fin.tellg();
 		}
+		fin.close();
 	}
-	fin.close();
 	return vec;
 }
 

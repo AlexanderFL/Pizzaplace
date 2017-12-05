@@ -75,7 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>includes/data/;includes/ui/;includes/model/;includes/;$(IncludePath)</IncludePath>
+    <IncludePath>includes/data/;includes/ui/;includes/model/;includes/service/;includes/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -155,8 +155,10 @@
     <ClInclude Include="includes\ui\ManagerUI.h" />
     <ClInclude Include="includes\ui\DeliveryUI.h" />
     <ClInclude Include="includes\ui\MainUI.h" />
+    <ClInclude Include="includes\service\ManagerService.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\service\ManagerService.cpp" />
     <ClCompile Include="src\data\Data.cpp" />
     <ClCompile Include="src\model\SideOrder.cpp" />
     <ClCompile Include="src\ui\KitchenUI.cpp" />
