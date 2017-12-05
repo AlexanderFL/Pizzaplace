@@ -32,21 +32,41 @@ void ManagerUI::managerMenu() {
 		if (registration == "pizza" || registration == "1") {
 			cout << "a";
 		}
+
 		else if (registration == "toppings" || registration == "2") {
-			//TODO: fix and add (also be able to delete a toping)
+			char input;
 			int numberOfToppings;
 			Data toppingRepo;
 			Topping topping;
-			cout << "How many topings would you like to add? ";
-			cin >> numberOfToppings;
-			cout << "What would you like as a topping? " << endl;
+			cout << "What would you like to do? \n"
+				<< "1. Add a topping.\n"
+				<< "2. Delete a topping.\n"
+				<< "Input: ";
+			cin >> input;
+			//Add a topping
+			if (input == '1') {
+				//TODO: fix and add (also be able to delete a toping)
+				cout << "How many topings would you like to add? ";
+				cin >> numberOfToppings;
+				cout << "What would you like as a topping? " << endl;
 
-			//TODO: FIX LOOP
-			string toppings;
-			for (int i = 0; i < numberOfToppings; ++i) {
-				cout << "Topping number " << i + 1 << ": ";
-				cin >> toppings;
-				toppingRepo.WriteToFile(topping);
+				for (int i = 0; i < numberOfToppings; ++i) {
+					cout << "Topping number " << i + 1 << ": ";
+					cin >> topping;
+					toppingRepo.WriteToFile(topping);
+				}
+			}
+			//Delete a topping
+			else if (input == '2') {
+				//TODO: Fix >:(
+				//toppingRepo.retrieveAllFromFile();
+
+				topping.getAllToppings();
+				cout << topping;
+			}
+
+			else {
+				cout << "Invalid input." << endl;
 			}
 		}
 
@@ -66,7 +86,7 @@ void ManagerUI::managerMenu() {
 		else if (registration == "quit" || registration == "6") {
 			break;
 		}
-		cin.clear();
-		cin.sync();
+		//cin.clear();
+		//cin.sync();
 	}
 }
