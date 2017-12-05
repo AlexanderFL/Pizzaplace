@@ -8,6 +8,7 @@ private:
 	Data repo;
 public:
 	ManagerService();
-	~ManagerService();
+	void addTopping(const Topping& topping) const;
+	vector<Topping> getToppings() const;
 };
 
