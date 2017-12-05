@@ -7,9 +7,10 @@ using namespace std;
 
 int main()
 {
-	//MainUI mainUI;
-	//mainUI.startUI();
+	MainUI mainUI;
+	mainUI.startUI();
 
+	/*
 	Data d;
 
 	Topping t("Shoelace", 450);
@@ -33,6 +34,6 @@ int main()
 	}
 
 	system("PAUSE");
-
+	*/
 	return 0;
 }
