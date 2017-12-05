@@ -2,8 +2,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "../model/Topping.h"
-#include "../model/Order.h"
+
+#include "Topping.h"
+#include "Order.h"
 using namespace std;
 
 class Data
