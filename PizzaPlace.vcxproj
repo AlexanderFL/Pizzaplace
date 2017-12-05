@@ -75,6 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>includes/data/;includes/ui/;includes/models/;includes/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -143,31 +144,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="data\Data.h" />
-    <ClInclude Include="model\SideOrder.h" />
-    <ClInclude Include="ui\KitchenUI.h" />
-    <ClInclude Include="ui\SalesmanUI.h" />
-    <ClInclude Include="ui\ManagerUI.h" />
-    <ClInclude Include="ui\DeliveryUI.h" />
-    <ClInclude Include="ui\MainUI.h" />
-    <ClInclude Include="model\Order.h" />
-    <ClInclude Include="model\Pizza.h" />
-    <ClInclude Include="model\Topping.h" />
-    <ClInclude Include="model\User.h" />
+    <ClInclude Include="includes\data\Data.h" />
+    <ClInclude Include="includes\model\Order.h" />
+    <ClInclude Include="includes\model\Pizza.h" />
+    <ClInclude Include="includes\model\SideOrder.h" />
+    <ClInclude Include="includes\model\Topping.h" />
+    <ClInclude Include="includes\model\User.h" />
+    <ClInclude Include="includes\ui\KitchenUI.h" />
+    <ClInclude Include="includes\ui\SalesmanUI.h" />
+    <ClInclude Include="includes\ui\ManagerUI.h" />
+    <ClInclude Include="includes\ui\DeliveryUI.h" />
+    <ClInclude Include="includes\ui\MainUI.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="data\Data.cpp" />
-    <ClCompile Include="model\SideOrder.cpp" />
-    <ClCompile Include="ui\KitchenUI.cpp" />
-    <ClCompile Include="ui\SalesmanUI.cpp" />
-    <ClCompile Include="ui\ManagerUI.cpp" />
-    <ClCompile Include="ui\DeliveryUI.cpp" />
-    <ClCompile Include="ui\MainUI.cpp" />
-    <ClCompile Include="model\Order.cpp" />
-    <ClCompile Include="model\Pizza.cpp" />
+    <ClCompile Include="src\data\Data.cpp" />
+    <ClCompile Include="src\model\SideOrder.cpp" />
+    <ClCompile Include="src\ui\KitchenUI.cpp" />
+    <ClCompile Include="src\ui\SalesmanUI.cpp" />
+    <ClCompile Include="src\ui\ManagerUI.cpp" />
+    <ClCompile Include="src\ui\DeliveryUI.cpp" />
+    <ClCompile Include="src\ui\MainUI.cpp" />
+    <ClCompile Include="src\model\Order.cpp" />
+    <ClCompile Include="src\model\Pizza.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="model\Topping.cpp" />
-    <ClCompile Include="model\User.cpp" />
+    <ClCompile Include="src\model\Topping.cpp" />
+    <ClCompile Include="src\model\User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
