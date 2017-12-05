@@ -50,14 +50,34 @@ double Topping::getPrice() {
 	return this->price;
 }
 
-istream& operator >> (istream& in, Topping topping) {
-	in >> topping.name >> topping.price;
+istream& operator >> (istream& in, Topping& topping) {
+	if (&in != &cin) {
+		int len;
+		topping.name = "";
+		in.read((char*)(&len), sizeof(int));
+		char* str = new char[len];
+		in.read(str, len);
+		topping.name = str;
+		in.read((char*)(&topping.price), sizeof(double));
+		delete[] str;
+	}
+	else {
+		in >> topping.name >> topping.price;
+	}
 	return in;
 }
 
-ostream& operator<< (ostream& out, const Topping topping)
+ostream& operator<< (ostream& out, const Topping& topping)
 {
-    out << topping.name << " " << topping.price;
+	if (&out != &cout) {
+		int len = topping.name.length() + 1;
+		out.write((char*)(&len), sizeof(int));
+		out.write(topping.name.c_str(), len);
+		out.write((char*)(&topping.price), sizeof(double));
+	}
+	else {
+		out << topping.name << " " << topping.price;
+	}
     return out;
 }
 

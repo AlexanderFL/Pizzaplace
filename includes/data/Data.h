@@ -28,7 +28,7 @@ inline void Data::WriteToFile(Repos rep) const
 {
 	ofstream fout;
 	fout.open(rep.filename, ios::binary | ios::app);
-	rep.write(fout);
+	fout << rep;
 	fout.close();
 }
 
@@ -39,7 +39,7 @@ inline void Data::WriteMultipleLinesToFile(vector<Repos> repVec) const
 	ofstream fout;
 	fout.open(rep.filename, ios::binary);
 	for (unsigned int i = 0; i < repVec.size(); i++){
-		repVec.at(i).write(fout);
+		fout << repVec.at(i);
 	}
 	fout.close();
 }
@@ -67,7 +67,7 @@ inline vector<Repos> Data::RetrieveAllFromFile()
 		int pos = 0;
 		while (pos != endpos)
 		{
-			rep.read(fin);
+			fin >> rep;
 			vec.push_back(rep);
 			pos = fin.tellg();
 		}
