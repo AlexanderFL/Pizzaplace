@@ -22,7 +22,7 @@ int main()
 		cout << i+1 << ": " << all[i] << endl;
 	}
 
-	d.RemoveFromFileAtIndex<Topping>(5);
+	d.ModifyFileAtIndex<Topping>(5);
 	all = d.RetrieveAllFromFile<Topping>();
 
 	cout << endl;
