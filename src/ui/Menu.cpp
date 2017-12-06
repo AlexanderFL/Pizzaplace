@@ -11,7 +11,7 @@ string Menu::printMenu(vector<string> options)
 			biggestString = options.at(i);
 		}
 	}
-	string output = "";
+	string output = "\n";
 	for (unsigned int i = 0; i < options.size(); i++)
 	{
 		output += printLines(biggestString.size());
