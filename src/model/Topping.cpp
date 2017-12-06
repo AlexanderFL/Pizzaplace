@@ -39,7 +39,7 @@ istream& operator >> (istream& in, Topping& topping) {
 	else {
 		cout << "\nName: ";
 		in >> topping.name;
-		cout << "\nPrice: ";
+		cout << "Price: ";
 		in >> topping.price;
 	}
 	return in;
