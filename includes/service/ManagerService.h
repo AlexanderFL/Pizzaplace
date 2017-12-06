@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Data.h"
+#include "NumberInString.h";
+#include "InvalidPrice.h";
 
 class ManagerService
 {
@@ -10,6 +12,9 @@ public:
 	ManagerService();
 	void addTopping(const Topping& topping);
 	void addSideOrder(const SideOrder& side);
+	void addSpecialOrder(string ordername, const Order& order);
+	void addDeliveryPlace(string place);
+
 	vector<Topping> getToppings();
 };
 
