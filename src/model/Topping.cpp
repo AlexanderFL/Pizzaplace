@@ -19,15 +19,6 @@ vector<Topping> Topping::getAllToppings()
 	return toppings;
 }
 
-/*
-	Returns itself
-*/
-Topping Topping::self()
-{
-	Topping t(name, price);
-	return t;
-}
-
 double Topping::getPrice() const{
 	return this->price;
 }

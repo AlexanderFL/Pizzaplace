@@ -19,7 +19,6 @@ public:
 	Topping();
 	Topping(string name, double price);
 	vector<Topping> getAllToppings();
-	Topping self();
 	double getPrice() const;
 	string getName() const;
 	friend istream& operator >> (istream& in, Topping& topping);
