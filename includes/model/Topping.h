@@ -12,12 +12,11 @@ public:
 	static const string filename;
 private:
 	string name;
-	//change price to an int
-	double price;
+	int price;
 
 public:
 	Topping();
-	Topping(string name, double price);
+	Topping(string name, int price);
 	vector<Topping> getAllToppings();
 	double getPrice() const;
 	string getName() const;

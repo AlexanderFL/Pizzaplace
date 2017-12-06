@@ -7,7 +7,7 @@ Topping::Topping() {
 	price = 0;
 }
 
-Topping::Topping(string name, double price)
+Topping::Topping(string name, int price)
 {
 	this->name = name;
 	this->price = price;
@@ -33,11 +33,14 @@ istream& operator >> (istream& in, Topping& topping) {
 		char* str = new char[len];
 		in.read(str, len);
 		topping.name = str;
-		in.read((char*)(&topping.price), sizeof(double));
+		in.read((char*)(&topping.price), sizeof(int));
 		delete[] str;
 	}
 	else {
+		cout << "\nName: ";
 		in >> topping.name;
+		cout << "\nPrice: ";
+		in >> topping.price;
 	}
 	return in;
 }
@@ -48,10 +51,10 @@ ostream& operator<< (ostream& out, const Topping& topping)
 		int len = topping.name.length() + 1;
 		out.write((char*)(&len), sizeof(int));
 		out.write(topping.name.c_str(), len);
-		out.write((char*)(&topping.price), sizeof(double));
+		out.write((char*)(&topping.price), sizeof(int));
 	}
 	else {
-		out << topping.name;
+		out << topping.name << " " << topping.price;
 	}
     return out;
 }

@@ -166,6 +166,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\model\Offer.cpp" />
+    <ClInclude Include="includes\ui\LoginUI.h" />
+    <ClInclude Include="includes\service\LoginService.h" />
+    <ClInclude Include="includes\exceptions\InvalidLogin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\exceptions\InvalidLogin.cpp" />
+    <ClCompile Include="src\service\LoginService.cpp" />
+    <ClCompile Include="src\ui\LoginUI.cpp" />
     <ClCompile Include="src\exceptions\InvalidPrice.cpp" />
     <ClCompile Include="src\exceptions\NumberInString.cpp" />
     <ClCompile Include="src\model\PizzaSize.cpp" />

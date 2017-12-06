@@ -4,6 +4,7 @@
 #include "SalesmanUI.h"
 #include "KitchenUI.h"
 #include "Menu.h"
+#include <stdlib.h>
 
 void MainUI::startUI()
 {
@@ -11,6 +12,7 @@ void MainUI::startUI()
 	Menu menu;
 	while (true)
 	{
+		system("CLS");
 		cout << "\nPlease Pick one of the following jobs:\n"
 			<< menu.printMenu({ "Manager", "Salesman", "Kitchen", "Delivery" })
 			<< "\nPress 'q' to quit.\nJob: ";

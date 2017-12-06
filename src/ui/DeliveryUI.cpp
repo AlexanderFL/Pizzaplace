@@ -22,13 +22,7 @@ void DeliveryUI::deliveryMenu() {
 	char input;
 	while (true) {
 		cout << "Where would you like it delivered? ";
-		//Using the bool ignore, so that it doesn't accidently ignore an input
-		if (ignore) {
-			cin.ignore();
-		}
-		else {
-			ignore = true;
-		}
+		cin.ignore();
 		getline(cin, homeAddress);
 		cout << "Your home address is " << homeAddress << ". Is this correct? (y/n): ";
 		cin >> input;
