@@ -14,9 +14,19 @@ Order::Order()
 	totalCost = 0;
 	comment = "";
 	status = 0;
-	location = 0;
+	//location = 0;
 	homeAddress = "none";
 
+}
+
+Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, int status, Location location, string comment, string homeAddress) {
+	this->pizzas = pizzas;
+	this->sides = sides;
+	this->totalCost = totalCost;
+	this->status = status;
+	this->location = location;
+	this->comment = comment;
+	this->homeAddress = homeAddress;
 }
 
 /*

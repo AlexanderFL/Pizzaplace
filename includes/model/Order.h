@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "Pizza.h"
 #include "SideOrder.h"
+#include "Location.h"
 using namespace std;
 
 /*
@@ -20,13 +21,14 @@ private:
 	vector<SideOrder> sides;
 	double totalCost;
 	int status;
-	int location;
+	Location location;
 	string comment;
 	void calculateCost();
 	string homeAddress;
 
 public:
 	Order();
+	Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, int status, Location location, string comment, string homeAddress);
 	friend ostream& operator << (ostream& out, const Order& order);
 	friend istream& operator >> (istream& in, Order& order);
 	friend bool operator == (const Order& left, const Order& right);
