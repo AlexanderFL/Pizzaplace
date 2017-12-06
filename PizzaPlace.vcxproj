@@ -162,8 +162,17 @@
     <ClInclude Include="includes\model\PizzaSize.h" />
     <ClInclude Include="includes\exceptions\NumberInString.h" />
     <ClInclude Include="includes\exceptions\InvalidPrice.h" />
+    <ClInclude Include="includes\ui\LoginUI.h" />
+    <ClInclude Include="includes\service\LoginService.h" />
+    <ClInclude Include="includes\exceptions\InvalidLogin.h" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="src\exceptions\InvalidLogin.cpp" />
+    <ClCompile Include="src\service\LoginService.cpp" />
+    <ClCompile Include="src\ui\LoginUI.cpp" />
+>>>>>>> 3f6d7e13e8af560233ef70ce41a299edfa2b1f8e
     <ClCompile Include="src\exceptions\InvalidPrice.cpp" />
     <ClCompile Include="src\exceptions\NumberInString.cpp" />
     <ClCompile Include="src\model\PizzaSize.cpp" />
