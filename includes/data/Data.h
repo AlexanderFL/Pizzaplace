@@ -17,7 +17,7 @@ public:
 	void WriteMultipleLinesToFile(vector<Repos> rep) const;
 
 	template <class Repos>
-	Repos RetrieveFromFile(int loc);
+	Repos RetrieveFromFile(int index);
 
 	template <class Repos>
 	vector<Repos> RetrieveAllFromFile();
@@ -51,10 +51,10 @@ inline void Data::WriteMultipleLinesToFile(vector<Repos> repVec) const
 }
 
 template<class Repos>
-inline Repos Data::RetrieveFromFile(int loc)
+inline Repos Data::RetrieveFromFile(int index)
 {
 	vector<Repos> repository = RetrieveAllFromFile<Repos>();
-	return repository.at(loc);
+	return repository.at(index);
 }
 
 template<class Repos>
