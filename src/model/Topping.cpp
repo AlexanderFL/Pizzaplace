@@ -19,13 +19,6 @@ vector<Topping> Topping::getAllToppings()
 	return toppings;
 }
 
-void Topping::write(ofstream& fout) const {
-	int len = name.length() + 1;
-	fout.write((char*)(&len), sizeof(int));
-	fout.write(name.c_str(), len);
-	fout.write((char*)(&price), sizeof(double));
-}
-
 /*
 	Returns itself
 */
@@ -33,17 +26,6 @@ Topping Topping::self()
 {
 	Topping t(name, price);
 	return t;
-}
-
-void Topping::read(ifstream& fin) {
-	int len;
-	this->name = "";
-	fin.read((char*)(&len), sizeof(int));
-	char* str = new char[len];
-	fin.read(str, len);
-	this->name = str;
-	fin.read((char*)(&this->price), sizeof(double));
-	delete[] str;
 }
 
 double Topping::getPrice() {

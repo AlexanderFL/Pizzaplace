@@ -19,5 +19,6 @@ public:
 	void setPriceMod(const double& pricemod);
 	friend ostream& operator << (ostream& out, const PizzaSize& size);
 	friend istream& operator >> (istream& in, PizzaSize& size);
+	friend bool operator == (const PizzaSize& left, const PizzaSize& right);
 };
 

@@ -8,37 +8,6 @@
 */
 
 Pizza::Pizza() {
-	this->size = 0;
-	this->cost = 0;
-}
-
-/*
-	Writes the pizza to a binary file
-*/
-void Pizza::write(ofstream& fout) const {
-	int size = this->nrToppings();
-	fout.write((char*)(&size), sizeof(int));
-	for (int i = 0; i < this->nrToppings(); ++i) {
-		toppings.at(i).write(fout);
-	}
-	fout.write((char*)(&this->size), sizeof(int));
-	fout.write((char*)(&this->cost), sizeof(double));
-}
-
-/*
-	Reads the pizza from a binary file
-*/
-void Pizza::read(ifstream& fin) {
-	int size;
-	fin.read((char*)(&size), sizeof(int));
-	this->toppings.clear();
-	Topping topping;
-	for (int i = 0; i < size; ++i) {
-		topping.read(fin);
-		this->addTopping(topping);
-	}
-	fin.read((char*)(&this->size), sizeof(int));
-	fin.read((char*)(&this->cost), sizeof(double));
 }
 
 /*
@@ -58,11 +27,12 @@ int Pizza::nrToppings() const {
 /*
 	Returns the cost of the pizza
 */
+/*/
 double Pizza::getCost() {
 	this->calculateCost();
 	return this->cost;
 }
-
+*/
 /*
 *************************************************
 *****			PRIVATE FUNCTIONS			*****
@@ -72,6 +42,7 @@ double Pizza::getCost() {
 /*
 	Calculates the cost for the pizza and sets the price of the pizza
 */
+/*
 void Pizza::calculateCost() {
 	this->cost = 0;
 	for (int i = 0; i < this->nrToppings(); ++i) {
@@ -85,7 +56,7 @@ void Pizza::calculateCost() {
 		this->cost += 1450;
 	}
 }
-
+*/
 /*
 *************************************************
 				FRIEND FUNCTIONS
@@ -99,8 +70,8 @@ ostream& operator<< (ostream& out, const Pizza& pizza)
 		for (int i = 0; i < size; ++i) {
 			out << pizza.toppings.at(i);
 		}
-		out.write((char*)(&pizza.size), sizeof(int));
-		out.write((char*)(&pizza.cost), sizeof(double));
+		out << pizza.crust;
+		out << pizza.size;
 	}
 	else {
 		for (int i = 0; i < pizza.nrToppings(); ++i) {
@@ -122,10 +93,11 @@ istream& operator>> (istream& in, Pizza& pizza)
 			in >> topping;
 			pizza.addTopping(topping);
 		}
-		in.read((char*)(&pizza.size), sizeof(int));
-		in.read((char*)(&pizza.cost), sizeof(double));
+		in >> pizza.crust;
+		in >> pizza.size;
 	}
 	else {
+		/*
 		int size;
 		do {
 			cout << "Select pizza size:" << endl;
@@ -142,7 +114,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 		for (int i = 0; i < pizza.nrToppings(); i++)
 		{
 
-		}
+		}*/
 	}
 	return in;
 }

@@ -49,3 +49,7 @@ istream& operator >> (istream& in, PizzaSize& size) {
 	}
 	return in;
 }
+
+bool operator == (const PizzaSize& left, const PizzaSize& right) {
+	return left.name == right.name && left.pricemod == right.pricemod;
+}

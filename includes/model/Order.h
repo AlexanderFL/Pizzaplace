@@ -34,8 +34,6 @@ public:
 	friend bool operator <= (const Order& left, const Order& right);
 	friend Order operator * (const Order& left, const Order& right);
 	void MakeOrder();
-	void write(ofstream&  fout) const;
-	void read(ifstream& fin);
 	double getTotalCost();
 	//TODO: Fix homeaddress
 	void setHomeAddress(string address);

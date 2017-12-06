@@ -15,8 +15,6 @@ private:
 public:
 	SideOrder();
 	SideOrder(string name, double price);
-	void write(ofstream& fout) const;
-	void read(ifstream& fin);
 	string getName() const;
 	double getPrice() const;
 	friend ostream& operator<< (ostream& out, const SideOrder& side);

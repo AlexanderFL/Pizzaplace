@@ -20,8 +20,6 @@ public:
 	Topping(string name, double price);
 	vector<Topping> getAllToppings();
 	Topping self();
-	void write(ofstream& fout) const;
-	void read(ifstream& fin);
 	double getPrice();
 	friend istream& operator >> (istream& in, Topping& topping);
 	friend ostream& operator << (ostream& out, const Topping& topping);
