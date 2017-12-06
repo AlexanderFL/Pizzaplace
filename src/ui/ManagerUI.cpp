@@ -33,7 +33,7 @@ void ManagerUI::managerMenu() {
 		}
 		case '2':
 		{
-			cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Delivery", "Other", "Go Back" }) << endl;
+			cout << menu.printMenu({ "Add a topping", "Delete a topping", "See all toppings", "Go Back" }) << endl;
 			cout << "Input: ";
 			cin >> input;
 			validateToppingInput(input);
