@@ -1,7 +1,7 @@
 #include "SalesmanUI.h"
 #include "DeliveryUI.h"
 #include "../model/Order.h"
-
+#include "Menu.h"
 SalesmanUI::SalesmanUI()
 {
 
@@ -10,21 +10,10 @@ SalesmanUI::SalesmanUI()
 void SalesmanUI::salesmanMenu() {
 	bool ignore = true;
 	string option;
-
+	Menu menu;
 	while (true) {
-		cout << "\n\t--------------------------------------------------\n"
-			<< " \t|  1: Register an Order   | 2: Add another order |\n"
-			<< " \t--------------------------------------------------\n"
-			<< " \t|  3: Price of the order  | 4: Home address      |\n"
-			<< " \t--------------------------------------------------\n"
-			<< " \t|  5: Food delivered      | 6: Food picked up    |\n"
-			<< " \t--------------------------------------------------\n"
-			<< " \t|  7: Mark paid for       | 8: Comments          |\n"
-			<< " \t--------------------------------------------------\n"
-			<< " \t|  9: Quit                |                      |\n"
-			<< " \t--------------------------------------------------\n" << endl;
-		
-		cout << "What would you like to do? "; 
+		cout << menu.printMenu({ "Register an order", "Add another order", "Price of the order", "Home address", "Food delivered", "Food picked up", "Mark paid for", "Comments" }) << endl;
+		cout << "Press 'q' to quit.\nWhat would you like to do? "; 
 
 		if (ignore) {
 			cin.ignore();
