@@ -29,6 +29,29 @@ int Pizza::nrToppings() const {
 	return this->toppings.size();
 }
 
+int Pizza::getToppingCount() const
+{
+	return toppings.size();
+}
+
+Topping Pizza::getToppingIndex(int index) const
+{
+	if (index >= 0 && index < toppings.size()) {
+		return toppings[index];
+	}
+	return toppings[0];
+}
+
+PizzaCrust Pizza::getCrust() const
+{
+	return crust;
+}
+
+PizzaSize Pizza::getPizzaSize() const
+{
+	return this->size;
+}
+
 /*
 	Returns the cost of the pizza
 */

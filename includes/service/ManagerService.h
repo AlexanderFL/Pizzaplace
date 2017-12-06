@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Data.h"
-#include "NumberInString.h"
-#include "InvalidPrice.h"
+#include "NumberInString.h";
+#include "InvalidPrice.h";
+#include "Offer.h"
 
 class ManagerService
 {

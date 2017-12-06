@@ -27,4 +27,9 @@ public:
 	friend bool operator != (const Pizza& left, const Pizza& right);
 	friend Pizza operator * (const Pizza& left, const Pizza& right);
 	friend Pizza operator + (const Pizza& left, const Pizza& right);
+
+	int getToppingCount() const;
+	Topping getToppingIndex(int index) const;
+	PizzaCrust getCrust() const;
+	PizzaSize getPizzaSize() const;
 };

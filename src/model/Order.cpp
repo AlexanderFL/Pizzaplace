@@ -78,7 +78,33 @@ void Order::setHomeAddress(string address) {
 	homeAddress = address;
 }
 
-string Order::getHomeAddress() {
+int Order::getPizzaOrderLength() const
+{
+	return pizzas.size();
+}
+
+int Order::getSideOrderLength() const
+{
+	return sides.size();
+}
+
+Pizza Order::getPizzaIndex(int index) const
+{
+	if (index >= 0 && index < pizzas.size()) {
+		return pizzas[index];
+	}
+	return pizzas[0];
+}
+
+SideOrder Order::getSideOrderIndex(int index) const
+{
+	if (index >= 0 && index < sides.size()) {
+		return sides[index];
+	}
+	return sides[0];
+}
+
+string Order::getHomeAddress() const {
 	return homeAddress;
 }
 /*

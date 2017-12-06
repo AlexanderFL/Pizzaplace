@@ -36,11 +36,15 @@ void ManagerService::addSideOrder(const SideOrder& side) {
 }
 
 /*
-	Add new special orders for the menu.
+	Add new special offer for the menu.
 */
 void ManagerService::addSpecialOrder(string ordername, const Order & order)
 {
-	//Validate
+	// No special checks needed
+	Offer offer(ordername, order);
+
+	repo.WriteToFile(offer);
+	
 }
 
 /*
