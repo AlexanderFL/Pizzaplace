@@ -8,7 +8,7 @@ class ManagerUI
 {
 private:
 	char input;
-	ManageService service;
+	ManagerService service;
 public:
 	ManagerUI();
 	void managerMenu();
