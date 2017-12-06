@@ -3,6 +3,5 @@ class InvalidPrice
 {
 public:
 	InvalidPrice();
-	~InvalidPrice();
 };
 
