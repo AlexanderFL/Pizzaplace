@@ -62,7 +62,7 @@ istream& operator >> (istream& in, Topping& topping) {
 		delete[] str;
 	}
 	else {
-		in >> topping.name >> topping.price;
+		in >> topping.name;
 	}
 	return in;
 }
@@ -76,7 +76,7 @@ ostream& operator<< (ostream& out, const Topping& topping)
 		out.write((char*)(&topping.price), sizeof(double));
 	}
 	else {
-		out << topping.name << " " << topping.price;
+		out << topping.name;
 	}
     return out;
 }

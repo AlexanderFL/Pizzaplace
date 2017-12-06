@@ -20,9 +20,9 @@ void ManagerUI::managerMenu() {
 			 << " \t----------------------------\n" << endl;
 
 		cout << "What would you like to register? ";
+		//not sure if needed anymore, check
 		if (ignore) {
 			cin.ignore();
-			ignore = false;
 		}
 
 		getline(cin, registration);
@@ -41,12 +41,13 @@ void ManagerUI::managerMenu() {
 			cout << "What would you like to do? \n"
 				<< "1. Add a topping.\n"
 				<< "2. Delete a topping.\n"
+				<< "3. See all the toppings you have so far.\n"
 				<< "Input: ";
 			cin >> input;
 			//Add a topping
 			if (input == '1') {
 				//TODO: fix and add (also be able to delete a toping)
-				cout << "How many topings would you like to add? ";
+				cout << "How many toppings would you like to add? ";
 				cin >> numberOfToppings;
 				cout << "What would you like as a topping? " << endl;
 
@@ -58,13 +59,30 @@ void ManagerUI::managerMenu() {
 			}
 			//Delete a topping
 			else if (input == '2') {
-				//TODO: Fix >:(
-				//toppingRepo.retrieveAllFromFile();
-
-				topping.getAllToppings();
-				cout << topping;
+				vector <Topping> toppings = toppingRepo.RetrieveAllFromFile<Topping>();
+				cout << "Here are the toppings you have so far: " << endl;
+				for (unsigned int i = 0; i < toppings.size(); i++) {
+					cout << i + 1 << ": " <<  toppings.at(i) << endl;
+				}
+				cout << "What topping would you like to delete. Please input a number or 'q' to quit." << endl;
+				cout << "Input: ";
+				cin >> input;
+				int inputInInt = (int)input - 49;
+				if (tolower(input) == 'q') {
+					break;
+				}
+				else if (inputInInt < 0 || toppings.size() <= inputInInt)  {
+					cout << "Invalid input." << endl;
+				}
+				else toppingRepo.RemoveFromFileAtIndex<Topping>(inputInInt);
 			}
-
+			else if (input == '3') {
+				vector <Topping> toppings = toppingRepo.RetrieveAllFromFile<Topping>();
+				cout << "Here are the toppings you have so far: " << endl;
+				for (unsigned int i = 0; i < toppings.size(); i++) {
+					cout << i + 1 << ": " << toppings.at(i) << endl;
+				}
+			}
 			else {
 				cout << "Invalid input." << endl;
 			}
