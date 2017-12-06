@@ -28,8 +28,11 @@ Topping Topping::self()
 	return t;
 }
 
-double Topping::getPrice() {
+double Topping::getPrice() const{
 	return this->price;
+}
+string Topping::getName() const{
+	return this->name;
 }
 
 istream& operator >> (istream& in, Topping& topping) {
