@@ -23,8 +23,9 @@ private:
 	int status;
 	Location location;
 	string comment;
-	void calculateCost();
 	string homeAddress;
+
+	void calculateCost();
 
 public:
 	Order();
@@ -37,7 +38,13 @@ public:
 	friend Order operator * (const Order& left, const Order& right);
 	void MakeOrder();
 	double getTotalCost();
+
 	//TODO: Fix homeaddress
 	void setHomeAddress(string address);
-	string getHomeAddress();
+
+	int getPizzaOrderLength() const;
+	int getSideOrderLength() const;
+	Pizza getPizzaIndex(int index) const;
+	SideOrder getSideOrderIndex(int index) const;
+	string getHomeAddress() const;
 };

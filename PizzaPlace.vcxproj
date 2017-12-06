@@ -144,7 +144,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="includes\exceptions\Exceptions.h" />
     <ClInclude Include="includes\data\Data.h" />
     <ClInclude Include="includes\model\Order.h" />
     <ClInclude Include="includes\model\Pizza.h" />
@@ -163,9 +162,10 @@
     <ClInclude Include="includes\model\PizzaSize.h" />
     <ClInclude Include="includes\exceptions\NumberInString.h" />
     <ClInclude Include="includes\exceptions\InvalidPrice.h" />
+    <ClInclude Include="includes\model\Offer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\exceptions\Exceptions.cpp" />
+    <ClCompile Include="src\model\Offer.cpp" />
     <ClCompile Include="src\exceptions\InvalidPrice.cpp" />
     <ClCompile Include="src\exceptions\NumberInString.cpp" />
     <ClCompile Include="src\model\PizzaSize.cpp" />
