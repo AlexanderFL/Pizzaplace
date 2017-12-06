@@ -19,15 +19,6 @@ vector<Topping> Topping::getAllToppings()
 	return toppings;
 }
 
-/*
-	Returns itself
-*/
-Topping Topping::self()
-{
-	Topping t(name, price);
-	return t;
-}
-
 double Topping::getPrice() const{
 	return this->price;
 }
@@ -38,7 +29,6 @@ string Topping::getName() const{
 istream& operator >> (istream& in, Topping& topping) {
 	if (&in != &cin) {
 		int len;
-		topping.name = "";
 		in.read((char*)(&len), sizeof(int));
 		char* str = new char[len];
 		in.read(str, len);
