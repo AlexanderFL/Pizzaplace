@@ -16,5 +16,8 @@ public:
 	void addDeliveryPlace(string place);
 
 	vector<Topping> getToppings();
+private:
+	bool containsOnlyAlpha(string s);
+	bool validPrice(double p);
 };
 
