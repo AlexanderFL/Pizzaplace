@@ -36,7 +36,6 @@ ostream& operator<< (ostream& out, const SideOrder& side) {
 istream& operator>> (istream& in, SideOrder& side) {
 	if (&in != &cin) {
 		int len;
-		side.name = "";
 		in.read((char*)(&len), sizeof(int));
 		char* str = new char[len];
 		in.read(str, len);

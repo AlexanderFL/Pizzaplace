@@ -20,9 +20,7 @@ vector<Topping> Topping::getAllToppings()
 }
 
 /*
-	TODO: Cast this function to the depths of hell far away from everything where no one can find it.
-		  Please remove it from all documentation and never mention it again. If these steps are not followed
-		  it will haunt you for the rest of your life.
+	Returns itself
 */
 Topping Topping::self()
 {
