@@ -4,6 +4,7 @@
 #include "../model/SideOrder.h"
 #include "DeliveryUI.h"
 #include "Menu.h"
+#include "Order.h"
 //For clearing the screen
 #include <stdlib.h>
 
@@ -14,16 +15,16 @@ ManagerUI::ManagerUI() {
 void ManagerUI::managerMenu() {
 	bool ignore = true;
 	Menu menu;
-	while (true) {
-		system("CLS");
+	bool managerStill = true;
+	while (managerStill) {
+		//system("CLS");
 		cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Delivery", "Other", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
-		//not sure if needed anymore, check
-		if (ignore) {
-			cin.ignore();
-		}
+
+		cin.ignore();
 		cin >> input;
 		system("CLS");
+
 		switch (input)
 		{
 		case '1':
@@ -36,12 +37,14 @@ void ManagerUI::managerMenu() {
 			cout << "Input: ";
 			cin >> input;
 			system("CLS");
-			//validateToppingInput(input);
+			validateToppingInput(input);
 			break;
 		}
 		case '3':
 		{
 			//TODO: get the total price of an order
+			Order order;
+			cout << order.getTotalCost();
 			break;
 		}
 		case '4':
@@ -53,6 +56,11 @@ void ManagerUI::managerMenu() {
 			break;
 		}
 		case '5':
+			//TODO: add other options for manager
+			cout << menu.printMenu({ "Add a side order", "delete a side order", "Go Back" }) << endl;
+			break;
+		case '6':
+			managerStill = false;
 			break;
 		case 'q':
 		case 'Q':
@@ -68,11 +76,13 @@ void ManagerUI::managerMenu() {
 	Changing Toppings
 */
 
+
 void ManagerUI::validateToppingInput(char input) {
-	vector <Topping> toppings;
 	Data toppingRepo;
+	vector <Topping> toppings;
 	toppings = toppingRepo.RetrieveAllFromFile<Topping>();
 	Topping topping;
+
 	switch (input) {
 	case '1':{
 		//Adding a topping

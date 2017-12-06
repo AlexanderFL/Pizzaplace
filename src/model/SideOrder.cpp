@@ -8,7 +8,7 @@ SideOrder::SideOrder() {
 	this->price = 0;
 }
 
-SideOrder::SideOrder(string name, double price) {
+SideOrder::SideOrder(string name, int price) {
 	this->name = name;
 	this->price = price;
 }
@@ -25,7 +25,7 @@ ostream& operator<< (ostream& out, const SideOrder& side) {
 		int len = side.name.length() + 1;
 		out.write((char*)(&len), sizeof(int));
 		out.write(side.name.c_str(), len);
-		out.write((char*)(&side.price), sizeof(double));
+		out.write((char*)(&side.price), sizeof(int));
 	}
 	else {
 		out << side.name << " " << side.price;
@@ -40,7 +40,7 @@ istream& operator>> (istream& in, SideOrder& side) {
 		char* str = new char[len];
 		in.read(str, len);
 		side.name = str;
-		in.read((char*)(&side.price), sizeof(double));
+		in.read((char*)(&side.price), sizeof(int));
 		delete[] str;
 	}
 	return in;

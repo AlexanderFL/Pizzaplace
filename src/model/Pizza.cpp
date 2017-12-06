@@ -32,12 +32,12 @@ int Pizza::nrToppings() const {
 /*
 	Returns the cost of the pizza
 */
-/*/
+
 double Pizza::getCost() {
 	this->calculateCost();
 	return this->cost;
 }
-*/
+
 /*
 *************************************************
 *****			PRIVATE FUNCTIONS			*****
@@ -47,12 +47,13 @@ double Pizza::getCost() {
 /*
 	Calculates the cost for the pizza and sets the price of the pizza
 */
-/*
+
 void Pizza::calculateCost() {
 	this->cost = 0;
 	for (int i = 0; i < this->nrToppings(); ++i) {
 		this->cost += toppings.at(i).getPrice();
 	}
+	/*
 	if (size == 1) {
 		this->cost += 950;
 	} else if (size == 2) {
@@ -60,8 +61,9 @@ void Pizza::calculateCost() {
 	} else if (size == 3) {
 		this->cost += 1450;
 	}
+	*/
 }
-*/
+
 /*
 *************************************************
 				FRIEND FUNCTIONS

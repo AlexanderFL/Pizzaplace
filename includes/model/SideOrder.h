@@ -10,11 +10,11 @@ public:
 	static const string filename;
 private:
 	string name;
-	double price;
+	int price;
 
 public:
 	SideOrder();
-	SideOrder(string name, double price);
+	SideOrder(string name, int price);
 	string getName() const;
 	double getPrice() const;
 	friend ostream& operator<< (ostream& out, const SideOrder& side);

@@ -63,10 +63,11 @@ double Order::getTotalCost() {
 	Based on how many pizzas were ordered, size of them and what toppings.
 */
 void Order::calculateCost() {
-	/*totalCost = 0;
+	totalCost = 0;
 	for (unsigned int i = 0; i < pizzas.size(); ++i) {
 		totalCost += pizzas.at(i).getCost();
 	}
+	/*
 	for (unsigned int i = 0; i < sides.size(); ++i) {
 		totalCost += sides.at(i).getPrice();
 	}*/
