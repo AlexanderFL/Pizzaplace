@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\exceptions\Exceptions.h" />
     <ClInclude Include="includes\data\Data.h" />
     <ClInclude Include="includes\model\Order.h" />
     <ClInclude Include="includes\model\Pizza.h" />

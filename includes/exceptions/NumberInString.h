@@ -3,6 +3,5 @@ class NumberInString
 {
 public:
 	NumberInString();
-	~NumberInString();
 };
 

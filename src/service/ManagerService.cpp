@@ -6,17 +6,15 @@ ManagerService::ManagerService(){}
 	Add a new topping.
 */
 void ManagerService::addTopping(const Topping& topping) {
+	// Validate topping
 	string toppingName = topping.getName();
-	// Check if string contains only alpha characters
-	for (int i = 0; i < toppingName.length(); i++){
-		if (!isalpha(toppingName[i])){
-			throw NumberInString();
-		}
+	if (containsOnlyAlpha(toppingName) == false) {
+		throw NumberInString();
 	}
-	// Check if number is not less than or equal to zero
-	if (topping.getPrice() <= 0) {
+	if (validPrice(topping.getPrice()) == false) {
 		throw InvalidPrice();
 	}
+	// Write it to file
 	repo.WriteToFile(topping);
 }
 
@@ -24,9 +22,17 @@ void ManagerService::addTopping(const Topping& topping) {
 	Add a new side order
 */
 void ManagerService::addSideOrder(const SideOrder& side) {
-	//Validate sideorder
+	// Validate side order
+	string sideOrderName = side.getName();
+	if (containsOnlyAlpha(sideOrderName) == false) {
+		throw NumberInString();
+	}
+	if (validPrice(side.getPrice())){
+		throw InvalidPrice();
+	}
 
-	//repo.WriteTofile(side);
+	// Write it to file
+	repo.WriteToFile(side);
 }
 
 /*

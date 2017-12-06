@@ -5,7 +5,3 @@ NumberInString::NumberInString()
 {
 }
 
-
-NumberInString::~NumberInString()
-{
-}
