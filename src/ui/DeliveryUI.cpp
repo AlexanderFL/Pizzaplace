@@ -1,4 +1,5 @@
 #include "DeliveryUI.h"
+#include "Order.h"
 
 //TODO: Fix home address! 
 
@@ -17,9 +18,10 @@ void DeliveryUI::setIgnore(bool ignore) {
 
 void DeliveryUI::deliveryMenu() {
 	string homeAddress;
+	Order order;
 	//TODO: Kalla í fallið numberOfOrders þegar það er tilbúið og setja útkomuna í int numberOfOrders 
-	int numberOfOrders = 0;
 	char input;
+	int numberOfInput = 0;
 	while (true) {
 		cout << "Where would you like it delivered? ";
 		cin.ignore();
@@ -33,13 +35,13 @@ void DeliveryUI::deliveryMenu() {
 		cin.clear();
 		cin.sync();
 	}
-	cout << "This home address has " << numberOfOrders << " order";
+	cout << "This home address has " << numberOfInput << " order";
 
-	if (numberOfOrders > 1) {
+	if (numberOfInput > 1) {
 		cout << "s.\nYour orders are: ";
 		//Add orders here
 	}
-	else if (numberOfOrders == 1) {
+	else if (numberOfInput == 1) {
 		cout << "Your order is:";
 	}
 	else {

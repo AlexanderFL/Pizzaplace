@@ -2,6 +2,7 @@
 #include "DeliveryUI.h"
 #include "../model/Order.h"
 #include "Menu.h"
+#include <stdlib.h>
 SalesmanUI::SalesmanUI()
 {
 
@@ -11,51 +12,43 @@ void SalesmanUI::salesmanMenu() {
 	bool ignore = true;
 	string option;
 	Menu menu;
-	while (true) {
-		cout << menu.printMenu({ "Register an order", "Add another order", "Price of the order", "Home address", "Food delivered", "Food picked up", "Mark paid for", "Comments" }) << endl;
+	char input;
+	bool stillSalesman = true;
+	while (stillSalesman) {
+		system("CLS");
+		cout << menu.printMenu({ "Register an order", "Add another order", "Price of the order", "Home address", "Food delivered", "Food picked up", "Mark paid for", "Comments", "Go back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to do? "; 
 
 		if (ignore) {
 			cin.ignore();
 			ignore = false;
 		}
-		getline(cin, option);
+		cin >> input;
 
-		//so that it doesn't matter if the string is all caps or not
-		transform(option.begin(), option.end(), option.begin(), ::tolower);
-		cout << endl;
-		//TODO: Fix the look of these statements and add functions to them
-		if (option == "1" || option == "2") {
+		switch (input) {
+		case '1':
+		case '2':{
 			Order order;
 			order.MakeOrder();
 			break;
 		}
-		else if (option == "3") {
+		case '3': {
 			Order order;
 			double totalCost = order.getTotalCost();
 			cout << "The total cost is: " << totalCost << " kr" << endl;
 			break;
 		}
-		else if (option == "4") {
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			stillSalesman = false;
 			break;
+		case 'q':
+		case 'Q':
+			exit(1);
 		}
-		else if (option == "5") {
-			break;
-		}
-		else if (option == "6") {
-			break;
-		}
-		else if (option == "7") {
-			break;
-		}
-		else if (option == "8") {
-			break;
-		}
-		else if (option == "9" || option == "q") {
-			break;
-		}
-
-		cin.clear();
-		cin.sync();
 	}
 }

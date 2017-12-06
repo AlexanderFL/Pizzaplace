@@ -15,8 +15,8 @@ ManagerUI::ManagerUI() {
 void ManagerUI::managerMenu() {
 	bool ignore = true;
 	Menu menu;
-	bool managerStill = true;
-	while (managerStill) {
+	bool stillManager = true;
+	while (stillManager) {
 		//system("CLS");
 		cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Delivery", "Other", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
@@ -60,7 +60,7 @@ void ManagerUI::managerMenu() {
 			cout << menu.printMenu({ "Add a side order", "delete a side order", "Go Back" }) << endl;
 			break;
 		case '6':
-			managerStill = false;
+			stillManager = false;
 			break;
 		case 'q':
 		case 'Q':
