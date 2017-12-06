@@ -13,6 +13,7 @@ private:
 	string name;
 	int job;
 public:
+	User();
 	User(string username, string password, string name, int job);
 	string getUsername() const;
 	string getPassword() const;
@@ -22,5 +23,7 @@ public:
 	void setPassword(const string& password);
 	void setName(const string& name);
 	void setJob(const int& job);
+	friend ostream& operator << (ostream& out, const User& user);
+	friend istream& operator >> (istream& in, User& user);
 };
 

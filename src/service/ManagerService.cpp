@@ -57,7 +57,7 @@ vector<Topping> ManagerService::getToppings() {
 */
 bool ManagerService::containsOnlyAlpha(string s)
 {
-	for (int i = 0; i < s.length; i++) {
+	for (int i = 0; i < s.length(); i++) {
 		if (!isalpha(s[i])) {
 			return false;
 		}

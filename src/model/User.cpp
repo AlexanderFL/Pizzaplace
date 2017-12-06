@@ -1,6 +1,11 @@
 #include "User.h"
+#include <fstream>
 
-const string PizzaCrust::filename = "users.dat";
+const string User::filename = "users.dat";
+
+User::User() {
+	this->job = 0;
+};
 
 User::User(string username, string password, string name, int job) {
 	this->username = username;
@@ -9,35 +14,73 @@ User::User(string username, string password, string name, int job) {
 	this->job = job;
 }
 
-string getUsername() const {
+string User::getUsername() const {
 	return this->username;
 }
 
-string getPassword() const {
+string User::getPassword() const {
 	return this->password;
 }
 
-string getName() const {
+string User::getName() const {
 	return this->name;
 }
 
-int getJob() const {
+int User::getJob() const {
 	return this->job;
 }
 
-void setUsername(const string& username) {
+void User::setUsername(const string& username) {
 	this->username = username;
 }
 
-void setPassword(const string& password) {
+void User::setPassword(const string& password) {
 	this->password = password;
 }
 
-void setName(const string& name) {
+void User::setName(const string& name) {
 	this->name = name;
 }
 
-void setJob(const int& job) {
+void User::setJob(const int& job) {
 	this->job = job;
 }
 
+ostream& operator << (ostream& out, const User& user) {
+	if (&out != &cout) {
+		int len = user.username.length() + 1;
+		out.write((char*)(&len), sizeof(int));
+		out.write(user.username.c_str(), len);
+		len = user.password.length() + 1;
+		out.write((char*)(&len), sizeof(int));
+		out.write(user.password.c_str(), len);
+		len = user.name.length() + 1;
+		out.write((char*)(&len), sizeof(int));
+		out.write(user.name.c_str(), len);
+		out.write((char*)(&user.job), sizeof(int));
+	}
+	return out;
+}
+
+istream& operator >> (istream& in, User& user) {
+	if (&in != &cin) {
+		int len;
+		in.read((char*)(&len), sizeof(int));
+		char* str = new char[len];
+		in.read(str, len);
+		user.username = str;
+		delete[] str;
+		in.read((char*)(&len), sizeof(int));
+		str = new char[len];
+		in.read(str, len);
+		user.password = str;
+		delete[] str;
+		in.read((char*)(&len), sizeof(int));
+		str = new char[len];
+		in.read(str, len);
+		user.name = str;
+		delete[] str;
+		in.read((char*)(&user.job), sizeof(int));
+	}
+	return in;
+}

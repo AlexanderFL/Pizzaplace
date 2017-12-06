@@ -1,8 +1,14 @@
 #pragma once
+
+#include "Menu.h"
+#include "LoginService.h"
+
 class LoginUI
 {
+private:
+	Menu menu;
+	LoginService service;
 public:
-	LoginUI();
-	~LoginUI();
+	void startUI();
 };
 
