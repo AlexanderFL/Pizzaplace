@@ -8,11 +8,11 @@ Location::Location(string name) {
 	this->name = name;
 }
 
-string getName() const {
+string Location::getName() const {
 	return this->name;
 }
 
-void setName(const string& name) {
+void Location::setName(const string& name) {
 	this->name = name;
 }
 
