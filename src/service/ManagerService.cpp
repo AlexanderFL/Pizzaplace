@@ -41,7 +41,7 @@ void ManagerService::addSideOrder(const SideOrder& side) {
 void ManagerService::addSpecialOrder(string ordername, const Order & order)
 {
 	// No special checks needed
-	Offer offer(ordername, order);
+	Offer offer(ordername, order, 0, true);
 
 	repo.WriteToFile(offer);
 	
