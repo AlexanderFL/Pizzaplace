@@ -156,8 +156,10 @@
     <ClInclude Include="includes\ui\DeliveryUI.h" />
     <ClInclude Include="includes\ui\MainUI.h" />
     <ClInclude Include="includes\service\ManagerService.h" />
+    <ClInclude Include="includes\ui\Menu.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\Menu.cpp" />
     <ClCompile Include="src\service\ManagerService.cpp" />
     <ClCompile Include="src\data\Data.cpp" />
     <ClCompile Include="src\model\SideOrder.cpp" />

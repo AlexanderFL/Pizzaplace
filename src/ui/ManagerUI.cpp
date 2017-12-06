@@ -3,22 +3,15 @@
 #include "../data/Data.h"
 #include "../model/SideOrder.h"
 #include "DeliveryUI.h"
-ManagerUI::ManagerUI()
-{
-}
+#include "Menu.h"
+
 
 void ManagerUI::managerMenu() {
 	string registration;
 	bool ignore = true;
+	//Menu menu;
 	while (true) {
-		cout << "\n\t----------------------------\n"
-			 << " \t|  1: Pizza |  2: Toppings |\n"
-			 << " \t----------------------------\n"
-			 << " \t|  3: Price |  4: Delivery |\n"
-			 << " \t----------------------------\n"
-			 << " \t|  5: Other |  6: Quit     |\n"
-			 << " \t----------------------------\n" << endl;
-
+		//cout << menu.printMenu({"Pizza", "Toppings", "Price", "Delivery", "Other", "Go Back"}) << endl;
 		cout << "What would you like to register? ";
 		//not sure if needed anymore, check
 		if (ignore) {

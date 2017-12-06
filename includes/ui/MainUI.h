@@ -7,15 +7,13 @@
 #include <fstream>
 #include <string>
 #include <algorithm> //tolower case string in MainUI cpp (start ui)
+#include <vector>
 
 using namespace std;
 
 class MainUI
 {
-    private:
-
     public:
-   //     MainUI();
         void startUI();
 };
 

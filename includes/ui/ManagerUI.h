@@ -5,8 +5,9 @@ using namespace std;
 
 class ManagerUI
 {
+private:
+
 public:
-	ManagerUI();
 	void managerMenu();
 };
 
