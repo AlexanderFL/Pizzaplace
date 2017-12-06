@@ -7,7 +7,12 @@
 *************************************************
 */
 
-Pizza::Pizza() {
+Pizza::Pizza() {}
+
+Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size) {
+	this->toppings = toppings;
+	this->crust = crust;
+	this->size = size;
 }
 
 /*

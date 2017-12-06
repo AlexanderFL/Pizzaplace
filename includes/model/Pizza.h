@@ -17,6 +17,7 @@ private:
 	//void calculateCost();
 public:
 	Pizza();
+	Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size);
 	void addTopping(const Topping& top);
 	int nrToppings() const;
 	//double getCost();

@@ -7,6 +7,8 @@ using namespace std;
 
 class PizzaCrust
 {
+public:
+	static const string filename;
 private:
 	string name;
 	double price;

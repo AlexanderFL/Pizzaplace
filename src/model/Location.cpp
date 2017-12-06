@@ -1,6 +1,7 @@
 #include "Location.h"
 #include <fstream>
 
+const string Location::filename = "locations.dat";
 
 Location::Location() {}
 

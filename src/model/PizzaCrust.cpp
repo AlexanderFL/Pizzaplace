@@ -1,6 +1,7 @@
 #include "PizzaCrust.h"
 #include <fstream>
 
+const string PizzaCrust::filename = "pizzacrusts.dat";
 
 PizzaCrust::PizzaCrust() {
 	this->price = 0;

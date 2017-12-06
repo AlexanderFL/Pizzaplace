@@ -7,6 +7,8 @@ using namespace std;
 
 class Location
 {
+public:
+	static const string filename;
 private:
 	string name;
 public:

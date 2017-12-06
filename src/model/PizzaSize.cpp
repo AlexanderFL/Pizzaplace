@@ -1,6 +1,7 @@
 #include "PizzaSize.h"
 #include <fstream>
 
+const string PizzaSize::filename = "pizzasizes.dat";
 
 PizzaSize::PizzaSize() {
 	this->pricemod = 1;
