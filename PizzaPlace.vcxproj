@@ -158,8 +158,10 @@
     <ClInclude Include="includes\service\ManagerService.h" />
     <ClInclude Include="includes\model\Location.h" />
     <ClInclude Include="includes\model\PizzaCrust.h" />
+    <ClInclude Include="includes\model\PizzaSize.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\model\PizzaSize.cpp" />
     <ClCompile Include="src\model\PizzaCrust.cpp" />
     <ClCompile Include="src\model\Location.cpp" />
     <ClCompile Include="src\service\ManagerService.cpp" />
