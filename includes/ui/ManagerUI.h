@@ -9,5 +9,6 @@ private:
 
 public:
 	void managerMenu();
+	void toppings();
 };
 
