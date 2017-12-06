@@ -6,31 +6,15 @@ ManagerService::ManagerService(){}
 	Add a new topping.
 */
 void ManagerService::addTopping(const Topping& topping) {
-	//Check if string contains only alpha characters
 	string toppingName = topping.getName();
-
-	try
-	{
-		string toppingName = topping.getName();
-		// Check if string contains only alpha characters
-		for (int i = 0; i < toppingName.length(); i++){
-			if (!isalpha(toppingName[i])){
-				throw NumberInString();
-			}
+	// Check if string contains only alpha characters
+	for (int i = 0; i < toppingName.length(); i++){
+		if (!isalpha(toppingName[i])){
+			throw NumberInString();
 		}
-		// Check if number is not less than or equal to zero
-		if (topping.getPrice() <= 0) {
-			throw InvalidPrice();
-		}
-
-		repo.WriteToFile(topping);
-	}
-	catch (NumberInString)
-	{
-		cout << "Error: There was a number in the name" << endl;
 	}
 	// Check if number is not less than or equal to zero
-	if (validPrice(topping.getPrice()) == false) {
+	if (topping.getPrice() <= 0) {
 		throw InvalidPrice();
 	}
 	repo.WriteToFile(topping);
