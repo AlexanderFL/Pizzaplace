@@ -11,13 +11,13 @@ void ManagerService::addTopping(const Topping& topping) {
 	{
 		string toppingName = topping.getName();
 		// Check if string contains only alpha characters
-		for (int i = 0; i < toppingName.length; i++){
+		for (int i = 0; i < toppingName.length(); i++){
 			if (!isalpha(toppingName[i])){
 				throw NumberInString();
 			}
 		}
 		// Check if number is not less than or equal to zero
-		if (topping.getPrice <= 0) {
+		if (topping.getPrice() <= 0) {
 			throw InvalidPrice();
 		}
 
