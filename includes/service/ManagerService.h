@@ -15,6 +15,7 @@ public:
 	void addSideOrder(const SideOrder& side);
 	void addSpecialOrder(string ordername, const Order& order);
 	void addDeliveryPlace(string place);
+	void deleteTopping(int index);
 
 	vector<Topping> getToppings();
 private:

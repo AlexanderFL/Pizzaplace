@@ -112,6 +112,8 @@ void ManagerUI::validateToppingInput(char input) {
 		if (tolower(input) == 'q') {
 			exit(1);
 		}
+		service.deleteTopping(inputInInt);
+		break;
 	}
 	case '3': {
 		cout << "Here are the toppings you have so far: " << endl;
@@ -123,6 +125,11 @@ void ManagerUI::validateToppingInput(char input) {
 	default:
 		cout << "Invalid input." << endl;
 	}
+	do {
+		cout << "\nPlease press 1 to continue: ";
+		cin >> input;
+	}
+	while (input != '1');
 }
 
 /*

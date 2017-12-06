@@ -59,6 +59,9 @@ vector<Topping> ManagerService::getToppings() {
 	return repo.RetrieveAllFromFile<Topping>();
 }
 
+void ManagerService::deleteTopping(int index) {
+	repo.RemoveFromFileAtIndex<Topping>(index);
+}
 
 /*
 *************************************************
