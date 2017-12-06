@@ -75,7 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>includes/data/;includes/ui/;includes/model/;includes/service/;includes/exceptions/;includes/;$(IncludePath)</IncludePath>
+    <IncludePath>includes/exceptions/;includes/data/;includes/ui/;includes/model/;includes/service/;includes/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -145,8 +145,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="includes\data\Data.h" />
-    <ClInclude Include="includes\exceptions\InvalidPrice.h" />
-    <ClInclude Include="includes\exceptions\NumberInString.h" />
     <ClInclude Include="includes\model\Order.h" />
     <ClInclude Include="includes\model\Pizza.h" />
     <ClInclude Include="includes\model\SideOrder.h" />
@@ -162,6 +160,8 @@
     <ClInclude Include="includes\model\Location.h" />
     <ClInclude Include="includes\model\PizzaCrust.h" />
     <ClInclude Include="includes\model\PizzaSize.h" />
+    <ClInclude Include="includes\exceptions\NumberInString.h" />
+    <ClInclude Include="includes\exceptions\InvalidPrice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\exceptions\InvalidPrice.cpp" />

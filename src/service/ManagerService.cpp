@@ -6,6 +6,8 @@ ManagerService::ManagerService(){}
 	Add a new topping.
 */
 void ManagerService::addTopping(const Topping& topping) {
+	//Check if string contains only alpha characters
+	string toppingName = topping.getName();
 
 	try
 	{
@@ -27,10 +29,11 @@ void ManagerService::addTopping(const Topping& topping) {
 	{
 		cout << "Error: There was a number in the name" << endl;
 	}
-	catch (InvalidPrice)
-	{
-		cout << "Error: Price can not be less than or equal to zero" << endl;
+	// Check if number is not less than or equal to zero
+	if (validPrice(topping.getPrice()) == false) {
+		throw InvalidPrice();
 	}
+	repo.WriteToFile(topping);
 }
 
 /*
@@ -60,4 +63,28 @@ void ManagerService::addDeliveryPlace(string place)
 
 vector<Topping> ManagerService::getToppings() {
 	return repo.RetrieveAllFromFile<Topping>();
+}
+
+
+/*
+*************************************************
+*****			PRIVATE FUNCTIONS			*****
+*************************************************
+*/
+bool ManagerService::containsOnlyAlpha(string s)
+{
+	for (int i = 0; i < s.length; i++) {
+		if (!isalpha(s[i])) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool ManagerService::validPrice(double p)
+{
+	if (p <= 0.0) {
+		return false;
+	}
+	return true;
 }
