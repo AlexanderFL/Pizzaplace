@@ -2,9 +2,7 @@
 
 ManagerService::ManagerService(){}
 
-/*
-	Add a new topping.
-*/
+/*		Add a new topping.		*/
 void ManagerService::addTopping(const Topping& topping) {
 	// Validate topping
 	string toppingName = topping.getName();
@@ -18,9 +16,7 @@ void ManagerService::addTopping(const Topping& topping) {
 	repo.WriteToFile(topping);
 }
 
-/*
-	Add a new side order
-*/
+/*		Add a new side order		*/
 void ManagerService::addSideOrder(const SideOrder& side) {
 	// Validate side order
 	string sideOrderName = side.getName();
@@ -35,30 +31,28 @@ void ManagerService::addSideOrder(const SideOrder& side) {
 	repo.WriteToFile(side);
 }
 
-/*
-	Add new special offer for the menu.
-*/
+/*		Add new special offer for the menu.		*/
 void ManagerService::addSpecialOrder(string ordername, const Order & order)
 {
 	// No special checks needed
 	Offer offer(ordername, order, 0, true);
 
 	repo.WriteToFile(offer);
-	
 }
 
-/*
-	Add new delivery places
-*/
-void ManagerService::addDeliveryPlace(string place)
+/*		Add new delivery places		*/
+void ManagerService::addDeliveryPlace(string address)
 {
-	//Validate
+	Location l(address);
+	repo.WriteToFile(l);
 }
 
+/*			Get all toppings		*/
 vector<Topping> ManagerService::getToppings() {
 	return repo.RetrieveAllFromFile<Topping>();
 }
 
+/*			Delete topping			*/
 void ManagerService::deleteTopping(int index) {
 	repo.RemoveFromFileAtIndex<Topping>(index);
 }
@@ -73,9 +67,11 @@ int ManagerService::getOrderTotalCost(const Order& order) {
 		temptotal += order.getPizzas().at(i).getCrust().getPrice();
 		temptotal *= order.getPizzas().at(i).getPizzaSize().getPriceMod();
 		total += temptotal;
+		
 	}
 	for (int i = 0; i < order.getSides().size(); ++i) {
 		total += order.getSides().at(i).getPrice();
+		
 	}
 	return total;
 }
@@ -84,6 +80,14 @@ int ManagerService::getOrderTotalCost(const Order& order) {
 *************************************************
 *****			PRIVATE FUNCTIONS			*****
 *************************************************
+*/
+
+/*		Checks if string contains only alpha characters
+		Returns true if it does and false otherwise.
+		
+		Examples for usage: If topping contains a number,
+							the function will return false,
+							because it is not a valid topping name.
 */
 bool ManagerService::containsOnlyAlpha(string s)
 {
@@ -95,9 +99,13 @@ bool ManagerService::containsOnlyAlpha(string s)
 	return true;
 }
 
+/*
+		Checks if price is valid, a price is valid if it is
+		not a number below zero.
+*/
 bool ManagerService::validPrice(double p)
 {
-	if (p <= 0.0) {
+	if (p < 0.0) {
 		return false;
 	}
 	return true;

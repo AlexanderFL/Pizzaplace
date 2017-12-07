@@ -10,12 +10,15 @@ class Location
 public:
 	static const string filename;
 private:
-	string name;
+	string address;
+	int postalCode;
+	string city;
 public:
-	Location();
-	Location(string name);
-	string getName() const;
-	void setName(const string& name);
+	Location(string address);
+
+	void setAddress(const string& address);
+	string getAddress() const;
+
 	friend ostream& operator << (ostream& out, const Location& loc);
 	friend istream& operator >> (istream& in, Location& loc);
 };
