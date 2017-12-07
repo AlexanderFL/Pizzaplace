@@ -43,9 +43,12 @@ void ManagerUI::managerMenu() {
 		case '3':
 		{
 			//TODO: get the total price of an order
-			Order order;
+			//Data orderRepo;
+			//vector<Order> order;
+			//order = orderRepo.RetrieveAllFromFile<Order>();
 			//Todo replace with service
 			//cout << order.getTotalCost();
+			//cout << "The total price of the order is: " << service.getOrderTotalCost(order) << " kr." << endl;
 			break;
 		}
 		case '4':
@@ -58,7 +61,13 @@ void ManagerUI::managerMenu() {
 		}
 		case '5':
 			//TODO: add other options for manager
+			do{
 			cout << menu.printMenu({ "Add a side order", "delete a side order", "Go Back" }) << endl;
+			cout << "Input: ";
+			cin >> input;
+			system("CLS");
+				validateOtherInput(input);
+			} while (input < 49 || 51 < input); //ascii - checking if input is between 1 and 3
 			break;
 		case '6':
 			stillManager = false;
@@ -74,11 +83,12 @@ void ManagerUI::managerMenu() {
 
 
 /*
-	Changing Toppings
+	Changing Toppings on Pizza
 */
 
 
 void ManagerUI::validateToppingInput(char input) {
+	//notar her toppingrepo, fix
 	Data toppingRepo;
 	vector <Topping> toppings;
 	toppings = toppingRepo.RetrieveAllFromFile<Topping>();
@@ -126,13 +136,32 @@ void ManagerUI::validateToppingInput(char input) {
 	default:
 		cout << "Invalid input." << endl;
 	}
-	do {
-		cout << "\nPlease press 1 to continue: ";
-		cin >> input;
-	}
-	while (input != '1');
+	system("PAUSE");
 }
 
+/*
+	Adding other products to purchase
+*/
+
+void ManagerUI::validateOtherInput(char input) {
+	switch (input) {
+		case '1': {
+			//Add a side order
+			break;
+		}
+		case '2': {
+			//delete a side order
+			break;
+		}
+		case '3': {
+			//go back
+			break;
+		}
+		default:
+			cout << "Invalid input." << endl;
+			break;
+		}
+}
 /*
 void ManagerUI::addTopping() {
 	int numberOfToppings;

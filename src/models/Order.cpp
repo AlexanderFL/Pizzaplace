@@ -21,7 +21,7 @@ Order::Order()
 
 Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, int status, Location location, string comment, string homeAddress) {
 	this->pizzas = pizzas;
-	this->sides = sides;
+	this->sides  = sides;
 	this->totalCost = totalCost;
 	this->status = status;
 	this->location = location;

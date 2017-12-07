@@ -15,5 +15,6 @@ public:
 	void validateToppingInput(char input);
 	void addTopping();
 	void deleteTopping();
+	void validateOtherInput(char input);
 };
 
