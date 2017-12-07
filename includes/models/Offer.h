@@ -11,13 +11,13 @@ class Offer
 public:
 	static const string filename;
 private:
-	string _offername;
-	Order _order;
-	int _price;
-	bool _fixed;
+	string name;
+	Order order;
+	int price;
+	bool fixed;
 public:
 	Offer();
-	Offer(string offername, Order order, int price, bool fixed);
+	Offer(string name, Order order, int price, bool fixed);
 
 	string getOffername();
 	Order getOrder();
