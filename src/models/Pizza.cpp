@@ -42,14 +42,30 @@ Topping Pizza::getToppingIndex(int index) const
 	return toppings[0];
 }
 
+vector<Topping> getToppings() const {
+	return this->toppings;
+}
+
 PizzaCrust Pizza::getCrust() const
 {
-	return crust;
+	return this->crust;
 }
 
 PizzaSize Pizza::getPizzaSize() const
 {
 	return this->size;
+}
+
+void setToppings(const vector<Topping>& toppings) {
+	this->toppings = toppings;
+}
+
+void setCrust(const PizzaCrust& crust) {
+	this->crust = crust;
+}
+
+void setPizzaSize(const PizzaSize& size) {
+	this->size = size;
 }
 
 /*

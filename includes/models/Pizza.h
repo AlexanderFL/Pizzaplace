@@ -30,6 +30,10 @@ public:
 
 	int getToppingCount() const;
 	Topping getToppingIndex(int index) const;
+	vector<Topping> getToppings() const;
 	PizzaCrust getCrust() const;
 	PizzaSize getPizzaSize() const;
+	void setToppings(const vector<Topping>& toppings);
+	void setCrust(const PizzaCrust& crust);
+	void setPizzaSize(const PizzaSize& size);
 };
