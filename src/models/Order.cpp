@@ -17,16 +17,21 @@ Order::Order()
 	//location = 0;
 	homeAddress = "none";
 	_deliveryMethod = PICKUP;
+	paidFor = false;
 }
 
-Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod) {
+Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod, bool isPaid) {
 	this->pizzas = pizzas;
+	this->sides  = sides;
+	this->totalCost = totalCost;
+	this->_status = orderStatus;
 	this->sides = sides;
 	this->_status = orderStatus;
 	this->location = location;
 	this->comment = comment;
 	this->homeAddress = homeAddress;
 	this->_deliveryMethod = orderDeliveryMethod;
+	this->paidFor = isPaid;
 }
 
 vector<Pizza>  Order::getPizzas() const {
@@ -58,6 +63,11 @@ deliveryMethod Order::getDeliveryMethod() const
 	return _deliveryMethod;
 }
 
+bool Order::isPaidFor() const
+{
+	return paidFor;
+}
+
 void  Order::setPizzas(const vector<Pizza>& pizzas) {
 	this->pizzas = pizzas;
 }
@@ -85,6 +95,11 @@ void  Order::setHomeAddress(const string& homeAddress) {
 void Order::setDeliveryMethod(const deliveryMethod & orderDeliveryMethod)
 {
 	this->_deliveryMethod = orderDeliveryMethod;
+}
+
+void Order::setOrderAsPaidFor(bool isPaid)
+{
+	this->paidFor = isPaid;
 }
 
 /*
