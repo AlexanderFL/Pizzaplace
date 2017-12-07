@@ -33,6 +33,7 @@ void ManagerUI::managerMenu() {
 		}
 		case '2':
 		{
+			//Toppings
 			do{
 			cout << menu.printMenu({ "Add a topping", "Delete a topping", "See all toppings", "Go Back" }) << endl;
 			cout << "Input: ";
@@ -44,6 +45,7 @@ void ManagerUI::managerMenu() {
 		}
 		case '3':
 		{
+			//Price
 			//TODO: get the total price of an order
 			//Data orderRepo;
 			//vector<Order> order;
@@ -55,6 +57,7 @@ void ManagerUI::managerMenu() {
 		}
 		case '4':
 		{
+			//Delivery
 			bool ignore = false;
 			DeliveryUI deliveryUI;
 			deliveryUI.setIgnore(ignore);
@@ -62,7 +65,7 @@ void ManagerUI::managerMenu() {
 			break;
 		}
 		case '5':
-			//TODO: add other options for manager
+			//Other
 			do{
 			cout << menu.printMenu({ "Add a side order", "delete a side order",  "See all side orders", "Go Back" }) << endl;
 			cout << "Input: ";
@@ -72,6 +75,7 @@ void ManagerUI::managerMenu() {
 			} while (input != 52); //ascii - checking if input is 4 (go back)
 			break;
 		case '6':
+			//Go back
 			stillManager = false;
 			break;
 		case 'q':
