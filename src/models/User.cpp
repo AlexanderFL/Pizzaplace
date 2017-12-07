@@ -48,14 +48,14 @@ void User::setJob(const int& job) {
 
 ostream& operator << (ostream& out, const User& user) {
 	if (&out != &cout) {
-		int len = user.username.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		size_t len = user.username.length() + 1;
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(user.username.c_str(), len);
 		len = user.password.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(user.password.c_str(), len);
 		len = user.name.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(user.name.c_str(), len);
 		out.write((char*)(&user.job), sizeof(int));
 	}
@@ -64,18 +64,18 @@ ostream& operator << (ostream& out, const User& user) {
 
 istream& operator >> (istream& in, User& user) {
 	if (&in != &cin) {
-		int len;
-		in.read((char*)(&len), sizeof(int));
+		size_t len;
+		in.read((char*)(&len), sizeof(size_t));
 		char* str = new char[len];
 		in.read(str, len);
 		user.username = str;
 		delete[] str;
-		in.read((char*)(&len), sizeof(int));
+		in.read((char*)(&len), sizeof(size_t));
 		str = new char[len];
 		in.read(str, len);
 		user.password = str;
 		delete[] str;
-		in.read((char*)(&len), sizeof(int));
+		in.read((char*)(&len), sizeof(size_t));
 		str = new char[len];
 		in.read(str, len);
 		user.name = str;

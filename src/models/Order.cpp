@@ -112,8 +112,7 @@ ostream& operator <<(ostream& out, const Order& order)
 		for (size_t i = 0; i < size; ++i) {
 			out << order.sides.at(i);
 		}
-		out.write((char*)(&order.totalCost), sizeof(double));
-		out.write((char*)(&order._status), sizeof(int));
+		out.write((char*)(&order._status), sizeof(deliveryMethod));
 		out.write((char*)(&order.location), sizeof(int));
 		size_t len = order.comment.length() + 1;
 		out.write((char*)(&len), sizeof(size_t));
@@ -143,8 +142,7 @@ istream& operator >> (istream& in, Order& order) {
 			in >> side;
 			order.sides.push_back(side);
 		}
-		in.read((char*)(&order.totalCost), sizeof(double));
-		in.read((char*)(&order._status), sizeof(int));
+		in.read((char*)(&order._status), sizeof(deliveryMethod));
 		in.read((char*)(&order.location), sizeof(int));
 		size_t len;
 		in.read((char*)(&len), sizeof(size_t));

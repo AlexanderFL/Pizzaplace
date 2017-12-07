@@ -57,9 +57,9 @@ void Pizza::setPizzaSize(const PizzaSize& size) {
 ostream& operator<< (ostream& out, const Pizza& pizza)
 {
 	if (&out != &cout) {
-		int size = pizza.toppings.size();
-		out.write((char*)(&size), sizeof(int));
-		for (int i = 0; i < size; ++i) {
+		size_t size = pizza.toppings.size();
+		out.write((char*)(&size), sizeof(size_t));
+		for (size_t i = 0; i < size; ++i) {
 			out << pizza.toppings.at(i);
 		}
 		out << pizza.crust;
@@ -77,11 +77,11 @@ istream& operator>> (istream& in, Pizza& pizza)
 {
 	// TODO: Make this a function call to UI layer
 	if (&in != &cin) {
-		int size;
-		in.read((char*)(&size), sizeof(int));
+		size_t size;
+		in.read((char*)(&size), sizeof(size_t));
 		pizza.toppings.clear();
 		Topping topping;
-		for (int i = 0; i < size; ++i) {
+		for (size_t i = 0; i < size; ++i) {
 			in >> topping;
 			pizza.toppings.push_back(topping);
 		}

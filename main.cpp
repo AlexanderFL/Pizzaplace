@@ -47,10 +47,10 @@ int main()
 		else if (input == "6") {
 			addOrder();
 		}
-	} while (input != "q");*/
+	} while (input != "q");
 	return 0;
 }
-/*
+
 void addTopping() {
 	cout << "Creating a new Topping" << endl;
 	cout << "Name: ";
@@ -180,5 +180,5 @@ void addOrder() {
 			pizzas.push_back(Pizza(toppings, crust, size));
 			repo.WriteToFile(Order(pizzas, sides, 0, 0, location, comment, address));
 		}
-	} while (input != "q");
-}*/
+	} while (input != "q");*/
+}

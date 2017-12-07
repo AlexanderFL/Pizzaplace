@@ -30,8 +30,8 @@ void PizzaCrust::setPrice(const int& price) {
 
 ostream& operator << (ostream& out, const PizzaCrust& crust) {
 	if (&out != &cout) {
-		int len = crust.name.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		size_t len = crust.name.length() + 1;
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(crust.name.c_str(), len);
 		out.write((char*)(&crust.price), sizeof(int));
 	}
@@ -40,8 +40,8 @@ ostream& operator << (ostream& out, const PizzaCrust& crust) {
 
 istream& operator >> (istream& in, PizzaCrust& crust) {
 	if (&in != &cin) {
-		int len;
-		in.read((char*)(&len), sizeof(int));
+		size_t len;
+		in.read((char*)(&len), sizeof(size_t));
 		char* str = new char[len];
 		in.read(str, len);
 		crust.name = str;

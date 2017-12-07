@@ -30,8 +30,8 @@ void PizzaSize::setPriceMod(const double& pricemod) {
 
 ostream& operator << (ostream& out, const PizzaSize& size) {
 	if (&out != &cout) {
-		int len = size.name.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		size_t len = size.name.length() + 1;
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(size.name.c_str(), len);
 		out.write((char*)(&size.pricemod), sizeof(double));
 	}
@@ -40,8 +40,8 @@ ostream& operator << (ostream& out, const PizzaSize& size) {
 
 istream& operator >> (istream& in, PizzaSize& size) {
 	if (&in != &cin) {
-		int len;
-		in.read((char*)(&len), sizeof(int));
+		size_t len;
+		in.read((char*)(&len), sizeof(size_t));
 		char* str = new char[len];
 		in.read(str, len);
 		size.name = str;
