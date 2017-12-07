@@ -3,25 +3,24 @@
 
 const string Location::filename = "locations.dat";
 
-Location::Location() {}
-
-Location::Location(string name) {
-	this->name = name;
+Location::Location(string address)
+	:address(address)
+{
 }
 
-string Location::getName() const {
-	return this->name;
+string Location::getAddress() const {
+	return this->address;
 }
 
-void Location::setName(const string& name) {
-	this->name = name;
+void Location::setAddress(const string& address) {
+	this->address = address;
 }
 
 ostream& operator << (ostream& out, const Location& loc) {
 	if (&out != &cout) {
-		int len = loc.name.length() + 1;
+		int len = loc.address.length() + 1;
 		out.write((char*)(&len), sizeof(int));
-		out.write(loc.name.c_str(), len);
+		out.write(loc.address.c_str(), len);
 	}
 	return out;
 }
@@ -32,7 +31,7 @@ istream& operator >> (istream& in, Location& loc) {
 		in.read((char*)(&len), sizeof(int));
 		char* str = new char[len];
 		in.read(str, len);
-		loc.name = str;
+		loc.address = str;
 		delete[] str;
 	}
 	return in;

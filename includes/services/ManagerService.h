@@ -16,6 +16,7 @@ public:
 	void addSpecialOrder(string ordername, const Order& order);
 	void addDeliveryPlace(string place);
 	void deleteTopping(int index);
+	int getOrderTotalCost(const Order& order);
 
 	vector<Topping> getToppings();
 private:
