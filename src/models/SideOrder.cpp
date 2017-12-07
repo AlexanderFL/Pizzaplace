@@ -20,6 +20,14 @@ double SideOrder::getPrice() const {
 	return this->price;
 }
 
+void SideOrder::setName(const string& name) {
+	this->name = name;
+}
+
+void SideOrder::setPrice(const int& price) {
+	this->price = price;
+}
+
 ostream& operator<< (ostream& out, const SideOrder& side) {
 	if (&out != &cout) {
 		int len = side.name.length() + 1;
