@@ -12,3 +12,10 @@ profession LoginService::login(string username, string password) {
 	}
 	throw InvalidLogin();
 }
+
+void LoginService::checkForUsers() {
+	vector<User> users = repo.RetrieveAllFromFile<User>();
+	if (users.size() == 0) {
+		throw EmptyVector();
+	}
+}
