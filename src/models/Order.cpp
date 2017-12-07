@@ -29,29 +29,6 @@ Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, in
 	this->homeAddress = homeAddress;
 }
 
-/*
-	Prompt the user for his order, the user can select multiple pizzas and
-	can change his order or cancel his order.
-
-	TODO: Complete the Pizza class for istream input and input options UI
-*/
-
-void Order::MakeOrder()
-{
-	Pizza tempPizza;
-	//Maybe skip the comment "New Order". Commented it out at least for now
-	//cout << "New Order" << endl;
-	cin >> tempPizza; // TODO: Finish this.
-}
-
-/*
-	Get total cost for the order
-*/
-double Order::getTotalCost() {
-	calculateCost();
-	return totalCost;
-}
-
 vector<Pizza>  Order::getPizzas() const {
 	return this->pizzas;
 }
@@ -106,55 +83,7 @@ void  Order::setHomeAddress(const string& homeAddress) {
 *************************************************
 */
 
-/*
-	Calculates the total cost for the order,
-	Based on how many pizzas were ordered, size of them and what toppings.
-*/
-void Order::calculateCost() {
-	totalCost = 0;
-	/*for (unsigned int i = 0; i < pizzas.size(); ++i) {
-		totalCost += pizzas.at(i).getCost();
-	}*/
-	/*
-	for (unsigned int i = 0; i < sides.size(); ++i) {
-		totalCost += sides.at(i).getPrice();
-	}*/
-}
 
-//To get the home address of a person (TODO: fix)
-/*void Order::setHomeAddress(string address) {
-	homeAddress = address;
-}*/
-
-int Order::getPizzaOrderLength() const
-{
-	return pizzas.size();
-}
-
-int Order::getSideOrderLength() const
-{
-	return sides.size();
-}
-
-Pizza Order::getPizzaIndex(int index) const
-{
-	if (index >= 0 && index < pizzas.size()) {
-		return pizzas[index];
-	}
-	return pizzas[0];
-}
-
-SideOrder Order::getSideOrderIndex(int index) const
-{
-	if (index >= 0 && index < sides.size()) {
-		return sides[index];
-	}
-	return sides[0];
-}
-
-/*string Order::getHomeAddress() const {
-	return homeAddress;
-}*/
 /*
 *************************************************
 				OVERLOAD FUNCTIONS

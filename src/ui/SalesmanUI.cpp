@@ -29,12 +29,14 @@ void SalesmanUI::salesmanMenu() {
 		case '1':
 		case '2':{
 			Order order;
-			order.MakeOrder();
+			//Todo replace with service
+			//order.MakeOrder();
 			break;
 		}
 		case '3': {
 			Order order;
-			double totalCost = order.getTotalCost();
+			//Todo replace with service
+			double totalCost = 0;//order.getTotalCost();
 			cout << "The total cost is: " << totalCost << " kr" << endl;
 			break;
 		}

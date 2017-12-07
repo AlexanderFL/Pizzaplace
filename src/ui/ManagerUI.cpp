@@ -44,7 +44,8 @@ void ManagerUI::managerMenu() {
 		{
 			//TODO: get the total price of an order
 			Order order;
-			cout << order.getTotalCost();
+			//Todo replace with service
+			//cout << order.getTotalCost();
 			break;
 		}
 		case '4':

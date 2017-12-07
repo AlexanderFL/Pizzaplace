@@ -36,8 +36,6 @@ public:
 	friend bool operator != (const Order& left, const Order& right);
 	friend bool operator <= (const Order& left, const Order& right);
 	friend Order operator * (const Order& left, const Order& right);
-	void MakeOrder();
-	double getTotalCost();
 
 	vector<Pizza> getPizzas() const;
 	vector<SideOrder> getSides() const;
@@ -51,13 +49,4 @@ public:
 	void setLocation(const Location& location);
 	void setComment(const string& comment);
 	void setHomeAddress(const string& homeAddress);
-
-	//TODO: Fix homeaddress
-	//void setHomeAddress(string address);
-
-	int getPizzaOrderLength() const;
-	int getSideOrderLength() const;
-	Pizza getPizzaIndex(int index) const;
-	SideOrder getSideOrderIndex(int index) const;
-	//string getHomeAddress() const;
 };
