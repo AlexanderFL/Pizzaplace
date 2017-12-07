@@ -23,24 +23,24 @@ void LoginUI::startUI() {
 			cout << "Password: ";
 			cin >> password;
 			try {
-				int job = service.login(username, password);
+				profession job = service.login(username, password);
 				switch (job) {
-				case 1: {
+				case MANAGER: {
 					ManagerUI managerUI;
 					managerUI.managerMenu();
 					break;
 				}
-				case 2: {
+				case SALESMAN: {
 					SalesmanUI salesmanUI;
 					salesmanUI.salesmanMenu();
 					break;
 				}
-				case 3: {
+				case KITCHEN: {
 					KitchenUI kitchenUI;
 					kitchenUI.kitchenMenu();
 					break;
 				}
-				case 4: {
+				case DELIVERY: {
 					DeliveryUI deliveryUI;
 					deliveryUI.deliveryMenu();
 					break;
