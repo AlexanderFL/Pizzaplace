@@ -164,8 +164,10 @@
     <ClInclude Include="includes\exceptions\NumberInString.h" />
     <ClInclude Include="includes\exceptions\InvalidPrice.h" />
     <ClInclude Include="includes\models\Offer.h" />
+    <ClInclude Include="SalesmanService.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SalesmanService.cpp" />
     <ClCompile Include="src\exceptions\FailedOpenFile.cpp" />
     <ClCompile Include="src\models\Offer.cpp" />
     <ClInclude Include="includes\ui\LoginUI.h" />

@@ -13,20 +13,21 @@ Order::Order()
 { 
 	totalCost = 0;
 	comment = "";
-	status = 0;
+	_status = PREPERATION;
 	//location = 0;
 	homeAddress = "none";
-
+	_deliveryMethod = PICKUP;
 }
 
-Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, int status, Location location, string comment, string homeAddress) {
+Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod) {
 	this->pizzas = pizzas;
 	this->sides = sides;
 	this->totalCost = totalCost;
-	this->status = status;
+	this->_status = orderStatus;
 	this->location = location;
 	this->comment = comment;
 	this->homeAddress = homeAddress;
+	this->_deliveryMethod = orderDeliveryMethod;
 }
 
 vector<Pizza>  Order::getPizzas() const {
@@ -37,8 +38,8 @@ vector<SideOrder>  Order::getSides() const {
 	return this->sides;
 }
 
-int  Order::getStatus() const {
-	return this->status;
+status Order::getStatus() const {
+	return this->_status;
 }
 
 Location  Order::getLocation() const {
@@ -53,6 +54,11 @@ string  Order::getHomeAddress() const {
 	return this->homeAddress;
 }
 
+deliveryMethod Order::getDeliveryMethod() const
+{
+	return _deliveryMethod;
+}
+
 void  Order::setPizzas(const vector<Pizza>& pizzas) {
 	this->pizzas = pizzas;
 }
@@ -61,8 +67,8 @@ void  Order::setSides(const vector<SideOrder>& sides) {
 	this->sides = sides;
 }
 
-void  Order::setStatus(const int& status) {
-	this->status = status;
+void  Order::setStatus(const status& orderStatus) {
+	this->_status = orderStatus;
 }
 
 void  Order::setLocation(const Location& location) {
@@ -107,11 +113,12 @@ ostream& operator <<(ostream& out, const Order& order)
 			out << order.sides.at(i);
 		}
 		out.write((char*)(&order.totalCost), sizeof(double));
-		out.write((char*)(&order.status), sizeof(int));
+		out.write((char*)(&order._status), sizeof(int));
 		out.write((char*)(&order.location), sizeof(int));
 		size_t len = order.comment.length() + 1;
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(order.comment.c_str(), len);
+		out.write((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
 	}
 	else {
 		out << "order";
@@ -137,7 +144,7 @@ istream& operator >> (istream& in, Order& order) {
 			order.sides.push_back(side);
 		}
 		in.read((char*)(&order.totalCost), sizeof(double));
-		in.read((char*)(&order.status), sizeof(int));
+		in.read((char*)(&order._status), sizeof(int));
 		in.read((char*)(&order.location), sizeof(int));
 		size_t len;
 		in.read((char*)(&len), sizeof(size_t));
@@ -145,6 +152,7 @@ istream& operator >> (istream& in, Order& order) {
 		in.read(str, len);
 		order.comment = str;
 		delete[] str;
+		in.read((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
 	}
 	return in;
 }

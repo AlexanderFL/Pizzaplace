@@ -12,6 +12,9 @@ using namespace std;
 	and allows the user to edit his order.
 */
 
+enum deliveryMethod { PICKUP = 0, SEND };
+enum status { PREPERATION, BAKING, SENT};
+
 class Order
 {
 public:
@@ -19,17 +22,16 @@ public:
 private:
 	vector<Pizza> pizzas;
 	vector<SideOrder> sides;
-	double totalCost;
-	int status;
-	Location location;
 	string comment;
 	string homeAddress;
-
-	void calculateCost();
+	Location location;
+	status _status;
+	deliveryMethod _deliveryMethod;
+	double totalCost;
 
 public:
 	Order();
-	Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, int status, Location location, string comment, string homeAddress);
+	Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod);
 	friend ostream& operator << (ostream& out, const Order& order);
 	friend istream& operator >> (istream& in, Order& order);
 	friend bool operator == (const Order& left, const Order& right);
@@ -39,14 +41,17 @@ public:
 
 	vector<Pizza> getPizzas() const;
 	vector<SideOrder> getSides() const;
-	int getStatus() const;
+	status getStatus() const;
 	Location getLocation() const;
 	string getComment() const;
 	string getHomeAddress() const;
+	deliveryMethod getDeliveryMethod() const;
+
 	void setPizzas(const vector<Pizza>& pizzas);
 	void setSides(const vector<SideOrder>& sides);
-	void setStatus(const int& status);
+	void setStatus(const status& orderStatus);
 	void setLocation(const Location& location);
 	void setComment(const string& comment);
 	void setHomeAddress(const string& homeAddress);
+	void setDeliveryMethod(const deliveryMethod& orderDeliveryMethod)
 };
