@@ -11,8 +11,6 @@ public:
 	static const string filename;
 private:
 	string address;
-	int postalCode;
-	string city;
 public:
 	Location(string address);
 
