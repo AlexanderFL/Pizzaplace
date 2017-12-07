@@ -13,12 +13,36 @@ Offer::Offer(string name, Order order, int price, bool fixed)
 {
 }
 
-string Offer::getOffername() {
-	return name;
+string Offer::getName() const {
+	return this->name;
 }
 
-Order Offer::getOrder() {
-	return order;
+Order Offer::getOrder() const {
+	return this->order;
+}
+
+int Offer::getPrice() const {
+	return this->price;
+}
+
+bool Offer::getFixed() const {
+	return this->fixed;
+}
+
+void Offer::setName(const string& name) {
+	this->name = name;
+}
+
+void Offer::setOrder(const Order& order) {
+	this->order = order;
+}
+
+void Offer::setPrice(const int& price) {
+	this->price = price;
+}
+
+void Offer::setFixed(const bool& fixed) {
+	this->fixed = fixed;
 }
 
 ostream& operator << (ostream& out, const Offer& offer) {
