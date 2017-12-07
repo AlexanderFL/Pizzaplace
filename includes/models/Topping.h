@@ -17,7 +17,6 @@ private:
 public:
 	Topping();
 	Topping(string name, int price);
-	vector<Topping> getAllToppings();
 	string getName() const;
 	int getPrice() const;
 	void setName(const string& name);
