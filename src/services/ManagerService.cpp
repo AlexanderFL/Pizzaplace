@@ -6,12 +6,8 @@ ManagerService::ManagerService(){}
 void ManagerService::addTopping(const Topping& topping) {
 	// Validate topping
 	string toppingName = topping.getName();
-	if (containsOnlyAlpha(toppingName) == false) {
-		throw NumberInString();
-	}
-	if (validPrice(topping.getPrice()) == false) {
-		throw InvalidPrice();
-	}
+	containsOnlyAlpha(toppingName);
+	validPrice(topping.getPrice());
 	// Write it to file
 	repo.WriteToFile(topping);
 }
@@ -20,12 +16,8 @@ void ManagerService::addTopping(const Topping& topping) {
 void ManagerService::addSideOrder(const SideOrder& side) {
 	// Validate side order
 	string sideOrderName = side.getName();
-	if (containsOnlyAlpha(sideOrderName) == false) {
-		throw NumberInString();
-	}
-	if (validPrice(side.getPrice())){
-		throw InvalidPrice();
-	}
+
+	validPrice(side.getPrice());
 
 	// Write it to file
 	repo.WriteToFile(side);
@@ -55,6 +47,11 @@ vector<Topping> ManagerService::getToppings() {
 /*			Delete topping			*/
 void ManagerService::deleteTopping(int index) {
 	repo.RemoveFromFileAtIndex<Topping>(index);
+}
+
+/*			Delete a side order		*/
+void ManagerService::deleteSideOrder(int index) {
+	repo.RemoveFromFileAtIndex<SideOrder>(index);
 }
 
 /*			Returns total cost for the order		*/
@@ -93,24 +90,22 @@ int ManagerService::getOrderTotalCost(const Order& order) {
 							the function will return false,
 							because it is not a valid topping name.
 */
-bool ManagerService::containsOnlyAlpha(string s)
+void ManagerService::containsOnlyAlpha(string s)
 {
 	for (int i = 0; i < s.length(); i++) {
 		if (!isalpha(s[i])) {
-			return false;
+			throw NumberInString();
 		}
 	}
-	return true;
 }
 
 /*
 		Checks if price is valid, a price is valid if it is
 		not a number below zero.
 */
-bool ManagerService::validPrice(double p)
+void ManagerService::validPrice(int p)
 {
-	if (p < 0.0) {
-		return false;
+	if (p < 0) {
+		throw InvalidPrice();
 	}
-	return true;
 }

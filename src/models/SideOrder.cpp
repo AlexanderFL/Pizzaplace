@@ -51,6 +51,12 @@ istream& operator>> (istream& in, SideOrder& side) {
 		in.read((char*)(&side.price), sizeof(int));
 		delete[] str;
 	}
+	else {
+		cout << "\nName: ";
+		in >> side.name;
+		cout << "Price: ";
+		in >> side.price;
+	}
 	return in;
 }
 

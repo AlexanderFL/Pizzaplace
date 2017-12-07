@@ -64,12 +64,12 @@ void ManagerUI::managerMenu() {
 		case '5':
 			//TODO: add other options for manager
 			do{
-			cout << menu.printMenu({ "Add a side order", "delete a side order", "Go Back" }) << endl;
+			cout << menu.printMenu({ "Add a side order", "delete a side order",  "See all side orders", "Go Back" }) << endl;
 			cout << "Input: ";
 			cin >> input;
 			system("CLS");
 				validateOtherInput(input);
-			} while (input != 51); //ascii - checking if input is 3 (go back)
+			} while (input != 52); //ascii - checking if input is 4 (go back)
 			break;
 		case '6':
 			stillManager = false;
@@ -114,38 +114,44 @@ void ManagerUI::validateToppingInput(char input) {
 	case '2': {
 		//Delete a topping
 		vector <Topping> toppings = toppingRepo.RetrieveAllFromFile<Topping>();
-		cout << "Here are the toppings you have so far: " << endl;
-		for (unsigned int i = 0; i < toppings.size(); i++) {
-			cout << i + 1 << ": " << toppings.at(i) << endl;
+		if (toppings.size() != 0) {
+			cout << "Here are the toppings you have so far: " << endl;
+			for (unsigned int i = 0; i < toppings.size(); i++) {
+				cout << i + 1 << ": " << toppings.at(i) << endl;
+			}
+			cout << "What topping would you like to delete. Please input a number or 'q' to quit." << endl;
+			cout << "Input: ";
+			cin >> input;
+			//Changing the input from char to int
+			int inputInInt = (int)input - 49;
+			if (tolower(input) == 'q') {
+				exit(1);
+			}
+			service.deleteTopping(inputInInt);
 		}
-		cout << "What topping would you like to delete. Please input a number or 'q' to quit." << endl;
-		cout << "Input: ";
-		cin >> input;
-		//Changing the input from char to int
-		int inputInInt = (int)input - 49;
-		if (tolower(input) == 'q') {
-			exit(1);
+		else cout << "You have no toppings so far." << endl;
+		break;
 		}
-		service.deleteTopping(inputInInt);
-		break;
-	}
-	case '3': {
-		//See all toppings
-		cout << "Here are the toppings you have so far: " << endl;
-		for (unsigned int i = 0; i < toppings.size(); i++) {
-			cout << i + 1 << ": " << toppings.at(i) << endl;
+		case '3': {
+			//See all toppings
+			if (toppings.size() != 0) {
+				cout << "Here are the toppings you have so far: " << endl;
+				for (unsigned int i = 0; i < toppings.size(); i++) {
+					cout << i + 1 << ": " << toppings.at(i) << endl;
+				}
+			}
+			else cout << "You have no toppings so far." << endl;
+			system("PAUSE");
+			break;
 		}
-		system("PAUSE");
-		break;
-	}
-	case '4': {
-		//Go back
-		break;
-	}
-	default: {
-		cout << "Invalid input." << endl;
-		break;
-	}
+		case '4': {
+			//Go back
+			break;
+		}
+		default: {
+			cout << "Invalid input." << endl;
+			break;
+		}
 	}
 }
 
@@ -153,17 +159,59 @@ void ManagerUI::validateToppingInput(char input) {
 	Adding other products to purchase
 */
 
+//TODO: fix managerservice for side order
 void ManagerUI::validateOtherInput(char input) {
+	Data sideOrderRepo;
+	vector <SideOrder> sides;
+	sides = sideOrderRepo.RetrieveAllFromFile<SideOrder>();
+	SideOrder sideOrder;
 	switch (input) {
 		case '1': {
 			//Add a side order
+			int numberOfSides;
+			cout << "How many side orders would you like to add? ";
+			cin >> numberOfSides;
+			cout << "What would you like as a side order? " << endl;
+
+			for (int i = 0; i < numberOfSides; ++i) {
+				cout << "Side number " << i + 1 << ": ";
+				cin >> sideOrder;
+				service.addSideOrder(sideOrder);
+			}
 			break;
 		}
 		case '2': {
 			//delete a side order
+			if (sides.size() != 0) {
+				cout << "Here are the side orders you have so far: " << endl;
+				for (unsigned int i = 0; i < sides.size(); i++) {
+					cout << i + 1 << ": " << sides.at(i) << endl;
+				}
+				cout << "What topping would you like to delete. Please input a number or 'q' to quit." << endl;
+				cout << "Input: ";
+				cin >> input;
+				//Changing the input from char to int
+				int inputInInt = (int)input - 49;
+				if (tolower(input) == 'q') {
+					exit(1);
+				}
+				service.deleteSideOrder(inputInInt);
+			}
+			else cout << "You have no side orders so far." << endl;
 			break;
 		}
 		case '3': {
+			//See all side orders
+			if (sides.size() != 0) {
+				cout << "Here are the side orders you have so far: " << endl;
+				for (unsigned int i = 0; i < sides.size(); i++) {
+					cout << i + 1 << ": " << sides.at(i) << endl;
+				}
+			}
+			else cout << "You have no side orders so far." << endl;
+			break;
+		}
+		case '4': {
 			//go back
 			break;
 		}
