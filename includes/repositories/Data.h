@@ -65,9 +65,9 @@ inline vector<Repos> Data::RetrieveAllFromFile()
 	if (fin.is_open())
 	{
 		fin.seekg(0, fin.end);
-		int endpos = fin.tellg();
+		streamoff endpos = fin.tellg();
 		fin.seekg(0, fin.beg);
-		int pos = 0;
+		streamoff pos = 0;
 		while (pos != endpos)
 		{
 			fin >> rep;
