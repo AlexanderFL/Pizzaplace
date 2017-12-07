@@ -13,12 +13,6 @@ Topping::Topping(string name, int price)
 	this->price = price;
 }
 
-vector<Topping> Topping::getAllToppings()
-{
-	vector<Topping> toppings;
-	return toppings;
-}
-
 string Topping::getName() const {
 	return this->name;
 }
