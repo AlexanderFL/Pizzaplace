@@ -60,12 +60,12 @@ void ManagerService::deleteTopping(int index) {
 /*			Returns total cost for the order		*/
 int ManagerService::getOrderTotalCost(const Order& order) {
 	int total = 0;
-	int numberOfPizzas = order.getPizzas().size();
+	size_t numberOfPizzas = order.getPizzas().size();
 	// Pizza cost
-	for (int i = 0; i < numberOfPizzas; ++i) {
+	for (size_t i = 0; i < numberOfPizzas; ++i) {
 		int temptotal = 0;
-		int numberOfToppingsOnPizza = order.getPizzas().at(i).getToppings().size();
-		for (int j = 0; j < numberOfToppingsOnPizza; ++j) {
+		size_t numberOfToppingsOnPizza = order.getPizzas().at(i).getToppings().size();
+		for (size_t j = 0; j < numberOfToppingsOnPizza; ++j) {
 			temptotal += order.getPizzas().at(i).getToppings().at(j).getPrice(); // Add each topping to price
 		}
 		temptotal += order.getPizzas().at(i).getCrust().getPrice(); // Add type of crust to price
