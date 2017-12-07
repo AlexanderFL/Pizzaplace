@@ -47,8 +47,8 @@ void Offer::setFixed(const bool& fixed) {
 
 ostream& operator << (ostream& out, const Offer& offer) {
 	if (&out != &cout) {
-		int len = offer.name.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		size_t len = offer.name.length() + 1;
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(offer.name.c_str(), len);
 		out << offer.order;
 		out.write((char*)(&offer.price), sizeof(int));
@@ -59,8 +59,8 @@ ostream& operator << (ostream& out, const Offer& offer) {
 
 istream& operator >> (istream& in, Offer& offer) {
 	if (&in != &cin) {
-		int len;
-		in.read((char*)(&len), sizeof(int));
+		size_t len;
+		in.read((char*)(&len), sizeof(size_t));
 		char* str = new char[len];
 		in.read(str, len);
 		offer.name = str;

@@ -96,21 +96,21 @@ void  Order::setHomeAddress(const string& homeAddress) {
 ostream& operator <<(ostream& out, const Order& order)
 {
 	if (&out != &cout) {
-		int size = order.pizzas.size();
-		out.write((char*)(&size), sizeof(int));
-		for (int i = 0; i < size; ++i) {
+		size_t size = order.pizzas.size();
+		out.write((char*)(&size), sizeof(size_t));
+		for (size_t i = 0; i < size; ++i) {
 			out << order.pizzas.at(i);
 		}
 		size = order.sides.size();
-		out.write((char*)(&size), sizeof(int));
-		for (int i = 0; i < size; ++i) {
+		out.write((char*)(&size), sizeof(size_t));
+		for (size_t i = 0; i < size; ++i) {
 			out << order.sides.at(i);
 		}
 		out.write((char*)(&order.totalCost), sizeof(double));
 		out.write((char*)(&order.status), sizeof(int));
 		out.write((char*)(&order.location), sizeof(int));
-		int len = order.comment.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		size_t len = order.comment.length() + 1;
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(order.comment.c_str(), len);
 	}
 	else {
@@ -123,24 +123,24 @@ istream& operator >> (istream& in, Order& order) {
 	if (&in != &cin) {
 		order.pizzas.clear();
 		order.sides.clear();
-		int size;
+		size_t size;
 		Pizza pizza;
-		in.read((char*)(&size), sizeof(int));
-		for (int i = 0; i < size; ++i) {
+		in.read((char*)(&size), sizeof(size_t));
+		for (size_t i = 0; i < size; ++i) {
 			in >> pizza;
 			order.pizzas.push_back(pizza);
 		}
-		in.read((char*)(&size), sizeof(int));
+		in.read((char*)(&size), sizeof(size_t));
 		SideOrder side;
-		for (int i = 0; i < size; ++i) {
+		for (size_t i = 0; i < size; ++i) {
 			in >> side;
 			order.sides.push_back(side);
 		}
 		in.read((char*)(&order.totalCost), sizeof(double));
 		in.read((char*)(&order.status), sizeof(int));
 		in.read((char*)(&order.location), sizeof(int));
-		int len;
-		in.read((char*)(&len), sizeof(int));
+		size_t len;
+		in.read((char*)(&len), sizeof(size_t));
 		char* str = new char[len];
 		in.read(str, len);
 		order.comment = str;

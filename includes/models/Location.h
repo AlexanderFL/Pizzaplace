@@ -14,6 +14,7 @@ private:
 	int postalCode;
 	string city;
 public:
+	Location();
 	Location(string address);
 
 	void setAddress(const string& address);
