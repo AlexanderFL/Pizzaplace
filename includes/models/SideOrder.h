@@ -16,7 +16,7 @@ public:
 	SideOrder();
 	SideOrder(string name, int price);
 	string getName() const;
-	double getPrice() const;
+	int getPrice() const;
 	void setName(const string& name);
 	void setPrice(const int& price);
 	friend ostream& operator<< (ostream& out, const SideOrder& side);

@@ -16,7 +16,7 @@ string SideOrder::getName() const {
 	return this->name;
 }
 
-double SideOrder::getPrice() const {
+int SideOrder::getPrice() const {
 	return this->price;
 }
 
