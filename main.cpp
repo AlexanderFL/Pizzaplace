@@ -5,20 +5,20 @@
 using namespace std;
 #include "MainUI.h"
 
-Data repo;
+/*Data repo;
 
 void addTopping();
 void addCrust();
 void addSize();
 void addSide();
 void addLocation();
-void addOrder();
+void addOrder();*/
 
 int main()
 {
-	//MainUI mainUI;
-	//mainUI.startUI();
-	string input;
+	MainUI mainUI;
+	mainUI.startUI();
+	/*string input;
 	do {
 		cout << "1. Add topping" << endl;
 		cout << "2. Add crust" << endl;
@@ -180,5 +180,5 @@ void addOrder() {
 			pizzas.push_back(Pizza(toppings, crust, size));
 			repo.WriteToFile(Order(pizzas, sides, 0, 0, location, comment, address));
 		}
-	} while (input != "q");
+	} while (input != "q");*/
 }
