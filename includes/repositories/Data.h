@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+#include "FailedOpenFile.h"
 #include "Topping.h"
 #include "Order.h"
 using namespace std;
@@ -78,6 +78,9 @@ inline vector<Repos> Data::RetrieveAllFromFile()
 			pos = fin.tellg();
 		}
 		fin.close();
+	}
+	else {
+		throw FailedOpenFile();
 	}
 	return vec;
 }

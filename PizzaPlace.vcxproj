@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\exceptions\FailedOpenFile.h" />
     <ClInclude Include="includes\repositories\Data.h" />
     <ClInclude Include="includes\models\Order.h" />
     <ClInclude Include="includes\models\Pizza.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="includes\models\Offer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\exceptions\FailedOpenFile.cpp" />
     <ClCompile Include="src\models\Offer.cpp" />
     <ClInclude Include="includes\ui\LoginUI.h" />
     <ClInclude Include="includes\services\LoginService.h" />
