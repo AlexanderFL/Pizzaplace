@@ -16,8 +16,8 @@ public:
 	void addSpecialOrder(string ordername, const Order& order);
 	void addDeliveryPlace(string place);
 	void deleteTopping(int index);
-
 	vector<Topping> getToppings();
+	int getOrderTotalCost(const Order& order);
 private:
 	bool containsOnlyAlpha(string s);
 	bool validPrice(double p);

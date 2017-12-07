@@ -63,6 +63,23 @@ void ManagerService::deleteTopping(int index) {
 	repo.RemoveFromFileAtIndex<Topping>(index);
 }
 
+int ManagerService::getOrderTotalCost(const Order& order) {
+	int total = 0;
+	for (int i = 0; i < order.getPizzas().size(); ++i) {
+		int temptotal = 0;
+		for (int j = 0; j < order.getPizzas().at(i).getToppings().size(); ++j) {
+			temptotal += order.getPizzas().at(i).getToppings().at(j).getPrice();
+		}
+		temptotal += order.getPizzas().at(i).getCrust().getPrice();
+		temptotal *= order.getPizzas().at(i).getPizzaSize().getPriceMod();
+		total += temptotal;
+	}
+	for (int i = 0; i < order.getSides().size(); ++i) {
+		total += order.getSides().at(i).getPrice();
+	}
+	return total;
+}
+
 /*
 *************************************************
 *****			PRIVATE FUNCTIONS			*****
