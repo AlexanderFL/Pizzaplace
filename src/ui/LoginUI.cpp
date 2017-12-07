@@ -25,6 +25,10 @@ void LoginUI::startUI() {
 			try {
 				profession job = service.login(username, password);
 				switch (job) {
+				case ADMIN: {
+					//ADMIN MENU
+					break;
+				}
 				case MANAGER: {
 					ManagerUI managerUI;
 					managerUI.managerMenu();
