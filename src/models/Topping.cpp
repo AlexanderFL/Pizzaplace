@@ -19,11 +19,20 @@ vector<Topping> Topping::getAllToppings()
 	return toppings;
 }
 
-double Topping::getPrice() const{
+string Topping::getName() const {
+	return this->name;
+}
+
+int Topping::getPrice() const{
 	return this->price;
 }
-string Topping::getName() const{
-	return this->name;
+
+void Topping::setName(const string& name) {
+	this->name = name;
+}
+
+void Topping::setPrice(const int& price) {
+	this->price = price;
 }
 
 istream& operator >> (istream& in, Topping& topping) {

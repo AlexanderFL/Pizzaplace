@@ -18,8 +18,10 @@ public:
 	Topping();
 	Topping(string name, int price);
 	vector<Topping> getAllToppings();
-	double getPrice() const;
 	string getName() const;
+	int getPrice() const;
+	void setName(const string& name);
+	void setPrice(const int& price);
 	friend istream& operator >> (istream& in, Topping& topping);
 	friend ostream& operator << (ostream& out, const Topping& topping);
 	friend bool operator == (const Topping& left, const Topping& right);
