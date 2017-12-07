@@ -63,7 +63,6 @@ int ManagerService::getOrderTotalCost(const Order& order) {
 		int temptotal = 0;
 		for (int j = 0; j < order.getPizzas().at(i).getToppings().size(); ++j) {
 			temptotal += order.getPizzas().at(i).getToppings().at(j).getPrice();
-			
 		}
 		temptotal += order.getPizzas().at(i).getCrust().getPrice();
 		temptotal *= order.getPizzas().at(i).getPizzaSize().getPriceMod();
@@ -74,7 +73,7 @@ int ManagerService::getOrderTotalCost(const Order& order) {
 		total += order.getSides().at(i).getPrice();
 		
 	}
-	return total;	
+	return total;
 }
 
 /*

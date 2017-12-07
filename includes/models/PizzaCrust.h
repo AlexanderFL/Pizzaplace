@@ -11,14 +11,14 @@ public:
 	static const string filename;
 private:
 	string name;
-	double price;
+	int price;
 public:
 	PizzaCrust();
-	PizzaCrust(string name, double price);
+	PizzaCrust(string name, int price);
 	string getName() const;
-	double getPrice() const;
+	int getPrice() const;
 	void setName(const string& name);
-	void setPrice(const double& price);
+	void setPrice(const int& price);
 	friend ostream& operator << (ostream& out, const PizzaCrust& crust);
 	friend istream& operator >> (istream& in, PizzaCrust& crust);
 };

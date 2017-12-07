@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Data.h"
-#include "NumberInString.h";
-#include "InvalidPrice.h";
+#include "NumberInString.h"
+#include "InvalidPrice.h"
 #include "Offer.h"
 
 class ManagerService
@@ -17,8 +17,8 @@ public:
 	void addDeliveryPlace(string place);
 	void deleteTopping(int index);
 	int getOrderTotalCost(const Order& order);
-
 	vector<Topping> getToppings();
+	int getOrderTotalCost(const Order& order);
 private:
 	bool containsOnlyAlpha(string s);
 	bool validPrice(double p);
