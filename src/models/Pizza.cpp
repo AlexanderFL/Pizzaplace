@@ -15,33 +15,6 @@ Pizza::Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size) {
 	this->size = size;
 }
 
-/*
-	Add a topping to the toppings vector
-*/
-void Pizza::addTopping(const Topping& top) {
-	this->toppings.push_back(top);
-}
-
-/*
-	Returns the number of toppings in the pizza
-*/
-int Pizza::nrToppings() const {
-	return this->toppings.size();
-}
-
-int Pizza::getToppingCount() const
-{
-	return toppings.size();
-}
-
-Topping Pizza::getToppingIndex(int index) const
-{
-	if (index >= 0 && index < toppings.size()) {
-		return toppings[index];
-	}
-	return toppings[0];
-}
-
 vector<Topping> Pizza::getToppings() const {
 	return this->toppings;
 }
@@ -68,14 +41,6 @@ void Pizza::setPizzaSize(const PizzaSize& size) {
 	this->size = size;
 }
 
-/*
-	Returns the cost of the pizza
-*/
-
-double Pizza::getCost() {
-	this->calculateCost();
-	return this->cost;
-}
 
 /*
 *************************************************
@@ -83,25 +48,6 @@ double Pizza::getCost() {
 *************************************************
 */
 
-/*
-	Calculates the cost for the pizza and sets the price of the pizza
-*/
-
-void Pizza::calculateCost() {
-	this->cost = 0;
-	for (int i = 0; i < this->nrToppings(); ++i) {
-		this->cost += toppings.at(i).getPrice();
-	}
-	/*
-	if (size == 1) {
-		this->cost += 950;
-	} else if (size == 2) {
-		this->cost += 1150;
-	} else if (size == 3) {
-		this->cost += 1450;
-	}
-	*/
-}
 
 /*
 *************************************************
@@ -111,7 +57,7 @@ void Pizza::calculateCost() {
 ostream& operator<< (ostream& out, const Pizza& pizza)
 {
 	if (&out != &cout) {
-		int size = pizza.nrToppings();
+		int size = pizza.toppings.size();
 		out.write((char*)(&size), sizeof(int));
 		for (int i = 0; i < size; ++i) {
 			out << pizza.toppings.at(i);
@@ -120,7 +66,7 @@ ostream& operator<< (ostream& out, const Pizza& pizza)
 		out << pizza.size;
 	}
 	else {
-		for (int i = 0; i < pizza.nrToppings(); ++i) {
+		for (int i = 0; i < pizza.toppings.size(); ++i) {
 			out << pizza.toppings.at(i) << " ";
 		}
 	}
@@ -137,7 +83,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 		Topping topping;
 		for (int i = 0; i < size; ++i) {
 			in >> topping;
-			pizza.addTopping(topping);
+			pizza.toppings.push_back(topping);
 		}
 		in >> pizza.crust;
 		in >> pizza.size;
@@ -171,7 +117,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 bool operator == (const Pizza& left, const Pizza& right) {
 	if (left.size == right.size) {
 		Pizza pizza = left * right;
-		if (pizza.nrToppings() == left.nrToppings() && pizza.nrToppings() == right.nrToppings()) {
+		if (pizza.toppings.size() == left.toppings.size() && pizza.toppings.size() ==		right.toppings.size()) {
 			return true;
 		}
 	}
@@ -190,10 +136,10 @@ bool operator != (const Pizza& left, const Pizza& right) {
 */
 Pizza operator * (const Pizza& left, const Pizza& right) {
 	Pizza pizza;
-	for (int i = 0; i < left.nrToppings(); ++i) {
-		for (int j = 0; j < right.nrToppings(); ++j) {
+	for (int i = 0; i < left.toppings.size(); ++i) {
+		for (int j = 0; j < right.toppings.size(); ++j) {
 			if (left.toppings.at(i) == right.toppings.at(j)) {
-				pizza.addTopping(left.toppings.at(i));
+				pizza.toppings.push_back(left.toppings.at(i));
 				break;
 			}
 		}
@@ -206,8 +152,8 @@ Pizza operator * (const Pizza& left, const Pizza& right) {
 */
 Pizza operator + (const Pizza& left, const Pizza& right) {
 	Pizza pizza = left;
-	for (int i = 0; i < right.nrToppings(); ++i) {
-		pizza.addTopping(right.toppings.at(i));
+	for (int i = 0; i < right.toppings.size(); ++i) {
+		pizza.toppings.push_back(right.toppings.at(i));
 	}
 	return pizza;
 }

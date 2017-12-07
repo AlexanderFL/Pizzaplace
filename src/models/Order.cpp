@@ -112,9 +112,9 @@ void  Order::setHomeAddress(const string& homeAddress) {
 */
 void Order::calculateCost() {
 	totalCost = 0;
-	for (unsigned int i = 0; i < pizzas.size(); ++i) {
+	/*for (unsigned int i = 0; i < pizzas.size(); ++i) {
 		totalCost += pizzas.at(i).getCost();
-	}
+	}*/
 	/*
 	for (unsigned int i = 0; i < sides.size(); ++i) {
 		totalCost += sides.at(i).getPrice();

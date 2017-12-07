@@ -13,14 +13,9 @@ private:
 	vector<Topping> toppings;
 	PizzaCrust crust;
 	PizzaSize size;
-	double cost;
-	void calculateCost();
 public:
 	Pizza();
 	Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size);
-	void addTopping(const Topping& top);
-	int nrToppings() const;
-	double getCost();
 	friend ostream& operator<< (ostream& out, const Pizza& pizza);
 	friend istream& operator>> (istream& in, Pizza& pizza);
 	friend bool operator == (const Pizza& left, const Pizza& right);
@@ -28,8 +23,6 @@ public:
 	friend Pizza operator * (const Pizza& left, const Pizza& right);
 	friend Pizza operator + (const Pizza& left, const Pizza& right);
 
-	int getToppingCount() const;
-	Topping getToppingIndex(int index) const;
 	vector<Topping> getToppings() const;
 	PizzaCrust getCrust() const;
 	PizzaSize getPizzaSize() const;
