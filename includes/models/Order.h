@@ -39,12 +39,25 @@ public:
 	void MakeOrder();
 	double getTotalCost();
 
+	vector<Pizza> getPizzas() const;
+	vector<SideOrder> getSides() const;
+	int getStatus() const;
+	Location getLocation() const;
+	string getComment() const;
+	string getHomeAddress() const;
+	void setPizzas(const vector<Pizza>& pizzas);
+	void setSides(const vector<SideOrder>& sides);
+	void setStatus(const int& status);
+	void setLocation(const Location& location);
+	void setComment(const string& comment);
+	void setHomeAddress(const string& homeAddress);
+
 	//TODO: Fix homeaddress
-	void setHomeAddress(string address);
+	//void setHomeAddress(string address);
 
 	int getPizzaOrderLength() const;
 	int getSideOrderLength() const;
 	Pizza getPizzaIndex(int index) const;
 	SideOrder getSideOrderIndex(int index) const;
-	string getHomeAddress() const;
+	//string getHomeAddress() const;
 };

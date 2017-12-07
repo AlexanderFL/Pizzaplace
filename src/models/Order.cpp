@@ -52,6 +52,54 @@ double Order::getTotalCost() {
 	return totalCost;
 }
 
+vector<Pizza>  Order::getPizzas() const {
+	return this->pizzas;
+}
+
+vector<SideOrder>  Order::getSides() const {
+	return this->sides;
+}
+
+int  Order::getStatus() const {
+	return this->status;
+}
+
+Location  Order::getLocation() const {
+	return this->location;
+}
+
+string  Order::getComment() const {
+	return this->comment;
+}
+
+string  Order::getHomeAddress() const {
+	return this->homeAddress;
+}
+
+void  Order::setPizzas(const vector<Pizza>& pizzas) {
+	this->pizzas = pizzas;
+}
+
+void  Order::setSides(const vector<SideOrder>& sides) {
+	this->sides = sides;
+}
+
+void  Order::setStatus(const int& status) {
+	this->status = status;
+}
+
+void  Order::setLocation(const Location& location) {
+	this->location = location;
+}
+
+void  Order::setComment(const string& comment) {
+	this->comment = comment;
+}
+
+void  Order::setHomeAddress(const string& homeAddress) {
+	this->homeAddress = homeAddress;
+}
+
 /*
 *************************************************
 				PRIVATE FUNCTIONS
@@ -74,9 +122,9 @@ void Order::calculateCost() {
 }
 
 //To get the home address of a person (TODO: fix)
-void Order::setHomeAddress(string address) {
+/*void Order::setHomeAddress(string address) {
 	homeAddress = address;
-}
+}*/
 
 int Order::getPizzaOrderLength() const
 {
@@ -104,9 +152,9 @@ SideOrder Order::getSideOrderIndex(int index) const
 	return sides[0];
 }
 
-string Order::getHomeAddress() const {
+/*string Order::getHomeAddress() const {
 	return homeAddress;
-}
+}*/
 /*
 *************************************************
 				OVERLOAD FUNCTIONS
