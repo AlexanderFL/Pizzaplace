@@ -169,7 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\exceptions\EmptyVector.cpp" />
-    <ClCompile Include="includes\services\SalesmanService.cpp" />
+    <ClCompile Include="src\services\SalesmanService.cpp" />
     <ClCompile Include="src\exceptions\FailedOpenFile.cpp" />
     <ClCompile Include="src\models\Offer.cpp" />
     <ClInclude Include="includes\ui\LoginUI.h" />
