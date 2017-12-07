@@ -31,7 +31,7 @@ private:
 
 public:
 	Order();
-	Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod);
+	Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod);
 	friend ostream& operator << (ostream& out, const Order& order);
 	friend istream& operator >> (istream& in, Order& order);
 	friend bool operator == (const Order& left, const Order& right);
@@ -53,5 +53,5 @@ public:
 	void setLocation(const Location& location);
 	void setComment(const string& comment);
 	void setHomeAddress(const string& homeAddress);
-	void setDeliveryMethod(const deliveryMethod& orderDeliveryMethod)
+	void setDeliveryMethod(const deliveryMethod& orderDeliveryMethod);
 };

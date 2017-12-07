@@ -19,10 +19,9 @@ Order::Order()
 	_deliveryMethod = PICKUP;
 }
 
-Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, double totalCost, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod) {
+Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod) {
 	this->pizzas = pizzas;
 	this->sides = sides;
-	this->totalCost = totalCost;
 	this->_status = orderStatus;
 	this->location = location;
 	this->comment = comment;
@@ -81,6 +80,11 @@ void  Order::setComment(const string& comment) {
 
 void  Order::setHomeAddress(const string& homeAddress) {
 	this->homeAddress = homeAddress;
+}
+
+void Order::setDeliveryMethod(const deliveryMethod & orderDeliveryMethod)
+{
+	this->_deliveryMethod = orderDeliveryMethod;
 }
 
 /*
