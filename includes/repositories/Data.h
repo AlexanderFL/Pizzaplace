@@ -32,8 +32,7 @@ public:
 template<class Repos>
 inline void Data::WriteToFile(Repos rep) const
 {
-	ofstream fout;
-	fout.open(rep.filename, ios::binary | ios::app);
+	ofstream fout(rep.filename, ios::binary | ios::app);
 	fout << rep;
 	fout.close();
 }
@@ -42,8 +41,7 @@ template <class Repos>
 inline void Data::WriteMultipleLinesToFile(vector<Repos> repVec) const
 {
 	Repos rep;
-	ofstream fout;
-	fout.open(rep.filename, ios::binary);
+	ofstream fout(rep.filename, ios::binary);
 	for (unsigned int i = 0; i < repVec.size(); i++){
 		fout << repVec.at(i);
 	}
@@ -62,9 +60,8 @@ inline vector<Repos> Data::RetrieveAllFromFile()
 {
 	vector<Repos> vec;
 	Repos rep;
-	ifstream fin;
+	ifstream fin(rep.filename, ios::binary);
 	
-	fin.open(rep.filename, ios::binary);
 	if (fin.is_open())
 	{
 		fin.seekg(0, fin.end);
