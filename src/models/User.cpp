@@ -4,10 +4,10 @@
 const string User::filename = "users.dat";
 
 User::User() {
-	this->job = 0;
+	this->job = ADMIN;
 };
 
-User::User(string username, string password, string name, int job) {
+User::User(string username, string password, string name, profession job) {
 	this->username = username;
 	this->password = password;
 	this->name = name;
@@ -26,7 +26,7 @@ string User::getName() const {
 	return this->name;
 }
 
-int User::getJob() const {
+profession User::getJob() const {
 	return this->job;
 }
 
@@ -42,7 +42,7 @@ void User::setName(const string& name) {
 	this->name = name;
 }
 
-void User::setJob(const int& job) {
+void User::setJob(const profession& job) {
 	this->job = job;
 }
 
@@ -57,7 +57,7 @@ ostream& operator << (ostream& out, const User& user) {
 		len = user.name.length() + 1;
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(user.name.c_str(), len);
-		out.write((char*)(&user.job), sizeof(int));
+		out.write((char*)(&user.job), sizeof(profession));
 	}
 	return out;
 }
@@ -80,7 +80,7 @@ istream& operator >> (istream& in, User& user) {
 		in.read(str, len);
 		user.name = str;
 		delete[] str;
-		in.read((char*)(&user.job), sizeof(int));
+		in.read((char*)(&user.job), sizeof(profession));
 	}
 	return in;
 }

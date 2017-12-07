@@ -1,4 +1,5 @@
 #include "LoginUI.h"
+#include "MainUI.h"
 #include "ManagerUI.h"
 #include "KitchenUI.h"
 #include "SalesmanUI.h"
@@ -9,6 +10,20 @@ using namespace std;
 
 void LoginUI::startUI() {
 	char input;
+	try {
+		service.checkForUsers();
+	}
+	catch (FailedOpenFile) {
+		cout << "Failed to open User file." << endl;
+		MainUI mainUI;
+		mainUI.startUI();
+	}
+	catch (EmptyVector) {
+		cout << "No users exist." << endl;
+		MainUI mainUI;
+		mainUI.startUI();
+	}
+	
 	while (true) {
 		cout << menu.printMenu({ "Login", "Exit" }) << endl;
 		cout << "Input: ";
@@ -23,24 +38,30 @@ void LoginUI::startUI() {
 			cout << "Password: ";
 			cin >> password;
 			try {
-				int job = service.login(username, password);
+				profession job = service.login(username, password);
 				switch (job) {
-				case 1: {
+				case ADMIN: {
+					//ADMIN MENU
+					MainUI mainUI;
+					mainUI.startUI();
+					break;
+				}
+				case MANAGER: {
 					ManagerUI managerUI;
 					managerUI.managerMenu();
 					break;
 				}
-				case 2: {
+				case SALESMAN: {
 					SalesmanUI salesmanUI;
 					salesmanUI.salesmanMenu();
 					break;
 				}
-				case 3: {
+				case KITCHEN: {
 					KitchenUI kitchenUI;
 					kitchenUI.kitchenMenu();
 					break;
 				}
-				case 4: {
+				case DELIVERY: {
 					DeliveryUI deliveryUI;
 					deliveryUI.deliveryMenu();
 					break;

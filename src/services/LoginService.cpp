@@ -1,10 +1,9 @@
 #include "LoginService.h"
-#include "User.h"
 
 
 LoginService::LoginService() {}
 
-int LoginService::login(string username, string password) {
+profession LoginService::login(string username, string password) {
 	vector<User> users = repo.RetrieveAllFromFile<User>();
 	for (int i = 0; i < users.size(); ++i) {
 		if (username == users.at(i).getUsername() && password == users.at(i).getPassword()) {
@@ -12,4 +11,11 @@ int LoginService::login(string username, string password) {
 		}
 	}
 	throw InvalidLogin();
+}
+
+void LoginService::checkForUsers() {
+	vector<User> users = repo.RetrieveAllFromFile<User>();
+	if (users.size() == 0) {
+		throw EmptyVector();
+	}
 }
