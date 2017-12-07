@@ -38,3 +38,10 @@ istream& operator >> (istream& in, Location& loc) {
 	}
 	return in;
 }
+
+bool operator == (const Location& left, const Location& right) {
+	if (left.address == right.address) {
+		return true;
+	}
+	return false;
+}

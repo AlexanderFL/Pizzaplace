@@ -20,5 +20,6 @@ public:
 
 	friend ostream& operator << (ostream& out, const Location& loc);
 	friend istream& operator >> (istream& in, Location& loc);
+	friend bool operator == (const Location& left, const Location& right);
 };
 
