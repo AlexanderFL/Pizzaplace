@@ -31,8 +31,8 @@ void Topping::setPrice(const int& price) {
 
 istream& operator >> (istream& in, Topping& topping) {
 	if (&in != &cin) {
-		int len;
-		in.read((char*)(&len), sizeof(int));
+		size_t len;
+		in.read((char*)(&len), sizeof(size_t));
 		char* str = new char[len];
 		in.read(str, len);
 		topping.name = str;
@@ -51,8 +51,8 @@ istream& operator >> (istream& in, Topping& topping) {
 ostream& operator<< (ostream& out, const Topping& topping)
 {
 	if (&out != &cout) {
-		int len = topping.name.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		size_t len = topping.name.length() + 1;
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(topping.name.c_str(), len);
 		out.write((char*)(&topping.price), sizeof(int));
 	}

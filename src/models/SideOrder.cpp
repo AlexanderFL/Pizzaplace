@@ -30,8 +30,8 @@ void SideOrder::setPrice(const int& price) {
 
 ostream& operator<< (ostream& out, const SideOrder& side) {
 	if (&out != &cout) {
-		int len = side.name.length() + 1;
-		out.write((char*)(&len), sizeof(int));
+		size_t len = side.name.length() + 1;
+		out.write((char*)(&len), sizeof(size_t));
 		out.write(side.name.c_str(), len);
 		out.write((char*)(&side.price), sizeof(int));
 	}
@@ -43,8 +43,8 @@ ostream& operator<< (ostream& out, const SideOrder& side) {
 
 istream& operator>> (istream& in, SideOrder& side) {
 	if (&in != &cin) {
-		int len;
-		in.read((char*)(&len), sizeof(int));
+		size_t len;
+		in.read((char*)(&len), sizeof(size_t));
 		char* str = new char[len];
 		in.read(str, len);
 		side.name = str;
