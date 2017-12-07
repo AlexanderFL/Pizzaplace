@@ -33,11 +33,13 @@ void ManagerUI::managerMenu() {
 		}
 		case '2':
 		{
+			do{
 			cout << menu.printMenu({ "Add a topping", "Delete a topping", "See all toppings", "Go Back" }) << endl;
 			cout << "Input: ";
 			cin >> input;
 			system("CLS");
 			validateToppingInput(input);
+		} while (input != 52); //ascii - checking if input is 4 (go back)
 			break;
 		}
 		case '3':
@@ -67,7 +69,7 @@ void ManagerUI::managerMenu() {
 			cin >> input;
 			system("CLS");
 				validateOtherInput(input);
-			} while (input < 49 || 51 < input); //ascii - checking if input is between 1 and 3
+			} while (input != 51); //ascii - checking if input is 3 (go back)
 			break;
 		case '6':
 			stillManager = false;
@@ -95,7 +97,7 @@ void ManagerUI::validateToppingInput(char input) {
 	Topping topping;
 
 	switch (input) {
-	case '1':{
+	case '1': {
 		//Adding a topping
 		int numberOfToppings;
 		cout << "How many toppings would you like to add? ";
@@ -110,6 +112,7 @@ void ManagerUI::validateToppingInput(char input) {
 		break;
 	}
 	case '2': {
+		//Delete a topping
 		vector <Topping> toppings = toppingRepo.RetrieveAllFromFile<Topping>();
 		cout << "Here are the toppings you have so far: " << endl;
 		for (unsigned int i = 0; i < toppings.size(); i++) {
@@ -127,16 +130,23 @@ void ManagerUI::validateToppingInput(char input) {
 		break;
 	}
 	case '3': {
+		//See all toppings
 		cout << "Here are the toppings you have so far: " << endl;
 		for (unsigned int i = 0; i < toppings.size(); i++) {
 			cout << i + 1 << ": " << toppings.at(i) << endl;
 		}
+		system("PAUSE");
 		break;
 	}
-	default:
-		cout << "Invalid input." << endl;
+	case '4': {
+		//Go back
+		break;
 	}
-	system("PAUSE");
+	default: {
+		cout << "Invalid input." << endl;
+		break;
+	}
+	}
 }
 
 /*
