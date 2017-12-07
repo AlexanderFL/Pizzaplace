@@ -33,19 +33,24 @@ void ManagerUI::managerMenu() {
 		}
 		case '2':
 		{
+			do{
 			cout << menu.printMenu({ "Add a topping", "Delete a topping", "See all toppings", "Go Back" }) << endl;
 			cout << "Input: ";
 			cin >> input;
 			system("CLS");
 			validateToppingInput(input);
+		} while (input != 52); //ascii - checking if input is 4 (go back)
 			break;
 		}
 		case '3':
 		{
 			//TODO: get the total price of an order
-			Order order;
+			//Data orderRepo;
+			//vector<Order> order;
+			//order = orderRepo.RetrieveAllFromFile<Order>();
 			//Todo replace with service
 			//cout << order.getTotalCost();
+			//cout << "The total price of the order is: " << service.getOrderTotalCost(order) << " kr." << endl;
 			break;
 		}
 		case '4':
@@ -58,7 +63,13 @@ void ManagerUI::managerMenu() {
 		}
 		case '5':
 			//TODO: add other options for manager
+			do{
 			cout << menu.printMenu({ "Add a side order", "delete a side order", "Go Back" }) << endl;
+			cout << "Input: ";
+			cin >> input;
+			system("CLS");
+				validateOtherInput(input);
+			} while (input != 51); //ascii - checking if input is 3 (go back)
 			break;
 		case '6':
 			stillManager = false;
@@ -74,18 +85,19 @@ void ManagerUI::managerMenu() {
 
 
 /*
-	Changing Toppings
+	Changing Toppings on Pizza
 */
 
 
 void ManagerUI::validateToppingInput(char input) {
+	//notar her toppingrepo, fix
 	Data toppingRepo;
 	vector <Topping> toppings;
 	toppings = toppingRepo.RetrieveAllFromFile<Topping>();
 	Topping topping;
 
 	switch (input) {
-	case '1':{
+	case '1': {
 		//Adding a topping
 		int numberOfToppings;
 		cout << "How many toppings would you like to add? ";
@@ -100,6 +112,7 @@ void ManagerUI::validateToppingInput(char input) {
 		break;
 	}
 	case '2': {
+		//Delete a topping
 		vector <Topping> toppings = toppingRepo.RetrieveAllFromFile<Topping>();
 		cout << "Here are the toppings you have so far: " << endl;
 		for (unsigned int i = 0; i < toppings.size(); i++) {
@@ -117,22 +130,48 @@ void ManagerUI::validateToppingInput(char input) {
 		break;
 	}
 	case '3': {
+		//See all toppings
 		cout << "Here are the toppings you have so far: " << endl;
 		for (unsigned int i = 0; i < toppings.size(); i++) {
 			cout << i + 1 << ": " << toppings.at(i) << endl;
 		}
+		system("PAUSE");
 		break;
 	}
-	default:
+	case '4': {
+		//Go back
+		break;
+	}
+	default: {
 		cout << "Invalid input." << endl;
+		break;
 	}
-	do {
-		cout << "\nPlease press 1 to continue: ";
-		cin >> input;
 	}
-	while (input != '1');
 }
 
+/*
+	Adding other products to purchase
+*/
+
+void ManagerUI::validateOtherInput(char input) {
+	switch (input) {
+		case '1': {
+			//Add a side order
+			break;
+		}
+		case '2': {
+			//delete a side order
+			break;
+		}
+		case '3': {
+			//go back
+			break;
+		}
+		default:
+			cout << "Invalid input." << endl;
+			break;
+		}
+}
 /*
 void ManagerUI::addTopping() {
 	int numberOfToppings;

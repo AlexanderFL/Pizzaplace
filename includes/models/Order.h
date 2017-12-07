@@ -13,7 +13,7 @@ using namespace std;
 */
 
 enum deliveryMethod { PICKUP = 0, SEND };
-enum status { PREPERATION, BAKING, READY, SENT};
+enum status { PREPERATION = 0, BAKING, READY, SENT};
 
 class Order
 {
@@ -28,10 +28,11 @@ private:
 	status _status;
 	deliveryMethod _deliveryMethod;
 	double totalCost;
+	bool paidFor;
 
 public:
 	Order();
-	Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod);
+	Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod, bool isPaid);
 	friend ostream& operator << (ostream& out, const Order& order);
 	friend istream& operator >> (istream& in, Order& order);
 	friend bool operator == (const Order& left, const Order& right);
@@ -46,6 +47,7 @@ public:
 	string getComment() const;
 	string getHomeAddress() const;
 	deliveryMethod getDeliveryMethod() const;
+	bool isPaidFor() const;
 
 	void setPizzas(const vector<Pizza>& pizzas);
 	void setSides(const vector<SideOrder>& sides);
@@ -54,4 +56,5 @@ public:
 	void setComment(const string& comment);
 	void setHomeAddress(const string& homeAddress);
 	void setDeliveryMethod(const deliveryMethod& orderDeliveryMethod);
+	void setOrderAsPaidFor(bool isPaid);
 };
