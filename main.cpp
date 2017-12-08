@@ -9,12 +9,12 @@ using namespace std;
 
 Data repo;
 
-void addTopping();
+/*void addTopping();
 void addCrust();
 void addSize();
 void addSide();
 void addLocation();
-void addOrder();
+void addOrder();*/
 
 /*long lrand()
 {
@@ -33,7 +33,7 @@ int main()
 {
 	MainUI mainUI;
 	mainUI.startUI();
-	string input;
+	/*string input;
 	do {
 		cout << "1. Add topping" << endl;
 		cout << "2. Add crust" << endl;
@@ -62,11 +62,11 @@ int main()
 		else if (input == "6") {
 			addOrder();
 		}
-	} while (input != "q");
+	} while (input != "q");*/
 	return 0;
 }
 
-void addTopping() {
+/*void addTopping() {
 	cout << "Creating a new Topping" << endl;
 	cout << "Name: ";
 	string name;
@@ -196,4 +196,4 @@ void addOrder() {
 			//repo.WriteToFile(Order(pizzas, sides, 0, 0, location, comment, address));
 		}
 	} while (input != "q");
-}
+}*/

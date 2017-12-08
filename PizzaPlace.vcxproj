@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="includes\exceptions\EmptyVector.h" />
     <ClInclude Include="includes\exceptions\FailedOpenFile.h" />
+    <ClInclude Include="includes\exceptions\InvalidAddress.h" />
     <ClInclude Include="includes\exceptions\InvalidOrder.h" />
     <ClInclude Include="includes\repositories\Data.h" />
     <ClInclude Include="includes\models\Order.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="includes\services\KitchenService.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\exceptions\InvalidAddress.cpp" />
     <ClCompile Include="src\exceptions\InvalidOrder.cpp" />
     <ClCompile Include="src\services\KitchenService.cpp" />
     <ClCompile Include="src\exceptions\EmptyVector.cpp" />
