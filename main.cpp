@@ -42,37 +42,52 @@ int main()
 	Pizza p;
 	PizzaCrust pc;
 	PizzaSize ps;
+	// Pizza crust
 	pc.setName("Normal");
 	pc.setPrice(250);
 
+	// Set crust on pizza
 	p.setCrust(pc);
 	p.setPhase(PREPERATION);
 
+	// Pizza size
 	ps.setName("Medium");
 	ps.setPriceMod(1.5);
+	// Set size on pizza
 	p.setPizzaSize(ps);
 
+	// Creating toppings (these will be retrieved from file)
 	Topping t1;
 	t1.setName("Ham");
 	t1.setPrice(350);
 	Topping t2;
 	t2.setName("Pineapple");
 	t2.setPrice(400);
+	// Put toppings in vector 
 	vector<Topping> toppings;
 	toppings.push_back(t1);
 	toppings.push_back(t2);
 
+	// Set toppings on pizza
 	p.setToppings(toppings);
 
+	// Create vector of pizzas
 	vector<Pizza> pizzas;
 	pizzas.push_back(p);
 
+	// add pizza to order
 	o.setPizzas(pizzas);
+	// set delivery method to order
 	o.setDeliveryMethod(PICKUP);
+	// test comment
 	o.setComment("This is a comment");
+
+	// create location for pizza place
 	Location l;
 	l.setAddress("Hraunbaer 121, 110 Rvk");
+	// set location on order
 	o.setLocation(l);
+
 	try {
 		//ss.registerNewOrder(o);
 		cout << "File before modification:" << endl << endl;
