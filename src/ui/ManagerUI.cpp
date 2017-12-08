@@ -66,67 +66,71 @@ void ManagerUI::managerMenu() {
 
 		case '4':
 		{
-			//Locations
-			Data locationRepo;
+			bool stillOnLocation = true;
+			while (stillOnLocation) {
+				//Locations
+				Data locationRepo;
 				vector<Location> locations = service.getLocations();
 				Location location;
 
 				cout << menu.printMenu({ "Add a location", "Remove a location", "See all Locations", "Go Back" }) << endl;
-				cout << "What would you like to do?" << endl;
+				cout << "What would you like to do? ";
 				cin >> input;
-				switch (input) {
-				case '1':
-				{
-					//Adding a location
-					int numberOfLocations;
-					cout << "How many locations would you like to add? ";
-					cin >> numberOfLocations;
-					cout << "Where would you like the locatins to be? " << endl;
+					switch (input) {
+					case '1':
+					{
+						//Adding a location
+						int numberOfLocations;
+						cout << "How many locations would you like to add? ";
+						cin >> numberOfLocations;
+						cout << "Where would you like the locatins to be? " << endl;
 
-					for (int i = 0; i < numberOfLocations; ++i) {
-						cout << "location number " << i + 1 << ": ";
-						cin >> location;
-						service.addLocation(location);
-					}
-					break;
-				}
-				case '2':
-				{
-					//Delete a Location
-					if (locations.size() != 0) {
-						cout << "Here are the locations you have so far: " << endl;
-						for (unsigned int i = 0; i < locations.size(); i++) {
-							cout << i + 1 << ": " << locations.at(i) << endl;
+						for (int i = 0; i < numberOfLocations; ++i) {
+							cout << "location number " << i + 1 << ": ";
+							cin >> location;
+							service.addLocation(location);
 						}
-						cout << "What location would you like to delete. Please input a number or 'q' to quit." << endl;
-						cout << "Input: ";
-						cin >> input;
-						//Changing the input from char to int
-						int inputInInt = (int)input - 49;
-						if (tolower(input) == 'q') {
-							exit(1);
-						}
-						service.deleteLocation(inputInInt);
+						break;
 					}
-					else cout << "You have no locations so far." << endl;
-					break;
-				}
+					case '2':
+					{
+						//Delete a Location
+						if (locations.size() != 0) {
+							cout << "Here are the locations you have so far: " << endl;
+							for (unsigned int i = 0; i < locations.size(); i++) {
+								cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
+							}
+							cout << "What location would you like to delete. Please input a number or 'q' to quit." << endl;
+							cout << "Input: ";
+							cin >> input;
+							//Changing the input from char to int
+							int inputInInt = (int)input - 49;
+							if (tolower(input) == 'q') {
+								exit(1);
+							}
+							service.deleteLocation(inputInInt);
+						}
+						else cout << "You have no locations so far." << endl;
+						break;
+					}
 
-				case '3': {
-					//See all locations
-					if (locations.size() != 0) {
-						cout << "Here are the locations you have so far: " << endl;
-						for (unsigned int i = 0; i < locations.size(); i++) {
-							cout << i + 1 << ": " << locations.at(i) << endl;
+					case '3': {
+						//See all locations
+						if (locations.size() != 0) {
+							cout << "Here are the locations you have so far: " << endl;
+							for (unsigned int i = 0; i < locations.size(); i++) {
+								cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
+							}
 						}
+						else cout << "You have no locations so far." << endl;
+						system("PAUSE");
+						break;
 					}
-					else cout << "You have no locations so far." << endl;
-					system("PAUSE");
-					break;
+					case '4':
+						stillOnLocation = false;
 				}
-				}
-				break;
 			}
+		}
 
 
 
