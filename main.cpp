@@ -4,6 +4,8 @@
 
 using namespace std;
 #include "MainUI.h"
+//#include <cstdlib>
+//#include <time.h>
 
 /*Data repo;
 
@@ -13,6 +15,19 @@ void addSize();
 void addSide();
 void addLocation();
 void addOrder();*/
+
+/*long lrand()
+{
+	if (sizeof(int) < sizeof(unsigned long))
+		return (static_cast<unsigned long>(rand()) << (sizeof(unsigned int) * 8)) |
+		rand();
+
+	return rand();
+}*/
+/*unsigned long long ullRandGen() {
+	unsigned long long n = abs(rand());
+	return (n << (sizeof(int) * 8)) | abs(rand());
+}*/
 
 int main()
 {
