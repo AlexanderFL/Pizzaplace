@@ -17,6 +17,7 @@ public:
 	int getPriceOfOrder(Order& order);
 	void assignHomeAddress(Order& order, string address);
 	void setOrderToDelivery(Order& order);
+	void setOrderToPickUp(Order& order);
 	void setOrderAsPaid(Order& order);
 	void setComments(Order& order, string comment);
 private:

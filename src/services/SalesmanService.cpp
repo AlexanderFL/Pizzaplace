@@ -39,9 +39,12 @@ void SalesmanService::assignHomeAddress(Order& order, string address)
 	order.setHomeAddress(address);
 }
 
-void SalesmanService::setOrderToDelivery(Order& order)
-{
+void SalesmanService::setOrderToDelivery(Order& order) {
 	order.setDeliveryMethod(SEND);
+}
+
+void SalesmanService::setOrderToPickUp(Order& order) {
+	order.setDeliveryMethod(PICKUP);
 }
 
 void SalesmanService::setOrderAsPaid(Order& order)
