@@ -3,6 +3,5 @@ class EmptyVector
 {
 public:
 	EmptyVector();
-	~EmptyVector();
 };
 

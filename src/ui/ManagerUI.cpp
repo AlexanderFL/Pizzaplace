@@ -5,8 +5,12 @@
 #include "DeliveryUI.h"
 #include "Menu.h"
 #include "Order.h"
+#include "Location.h"
 //For clearing the screen
 #include <stdlib.h>
+
+
+//TODO: Fix comment on the bottom and make this code more readable.
 
 ManagerUI::ManagerUI() {
 	char input = ' ';
@@ -18,7 +22,7 @@ void ManagerUI::managerMenu() {
 	bool stillManager = true;
 	while (stillManager) {
 		//system("CLS");
-		cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Delivery", "Other", "Go Back" }) << endl;
+		cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Locations", "Other", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 
 		cin.ignore();
@@ -43,6 +47,8 @@ void ManagerUI::managerMenu() {
 		} while (input != 52); //ascii - checking if input is 4 (go back)
 			break;
 		}
+
+
 		case '3':
 		{
 			//Price
@@ -55,15 +61,75 @@ void ManagerUI::managerMenu() {
 			//cout << "The total price of the order is: " << service.getOrderTotalCost(order) << " kr." << endl;
 			break;
 		}
+
+
+
 		case '4':
 		{
-			//Delivery
-			bool ignore = false;
-			DeliveryUI deliveryUI;
-			deliveryUI.setIgnore(ignore);
-			deliveryUI.deliveryMenu();
-			break;
-		}
+			//Locations
+			Data locationRepo;
+				vector<Location> locations = service.getLocations();
+				Location location;
+
+				cout << menu.printMenu({ "Add a location", "Remove a location", "See all Locations", "Go Back" }) << endl;
+				cout << "What would you like to do?" << endl;
+				cin >> input;
+				switch (input) {
+				case '1':
+				{
+					//Adding a location
+					int numberOfLocations;
+					cout << "How many locations would you like to add? ";
+					cin >> numberOfLocations;
+					cout << "Where would you like the locatins to be? " << endl;
+
+					for (int i = 0; i < numberOfLocations; ++i) {
+						cout << "location number " << i + 1 << ": ";
+						cin >> location;
+						service.addLocation(location);
+					}
+					break;
+				}
+				case '2':
+				{
+					//Delete a Location
+					if (locations.size() != 0) {
+						cout << "Here are the locations you have so far: " << endl;
+						for (unsigned int i = 0; i < locations.size(); i++) {
+							cout << i + 1 << ": " << locations.at(i) << endl;
+						}
+						cout << "What location would you like to delete. Please input a number or 'q' to quit." << endl;
+						cout << "Input: ";
+						cin >> input;
+						//Changing the input from char to int
+						int inputInInt = (int)input - 49;
+						if (tolower(input) == 'q') {
+							exit(1);
+						}
+						service.deleteLocation(inputInInt);
+					}
+					else cout << "You have no locations so far." << endl;
+					break;
+				}
+
+				case '3': {
+					//See all locations
+					if (locations.size() != 0) {
+						cout << "Here are the locations you have so far: " << endl;
+						for (unsigned int i = 0; i < locations.size(); i++) {
+							cout << i + 1 << ": " << locations.at(i) << endl;
+						}
+					}
+					else cout << "You have no locations so far." << endl;
+					system("PAUSE");
+					break;
+				}
+				}
+				break;
+			}
+
+
+
 		case '5':
 			//Other
 			do{
@@ -224,6 +290,10 @@ void ManagerUI::validateOtherInput(char input) {
 			break;
 		}
 }
+
+
+
+
 /*
 void ManagerUI::addTopping() {
 	int numberOfToppings;

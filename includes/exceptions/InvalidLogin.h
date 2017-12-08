@@ -3,6 +3,5 @@ class InvalidLogin
 {
 public:
 	InvalidLogin();
-	~InvalidLogin();
 };
 
