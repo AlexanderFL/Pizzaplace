@@ -22,9 +22,13 @@ vector<Order> getOrders(const Location& location) {
 }
 
 void setOrderPaid(const int& index) {
-
+	vector<Order> orders = getOrders();
+	//TODO validate
+	orders.at(index).setOrderAsPaidFor(true);
 }
 
 void setOrderDelivered(const int& index) {
-
+	vector<Order> orders = getOrders();
+	//TODO validate
+	orders.at(index).setStatus(SENT);
 }
