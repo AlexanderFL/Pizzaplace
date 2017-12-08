@@ -54,6 +54,11 @@ void ManagerService::deleteSideOrder(int index) {
 	repo.RemoveFromFileAtIndex<SideOrder>(index);
 }
 
+/*			Delete a Location		*/
+void ManagerService::deleteLocation(int index) {
+	repo.RemoveFromFileAtIndex<Location>(index);
+
+}
 /*			Returns total cost for the order		*/
 int ManagerService::getOrderTotalCost(const Order& order) {
 	int total = 0;
@@ -75,6 +80,24 @@ int ManagerService::getOrderTotalCost(const Order& order) {
 		
 	}
 	return total;
+}
+
+//Adding locations
+void ManagerService::addLocation(const Location& location) {
+	//Validate location 
+	string locationName = location.getAddress();
+	containsOnlyAlpha(locationName);
+	// Write it to file
+	repo.WriteToFile(location);
+}
+
+vector<Location>ManagerService::getLocations() {
+	vector<Location> locations = repo.RetrieveAllFromFile<Location>();
+
+	if (locations.size() == 0) {
+		throw EmptyVector();
+	}
+	return locations;
 }
 
 /*

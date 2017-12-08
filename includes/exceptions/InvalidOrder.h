@@ -3,6 +3,5 @@ class InvalidOrder
 {
 public:
 	InvalidOrder();
-	~InvalidOrder();
 };
 

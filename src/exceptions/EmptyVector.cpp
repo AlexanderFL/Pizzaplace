@@ -4,8 +4,3 @@
 EmptyVector::EmptyVector()
 {
 }
-
-
-EmptyVector::~EmptyVector()
-{
-}
