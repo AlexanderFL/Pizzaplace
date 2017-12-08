@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -144,8 +144,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\services\DeliveryService.h" />
     <ClInclude Include="includes\exceptions\EmptyVector.h" />
     <ClInclude Include="includes\exceptions\FailedOpenFile.h" />
+    <ClInclude Include="includes\exceptions\InvalidAddress.h" />
+    <ClInclude Include="includes\exceptions\InvalidOrder.h" />
     <ClInclude Include="includes\repositories\Data.h" />
     <ClInclude Include="includes\models\Order.h" />
     <ClInclude Include="includes\models\Pizza.h" />
@@ -173,6 +176,7 @@
   <ItemGroup>
     <ClCompile Include="src\exceptions\InvalidAddress.cpp" />
     <ClCompile Include="src\exceptions\InvalidOrder.cpp" />
+    <ClCompile Include="src\services\DeliveryService.cpp" />
     <ClCompile Include="src\services\KitchenService.cpp" />
     <ClCompile Include="src\exceptions\EmptyVector.cpp" />
     <ClCompile Include="src\services\SalesmanService.cpp" />

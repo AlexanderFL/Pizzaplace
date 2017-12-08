@@ -4,18 +4,33 @@
 
 using namespace std;
 #include "MainUI.h"
+//#include <cstdlib>
+//#include <time.h>
 
 #include "SalesmanService.h"
 
 
 Data repo;
 
-void addTopping();
+/*void addTopping();
 void addCrust();
 void addSize();
 void addSide();
 void addLocation();
-void addOrder();
+void addOrder();*/
+
+/*long lrand()
+{
+	if (sizeof(int) < sizeof(unsigned long))
+		return (static_cast<unsigned long>(rand()) << (sizeof(unsigned int) * 8)) |
+		rand();
+
+	return rand();
+}*/
+/*unsigned long long ullRandGen() {
+	unsigned long long n = abs(rand());
+	return (n << (sizeof(int) * 8)) | abs(rand());
+}*/
 
 int main()
 {
@@ -76,7 +91,7 @@ int main()
 
 	MainUI mainUI;
 	mainUI.startUI();
-	string input;
+	/*string input;
 	do {
 		cout << "1. Add topping" << endl;
 		cout << "2. Add crust" << endl;
@@ -105,11 +120,11 @@ int main()
 		else if (input == "6") {
 			addOrder();
 		}
-	} while (input != "q");
+	} while (input != "q");*/
 	return 0;
 }
 
-void addTopping() {
+/*void addTopping() {
 	cout << "Creating a new Topping" << endl;
 	cout << "Name: ";
 	string name;
