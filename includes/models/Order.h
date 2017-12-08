@@ -13,7 +13,6 @@ using namespace std;
 */
 
 enum deliveryMethod { PICKUP = 0, SEND };
-enum status { PREPERATION = 0, READY, SENT};
 
 class Order
 {

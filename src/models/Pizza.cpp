@@ -8,14 +8,14 @@
 */
 
 Pizza::Pizza() {
-	this->status = PREPERATION;
+	this->phase = PREPERATION;
 }
 
 Pizza::Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size) {
 	this->toppings = toppings;
 	this->crust = crust;
 	this->size = size;
-	this->status = PREPERATION;
+	this->phase = PREPERATION;
 }
 
 vector<Topping> Pizza::getToppings() const {
@@ -32,8 +32,8 @@ PizzaSize Pizza::getPizzaSize() const
 	return this->size;
 }
 
-phase Pizza::getStatus() const {
-	return this->status;
+status Pizza::getPhase() const {
+	return this->phase;
 }
 
 void Pizza::setToppings(const vector<Topping>& toppings) {
@@ -48,8 +48,8 @@ void Pizza::setPizzaSize(const PizzaSize& size) {
 	this->size = size;
 }
 
-void Pizza::getStatus(const phase& status) {
-	this->status = status;
+void Pizza::setPhase(const status& phase) {
+	this->phase = phase;
 }
 
 
@@ -75,7 +75,7 @@ ostream& operator<< (ostream& out, const Pizza& pizza)
 		}
 		out << pizza.crust;
 		out << pizza.size;
-		out.write((char*)(&pizza.status), sizeof(phase));
+		out.write((char*)(&pizza.phase), sizeof(status));
 	}
 	else {
 		for (int i = 0; i < pizza.toppings.size(); ++i) {
@@ -99,7 +99,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 		}
 		in >> pizza.crust;
 		in >> pizza.size;
-		in.read((char*)(&pizza.status), sizeof(phase));
+		in.read((char*)(&pizza.phase), sizeof(status));
 	}
 	else {
 		/*

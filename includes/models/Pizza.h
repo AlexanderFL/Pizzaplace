@@ -6,7 +6,7 @@
 #include "PizzaSize.h"
 using namespace std;
 
-enum phase { PREPERATION = 0, BAKING, READY }
+enum status { PREPERATION = 0, BAKING, READY, SENT };
 
 class Pizza
 {
@@ -15,7 +15,7 @@ private:
 	vector<Topping> toppings;
 	PizzaCrust crust;
 	PizzaSize size;
-	phase status;
+	status phase;
 public:
 	Pizza();
 	Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size);
@@ -29,9 +29,9 @@ public:
 	vector<Topping> getToppings() const;
 	PizzaCrust getCrust() const;
 	PizzaSize getPizzaSize() const;
-	phase getStatus() const;
+	status getPhase() const;
 	void setToppings(const vector<Topping>& toppings);
 	void setCrust(const PizzaCrust& crust);
 	void setPizzaSize(const PizzaSize& size);
-	void setStatus(const phase& status);
+	void setPhase(const status& phase);
 };
