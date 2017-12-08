@@ -208,3 +208,22 @@ Order operator * (const Order& left, const Order& right) {
 	}
 	return order;
 }
+
+// The + operator ONLY adds together the vectors pizzas and sides
+Order operator + (const Order& left, const Order& right) {
+	Order newOrder;
+	// Copy left Order into newOrder
+	newOrder = left;
+
+	// Append right pizzas together into newOrder
+	for (int i = 0; i < right.pizzas.size(); i++) {
+		newOrder.pizzas.push_back(right.pizzas[i]);
+	}
+
+	// Append right side orders into newOrder
+	for (int i = 0; i < left.sides.size(); i++) {
+		newOrder.sides.push_back(left.sides[i]);
+	}
+	
+	return newOrder;
+}

@@ -38,6 +38,7 @@ public:
 	friend bool operator != (const Order& left, const Order& right);
 	friend bool operator <= (const Order& left, const Order& right);
 	friend Order operator * (const Order& left, const Order& right);
+	friend Order operator + (const Order& left, const Order& right);
 
 	vector<Pizza> getPizzas() const;
 	vector<SideOrder> getSides() const;

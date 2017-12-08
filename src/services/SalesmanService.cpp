@@ -8,12 +8,14 @@ SalesmanService::SalesmanService()
 
 void SalesmanService::registerNewOrder(Order& order)
 {
-	
+	// TODO: Checks to validate input
+	_repo.WriteToFile(order);
 }
 
-void SalesmanService::appendToOrder(Order& order)
+void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
 {
-
+	// TODO: Checks to validate input from both orders
+	firstOrder = firstOrder + secondOrder;
 }
 
 int SalesmanService::getPriceOfOrder(Order& order)

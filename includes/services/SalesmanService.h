@@ -12,7 +12,7 @@ public:
 	SalesmanService();
 
 	void registerNewOrder(Order& order);
-	void appendToOrder(Order& order);
+	void appendToOrder(Order& firstOrder, Order& secondOrder);
 	int getPriceOfOrder(Order& order);
 	void assignHomeAddress(Order& order, string address);
 	void setOrderToDelivery(Order& order);
