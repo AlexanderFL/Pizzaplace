@@ -57,7 +57,7 @@ ostream& operator<< (ostream& out, const Topping& topping)
 		out.write((char*)(&topping.price), sizeof(int));
 	}
 	else {
-		out << topping.name << " " << topping.price;
+		out << "Name: " << topping.name << " | Price: " << topping.price << " Kr.";
 	}
     return out;
 }

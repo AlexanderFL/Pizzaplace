@@ -34,10 +34,10 @@ void addOrder();*/
 
 int main()
 {
-	//MainUI mainUI;
-	//mainUI.startUI();
+	MainUI mainUI;
+	mainUI.startUI();
 
-	SalesmanService ss;
+	/*SalesmanService ss;
 	Order o;
 	Pizza p;
 	PizzaCrust pc;
@@ -84,7 +84,7 @@ int main()
 		cout << "Invalid order";
 	}
 
-	system("PAUSE");
+	system("PAUSE");*/
 	return 0;
 }
 	

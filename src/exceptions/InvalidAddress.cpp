@@ -4,8 +4,3 @@
 InvalidAddress::InvalidAddress()
 {
 }
-
-
-InvalidAddress::~InvalidAddress()
-{
-}

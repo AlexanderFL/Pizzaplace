@@ -101,8 +101,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 		in >> pizza.size;
 		in.read((char*)(&pizza.phase), sizeof(status));
 	}
-	else {
-		/*
+	/*else {
 		int size;
 		do {
 			cout << "Select pizza size:" << endl;
@@ -119,8 +118,9 @@ istream& operator>> (istream& in, Pizza& pizza)
 		for (int i = 0; i < pizza.nrToppings(); i++)
 		{
 
-		}*/
-	}
+		}
+	}*/
+
 	return in;
 }
 

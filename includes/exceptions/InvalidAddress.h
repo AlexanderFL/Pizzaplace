@@ -3,6 +3,5 @@ class InvalidAddress
 {
 public:
 	InvalidAddress();
-	~InvalidAddress();
 };
 
