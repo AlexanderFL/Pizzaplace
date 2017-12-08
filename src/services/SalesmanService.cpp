@@ -36,7 +36,24 @@ int SalesmanService::getPriceOfOrder(Order& order)
 
 void SalesmanService::assignHomeAddress(Order& order, string address)
 {
-	order.setHomeAddress(address);
+	//address must contain at least one character and one number
+	//ex. of address: Menntavegi 1
+	bool containsCharacter = false;
+	bool containsNumber = false;
+	for (int i = 0; i < address.length(); i++) {
+		if (isalpha(address[i]) && !containsCharacter) {
+			containsCharacter = true;
+		}
+		if (isalnum(address[i]) && !containsNumber) {
+			containsNumber = true;
+		}
+	}
+	if (!containsCharacter && !containsNumber) {
+		order.setHomeAddress(address);
+	}
+	else {
+		throw InvalidAddress();
+	}
 }
 
 void SalesmanService::setOrderToDelivery(Order& order) {
@@ -47,13 +64,11 @@ void SalesmanService::setOrderToPickUp(Order& order) {
 	order.setDeliveryMethod(PICKUP);
 }
 
-void SalesmanService::setOrderAsPaid(Order& order)
-{
+void SalesmanService::setOrderAsPaid(Order& order){
 	order.setOrderAsPaidFor(true);
 }
 
-void SalesmanService::setComments(Order& order, string comment)
-{
+void SalesmanService::setComments(Order& order, string comment){
 	order.setComment(comment);
 }
 
