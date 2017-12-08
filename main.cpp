@@ -85,6 +85,7 @@ int main()
 	}
 
 	system("PAUSE");
+	return 0;
 }
 	
 	/*string input;
@@ -121,9 +122,6 @@ int main()
 			addOrder();
 		}
 	} while (input != "q");*/
-	return 0;
-}
-
 /*void addTopping() {
 	cout << "Creating a new Topping" << endl;
 	cout << "Name: ";
