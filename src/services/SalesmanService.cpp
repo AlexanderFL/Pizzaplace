@@ -90,6 +90,11 @@ void SalesmanService::setComments(Order& order, string comment){
 	order.setComment(comment);
 }
 
+vector<Order> SalesmanService::getAllOrders()
+{
+	return _repo.RetrieveAllFromFile<Order>();
+}
+
 
 /*
 

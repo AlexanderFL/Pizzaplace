@@ -74,11 +74,22 @@ int main()
 	l.setAddress("Hraunbaer 121, 110 Rvk");
 	o.setLocation(l);
 	try {
-		ss.registerNewOrder(o);
+		//ss.registerNewOrder(o);
+		cout << "File before modification:" << endl << endl;
+		vector<Order> orders = ss.getAllOrders();
+		for (int i = 0; i < orders.size(); i++) {
+			cout << orders[i] << endl;
+		}
 
-		cout << o;
-		ss.appendToOrder(o, o);
-		cout << o;
+		cout << endl << endl << endl;
+		cout << "File after modification: " << endl << endl;
+
+		ss.appendToOrder(orders[0], o);
+
+		orders = ss.getAllOrders();
+		for (int i = 0; i < orders.size(); i++) {
+			cout << orders[i] << endl;
+		}
 	}
 	catch (InvalidOrder) {
 		cout << "Invalid order";

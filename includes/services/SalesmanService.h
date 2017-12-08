@@ -21,6 +21,7 @@ public:
 	void setOrderToPickUp(Order& order);
 	void setOrderAsPaid(Order& order);
 	void setComments(Order& order, string comment);
+	vector<Order> getAllOrders();
 private:
 	int calculateCost(const Order& order);
 	bool validateOrder(Order order);

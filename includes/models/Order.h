@@ -21,12 +21,11 @@ public:
 private:
 	vector<Pizza> pizzas;
 	vector<SideOrder> sides;
+	status _status;
+	Location location;
 	string comment;
 	string homeAddress;
-	Location location;
-	status _status;
 	deliveryMethod _deliveryMethod;
-	double totalCost;
 	bool paidFor;
 
 public:
