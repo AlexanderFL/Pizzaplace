@@ -3,6 +3,7 @@
 #include <string>
 #include "Data.h"
 #include "InvalidOrder.h"
+#include "InvalidAddress.h"
 using namespace std;
 
 class SalesmanService
