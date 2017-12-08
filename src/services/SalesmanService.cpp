@@ -9,13 +9,23 @@ SalesmanService::SalesmanService()
 void SalesmanService::registerNewOrder(Order& order)
 {
 	// TODO: Checks to validate input
-	_repo.WriteToFile(order);
+	if (validateOrder(order)) {
+		_repo.WriteToFile(order);
+	}
+	else {
+		throw InvalidOrder();
+	}
 }
 
 void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
 {
 	// TODO: Checks to validate input from both orders
-	firstOrder = firstOrder + secondOrder;
+	if (validateOrder(firstOrder) && validateOrder(secondOrder)) {
+		firstOrder = firstOrder + secondOrder;
+	}
+	else {
+		throw InvalidOrder();
+	}
 }
 
 int SalesmanService::getPriceOfOrder(Order& order)
@@ -73,4 +83,13 @@ int SalesmanService::calculateCost(const Order& order) {
 
 	}
 	return total;
+}
+
+/*			Validate the Order			*/
+bool SalesmanService::validateOrder(Order order) {
+	// Just check if both pizzas and sides vectors are emtpy
+	if (order.getPizzas().empty() && order.getSides().empty()) {
+		return false;
+	}
+	return true;
 }

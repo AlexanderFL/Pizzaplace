@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Data.h"
+#include "InvalidOrder.h"
 using namespace std;
 
 class SalesmanService
@@ -20,4 +21,5 @@ public:
 	void setComments(Order& order, string comment);
 private:
 	int calculateCost(const Order& order);
+	bool validateOrder(Order order);
 };
