@@ -3,32 +3,34 @@
 
 DeliveryService::DeliveryService() {}
 
-vector<Order> getOrders() {
-	vector<Order> orders = repo.ReadAllFromFile<Order>();
+vector<Order> DeliveryService::getOrders() {
+	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
 	//TODO validate
 	return orders;
 }
 
-vector<Order> getOrders(const Location& location) {
+vector<Order> DeliveryService::getOrders(const Location& location) {
 	vector<Order> orders;
 	vector<Order> allorders = getOrders();
 	for (size_t i = 0; i < allorders.size(); i++) {
 		if (allorders.at(i).getLocation() == location) {
-			orders.push_back(orders);
+			orders.push_back(orders.at(i));
 		}
 	}
 	//TODO validate
 	return orders;
 }
 
-void setOrderPaid(const int& index) {
+void DeliveryService::setOrderPaid(const int& index) {
 	vector<Order> orders = getOrders();
 	//TODO validate
 	orders.at(index).setOrderAsPaidFor(true);
+	repo.WriteMultipleLinesToFile(orders);
 }
 
-void setOrderDelivered(const int& index) {
+void DeliveryService::setOrderDelivered(const int& index) {
 	vector<Order> orders = getOrders();
 	//TODO validate
 	orders.at(index).setStatus(SENT);
+	repo.WriteMultipleLinesToFile(orders);
 }
