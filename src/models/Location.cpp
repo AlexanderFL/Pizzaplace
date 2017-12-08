@@ -36,6 +36,9 @@ istream& operator >> (istream& in, Location& loc) {
 		loc.address = str;
 		delete[] str;
 	}
+	else {
+		in >> loc.address;
+	}
 	return in;
 }
 
