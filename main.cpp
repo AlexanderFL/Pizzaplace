@@ -7,14 +7,14 @@ using namespace std;
 //#include <cstdlib>
 //#include <time.h>
 
-/*Data repo;
+Data repo;
 
 void addTopping();
 void addCrust();
 void addSize();
 void addSide();
 void addLocation();
-void addOrder();*/
+void addOrder();
 
 /*long lrand()
 {
@@ -33,7 +33,7 @@ int main()
 {
 	MainUI mainUI;
 	mainUI.startUI();
-	/*string input;
+	string input;
 	do {
 		cout << "1. Add topping" << endl;
 		cout << "2. Add crust" << endl;
@@ -193,7 +193,7 @@ void addOrder() {
 			cout << "Address: ";
 			cin >> address;
 			pizzas.push_back(Pizza(toppings, crust, size));
-			repo.WriteToFile(Order(pizzas, sides, 0, 0, location, comment, address));
+			//repo.WriteToFile(Order(pizzas, sides, 0, 0, location, comment, address));
 		}
-	} while (input != "q");*/
+	} while (input != "q");
 }

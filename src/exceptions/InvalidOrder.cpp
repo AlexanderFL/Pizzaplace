@@ -4,8 +4,3 @@
 InvalidOrder::InvalidOrder()
 {
 }
-
-
-InvalidOrder::~InvalidOrder()
-{
-}

@@ -3,6 +3,5 @@ class FailedOpenFile
 {
 public:
 	FailedOpenFile();
-	~FailedOpenFile();
 };
 

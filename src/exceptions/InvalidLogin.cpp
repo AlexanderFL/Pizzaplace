@@ -5,7 +5,3 @@ InvalidLogin::InvalidLogin()
 {
 }
 
-
-InvalidLogin::~InvalidLogin()
-{
-}
