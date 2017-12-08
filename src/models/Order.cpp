@@ -131,11 +131,14 @@ ostream& operator <<(ostream& out, const Order& order)
 		for (size_t i = 0; i < size; ++i) {
 			out << order.sides.at(i);
 		}
-		out.write((char*)(&order._status), sizeof(deliveryMethod));
-		out.write((char*)(&order.location), sizeof(int));
+		out.write((char*)(&order._status), sizeof(status));
+		out << order.location;
 		size_t len = order.comment.length() + 1;
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(order.comment.c_str(), len);
+		len = order.homeAddress.length() + 1;
+		out.write((char*)(&len), sizeof(size_t));
+		out.write(order.homeAddress.c_str(), len);
 		out.write((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
 	}
 	else {
@@ -161,13 +164,18 @@ istream& operator >> (istream& in, Order& order) {
 			in >> side;
 			order.sides.push_back(side);
 		}
-		in.read((char*)(&order._status), sizeof(deliveryMethod));
-		in.read((char*)(&order.location), sizeof(int));
+		in.read((char*)(&order._status), sizeof(status));
+		in >> order.location;
 		size_t len;
 		in.read((char*)(&len), sizeof(size_t));
 		char* str = new char[len];
 		in.read(str, len);
 		order.comment = str;
+		delete[] str;
+		in.read((char*)(&len), sizeof(size_t));
+		str = new char[len];
+		in.read(str, len);
+		order.homeAddress = str;
 		delete[] str;
 		in.read((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
 	}
