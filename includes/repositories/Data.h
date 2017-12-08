@@ -26,7 +26,7 @@ public:
 	void RemoveFromFileAtIndex(int index);
 
 	template <class Repos>
-	void ModifyFileAtIndex(int index);
+	void ModifyFileAtIndex(int index, Repos modification);
 };
 
 template<class Repos>
@@ -91,11 +91,10 @@ inline void Data::RemoveFromFileAtIndex(int index)
 }
 
 template<class Repos>
-inline void Data::ModifyFileAtIndex(int index)
+inline void Data::ModifyFileAtIndex(int index, Repos modification)
 {
 	vector<Repos> vec = RetrieveAllFromFile<Repos>();
-	Repos rep;
-	cin >> rep;
+	Repos rep = modification;
 	vec[index] = rep;
 	WriteMultipleLinesToFile(vec);
 }

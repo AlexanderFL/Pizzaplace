@@ -147,8 +147,6 @@
     <ClInclude Include="includes\services\DeliveryService.h" />
     <ClInclude Include="includes\exceptions\EmptyVector.h" />
     <ClInclude Include="includes\exceptions\FailedOpenFile.h" />
-    <ClInclude Include="includes\exceptions\InvalidAddress.h" />
-    <ClInclude Include="includes\exceptions\InvalidOrder.h" />
     <ClInclude Include="includes\repositories\Data.h" />
     <ClInclude Include="includes\models\Order.h" />
     <ClInclude Include="includes\models\Pizza.h" />
@@ -170,6 +168,8 @@
     <ClInclude Include="includes\models\Offer.h" />
     <ClInclude Include="includes\services\SalesmanService.h" />
     <ClInclude Include="includes\services\KitchenService.h" />
+    <ClInclude Include="includes\exceptions\InvalidOrder.h" />
+    <ClInclude Include="includes\exceptions\InvalidAddress.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\exceptions\InvalidAddress.cpp" />
