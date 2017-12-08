@@ -3,6 +3,12 @@
 
 DeliveryService::DeliveryService() {}
 
+vector<Location> DeliveryService::getLocations() {
+	vector<Location> locations = repo.RetrieveAllFromFile<Location>();
+	//TODO validate
+	return locations;
+}
+
 vector<Order> DeliveryService::getOrders() {
 	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
 	//TODO validate

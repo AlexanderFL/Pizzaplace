@@ -9,6 +9,7 @@ private:
 public:
 	DeliveryService();
 
+	vector<Location> getLocations();
 	vector<Order> getOrders();
 	vector<Order> getOrders(const Location& location);
 	void setOrderPaid(const int& index);
