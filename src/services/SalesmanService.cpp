@@ -8,7 +8,6 @@ SalesmanService::SalesmanService()
 
 void SalesmanService::registerNewOrder(Order& order)
 {
-	// TODO: Checks to validate input
 	if (validateOrder(order)) {
 		_repo.WriteToFile(order);
 	}
@@ -19,9 +18,20 @@ void SalesmanService::registerNewOrder(Order& order)
 
 void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
 {
-	// TODO: Checks to validate input from both orders
+	//validate
 	if (validateOrder(firstOrder) && validateOrder(secondOrder)) {
-		firstOrder = firstOrder + secondOrder;
+		//grab all orders from file
+		vector<Order> orders = _repo.RetrieveAllFromFile<Order>();
+		for (int i = 0; i < orders.size(); i++) {
+			//find the order to append to
+			if (orders[i] == firstOrder) {
+				//append the second order to first
+				firstOrder = firstOrder + secondOrder;
+				//override in file
+				overrideOrder(i, firstOrder);
+				break;
+			}
+		}
 	}
 	else {
 		throw InvalidOrder();
@@ -37,22 +47,30 @@ int SalesmanService::getPriceOfOrder(Order& order)
 void SalesmanService::assignHomeAddress(Order& order, string address)
 {
 	//address must contain at least one character and one number
-	//ex. of address: Menntavegi 1
+	//ex. of address: 'Menntavegur 1' or 'Skogarstigur 12'
+	//
+	//address can be empty if deliverymethod is pickup
 	bool containsCharacter = false;
 	bool containsNumber = false;
-	for (int i = 0; i < address.length(); i++) {
-		if (isalpha(address[i]) && !containsCharacter) {
-			containsCharacter = true;
-		}
-		if (isalnum(address[i]) && !containsNumber) {
-			containsNumber = true;
-		}
-	}
-	if (!containsCharacter && !containsNumber) {
+	if (address == "" && order.getDeliveryMethod() == PICKUP) {
 		order.setHomeAddress(address);
 	}
-	else {
-		throw InvalidAddress();
+	else
+	{
+		for (int i = 0; i < address.length(); i++) {
+			if (isalpha(address[i]) && !containsCharacter) {
+				containsCharacter = true;
+			}
+			if (isalnum(address[i]) && !containsNumber) {
+				containsNumber = true;
+			}
+		}
+		if (containsCharacter && containsNumber) {
+			order.setHomeAddress(address);
+		}
+		else {
+			throw InvalidAddress();
+		}
 	}
 }
 
@@ -110,4 +128,8 @@ bool SalesmanService::validateOrder(Order order) {
 		return false;
 	}
 	return true;
+}
+
+void SalesmanService::overrideOrder(int index, Order edit) {
+	_repo.ModifyFileAtIndex<Order>(index, edit);
 }

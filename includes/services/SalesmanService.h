@@ -24,4 +24,5 @@ public:
 private:
 	int calculateCost(const Order& order);
 	bool validateOrder(Order order);
+	void overrideOrder(int index, Order edit);
 };

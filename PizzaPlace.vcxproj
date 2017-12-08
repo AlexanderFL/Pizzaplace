@@ -167,8 +167,12 @@
     <ClInclude Include="includes\models\Offer.h" />
     <ClInclude Include="includes\services\SalesmanService.h" />
     <ClInclude Include="includes\services\KitchenService.h" />
+    <ClInclude Include="includes\exceptions\InvalidOrder.h" />
+    <ClInclude Include="includes\exceptions\InvalidAddress.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\exceptions\InvalidAddress.cpp" />
+    <ClCompile Include="src\exceptions\InvalidOrder.cpp" />
     <ClCompile Include="src\services\KitchenService.cpp" />
     <ClCompile Include="src\exceptions\EmptyVector.cpp" />
     <ClCompile Include="src\services\SalesmanService.cpp" />

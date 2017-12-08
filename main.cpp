@@ -5,6 +5,8 @@
 using namespace std;
 #include "MainUI.h"
 
+#include "SalesmanService.h"
+
 /*Data repo;
 
 void addTopping();
@@ -16,8 +18,58 @@ void addOrder();*/
 
 int main()
 {
-	MainUI mainUI;
-	mainUI.startUI();
+	//MainUI mainUI;
+	//mainUI.startUI();
+
+	SalesmanService ss;
+	Order o;
+	Pizza p;
+	PizzaCrust pc;
+	PizzaSize ps;
+	pc.setName("Normal");
+	pc.setPrice(250);
+
+	p.setCrust(pc);
+	p.setPhase(PREPERATION);
+
+	ps.setName("Medium");
+	ps.setPriceMod(1.5);
+	p.setPizzaSize(ps);
+
+	Topping t1;
+	t1.setName("Ham");
+	t1.setPrice(350);
+	Topping t2;
+	t2.setName("Pineapple");
+	t2.setPrice(400);
+	vector<Topping> toppings;
+	toppings.push_back(t1);
+	toppings.push_back(t2);
+
+	p.setToppings(toppings);
+
+	vector<Pizza> pizzas;
+	pizzas.push_back(p);
+
+	o.setPizzas(pizzas);
+	o.setDeliveryMethod(PICKUP);
+	o.setComment("This is a comment");
+	Location l;
+	l.setAddress("Hraunbaer 121, 110 Rvk");
+	o.setLocation(l);
+	try {
+		ss.registerNewOrder(o);
+
+		cout << o;
+		ss.appendToOrder(o, o);
+		cout << o;
+	}
+	catch (InvalidOrder) {
+		cout << "Invalid order";
+	}
+
+	system("PAUSE");
+	
 	/*string input;
 	do {
 		cout << "1. Add topping" << endl;
