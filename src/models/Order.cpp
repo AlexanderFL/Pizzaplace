@@ -66,6 +66,10 @@ bool Order::isPaidFor() const
 	return paidFor;
 }
 
+size_t Order::getID() const {
+	return this->id;
+}
+
 void  Order::setPizzas(const vector<Pizza>& pizzas) {
 	this->pizzas = pizzas;
 }
@@ -98,6 +102,10 @@ void Order::setDeliveryMethod(const deliveryMethod & orderDeliveryMethod)
 void Order::setOrderAsPaidFor(bool isPaid)
 {
 	this->paidFor = isPaid;
+}
+
+void Order::setID(const size_t& id) {
+	this->id = id;
 }
 
 /*
@@ -138,6 +146,7 @@ ostream& operator <<(ostream& out, const Order& order)
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(order.homeAddress.c_str(), len);
 		out.write((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
+		out.write((char*)(&order.id), sizeof(size_t));
 	}
 	else {
 		// This was for debugging purposes only
@@ -181,6 +190,7 @@ istream& operator >> (istream& in, Order& order) {
 		order.homeAddress = str;
 		delete[] str;
 		in.read((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
+		in.read((char*)(&order.id), sizeof(size_t));
 	}
 	return in;
 }

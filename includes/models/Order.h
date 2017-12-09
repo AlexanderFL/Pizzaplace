@@ -27,7 +27,7 @@ private:
 	string homeAddress;
 	deliveryMethod _deliveryMethod;
 	bool paidFor;
-
+	size_t id;
 public:
 	// Constructors
 	Order();
@@ -42,6 +42,7 @@ public:
 	string getHomeAddress() const;
 	deliveryMethod getDeliveryMethod() const;
 	bool isPaidFor() const;
+	size_t getID() const;
 
 	// Set functions
 	void setPizzas(const vector<Pizza>& pizzas);
@@ -52,6 +53,7 @@ public:
 	void setHomeAddress(const string& homeAddress);
 	void setDeliveryMethod(const deliveryMethod& orderDeliveryMethod);
 	void setOrderAsPaidFor(bool isPaid);
+	void setID(const size_t& id);
 
 	// Operator overloads
 	friend ostream& operator << (ostream& out, const Order& order);
