@@ -12,11 +12,17 @@ public:
 private:
 	string address;
 public:
+	// Constructors
 	Location();
 	Location(string address);
 
-	void setAddress(const string& address);
+	// Get functions
 	string getAddress() const;
+
+	// Set functions
+	void setAddress(const string& address);
+
+	// Operator overloads
 	friend ostream& operator << (ostream& out, const Location& loc);
 	friend istream& operator >> (istream& in, Location& loc);
 	friend bool operator == (const Location& left, const Location& right);

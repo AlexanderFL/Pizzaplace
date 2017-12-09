@@ -17,21 +17,27 @@ private:
 	PizzaSize size;
 	status phase;
 public:
+	// Constructors
 	Pizza();
 	Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size);
+
+	// Get functions
+	vector<Topping> getToppings() const;
+	PizzaCrust getCrust() const;
+	PizzaSize getPizzaSize() const;
+	status getPhase() const;
+
+	// Set Functions
+	void setToppings(const vector<Topping>& toppings);
+	void setCrust(const PizzaCrust& crust);
+	void setPizzaSize(const PizzaSize& size);
+	void setPhase(const status& phase);
+
+	// Operator overloads
 	friend ostream& operator<< (ostream& out, const Pizza& pizza);
 	friend istream& operator>> (istream& in, Pizza& pizza);
 	friend bool operator == (const Pizza& left, const Pizza& right);
 	friend bool operator != (const Pizza& left, const Pizza& right);
 	friend Pizza operator * (const Pizza& left, const Pizza& right);
 	friend Pizza operator + (const Pizza& left, const Pizza& right);
-
-	vector<Topping> getToppings() const;
-	PizzaCrust getCrust() const;
-	PizzaSize getPizzaSize() const;
-	status getPhase() const;
-	void setToppings(const vector<Topping>& toppings);
-	void setCrust(const PizzaCrust& crust);
-	void setPizzaSize(const PizzaSize& size);
-	void setPhase(const status& phase);
 };
