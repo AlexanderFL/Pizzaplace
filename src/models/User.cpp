@@ -30,6 +30,10 @@ profession User::getJob() const {
 	return this->job;
 }
 
+size_t User::getID() const {
+	return this->id;
+}
+
 void User::setUsername(const string& username) {
 	this->username = username;
 }
@@ -44,6 +48,10 @@ void User::setName(const string& name) {
 
 void User::setJob(const profession& job) {
 	this->job = job;
+}
+
+void User::setID(const size_t& id) {
+	this->id = id;
 }
 
 ostream& operator << (ostream& out, const User& user) {
