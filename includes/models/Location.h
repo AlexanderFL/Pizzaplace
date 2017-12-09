@@ -11,6 +11,7 @@ public:
 	static const string filename;
 private:
 	string address;
+	size_t id;
 public:
 	// Constructors
 	Location();
@@ -18,9 +19,11 @@ public:
 
 	// Get functions
 	string getAddress() const;
+	size_t getID() const;
 
 	// Set functions
 	void setAddress(const string& address);
+	void setID(const size_t& id);
 
 	// Operator overloads
 	friend ostream& operator << (ostream& out, const Location& loc);
