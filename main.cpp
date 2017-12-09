@@ -34,9 +34,10 @@ void addOrder();*/
 
 int main()
 {
-	//MainUI mainUI;
-	//mainUI.startUI();
+	MainUI mainUI;
+	mainUI.startUI();
 
+	/*
 	SalesmanService ss;
 	Order o;
 	Pizza p;
@@ -111,6 +112,7 @@ int main()
 	}
 
 	system("PAUSE");
+	*/
 	return 0;
 }
 	

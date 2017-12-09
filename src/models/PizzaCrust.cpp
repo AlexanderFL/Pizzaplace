@@ -3,13 +3,16 @@
 
 const string PizzaCrust::filename = "pizzacrusts.dat";
 
-PizzaCrust::PizzaCrust() {
-	this->price = 0;
+PizzaCrust::PizzaCrust() 
+	:name(""), price(0)
+{
+
 }
 
-PizzaCrust::PizzaCrust(string name, int price) {
-	this->name = name;
-	this->price = price;
+PizzaCrust::PizzaCrust(string name, int price) 
+	:name(name), price(price)
+{
+
 }
 
 string PizzaCrust::getName() const {

@@ -2,6 +2,7 @@
 #include "DeliveryUI.h"
 #include "Order.h"
 #include "Menu.h"
+#include "SalesmanService.h"
 #include <stdlib.h>
 SalesmanUI::SalesmanUI()
 {
@@ -27,6 +28,8 @@ void SalesmanUI::salesmanMenu() {
 
 		switch (input) {
 		case '1':
+			makeNewOrder();
+			break;
 		case '2':{
 			Order order;
 			//Todo replace with service
@@ -53,4 +56,16 @@ void SalesmanUI::salesmanMenu() {
 			exit(1);
 		}
 	}
+}
+
+void SalesmanUI::makeNewOrder()
+{
+	SalesmanService service;
+	Order newOrder;
+
+	PizzaCrust newCrust;
+	PizzaSize newSize;
+
+	// TODO: Get all pizza sizes and crusts available and display them
+	//		 for the salesman to select from.
 }

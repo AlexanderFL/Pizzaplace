@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ public:
 	int getPrice() const;
 	void setName(const string& name);
 	void setPrice(const int& price);
+
 	friend ostream& operator << (ostream& out, const PizzaCrust& crust);
 	friend istream& operator >> (istream& in, PizzaCrust& crust);
 };
-
