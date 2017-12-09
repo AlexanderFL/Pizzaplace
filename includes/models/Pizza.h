@@ -16,6 +16,7 @@ private:
 	PizzaCrust crust;
 	PizzaSize size;
 	status phase;
+	size_t id;
 public:
 	// Constructors
 	Pizza();
@@ -26,12 +27,14 @@ public:
 	PizzaCrust getCrust() const;
 	PizzaSize getPizzaSize() const;
 	status getPhase() const;
+	size_t getID() const;
 
 	// Set Functions
 	void setToppings(const vector<Topping>& toppings);
 	void setCrust(const PizzaCrust& crust);
 	void setPizzaSize(const PizzaSize& size);
 	void setPhase(const status& phase);
+	void setID(const size_t& id);
 
 	// Operator overloads
 	friend ostream& operator<< (ostream& out, const Pizza& pizza);
