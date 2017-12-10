@@ -20,7 +20,7 @@ public:
 	void deleteLocation(int index);
 	int getOrderTotalCost(const Order& order);
 	vector<Topping> getToppings();
-	void addLocation(const Location& location);
+	void addLocation(Location& location);
 	vector<Location> getLocations();
 private:
 	void containsOnlyAlpha(string s);

@@ -86,11 +86,12 @@ int ManagerService::getOrderTotalCost(const Order& order) {
 }
 
 //Adding locations
-void ManagerService::addLocation(const Location& location) {
+void ManagerService::addLocation(Location& location) {
 	//Validate location 
 	string locationName = location.getAddress();
 	containsOnlyAlpha(locationName);
 	// Write it to file
+	assignID(location);
 	repo.WriteToFile(location);
 }
 

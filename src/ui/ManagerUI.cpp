@@ -68,11 +68,6 @@ void ManagerUI::managerMenu() {
 		{
 			bool stillOnLocation = true;
 			while (stillOnLocation) {
-				//Locations
-				Data locationRepo;
-				vector<Location> locations = service.getLocations();
-				Location location;
-
 				cout << menu.printMenu({ "Add a location", "Remove a location", "See all Locations", "Go Back" }) << endl;
 				cout << "What would you like to do? ";
 				cin >> input;
@@ -87,13 +82,15 @@ void ManagerUI::managerMenu() {
 
 						for (int i = 0; i < numberOfLocations; ++i) {
 							cout << "location number " << i + 1 << ": ";
-							cin >> location;
-							service.addLocation(location);
+							string address;
+							getline(cin, address);
+							service.addLocation(Location(address));
 						}
 						break;
 					}
 					case '2':
 					{
+						vector<Location> locations = service.getLocations();
 						//Delete a Location
 						if (locations.size() != 0) {
 							cout << "Here are the locations you have so far: " << endl;
@@ -115,6 +112,7 @@ void ManagerUI::managerMenu() {
 					}
 
 					case '3': {
+						vector<Location> locations = service.getLocations();
 						//See all locations
 						if (locations.size() != 0) {
 							cout << "Here are the locations you have so far: " << endl;
@@ -165,10 +163,6 @@ void ManagerUI::managerMenu() {
 
 void ManagerUI::validateToppingInput(char input) {
 	//notar her toppingrepo, fix
-	Data toppingRepo;
-	vector <Topping> toppings;
-	toppings = toppingRepo.RetrieveAllFromFile<Topping>();
-	Topping topping;
 
 	switch (input) {
 	case '1': {
@@ -179,15 +173,21 @@ void ManagerUI::validateToppingInput(char input) {
 		cout << "What would you like as a topping? " << endl;
 
 		for (int i = 0; i < numberOfToppings; ++i) {
-			cout << "Topping number " << i + 1 << ": ";
-			cin >> topping;
-			service.addTopping(topping);
+			cout << "Topping number " << i + 1 << ": " << endl;
+			string name;
+			int price;
+			cout << "Name: ";
+			cin >> ws;
+			getline(cin, name);
+			cout << "Price: ";
+			cin >> price;
+			service.addTopping(Topping(name, price));
 		}
 		break;
 	}
 	case '2': {
 		//Delete a topping
-		vector <Topping> toppings = toppingRepo.RetrieveAllFromFile<Topping>();
+		vector <Topping> toppings = service.getToppings();
 		if (toppings.size() != 0) {
 			cout << "Here are the toppings you have so far: " << endl;
 			for (unsigned int i = 0; i < toppings.size(); i++) {
@@ -207,6 +207,7 @@ void ManagerUI::validateToppingInput(char input) {
 		break;
 		}
 		case '3': {
+			vector<Topping> toppings = service.getToppings();
 			//See all toppings
 			if (toppings.size() != 0) {
 				cout << "Here are the toppings you have so far: " << endl;
