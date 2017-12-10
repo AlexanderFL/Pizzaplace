@@ -39,7 +39,7 @@ vector<Order> DeliveryService::getOrders(const Location& location) {
 void DeliveryService::setOrderPaid(const size_t& id) {
 	vector<Order> orders = getOrders();
 	//TODO validate
-	for (size_t i = 0; i < orders.length(); ++i) {
+	for (size_t i = 0; i < orders.size(); ++i) {
 		if (orders.at(i).getID() == id) {
 			orders.at(i).setOrderAsPaidFor(true);
 			repo.WriteMultipleLinesToFile(orders);
@@ -51,7 +51,7 @@ void DeliveryService::setOrderPaid(const size_t& id) {
 void DeliveryService::setOrderDelivered(const size_t& id) {
 	vector<Order> orders = getOrders();
 	//TODO validate
-	for (size_t i = 0; i < orders.length(); ++i) {
+	for (size_t i = 0; i < orders.size(); ++i) {
 		if (orders.at(i).getID() == id) {
 			orders.at(i).setStatus(SENT);
 			repo.WriteMultipleLinesToFile(orders);

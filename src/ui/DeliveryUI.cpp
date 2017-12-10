@@ -138,7 +138,7 @@ void DeliveryUI::deliveryMenu() {
 						switch (input) {
 						case '1': {
 							try {
-								service.setOrderPaid(order);
+								service.setOrderPaid(orders.at(order).getID());
 							}
 							catch (out_of_range) {
 								cout << "Invalid index" << endl;
@@ -147,7 +147,7 @@ void DeliveryUI::deliveryMenu() {
 						}
 						case '2': {
 							try {
-								service.setOrderDelivered(order);
+								service.setOrderDelivered(orders.at(order).getID());
 							}
 							catch (out_of_range) {
 								cout << "Invalid index" << endl;
