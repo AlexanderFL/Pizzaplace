@@ -11,8 +11,8 @@ private:
 	Data repo;
 public:
 	ManagerService();
-	void addTopping(const Topping& topping);
-	void addSideOrder(const SideOrder& side);
+	void addTopping(Topping& topping);
+	void addSideOrder(SideOrder& side);
 	void addSpecialOrder(string ordername, const Order& order);
 	void addDeliveryPlace(string place);
 	void deleteTopping(int index);
@@ -25,5 +25,9 @@ public:
 private:
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
+	void assignID(Topping& toppging);
+	void assignID(SideOrder& side);
+	void assignID(Offer& offer);
+	void assignID(Location& loc);
 };
 
