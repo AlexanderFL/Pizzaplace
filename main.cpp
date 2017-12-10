@@ -36,8 +36,6 @@ int main()
 {
 	MainUI mainUI;
 	mainUI.startUI();
-
-<<<<<<< HEAD
 	/*SalesmanService ss;
 =======
 	/*
@@ -117,10 +115,6 @@ int main()
 
 <<<<<<< HEAD
 	system("PAUSE");*/
-=======
-	system("PAUSE");
-	*/
->>>>>>> 6177b8759bcad99d275921beae3fee898a4fb313
 	return 0;
 }
 	

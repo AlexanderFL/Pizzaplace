@@ -22,6 +22,7 @@ public:
 	vector<Topping> getToppings();
 	void addLocation(const Location& location);
 	vector<Location> getLocations();
+
 private:
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);

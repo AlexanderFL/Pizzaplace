@@ -57,8 +57,8 @@ void ManagerService::deleteSideOrder(int index) {
 /*			Delete a Location		*/
 void ManagerService::deleteLocation(int index) {
 	repo.RemoveFromFileAtIndex<Location>(index);
-
 }
+
 /*			Returns total cost for the order		*/
 int ManagerService::getOrderTotalCost(const Order& order) {
 	int total = 0;
@@ -99,6 +99,8 @@ vector<Location>ManagerService::getLocations() {
 	}
 	return locations;
 }
+
+
 
 /*
 *************************************************

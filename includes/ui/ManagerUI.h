@@ -2,6 +2,15 @@
 #include <string>
 #include <algorithm>
 #include "ManagerService.h"
+#include "Topping.h"
+#include "Data.h"
+#include "SideOrder.h"
+#include "DeliveryUI.h"
+#include "Menu.h"
+#include "Order.h"
+#include "Location.h"
+//For clearing the screen
+#include <stdlib.h>
 using namespace std;
 
 class ManagerUI
@@ -9,12 +18,34 @@ class ManagerUI
 private:
 	char input;
 	ManagerService service;
+	Menu menu;
+	void pizzaOption();
+	void toppingOption();
+	void priceOption();
+	void locationOption();
+	void sideOrderOption();
 public:
 	ManagerUI();
 	void managerMenu();
-	void validateToppingInput(char input);
 	void addTopping();
 	void deleteTopping();
+
+	//Side orders
 	void validateOtherInput(char input);
+	void addMultipleSides();
+	void deleteMultipleSides();
+	void seeAllSides();
+	//Toppings
+	void validateToppingInput(char input);
+
+	void addMultipleToppings();
+	void deleteToppings();
+	void seeAllToppings();
+
+	//Location
+	void addingMultipleLocations();
+	void validateLocationOptions(char input);
+	void deleteMultipleLocations();
+	void seeAllLocations();
 };
 
