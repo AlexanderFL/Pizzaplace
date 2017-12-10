@@ -36,16 +36,26 @@ vector<Order> DeliveryService::getOrders(const Location& location) {
 	return orders;
 }
 
-void DeliveryService::setOrderPaid(const int& index) {
+void DeliveryService::setOrderPaid(const size_t& id) {
 	vector<Order> orders = getOrders();
 	//TODO validate
-	orders.at(index).setOrderAsPaidFor(true);
-	repo.WriteMultipleLinesToFile(orders);
+	for (size_t i = 0; i < orders.length(); ++i) {
+		if (orders.at(i).getID() == id) {
+			orders.at(i).setOrderAsPaidFor(true);
+			repo.WriteMultipleLinesToFile(orders);
+			return;
+		}
+	}
 }
 
-void DeliveryService::setOrderDelivered(const int& index) {
+void DeliveryService::setOrderDelivered(const size_t& id) {
 	vector<Order> orders = getOrders();
 	//TODO validate
-	orders.at(index).setStatus(SENT);
-	repo.WriteMultipleLinesToFile(orders);
+	for (size_t i = 0; i < orders.length(); ++i) {
+		if (orders.at(i).getID() == id) {
+			orders.at(i).setStatus(SENT);
+			repo.WriteMultipleLinesToFile(orders);
+			return;
+		}
+	}
 }
