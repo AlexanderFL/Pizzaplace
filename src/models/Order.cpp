@@ -11,10 +11,9 @@ const string Order::filename = "orders.dat";
 
 Order::Order() 
 { 
-	totalCost = 0;
 	comment = "";
 	_status = PREPERATION;
-	//location = 0;
+	location = Location("None");
 	homeAddress = "none";
 	_deliveryMethod = PICKUP;
 	paidFor = false;
@@ -23,7 +22,6 @@ Order::Order()
 Order::Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod, bool isPaid) {
 	this->pizzas = pizzas;
 	this->sides  = sides;
-	this->totalCost = totalCost;
 	this->_status = orderStatus;
 	this->sides = sides;
 	this->_status = orderStatus;
@@ -142,7 +140,12 @@ ostream& operator <<(ostream& out, const Order& order)
 		out.write((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
 	}
 	else {
-		out << "order";
+		// This was for debugging purposes only
+		// Feel free to change it, it won't (shouldn't) 
+		// break anything, if it does, contact god. -A
+		for (int i = 0; i < order.pizzas.size(); i++) {
+			out << "Pizza " << i << ": " << order.pizzas[i] << endl;
+		}
 	}
 	return out;
 }

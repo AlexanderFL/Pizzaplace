@@ -21,25 +21,19 @@ public:
 private:
 	vector<Pizza> pizzas;
 	vector<SideOrder> sides;
+	status _status;
+	Location location;
 	string comment;
 	string homeAddress;
-	Location location;
-	status _status;
 	deliveryMethod _deliveryMethod;
-	double totalCost;
 	bool paidFor;
 
 public:
+	// Constructors
 	Order();
 	Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod, bool isPaid);
-	friend ostream& operator << (ostream& out, const Order& order);
-	friend istream& operator >> (istream& in, Order& order);
-	friend bool operator == (const Order& left, const Order& right);
-	friend bool operator != (const Order& left, const Order& right);
-	friend bool operator <= (const Order& left, const Order& right);
-	friend Order operator * (const Order& left, const Order& right);
-	friend Order operator + (const Order& left, const Order& right);
 
+	// Get functions
 	vector<Pizza> getPizzas() const;
 	vector<SideOrder> getSides() const;
 	status getStatus() const;
@@ -49,6 +43,7 @@ public:
 	deliveryMethod getDeliveryMethod() const;
 	bool isPaidFor() const;
 
+	// Set functions
 	void setPizzas(const vector<Pizza>& pizzas);
 	void setSides(const vector<SideOrder>& sides);
 	void setStatus(const status& orderStatus);
@@ -57,4 +52,13 @@ public:
 	void setHomeAddress(const string& homeAddress);
 	void setDeliveryMethod(const deliveryMethod& orderDeliveryMethod);
 	void setOrderAsPaidFor(bool isPaid);
+
+	// Operator overloads
+	friend ostream& operator << (ostream& out, const Order& order);
+	friend istream& operator >> (istream& in, Order& order);
+	friend bool operator == (const Order& left, const Order& right);
+	friend bool operator != (const Order& left, const Order& right);
+	friend bool operator <= (const Order& left, const Order& right);
+	friend Order operator * (const Order& left, const Order& right);
+	friend Order operator + (const Order& left, const Order& right);
 };
