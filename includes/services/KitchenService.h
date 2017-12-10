@@ -10,8 +10,8 @@ private:
 	vector<vector<bool>> tracker;
 public:
 	KitchenService();
-	void setOrderAsBaking(const int& index);
-	void setOrderAsReady(const int& index);
+	void setOrderAsBaking(const size_t& id);
+	void setOrderAsReady(const size_t& id);
 	vector<Location> getLocations();
 	vector<Order> getOrders();
 	vector<Pizza> getPizzas(const Location& location);

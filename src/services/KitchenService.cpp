@@ -3,44 +3,39 @@
 
 KitchenService::KitchenService() {}
 
-void KitchenService::setOrderAsBaking(const int& index) {
+void KitchenService::setOrderAsBaking(const size_t& id) {
 	vector<Order> orders = getOrders();
-	int counter = 0;
-	for (size_t i = 0; i < tracker.size(); ++i) {
-		for (size_t j = 0; j < tracker.at(i).size(); ++j) {
-			if (tracker.at(i).at(j)) {
-				if (counter++ == index) {
-					orders.at(i).getPizzas().at(j).setPhase(BAKING);
-					repo.WriteMultipleLinesToFile(orders);
-					return;
-				}
+	for (size_t i = 0; i < orders.size(); ++i) {
+		for (size_t j = 0; j < orders.at(i).getPizzas().size(); ++j) {
+			if (orders.at(i).getPizzas().at(j).getID() == id) {
+				orders.at(i).getPizzas().at(j).setPhase(BAKING);
+				repo.WriteMultipleLinesToFile(orders);
+				return;
 			}
 		}
 	}
 }
 
-void KitchenService::setOrderAsReady(const int& index) {
+void KitchenService::setOrderAsReady(const size_t& id) {
 	vector<Order> orders = getOrders();
-	int counter = 0;
-	int readycounter = 0;
-	for (size_t i = 0; i < tracker.size(); ++i) {
-		for (size_t j = 0; j < tracker.at(i).size(); ++j) {
-			if (tracker.at(i).at(j)) {
-				if (counter++ == index) {
-					orders.at(i).getPizzas().at(j).setPhase(READY);
-					tracker.at(i).at(j) = false;
-					++readycounter;
+	for (size_t i = 0; i < orders.size(); ++i) {
+		for (size_t j = 0; j < orders.at(i).getPizzas().size(); ++j) {
+			if (orders.at(i).getPizzas().at(j).getID() == id) {
+				orders.at(i).getPizzas().at(j).setPhase(READY);
+				int counter = 0;
+				for (size_t k = 0; k < orders.at(i).getPizzas().size(); ++k) {
+					if (orders.at(i).getPizzas().at(k).getPhase() == READY) {
+						++counter;
+					}
 				}
+				if (orders.at(i).getPizzas().size() == counter) {
+					orders.at(i).setStatus(READY);
+				}
+				repo.WriteMultipleLinesToFile(orders);
+				return;
 			}
-			else {
-				++readycounter;
-			}
-		}
-		if (readycounter == tracker.at(i).size() && orders.at(i).getStatus() == PREPERATION) {
-			orders.at(i).setStatus(READY);
 		}
 	}
-	repo.WriteMultipleLinesToFile(orders);
 }
 
 vector<Location> KitchenService::getLocations() {
