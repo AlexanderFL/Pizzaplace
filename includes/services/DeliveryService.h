@@ -12,7 +12,7 @@ public:
 	vector<Location> getLocations();
 	vector<Order> getOrders();
 	vector<Order> getOrders(const Location& location);
-	void setOrderPaid(const int& index);
-	void setOrderDelivered(const int& index);
+	void setOrderPaid(const size_t& id);
+	void setOrderDelivered(const size_t& id);
 };
 

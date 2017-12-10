@@ -3,23 +3,25 @@
 ManagerService::ManagerService(){}
 
 /*		Add a new topping.		*/
-void ManagerService::addTopping(const Topping& topping) {
+void ManagerService::addTopping(Topping& topping) {
 	// Validate topping
 	string toppingName = topping.getName();
 	containsOnlyAlpha(toppingName);
 	validPrice(topping.getPrice());
 	// Write it to file
+	assignID(topping);
 	repo.WriteToFile(topping);
 }
 
 /*		Add a new side order		*/
-void ManagerService::addSideOrder(const SideOrder& side) {
+void ManagerService::addSideOrder(SideOrder& side) {
 	// Validate side order
 	string sideOrderName = side.getName();
 
 	validPrice(side.getPrice());
 
 	// Write it to file
+	assignID(side);
 	repo.WriteToFile(side);
 }
 
@@ -36,6 +38,7 @@ void ManagerService::addSpecialOrder(string ordername, const Order & order)
 void ManagerService::addDeliveryPlace(string address)
 {
 	Location l(address);
+	assignID(l);
 	repo.WriteToFile(l);
 }
 
@@ -83,11 +86,12 @@ int ManagerService::getOrderTotalCost(const Order& order) {
 }
 
 //Adding locations
-void ManagerService::addLocation(const Location& location) {
+void ManagerService::addLocation(Location& location) {
 	//Validate location 
 	string locationName = location.getAddress();
 	containsOnlyAlpha(locationName);
 	// Write it to file
+	assignID(location);
 	repo.WriteToFile(location);
 }
 
@@ -132,5 +136,66 @@ void ManagerService::validPrice(int p)
 {
 	if (p < 0) {
 		throw InvalidPrice();
+	}
+}
+
+
+void ManagerService::assignID(Topping& topping) {
+	try {
+		vector<Topping> toppings = repo.RetrieveAllFromFile<Topping>();
+		if (toppings.size() == 0) {
+			topping.setID(1);
+		}
+		else {
+			topping.setID(toppings.at(toppings.size() - 1).getID() + 1);
+		}
+	}
+	catch (FailedOpenFile) {
+		topping.setID(1);
+	}
+}
+
+void ManagerService::assignID(SideOrder& side) {
+	try {
+		vector<SideOrder> sides = repo.RetrieveAllFromFile<SideOrder>();
+		if (sides.size() == 0) {
+			side.setID(1);
+		}
+		else {
+			side.setID(sides.at(sides.size() - 1).getID() + 1);
+		}
+	}
+	catch (FailedOpenFile) {
+		side.setID(1);
+	}
+}
+
+void ManagerService::assignID(Offer& offer) {
+	try {
+		vector<Offer> offers = repo.RetrieveAllFromFile<Offer>();
+		if (offers.size() == 0) {
+			offer.setID(1);
+		}
+		else {
+			offer.setID(offers.at(offers.size() - 1).getID() + 1);
+		}
+	}
+	catch (FailedOpenFile) {
+		offer.setID(1);
+	}
+}
+
+void ManagerService::assignID(Location& loc) {
+	try {
+		vector<Location> locs = repo.RetrieveAllFromFile<Location>();
+		if (locs.size() == 0) {
+			loc.setID(1);
+		}
+		else {
+			loc.setID(locs.at(locs.size() - 1).getID() + 1);
+		}
+	}
+	catch (FailedOpenFile) {
+		loc.setID(1);
 	}
 }

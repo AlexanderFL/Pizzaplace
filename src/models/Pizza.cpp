@@ -36,6 +36,10 @@ status Pizza::getPhase() const {
 	return this->phase;
 }
 
+size_t Pizza::getID() const {
+	return this->id;
+}
+
 void Pizza::setToppings(const vector<Topping>& toppings) {
 	this->toppings = toppings;
 }
@@ -50,6 +54,10 @@ void Pizza::setPizzaSize(const PizzaSize& size) {
 
 void Pizza::setPhase(const status& phase) {
 	this->phase = phase;
+}
+
+void Pizza::setID(const size_t& id) {
+	this->id = id;
 }
 
 
@@ -76,6 +84,7 @@ ostream& operator<< (ostream& out, const Pizza& pizza)
 		out << pizza.crust;
 		out << pizza.size;
 		out.write((char*)(&pizza.phase), sizeof(status));
+		out.write((char*)(&pizza.id), sizeof(size_t));
 	}
 	else {
 		for (int i = 0; i < pizza.toppings.size(); ++i) {
@@ -100,6 +109,7 @@ istream& operator>> (istream& in, Pizza& pizza)
 		in >> pizza.crust;
 		in >> pizza.size;
 		in.read((char*)(&pizza.phase), sizeof(status));
+		in.read((char*)(&pizza.id), sizeof(size_t));
 	}
 	/*else {
 		int size;

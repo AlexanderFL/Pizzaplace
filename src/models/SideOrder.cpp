@@ -20,6 +20,10 @@ int SideOrder::getPrice() const {
 	return this->price;
 }
 
+size_t SideOrder::getID() const {
+	return this->id;
+}
+
 void SideOrder::setName(const string& name) {
 	this->name = name;
 }
@@ -28,12 +32,17 @@ void SideOrder::setPrice(const int& price) {
 	this->price = price;
 }
 
+void SideOrder::setID(const size_t& id) {
+	this->id = id;
+}
+
 ostream& operator<< (ostream& out, const SideOrder& side) {
 	if (&out != &cout) {
 		size_t len = side.name.length() + 1;
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(side.name.c_str(), len);
 		out.write((char*)(&side.price), sizeof(int));
+		out.write((char*)(&side.id), sizeof(size_t));
 	}
 	else {
 		out << side.name << " " << side.price;
@@ -50,6 +59,7 @@ istream& operator>> (istream& in, SideOrder& side) {
 		side.name = str;
 		in.read((char*)(&side.price), sizeof(int));
 		delete[] str;
+		in.read((char*)(&side.id), sizeof(size_t));
 	}
 	else {
 		cout << "\nName: ";
