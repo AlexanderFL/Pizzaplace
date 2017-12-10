@@ -7,11 +7,14 @@ KitchenUI::KitchenUI()
 
 //TODO: Only allow certain workplaces and let the user pick from that
 void KitchenUI::kitchenMenu() {
-	string workplace;
+	char workplace;
 	char input;
+	Data locationRepo;
+	vector<Location> locations = service.getLocations();
+	Location location;
 	while (true) {
 		try {
-			vector<Location> locations = service.getLocations();
+ 			vector<Location> locations = service.getLocations();
 			cout << "Choose the location of your workplace" << endl;
 			for (size_t i = 0; i < locations.size(); ++i) {
 				cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
@@ -56,8 +59,9 @@ void KitchenUI::kitchenMenu() {
 
 		cout << "Where do you work? ";
 		cin.ignore();
-		getline(cin, workplace);
-		cout << "You work at " << workplace << ". Is this correct? (y/n): ";
+		cin >> workplace;
+		int workplaceInInt = workplace - 49;
+		cout << "You work at " << locations.at(workplaceInInt).getAddress() << ". Is this correct? (y/n): ";
 		cin >> input;
 		if (tolower(input) == 'y') {
 			break;

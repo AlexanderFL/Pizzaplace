@@ -49,7 +49,6 @@ void ManagerUI::managerMenu() {
 			break;
 		}
 
-
 		case '3':
 		{
 			//Price

@@ -89,3 +89,8 @@ void KitchenService::validateVector(const vector<Order>& vec) const {
 		throw EmptyVector();
 	}
 }
+
+
+
+
+
