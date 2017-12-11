@@ -26,9 +26,5 @@ public:
 private:
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
-	void assignID(Topping& toppging);
-	void assignID(SideOrder& side);
-	void assignID(Offer& offer);
-	void assignID(Location& loc);
 };
 
