@@ -30,6 +30,7 @@ public:
 	template<class T> vector<T> get();
 private:
 	int calculateCost(const Order& order);
+	int calculateCost(const Pizza& pizza);
 	bool validateOrder(Order order);
 	void overrideOrder(int index, Order edit);
 	void assignID(Order& order);
