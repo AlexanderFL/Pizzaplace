@@ -113,7 +113,7 @@ void ManagerUI::pizzaMenuOption() {
 		cout << menu.printMenu({ "Add a pizza", "Remove a pizza", "Pizza menu", "Go Back" }) << endl;
 		cout << "What would you like to do? ";
 		cin >> input;
-		//validatePizzaMenuOption(input);
+		validatePizzaMenuOption(input);
 		if (input == '4') return;
 	}
 }
@@ -122,6 +122,7 @@ void ManagerUI::pizzaMenuOption() {
 /*				TOPPINGS			*/
 
 void ManagerUI::validateToppingInput(char input) {
+	seeAllToppings();
 	switch (input) {
 	case '1': {
 		//Adding a topping
@@ -153,7 +154,6 @@ void ManagerUI::validateToppingInput(char input) {
 void ManagerUI::addMultipleToppings() {
 	int numberOfToppings;
 	Topping topping;
-	seeAllToppings();
 	cout << "How many toppings would you like to add? ";
 	cin >> numberOfToppings;
 	cout << "What would you like as a topping? " << endl;
@@ -167,7 +167,6 @@ void ManagerUI::addMultipleToppings() {
 
 void ManagerUI::deleteToppings() {
 	char input;
-	seeAllToppings();
 	if ((service.getToppings()).size() != 0) {
 		cout << "What topping would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
@@ -192,12 +191,10 @@ void ManagerUI::seeAllToppings() {
 	}
 }
 
-
-
 /*				LOCATIONS			*/
 
-
 void ManagerUI::validateLocationOptions(char input) {
+	seeAllLocations();
 	switch (input) {
 	case '1':
 	{
@@ -208,7 +205,7 @@ void ManagerUI::validateLocationOptions(char input) {
 	case '2':
 	{
 		//Delete a Location
-		addingMultipleLocations();
+		deleteMultipleLocations();
 		break;
 	}
 	case '3': {
@@ -224,7 +221,6 @@ void ManagerUI::addingMultipleLocations() {
 	int numberOfLocations;
 	vector<Location> locations = service.getLocations();
 	Location location;
-	seeAllLocations();
 	cout << "How many locations would you like to add? ";
 	cin >> numberOfLocations;
 	cout << "Where would you like the locatins to be? " << endl;
@@ -238,7 +234,6 @@ void ManagerUI::addingMultipleLocations() {
 
 void ManagerUI::deleteMultipleLocations() {
 	char input;
-	seeAllLocations();
 	if ((service.getLocations()).size() != 0) {
 		cout << "What location would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
@@ -248,7 +243,6 @@ void ManagerUI::deleteMultipleLocations() {
 		service.deleteLocation(inputInInt);
 	}
 }
-
 
 void ManagerUI::seeAllLocations() {
 	vector<Location> locations = service.getLocations();
@@ -266,8 +260,7 @@ void ManagerUI::seeAllLocations() {
 /*			SIDE ORDERS		*/
 
 void ManagerUI::validateOtherInput(char input) {
-	vector <SideOrder> sides = service.getSides();
-	SideOrder sideOrder;
+	seeAllSides();
 	switch (input) {
 	case '1': {
 		//Add a side order
@@ -297,7 +290,6 @@ void ManagerUI::validateOtherInput(char input) {
 void ManagerUI::addMultipleSides() {
 	int numberOfSides;
 	SideOrder sideOrder;
-	//seeAllSides();
 	cout << "How many side orders would you like to add? ";
 	cin >> numberOfSides;
 	cout << "What would you like as a side order? " << endl;
@@ -311,7 +303,6 @@ void ManagerUI::addMultipleSides() {
 
 void ManagerUI::deleteMultipleSides() {
 	char input;
-	seeAllSides();
 	if ((service.getSides()).size() != 0) {
 		cout << "What topping would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
@@ -341,7 +332,8 @@ void ManagerUI::seeAllSides() {
 void ManagerUI::validatePizzaMenuOption(char input) {
 	switch (input) {
 	case '1': {
-		//Add a Pizza to the menu
+		//Add a Pizza/Offer to the menu
+		addMultiplePizza();
 		break;
 	}
 	case '2': {
@@ -359,5 +351,20 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 	default:
 		cout << "Invalid input." << endl;
 		break;
+	}
+}
+
+void ManagerUI::addMultiplePizza() {
+	int numberOfPizzas;
+	Offer offer;
+	//seeAllOrders();
+	cout << "How many pizza offers would you like to add? ";
+	cin >> numberOfPizzas;
+	cout << "What would you like as a pizza offer? " << endl;
+
+	for (int i = 0; i < numberOfPizzas; ++i) {
+		cout << "Pizza number " << i + 1 << ": ";
+		cin >> offer;
+		service.addOffer(offer);
 	}
 }

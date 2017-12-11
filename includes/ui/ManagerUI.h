@@ -16,7 +16,7 @@ using namespace std;
 class ManagerUI
 {
 private:
-	char input;  //shouldn't be here
+	char input;  //<----- shouldn't be here
 	ManagerService service;
 	Menu menu;
 	void pizzaOption();
@@ -45,5 +45,6 @@ public:
 	//Pizza Menu
 	void pizzaMenuOption();
 	void validatePizzaMenuOption(char input);
+	void addMultiplePizza();
 };
 

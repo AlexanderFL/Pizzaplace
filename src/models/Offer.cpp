@@ -54,6 +54,10 @@ ostream& operator << (ostream& out, const Offer& offer) {
 		out.write((char*)(&offer.price), sizeof(int));
 		out.write((char*)(&offer.fixed), sizeof(bool));
 	}
+	else {
+		cout << "Name: " << offer.name << endl;
+		cout << "Price: " << offer.price << endl;
+	}
 	return out;
 }
 
@@ -68,6 +72,12 @@ istream& operator >> (istream& in, Offer& offer) {
 		in >> offer.order;
 		in.read((char*)(&offer.price), sizeof(int));
 		in.read((char*)(&offer.fixed), sizeof(bool));
+	}
+	else {
+		cout << "\nName: ";
+		in >> offer.name;
+		cout << "Price: ";
+		in >> offer.price;
 	}
 	return in;
 }

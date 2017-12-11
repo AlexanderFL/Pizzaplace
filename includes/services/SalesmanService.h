@@ -12,7 +12,6 @@ private:
 	Data _repo;
 public:
 	SalesmanService();
-
 	void registerNewOrder(Order& order);
 	void appendToOrder(Order& firstOrder, Order& secondOrder);
 	int getPriceOfOrder(Order& order);
@@ -28,6 +27,7 @@ public:
 	vector<PizzaCrust> getAllPizzaCrusts();
 	vector<PizzaSize> getAllPizzaSizes();
 	template<class T> vector<T> get();
+
 private:
 	int calculateCost(const Order& order);
 	int calculateCost(const Pizza& pizza);
