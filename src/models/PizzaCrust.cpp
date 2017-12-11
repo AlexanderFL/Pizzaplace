@@ -23,10 +23,6 @@ int PizzaCrust::getPrice() const {
 	return this->price;
 }
 
-size_t PizzaCrust::getID() const {
-	return this->id;
-}
-
 void PizzaCrust::setName(const string& name) {
 	this->name = name;
 }
@@ -35,17 +31,12 @@ void PizzaCrust::setPrice(const int& price) {
 	this->price = price;
 }
 
-void PizzaCrust::setID(const size_t& id) {
-	this->id = id;
-}
-
 ostream& operator << (ostream& out, const PizzaCrust& crust) {
 	if (&out != &cout) {
 		size_t len = crust.name.length() + 1;
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(crust.name.c_str(), len);
 		out.write((char*)(&crust.price), sizeof(int));
-		out.write((char*)(&crust.id), sizeof(size_t));
 	}
 	return out;
 }
@@ -59,7 +50,6 @@ istream& operator >> (istream& in, PizzaCrust& crust) {
 		crust.name = str;
 		delete[] str;
 		in.read((char*)(&crust.price), sizeof(int));
-		in.read((char*)(&crust.id), sizeof(size_t));
 	}
 	return in;
 }

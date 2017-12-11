@@ -21,20 +21,12 @@ int Topping::getPrice() const{
 	return this->price;
 }
 
-size_t Topping::getID() const {
-	return this->id;
-}
-
 void Topping::setName(const string& name) {
 	this->name = name;
 }
 
 void Topping::setPrice(const int& price) {
 	this->price = price;
-}
-
-void Topping::setID(const size_t& id) {
-	this->id = id;
 }
 
 istream& operator >> (istream& in, Topping& topping) {
@@ -46,7 +38,6 @@ istream& operator >> (istream& in, Topping& topping) {
 		topping.name = str;
 		in.read((char*)(&topping.price), sizeof(int));
 		delete[] str;
-		in.read((char*)(&topping.id), sizeof(size_t));
 	}
 	else {
 		cout << "\nName: ";
@@ -64,7 +55,6 @@ ostream& operator<< (ostream& out, const Topping& topping)
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(topping.name.c_str(), len);
 		out.write((char*)(&topping.price), sizeof(int));
-		out.write((char*)(&topping.id), sizeof(size_t));
 	}
 	else {
 		out << "Name: " << topping.name << " | Price: " << topping.price << " Kr.";

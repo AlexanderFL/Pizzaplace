@@ -12,7 +12,6 @@ public:
 private:
 	string name;
 	double pricemod;
-	size_t id;
 public:
 	// Constructors
 	PizzaSize();
@@ -21,12 +20,10 @@ public:
 	// Get functions
 	string getName() const;
 	double getPriceMod() const;
-	size_t getID() const;
 
 	// Set funcitons
 	void setName(const string& name);
 	void setPriceMod(const double& pricemod);
-	void setID(const size_t& id);
 
 	// Operator overloads
 	friend ostream& operator << (ostream& out, const PizzaSize& size);

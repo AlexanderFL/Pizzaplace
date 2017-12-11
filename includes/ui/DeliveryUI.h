@@ -16,5 +16,7 @@ public:
 	void deliveryMenu();
 	void allOrdersMenu();
 	void ordersMenu();
+	string showOrderInfo();
+	string showOrderInfoShort();
 };
 

@@ -51,10 +51,11 @@ void DeliveryUI::allOrdersMenu() {
 		try {
 			int order = (int)input - 49;
 			cout << orders.at(order) << endl;
-			cout << "Set as paid" << endl;
-			cout << "Set as delivered" << endl;
-			cout << "Go back" << endl;
+			cout << "1: Set as paid" << endl;
+			cout << "2: Set as delivered" << endl;
+			cout << "3: Go back" << endl;
 			cout << "Input: " << endl;
+			cin >> input;
 			switch (input) {
 			case '1': {
 				try {

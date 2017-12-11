@@ -34,8 +34,8 @@ void KitchenUI::kitchenMenu() {
 						else {
 							try {
 								while (true) {
-									int pizzanr = (int)input - 49);
-									cout << showPizzaInfo(pizzas.at(pizzanr) << endl;
+									int pizzanr = (int)input - 49;
+									cout << showPizzaInfo(pizzas.at(pizzanr)) << endl;
 									cout << "1: Set as Baking" << endl;
 									cout << "2: Set as Ready" << endl;
 									cout << "3: Go Back" << endl;
@@ -88,7 +88,7 @@ string KitchenUI::showPizzaInfo(const Pizza& pizza) const {
 		info += "no toppings, ";
 	}
 	else {
-		for (size_t i = 0; i < pizza.getToppings(); ++i) {
+		for (size_t i = 0; i < pizza.getToppings().size(); ++i) {
 			info += pizza.getToppings().at(i).getName() + ", ";
 		}
 	}
