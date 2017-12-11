@@ -6,9 +6,7 @@ DeliveryService::DeliveryService() {}
 vector<Location> DeliveryService::getLocations() {
 	vector<Location> locations = repo.RetrieveAllFromFile<Location>();
 	//TODO validate
-	if (locations.size() == 0) {
-		throw EmptyVector();
-	}
+	validateVector(locations);
 	return locations;
 }
 
@@ -21,9 +19,7 @@ vector<Order> DeliveryService::getOrders() {
 			orders.push_back(orders.at(i));
 		}
 	}
-	if (orders.size() == 0) {
-		throw EmptyVector();
-	}
+	validateVector(orders);
 	return orders;
 }
 
@@ -36,9 +32,7 @@ vector<Order> DeliveryService::getOrders(const Location& location) {
 		}
 	}
 	//TODO validate
-	if (orders.size() == 0) {
-		throw EmptyVector();
-	}
+	validateVector(orders);
 	return orders;
 }
 

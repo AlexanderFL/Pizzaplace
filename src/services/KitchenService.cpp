@@ -40,10 +40,7 @@ void KitchenService::setOrderAsReady(const size_t& id) {
 
 vector<Location> KitchenService::getLocations() {
 	vector<Location> locations = repo.RetrieveAllFromFile<Location>();
-	//validateVector(locations);
-	if (locations.size() == 0) {
-		throw EmptyVector();
-	}
+	validateVector(locations);
 	return locations;
 }
 
@@ -65,21 +62,9 @@ vector<Pizza> KitchenService::getPizzas(const Location& location) {
 			}
 		}
 	}
-	//validateVector(pizzas);
-	if (pizzas.size() == 0) {
-		throw EmptyVector();
-	}
-
+	validateVector(pizzas);
 	return pizzas;
 }
-
-void KitchenService::validateVector(const vector<Order>& vec) const {
-	if (vec.size() == 0) {
-		throw EmptyVector();
-	}
-}
-
-
 
 
 

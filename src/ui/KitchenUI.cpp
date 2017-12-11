@@ -35,6 +35,7 @@ void KitchenUI::kitchenMenu() {
 					cout << "Back" << endl;
 					cout << "Input: ";
 					cin >> input;
+
 				}
 				catch (out_of_range) {
 					cout << "Invalid index." << endl;
