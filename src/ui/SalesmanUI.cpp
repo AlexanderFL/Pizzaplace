@@ -1,9 +1,9 @@
 #include "SalesmanUI.h"
 #include "DeliveryUI.h"
 #include "Order.h"
-#include "Menu.h"
 #include "SalesmanService.h"
 #include <stdlib.h>
+
 SalesmanUI::SalesmanUI()
 {
 
@@ -25,7 +25,7 @@ void SalesmanUI::salesmanMenu() {
 
 		switch (input) {
 		case '1':
-			makeNewOrder();
+			makeNewOrder(menu);
 			break;
 		case '2':{
 			Order order;
@@ -55,7 +55,7 @@ void SalesmanUI::salesmanMenu() {
 	}
 }
 
-void SalesmanUI::makeNewOrder()
+void SalesmanUI::makeNewOrder(Menu& m)
 {
 	SalesmanService service;
 	Order newOrder;
@@ -63,6 +63,30 @@ void SalesmanUI::makeNewOrder()
 	PizzaCrust newCrust;
 	PizzaSize newSize;
 
-	// TODO: Get all pizza sizes and crusts available and display them
-	//		 for the salesman to select from.
+	try
+	{
+		// TODO: Get all pizza sizes and crusts available and display them
+		//		 for the salesman to select from.
+		vector<PizzaCrust> crustVector = service.getAllPizzaCrusts();
+		//vector<PizzaSize> sizeVector = service.getAllPizzaSizes();
+
+		// Vector to put names of either size or crusts in
+		vector<string> stringVec;
+
+		// Place all crust names in a string vector
+		for (int i = 0; i < crustVector.size(); i++){
+			stringVec.push_back(crustVector[i].getName());
+		}
+
+		cout << "Choose a crust";
+		// Print out the vector
+		cout << m.printMenu(stringVec);
+		system("pause");
+	}
+	catch (FailedOpenFile)
+	{
+		cout << "Failed to open a file" << endl;
+		system("pause");
+	}
+
 }
