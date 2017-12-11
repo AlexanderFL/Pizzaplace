@@ -37,38 +37,24 @@ void KitchenUI::kitchenMenu() {
 					cin >> input;
 				}
 				catch (out_of_range) {
-					cout << "Invalid index" << endl;
+					cout << "Invalid index." << endl;
 				}
 			}
 			catch (out_of_range) {
-				cout << "Invalid index" << endl;
+				cout << "Invalid index." << endl;
 			}
 			catch (EmptyVector) {
-				cout << "No pizzas av" << endl;
+				cout << "No pizzas available for this location." << endl;
 			}
 			catch (FailedOpenFile) {
-				cout << "Failed open file 2" << endl;
+				cout << "Failed to open file." << endl;
 			}
 		}
 		catch (EmptyVector) {
-			cout << "No locations av" << endl;
+			cout << "No locations available." << endl;
 		}
 		catch (FailedOpenFile) {
-			cout << "Failed opne file 1" << endl;
+			cout << "Failed to open file." << endl;
 		}
-
-		cout << "Where do you work? ";
-		cin.ignore();
-		cin >> workplace;
-		int workplaceInInt = workplace - 49;
-		cout << "You work at " << locations.at(workplaceInInt).getAddress() << ". Is this correct? (y/n): ";
-		cin >> input;
-		if (tolower(input) == 'y') {
-			break;
-		}
-
-		//To be able to use getline again without error
-		cin.clear();
-		cin.sync();
 	}
 }

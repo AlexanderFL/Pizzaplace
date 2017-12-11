@@ -7,7 +7,6 @@ class KitchenService
 {
 private:
 	Data repo;
-	vector<vector<bool>> tracker;
 public:
 	KitchenService();
 	void setOrderAsBaking(const size_t& id);

@@ -57,16 +57,10 @@ vector<Pizza> KitchenService::getPizzas(const Location& location) {
 	vector<Pizza> pizzas;
 	vector<Order> orders = getOrders();
 	for (size_t i = 0; i < orders.size(); ++i) {
-		vector<bool> vec;
-		tracker.push_back(vec);
 		if (orders.at(i).getLocation() == location && orders.at(i).getStatus() == PREPERATION) {
 			for (size_t j = 0; j < orders.at(i).getPizzas().size(); ++j) {
 				if (orders.at(i).getPizzas().at(j).getPhase() == PREPERATION || orders.at(i).getPizzas().at(j).getPhase() == BAKING) {
-					tracker.at(j).push_back(true);
 					pizzas.push_back(orders.at(i).getPizzas().at(j));
-				}
-				else {
-					tracker.at(j).push_back(false);
 				}
 			}
 		}
