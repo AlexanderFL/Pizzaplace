@@ -1,17 +1,10 @@
 #include "KitchenUI.h"
 
-KitchenUI::KitchenUI()
-{
-
-}
+KitchenUI::KitchenUI() {}
 
 //TODO: Only allow certain workplaces and let the user pick from that
 void KitchenUI::kitchenMenu() {
-	char workplace;
 	char input;
-	Data locationRepo;
-	vector<Location> locations = service.getLocations();
-	Location location;
 	while (true) {
 		try {
  			vector<Location> locations = service.getLocations();
@@ -19,56 +12,108 @@ void KitchenUI::kitchenMenu() {
 			for (size_t i = 0; i < locations.size(); ++i) {
 				cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
 			}
+			cout << "0: Go back" << endl;
 			cout << "Input: ";
 			cin >> input;
-			try {
-				vector<Pizza> pizzas = service.getPizzas(locations.at((int)input - 49));
-				for (size_t i = 0; i < pizzas.size(); ++i) {
-					cout << i + 1 << ": " << pizzas.at(i).getPhase() << endl;
-				}
-				cout << "Input: ";
-				cin >> input;
+			if (input == '0') {
+				return;
+			}
+			else {
 				try {
-					cout << pizzas.at((int)input - 49) << endl;
-					cout << "Set as Baking" << endl;
-					cout << "Set as Ready" << endl;
-					cout << "Back" << endl;
-					cout << "Input: ";
-					cin >> input;
+					vector<Pizza> pizzas = service.getPizzas(locations.at((int)input - 49));
+					while (true) {
+						for (size_t i = 0; i < pizzas.size(); ++i) {
+							cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl;
+						}
+						cout << "0: Go back" << endl;
+						cout << "Input: ";
+						cin >> input;
+						if (input == '0') {
+							return;
+						}
+						else {
+							try {
+								while (true) {
+									int pizzanr = (int)input - 49;
+									cout << showPizzaInfo(pizzas.at(pizzanr)) << endl;
+									cout << "1: Set as Baking" << endl;
+									cout << "2: Set as Ready" << endl;
+									cout << "3: Go Back" << endl;
+									cout << "Input: ";
+									cin >> input;
+									if (input == '1') {
+										service.setOrderAsBaking(pizzas.at(pizzanr).getID());
+									}
+									else if (input == '2') {
+										service.setOrderAsReady(pizzas.at(pizzanr).getID());
+									}
+									else if (input == '3') {
+										break;
+									}
+									else {
+										cout << "Invalid input.";
+									}
+								}
+							}
+							catch (out_of_range) {
+								cout << "Invalid index." << endl;
+							}
+						}
+					}
 				}
 				catch (out_of_range) {
-					cout << "Invalid index" << endl;
+					cout << "Invalid index." << endl;
 				}
-			}
-			catch (out_of_range) {
-				cout << "Invalid index" << endl;
-			}
-			catch (EmptyVector) {
-				cout << "No pizzas av" << endl;
-			}
-			catch (FailedOpenFile) {
-				cout << "Failed open file 2" << endl;
+				catch (EmptyVector) {
+					cout << "No pizzas available for this location." << endl;
+				}
+				catch (FailedOpenFile) {
+					cout << "Failed to open file." << endl;
+				}
 			}
 		}
 		catch (EmptyVector) {
-			cout << "No locations av" << endl;
+			cout << "No locations available." << endl;
 		}
 		catch (FailedOpenFile) {
-			cout << "Failed opne file 1" << endl;
+			cout << "Failed to open file." << endl;
 		}
-
-		cout << "Where do you work? ";
-		cin.ignore();
-		cin >> workplace;
-		int workplaceInInt = workplace - 49;
-		cout << "You work at " << locations.at(workplaceInInt).getAddress() << ". Is this correct? (y/n): ";
-		cin >> input;
-		if (tolower(input) == 'y') {
-			break;
-		}
-
-		//To be able to use getline again without error
-		cin.clear();
-		cin.sync();
 	}
+}
+
+string KitchenUI::showPizzaInfo(const Pizza& pizza) const {
+	string info = "A ";
+	info += pizza.getPizzaSize().getName() + " pizza with ";
+	if (pizza.getToppings().size() == 0) {
+		info += "no toppings, ";
+	}
+	else {
+		for (size_t i = 0; i < pizza.getToppings().size(); ++i) {
+			info += pizza.getToppings().at(i).getName() + ", ";
+		}
+	}
+	info += pizza.getCrust().getName() + " crust.";
+	info += " It is currently ";
+	if (pizza.getPhase() == PREPERATION) {
+		info += " in preperation.";
+	}
+	else if (pizza.getPhase() == BAKING) {
+		info += " baking.";
+	}
+	return info;
+}
+
+string KitchenUI::showPizzaInfoShort(const Pizza& pizza) const {
+	string info = "";
+	info += pizza.getID() + " - ";
+	info += pizza.getToppings().size() + " toppings, ";
+	info += pizza.getPizzaSize().getName() + " ";
+	info += pizza.getCrust().getName() + " pizza - ";
+	if (pizza.getPhase() == PREPERATION) {
+		info += "in preperation";
+	}
+	else if (pizza.getPhase() == BAKING) {
+		info += "baking";
+	}
+	return info;
 }

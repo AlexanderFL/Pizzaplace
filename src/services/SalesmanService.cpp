@@ -96,6 +96,25 @@ vector<Order> SalesmanService::getAllOrders()
 	return _repo.RetrieveAllFromFile<Order>();
 }
 
+vector<Location> SalesmanService::getAllLocations() {
+	return _repo.RetrieveAllFromFile<Location>();
+}
+
+vector<SideOrder> SalesmanService::getAllSideOrders() {
+	return _repo.RetrieveAllFromFile<SideOrder>();
+}
+
+vector<Topping> SalesmanService::getAllToppings() {
+	return _repo.RetrieveAllFromFile<Topping>();
+}
+
+vector<PizzaCrust> SalesmanService::getAllPizzaCrusts() {
+	return _repo.RetrieveAllFromFile<PizzaCrust>();
+}
+
+vector<PizzaSize> SalesmanService::getAllPizzaSizes() {
+	return _repo.RetrieveAllFromFile<PizzaSize>();
+}
 
 /*
 
@@ -110,20 +129,25 @@ int SalesmanService::calculateCost(const Order& order) {
 	size_t numberOfPizzas = order.getPizzas().size();
 	// Pizza cost
 	for (size_t i = 0; i < numberOfPizzas; ++i) {
-		int temptotal = 0;
-		size_t numberOfToppingsOnPizza = order.getPizzas().at(i).getToppings().size();
-		for (size_t j = 0; j < numberOfToppingsOnPizza; ++j) {
-			temptotal += order.getPizzas().at(i).getToppings().at(j).getPrice(); // Add each topping to price
-		}
-		temptotal += order.getPizzas().at(i).getCrust().getPrice(); // Add type of crust to price
-		temptotal *= order.getPizzas().at(i).getPizzaSize().getPriceMod(); // Add the pizza size to price
-		total += temptotal;
+		total += calculateCost(order.getPizzas().at(i));
 	}
 	// Side orders cost
 	for (int i = 0; i < order.getSides().size(); ++i) {
 		total += order.getSides().at(i).getPrice();
 
 	}
+	return total;
+}
+
+/*			Returns total cost for the pizza		*/
+int SalesmanService::calculateCost(const Pizza& pizza) {
+	int total = 0;
+	size_t numberOfToppingsOnPizza = pizza.getToppings().size();
+	for (size_t j = 0; j < numberOfToppingsOnPizza; ++j) {
+		total += pizza.getToppings().at(j).getPrice(); // Add each topping to price
+	}
+	total += pizza.getCrust().getPrice(); // Add type of crust to price
+	total *= pizza.getPizzaSize().getPriceMod(); // Add the pizza size to price
 	return total;
 }
 
@@ -142,23 +166,21 @@ void SalesmanService::overrideOrder(int index, Order edit) {
 
 void SalesmanService::assignID(Order& order) {
 	try {
-		vector<Order> orders = _repo.RetrieveAllFromFile<Order>();
+		vector<Order> orders = get<Order>();
 		if (orders.size() == 0) {
 			order.setID(1);
 		}
 		else {
 			order.setID(orders.at(orders.size() - 1).getID() + 1);
-			if (order.getPizzas().size() > 0) {
-				size_t id = 1;
-				for (size_t i = orders.size() - 1; i > 0; --i) {
-					if (orders.at(i).getPizzas().size() > 0) {
-						id = orders.at(i).getPizzas().at(orders.at(i).getPizzas().size() - 1).getID() + 1;
-					}
-				}
-				for (size_t i = 0; i < order.getPizzas().size(); ++i) {
-					order.getPizzas().at(i).setID(id++);
-				}
+		}
+		size_t id = 1;
+		for (size_t i = orders.size() - 1; i > 0; --i) {
+			if (orders.at(i).getPizzas().size() > 0) {
+				id = orders.at(i).getPizzas().at(orders.at(i).getPizzas().size() - 1).getID() + 1;
 			}
+		}
+		for (size_t i = 0; i < order.getPizzas().size(); ++i) {
+			order.getPizzas().at(i).setID(id++);
 		}
 	}
 	catch (FailedOpenFile) {

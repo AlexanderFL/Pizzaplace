@@ -7,7 +7,6 @@ class KitchenService
 {
 private:
 	Data repo;
-	vector<vector<bool>> tracker;
 public:
 	KitchenService();
 	void setOrderAsBaking(const size_t& id);
@@ -16,6 +15,11 @@ public:
 	vector<Order> getOrders();
 	vector<Pizza> getPizzas(const Location& location);
 private:
-	void validateVector(const vector<Order>& vec) const;
+	template <class T> void validateVector(const vector<T>& vec) const;
 };
 
+template <class T> void KitchenService::validateVector(const vector<T>& vec) const {
+	if (vec.size() == 0) {
+		throw EmptyVector();
+	}
+}

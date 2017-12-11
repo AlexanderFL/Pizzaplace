@@ -22,9 +22,20 @@ public:
 	void setOrderAsPaid(Order& order);
 	void setComments(Order& order, string comment);
 	vector<Order> getAllOrders();
+	vector<Location> getAllLocations();
+	vector<SideOrder> getAllSideOrders();
+	vector<Topping> getAllToppings();
+	vector<PizzaCrust> getAllPizzaCrusts();
+	vector<PizzaSize> getAllPizzaSizes();
+	template<class T> vector<T> get();
 private:
 	int calculateCost(const Order& order);
+	int calculateCost(const Pizza& pizza);
 	bool validateOrder(Order order);
 	void overrideOrder(int index, Order edit);
 	void assignID(Order& order);
 };
+
+template<class T> vector<T> SalesmanService::get() {
+	return _repo.RetrieveAllFromFile<T>();
+}

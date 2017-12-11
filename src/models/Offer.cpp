@@ -29,10 +29,6 @@ bool Offer::getFixed() const {
 	return this->fixed;
 }
 
-size_t Offer::getID() const {
-	return this->id;
-}
-
 void Offer::setName(const string& name) {
 	this->name = name;
 }
@@ -49,10 +45,6 @@ void Offer::setFixed(const bool& fixed) {
 	this->fixed = fixed;
 }
 
-void Offer::setID(const size_t& id) {
-	this->id = id;
-}
-
 ostream& operator << (ostream& out, const Offer& offer) {
 	if (&out != &cout) {
 		size_t len = offer.name.length() + 1;
@@ -61,7 +53,6 @@ ostream& operator << (ostream& out, const Offer& offer) {
 		out << offer.order;
 		out.write((char*)(&offer.price), sizeof(int));
 		out.write((char*)(&offer.fixed), sizeof(bool));
-		out.write((char*)(&offer.id), sizeof(size_t));
 	}
 	return out;
 }
@@ -77,7 +68,6 @@ istream& operator >> (istream& in, Offer& offer) {
 		in >> offer.order;
 		in.read((char*)(&offer.price), sizeof(int));
 		in.read((char*)(&offer.fixed), sizeof(bool));
-		in.read((char*)(&offer.id), sizeof(size_t));
 	}
 	return in;
 }

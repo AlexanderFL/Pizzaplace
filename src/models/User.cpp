@@ -30,10 +30,6 @@ profession User::getJob() const {
 	return this->job;
 }
 
-size_t User::getID() const {
-	return this->id;
-}
-
 void User::setUsername(const string& username) {
 	this->username = username;
 }
@@ -50,10 +46,6 @@ void User::setJob(const profession& job) {
 	this->job = job;
 }
 
-void User::setID(const size_t& id) {
-	this->id = id;
-}
-
 ostream& operator << (ostream& out, const User& user) {
 	if (&out != &cout) {
 		size_t len = user.username.length() + 1;
@@ -66,7 +58,6 @@ ostream& operator << (ostream& out, const User& user) {
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(user.name.c_str(), len);
 		out.write((char*)(&user.job), sizeof(profession));
-		out.write((char*)(&user.id), sizeof(size_t));
 	}
 	return out;
 }
@@ -90,7 +81,6 @@ istream& operator >> (istream& in, User& user) {
 		user.name = str;
 		delete[] str;
 		in.read((char*)(&user.job), sizeof(profession));
-		in.read((char*)(&user.id), sizeof(size_t));
 	}
 	return in;
 }
