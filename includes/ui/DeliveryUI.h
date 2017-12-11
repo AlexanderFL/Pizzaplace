@@ -14,5 +14,7 @@ public:
 	DeliveryUI();
 	void setIgnore(bool ignore);
 	void deliveryMenu();
+	void allOrdersMenu();
+	void ordersMenu();
 };
 
