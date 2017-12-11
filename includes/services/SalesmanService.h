@@ -22,6 +22,11 @@ public:
 	void setOrderAsPaid(Order& order);
 	void setComments(Order& order, string comment);
 	vector<Order> getAllOrders();
+	vector<Location> getAllLocations();
+	vector<SideOrder> getAllSideOrders();
+	vector<Topping> getAllToppings();
+	vector<PizzaCrust> getAllPizzaCrusts();
+	vector<PizzaSize> getAllPizzaSizes();
 private:
 	int calculateCost(const Order& order);
 	bool validateOrder(Order order);

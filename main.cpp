@@ -32,10 +32,15 @@ void addOrder();*/
 	return (n << (sizeof(int) * 8)) | abs(rand());
 }*/
 
+//Pizza pizzaDesigner();
+//void orderDesigner();
+
 int main()
 {
 	MainUI mainUI;
 	mainUI.startUI();
+
+	//orderDesigner();
 	/*SalesmanService ss;
 =======
 	/*
@@ -282,4 +287,147 @@ void addOrder() {
 			//repo.WriteToFile(Order(pizzas, sides, 0, 0, location, comment, address));
 		}
 	} while (input != "q");
+}*/
+/*
+Pizza pizzaDesigner() {
+	SalesmanService service;
+	Pizza pizza;
+	while (true) {
+		// Order info should be here maybe
+		cout << "1: Add topping" << endl;
+		cout << "2: Set crust" << endl;
+		cout << "3: Set size" << endl;
+		cout << "4: Complete pizza" << endl;
+		cout << "5: Cancel pizza" << endl;
+		cout << "Input: ";
+		char input;
+		cin >> input;
+		switch (input)
+		{
+		case '1': {
+			vector<Topping> toppings = service.getAllToppings();
+			for (size_t i = 0; i < toppings.size(); ++i) {
+				cout << i + 1 << ": " << toppings.at(i).getName();
+			}
+			cout << "Input: ";
+			cin >> input;
+			pizza.getToppings().push_back(toppings.at((int)input - 49));
+			break;
+		}
+		case '2': {
+			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
+			for (size_t i = 0; i < crusts.size(); ++i) {
+				cout << i + 1 << ": " << crusts.at(i).getName();
+			}
+			cout << "Input: ";
+			cin >> input;
+			pizza.setCrust(crusts.at((int)input - 49));
+			break;
+		}
+		case '3': {
+			vector<PizzaSize> sizes = service.getAllPizzaSizes();
+			for (size_t i = 0; i < sizes.size(); ++i) {
+				cout << i + 1 << ": " << sizes.at(i).getName();
+			}
+			cout << "Input: ";
+			cin >> input;
+			pizza.setPizzaSize(sizes.at((int)input - 49));
+			break;
+		}
+		case '4': {
+			// Validations stuff
+			return pizza;
+		}
+		case '5': {
+			throw 1;
+		}
+		default:
+			cout << "Invalid input" << endl;
+			break;
+		}
+	}
+}
+
+void orderDesigner() {
+	SalesmanService service;
+	Order order;
+	while (true) {
+		// Order info should be here maybe
+		cout << "1: Add pizza" << endl;
+		cout << "2: Add SideOrder" << endl;
+		cout << "3: Set location" << endl;
+		cout << "4: Set delivery method" << endl;
+		cout << "5: Set comment" << endl;
+		cout << "6: Complete order" << endl;
+		cout << "7: Cancel order" << endl;
+		cout << "Input: ";
+		char input;
+		cin >> input;
+		switch (input)
+		{
+		case '1': {
+			order.getPizzas().push_back(pizzaDesigner());
+			break;
+		}
+		case '2': {
+			vector<SideOrder> sides = service.getAllSideOrders();
+			for (size_t i = 0; i < sides.size(); ++i) {
+				cout << i + 1 << ": " << sides.at(i).getName();
+			}
+			cout << "Input: ";
+			cin >> input;
+			order.getSides().push_back(sides.at((int)input - 49));
+			break;
+		}
+		case '3': {
+			vector<Location> locations = service.getAllLocations();
+			for (size_t i = 0; i < locations.size(); ++i) {
+				cout << i + 1 << ": " << locations.at(i).getAddress();
+			}
+			cout << "Input: ";
+			cin >> input;
+			order.setLocation(locations.at((int)input - 49));
+			break;
+		}
+		case '4': {
+			cout << "1: Set to pickup" << endl;
+			cout << "2: Set to delivery" << endl;
+			cout << "Input: ";
+			cin >> input;
+			if (input == '1') {
+				order.setDeliveryMethod(PICKUP);
+			}
+			else if (input == '2') {
+				order.setDeliveryMethod(SEND);
+				string address;
+				cout << "Address: " << endl;
+				cin >> ws;
+				getline(cin, address);
+				order.setHomeAddress(address);
+			}
+			else {
+				cout << "Invalid option" << endl;
+			}
+			break;
+		}
+		case '5': {
+			cout << "Your comment: ";
+			string comment;
+			cin >> ws;
+			getline(cin, comment);
+			order.setComment(comment);
+			break;
+		} 
+		case '6': {
+			service.registerNewOrder(order);
+			return;
+		}
+		case '7': {
+			return;
+		}
+		default:
+			cout << "Invalid input" << endl;
+			break;
+		}
+	}
 }*/
