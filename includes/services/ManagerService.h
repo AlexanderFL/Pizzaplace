@@ -23,6 +23,8 @@ public:
 	void addLocation(Location& location);
 	vector<Location> getLocations();
 	vector<SideOrder> getSides();
+	//Order
+	void addOffer(Offer& offer);
 
 private:
 	void containsOnlyAlpha(string s);

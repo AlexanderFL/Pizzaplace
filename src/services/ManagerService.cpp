@@ -3,6 +3,7 @@
 ManagerService::ManagerService(){}
 
 /*		Add a new topping.		*/
+
 void ManagerService::addTopping(Topping& topping) {
 	// Validate topping
 	string toppingName = topping.getName();
@@ -21,6 +22,17 @@ void ManagerService::addSideOrder(SideOrder& side) {
 
 	// Write it to file
 	repo.WriteToFile(side);
+}
+
+/*		Add a new Order				*/
+void ManagerService::addOffer(Offer& offer) {
+	// Validate side order
+	string offerName = offer.getName();
+
+	validPrice(offer.getPrice());
+
+	// Write it to file
+	repo.WriteToFile(offer);
 }
 
 /*		Add new special offer for the menu.		*/
