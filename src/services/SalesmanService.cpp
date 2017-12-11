@@ -161,23 +161,21 @@ void SalesmanService::overrideOrder(int index, Order edit) {
 
 void SalesmanService::assignID(Order& order) {
 	try {
-		vector<Order> orders = _repo.RetrieveAllFromFile<Order>();
+		vector<Order> orders = get<Order>();
 		if (orders.size() == 0) {
 			order.setID(1);
 		}
 		else {
 			order.setID(orders.at(orders.size() - 1).getID() + 1);
-			if (order.getPizzas().size() > 0) {
-				size_t id = 1;
-				for (size_t i = orders.size() - 1; i > 0; --i) {
-					if (orders.at(i).getPizzas().size() > 0) {
-						id = orders.at(i).getPizzas().at(orders.at(i).getPizzas().size() - 1).getID() + 1;
-					}
-				}
-				for (size_t i = 0; i < order.getPizzas().size(); ++i) {
-					order.getPizzas().at(i).setID(id++);
-				}
+		}
+		size_t id = 1;
+		for (size_t i = orders.size() - 1; i > 0; --i) {
+			if (orders.at(i).getPizzas().size() > 0) {
+				id = orders.at(i).getPizzas().at(orders.at(i).getPizzas().size() - 1).getID() + 1;
 			}
+		}
+		for (size_t i = 0; i < order.getPizzas().size(); ++i) {
+			order.getPizzas().at(i).setID(id++);
 		}
 	}
 	catch (FailedOpenFile) {

@@ -27,9 +27,14 @@ public:
 	vector<Topping> getAllToppings();
 	vector<PizzaCrust> getAllPizzaCrusts();
 	vector<PizzaSize> getAllPizzaSizes();
+	template<class T> vector<T> get();
 private:
 	int calculateCost(const Order& order);
 	bool validateOrder(Order order);
 	void overrideOrder(int index, Order edit);
 	void assignID(Order& order);
 };
+
+template<class T> vector<T> SalesmanService::get() {
+	return _repo.RetrieveAllFromFile<T>();
+}
