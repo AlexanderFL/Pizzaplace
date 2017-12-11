@@ -2,6 +2,7 @@
 #include "Data.h"
 #include "Order.h"
 #include "EmptyVector.h"
+#include "InvalidString.h"
 
 class KitchenService
 {
@@ -14,8 +15,10 @@ public:
 	vector<Location> getLocations();
 	vector<Order> getOrders();
 	vector<Pizza> getPizzas(const Location& location);
+	int convertStringToInt(const string& str) const;
 private:
 	template <class T> void validateVector(const vector<T>& vec) const;
+	void validateString(const string& str) const;
 };
 
 template <class T> void KitchenService::validateVector(const vector<T>& vec) const {

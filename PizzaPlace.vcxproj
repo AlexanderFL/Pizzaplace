@@ -170,8 +170,10 @@
     <ClInclude Include="includes\services\KitchenService.h" />
     <ClInclude Include="includes\exceptions\InvalidOrder.h" />
     <ClInclude Include="includes\exceptions\InvalidAddress.h" />
+    <ClInclude Include="includes\exceptions\InvalidString.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\exceptions\InvalidString.cpp" />
     <ClCompile Include="src\exceptions\InvalidAddress.cpp" />
     <ClCompile Include="src\exceptions\InvalidOrder.cpp" />
     <ClCompile Include="src\services\DeliveryService.cpp" />

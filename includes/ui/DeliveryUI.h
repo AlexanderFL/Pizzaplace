@@ -9,10 +9,8 @@ class DeliveryUI
 {
 private:
 	DeliveryService service;
-	bool ignore;
 public:
 	DeliveryUI();
-	void setIgnore(bool ignore);
 	void deliveryMenu();
 	void allOrdersMenu();
 	void ordersMenu();

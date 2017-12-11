@@ -1,6 +1,7 @@
 #pragma once
 #include "Data.h"
 #include "EmptyVector.h"
+#include "InvalidString.h"
 
 class DeliveryService
 {
@@ -14,8 +15,10 @@ public:
 	vector<Order> getOrders(const Location& location);
 	void setOrderPaid(const size_t& id);
 	void setOrderDelivered(const size_t& id);
+	int convertStringToInt(const string& str) const;
 private:
 	template <class T> void validateVector(const vector<T>& vec) const;
+	void validateString(const string& str) const;
 };
 
 template <class T> void DeliveryService::validateVector(const vector<T>& vec) const {

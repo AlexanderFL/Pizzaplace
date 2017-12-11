@@ -4,84 +4,74 @@
 
 //TODO: Fix home address! 
 
-DeliveryUI::DeliveryUI()
-{
-	ignore = true;
-}
-
-void DeliveryUI::setIgnore(bool ignore) {
-	this-> ignore = ignore;
-}
+DeliveryUI::DeliveryUI() {}
 
 void DeliveryUI::deliveryMenu() {
-	char input;
+	string input;
 	Menu menu;
 	while (true) {
 		cout << menu.printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" }) << endl;
-		cin >> input;
-		switch (input)
-		{
-		case '1': {
+		cin >> ws;
+		getline(cin, input);
+		if (input == "1") {
 			allOrdersMenu();
-			break;
 		}
-		case '2': {
+		else if (input == "2") {
 			ordersMenu();
-			break;
 		}
-		case '3': {
+		else if (input == "3") {
 			return;
 		}
-		default:
+		else {
 			cout << "Invalid input." << endl;
-			break;
 		}
 	}
 }
 
 void DeliveryUI::allOrdersMenu() {
-	char input;
+	string input;
 	try {
 		vector<Order> orders = service.getOrders();
 		for (size_t i = 0; i < orders.size(); ++i) {
 			cout << i + 1 << ": " << orders.at(i).getStatus() << endl;
 		}
 		cout << "Input: ";
-		cin >> input;
+		cin >> ws;
+		getline(cin, input);
 		try {
-			int order = (int)input - 49;
+			int order = service.convertStringToInt(input);
 			cout << orders.at(order) << endl;
 			cout << "1: Set as paid" << endl;
 			cout << "2: Set as delivered" << endl;
 			cout << "3: Go back" << endl;
 			cout << "Input: " << endl;
-			cin >> input;
-			switch (input) {
-			case '1': {
+			cin >> ws;
+			getline(cin, input);
+			if (input == "1") {
 				try {
 					service.setOrderPaid(orders.at(order).getID());
 				}
 				catch (out_of_range) {
 					cout << "Invalid index." << endl;
 				}
-				break;
 			}
-			case '2': {
+			else if (input == "2") {
 				try {
 					service.setOrderDelivered(orders.at(order).getID());
 				}
 				catch (out_of_range) {
 					cout << "Invalid index." << endl;
 				}
-				break;
 			}
-			case '3': {
+			else if (input == "3") {
 				return;
 			}
-			default:
+			else {
 				cout << "Invalid input." << endl;
-				break;
 			}
+		}
+		catch (InvalidString) {
+			cout << "Invalid input." << endl;
 		}
 		catch (out_of_range) {
 			cout << "Invalid index." << endl;
@@ -96,7 +86,7 @@ void DeliveryUI::allOrdersMenu() {
 }
 
 void DeliveryUI::ordersMenu() {
-	char input;
+	string input;
 	try {
 		vector<Location> locations = service.getLocations();
 		cout << "Choose the location of your workplace" << endl;
@@ -104,54 +94,59 @@ void DeliveryUI::ordersMenu() {
 			cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
 		}
 		cout << "Input: ";
-		cin >> input;
+		cin >> ws;
+		getline(cin, input);
 		try {
-			vector<Order> orders = service.getOrders(locations.at((int)input - 49));
+			int index = service.convertStringToInt(input);
+			vector<Order> orders = service.getOrders(locations.at(index));
 			for (size_t i = 0; i < orders.size(); ++i) {
 				cout << i + 1 << ": " << showOrderInfoShort(orders.at(i)) << endl;
 			}
 			cout << "Input: ";
-			cin >> input;
+			cin >> ws;
+			getline(cin, input);
 			try {
-				int order = (int)input - 49;
+				int order = service.convertStringToInt(input);
 				cout << showOrderInfo(orders.at(order)) << endl;
 				cout << "Set as paid" << endl;
 				cout << "Set as delivered" << endl;
 				cout << "Go back" << endl;
 				cout << "Input: " << endl;
-				switch (input) {
-				case '1': {
+				if (input == "1") {
 					try {
 						service.setOrderPaid(orders.at(order).getID());
 					}
 					catch (out_of_range) {
 						cout << "Invalid index." << endl;
 					}
-					break;
 				}
-				case '2': {
+				if(input == "2") {
 					try {
 						service.setOrderDelivered(orders.at(order).getID());
 					}
 					catch (out_of_range) {
 						cout << "Invalid index." << endl;
 					}
-					break;
 				}
-				case '3': {
+				if (input == "3") {
 					return;
 				}
-				default:
+				else {
 					cout << "Invalid input." << endl;
-					break;
 				}
+			}
+			catch (InvalidString) {
+				cout << "Invalid input." << endl;
 			}
 			catch (out_of_range) {
 				cout << "Invalid index." << endl;
 			}
 		}
+		catch (InvalidString) {
+			cout << "Invalid input." << endl;
+		}
 		catch (out_of_range) {
-			cout << "Invalid index" << endl;
+			cout << "Invalid index." << endl;
 		}
 		catch (EmptyVector) {
 			cout << "No orders available for this location." << endl;

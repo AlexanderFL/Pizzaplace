@@ -4,7 +4,7 @@ KitchenUI::KitchenUI() {}
 
 //TODO: Only allow certain workplaces and let the user pick from that
 void KitchenUI::kitchenMenu() {
-	char input;
+	string input;
 	while (true) {
 		try {
  			vector<Location> locations = service.getLocations();
@@ -14,40 +14,44 @@ void KitchenUI::kitchenMenu() {
 			}
 			cout << "0: Go back" << endl;
 			cout << "Input: ";
-			cin >> input;
-			if (input == '0') {
+			cin >> ws;
+			getline(cin, input);
+			if (input == "0") {
 				return;
 			}
 			else {
 				try {
-					vector<Pizza> pizzas = service.getPizzas(locations.at((int)input - 49));
+					int index = service.convertStringToInt(input);
+					vector<Pizza> pizzas = service.getPizzas(locations.at(index));
 					while (true) {
 						for (size_t i = 0; i < pizzas.size(); ++i) {
 							cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl;
 						}
 						cout << "0: Go back" << endl;
 						cout << "Input: ";
-						cin >> input;
-						if (input == '0') {
+						cin >> ws;
+						getline(cin, input);
+						if (input == "0") {
 							return;
 						}
 						else {
 							try {
 								while (true) {
-									int pizzanr = (int)input - 49;
+									int pizzanr = service.convertStringToInt(input);
 									cout << showPizzaInfo(pizzas.at(pizzanr)) << endl;
 									cout << "1: Set as Baking" << endl;
 									cout << "2: Set as Ready" << endl;
 									cout << "3: Go Back" << endl;
 									cout << "Input: ";
-									cin >> input;
-									if (input == '1') {
+									cin >> ws;
+									getline(cin, input);
+									if (input == "1") {
 										service.setOrderAsBaking(pizzas.at(pizzanr).getID());
 									}
-									else if (input == '2') {
+									else if (input == "2") {
 										service.setOrderAsReady(pizzas.at(pizzanr).getID());
 									}
-									else if (input == '3') {
+									else if (input == "3") {
 										break;
 									}
 									else {
@@ -60,6 +64,9 @@ void KitchenUI::kitchenMenu() {
 							}
 						}
 					}
+				}
+				catch (InvalidString) {
+					cout << "Invalid input." << endl;
 				}
 				catch (out_of_range) {
 					cout << "Invalid index." << endl;
