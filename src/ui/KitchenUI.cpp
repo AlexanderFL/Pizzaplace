@@ -74,9 +74,11 @@ void KitchenUI::kitchenMenu() {
 		}
 		catch (EmptyVector) {
 			cout << "No locations available." << endl;
+			break;
 		}
 		catch (FailedOpenFile) {
 			cout << "Failed to open file." << endl;
+			break;
 		}
 	}
 }
