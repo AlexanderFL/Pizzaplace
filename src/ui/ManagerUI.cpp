@@ -1,12 +1,11 @@
 #include "ManagerUI.h"
-//TODO: Fix comment on the bottom and make this code more readable.
 
 ManagerUI::ManagerUI() {
 }
 
 void ManagerUI::managerMenu() {
 	while (true) {
-		cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Locations", "Side orders", "Go Back" }) << endl;
+		cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Locations", "Side orders", "Menu options", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 
 		cin.ignore();
@@ -15,26 +14,22 @@ void ManagerUI::managerMenu() {
 
 		switch (input)
 		{
-			case '1':
-			{
+			case '1':{
 				//Pizza
 				pizzaOption();
 				break;
 			}
-			case '2':
-			{
+			case '2':{
 				//Toppings
 				toppingOption();
 				break;
 			}
-			case '3':
-			{
+			case '3':{
 				//Price
 				priceOption();
 				break;
 			}
-			case '4':
-			{
+			case '4':{
 				//Location
 				locationOption();
 				break;
@@ -44,6 +39,9 @@ void ManagerUI::managerMenu() {
 				sideOrderOption();
 				break;
 			case '6':
+				//Pizza Menu
+				pizzaMenuOption();
+			case '7':
 				//Go back
 				return;
 			case 'q':
@@ -60,6 +58,12 @@ void ManagerUI::managerMenu() {
 
 void ManagerUI::pizzaOption() {
 	//TODO: Add options to add sizes/ bottoms   or delete them
+	while (true) {
+		cout << menu.printMenu({ "Size", "Bottom", "Go Back" }) << endl;
+		cout << "Press 'q' to quit.\nWhat would you like to register? ";
+		cin >> input;
+		if (input == '3') break;
+	}
 }
 
 void ManagerUI::toppingOption() {
@@ -104,14 +108,20 @@ void ManagerUI::sideOrderOption() {
 	}
 }
 
+void ManagerUI::pizzaMenuOption() {
+	while (true) {
+		cout << menu.printMenu({ "Add a pizza", "Remove a pizza", "Pizza menu", "Go Back" }) << endl;
+		cout << "What would you like to do? ";
+		cin >> input;
+		//validatePizzaMenuOption(input);
+		if (input == '4') return;
+	}
+}
+
 
 /*				TOPPINGS			*/
 
 void ManagerUI::validateToppingInput(char input) {
-	Data toppingRepo;
-	vector <Topping> toppings = toppingRepo.RetrieveAllFromFile<Topping>();
-	Topping topping;
-
 	switch (input) {
 	case '1': {
 		//Adding a topping
@@ -120,18 +130,12 @@ void ManagerUI::validateToppingInput(char input) {
 	}
 	case '2': {
 		//Delete a topping
-		if (toppings.size() != 0) {
-			deleteToppings();
-		}
-		else cout << "You have no toppings so far." << endl;
+		deleteToppings();
 		break;
 	}
 	case '3': {
 		//See all toppings
-		if (toppings.size() != 0) {
-			seeAllToppings();
-		}
-		else cout << "You have no toppings so far." << endl;
+		seeAllToppings();
 		system("PAUSE");
 		break;
 	}
@@ -164,22 +168,27 @@ void ManagerUI::addMultipleToppings() {
 void ManagerUI::deleteToppings() {
 	char input;
 	seeAllToppings();
-	cout << "What topping would you like to delete. Please input a number: " << endl;
-	cout << "Input: ";
-	cin >> input;
-	//Changing the input from char to int
-	int inputInInt = (int)input - 49;
-	service.deleteTopping(inputInInt);
+	if ((service.getToppings()).size() != 0) {
+		cout << "What topping would you like to delete. Please input a number: " << endl;
+		cout << "Input: ";
+		cin >> input;
+		//Changing the input from char to int
+		int inputInInt = (int)input - 49;
+		service.deleteTopping(inputInInt);
+	}
 }
 
 
 void ManagerUI::seeAllToppings() {
-	Data toppingRepo;
-	vector <Topping> toppings = toppingRepo.RetrieveAllFromFile<Topping>();
-	Topping topping;
-	cout << "Here are the toppings you have so far: " << endl;
-	for (unsigned int i = 0; i < toppings.size(); i++) {
-		cout << i + 1 << ": " << toppings.at(i) << endl;
+	vector <Topping> toppings = service.getToppings();
+	if (toppings.size() != 0) {
+		cout << "Here are the toppings you have so far: " << endl;
+		for (unsigned int i = 0; i < toppings.size(); i++) {
+			cout << i + 1 << ": " << toppings.at(i) << endl;
+		}
+	}
+	else {
+		cout << "You have no toppings so far." << endl;
 	}
 }
 
@@ -189,9 +198,6 @@ void ManagerUI::seeAllToppings() {
 
 
 void ManagerUI::validateLocationOptions(char input) {
-	Data locationRepo;
-	vector<Location> locations = service.getLocations();
-	Location location;
 	switch (input) {
 	case '1':
 	{
@@ -202,28 +208,20 @@ void ManagerUI::validateLocationOptions(char input) {
 	case '2':
 	{
 		//Delete a Location
-		if (locations.size() != 0) {
-			addingMultipleLocations();
-		}
-		else cout << "You have no locations so far." << endl;
+		addingMultipleLocations();
 		break;
 	}
 	case '3': {
 		//See all locations
-		if (locations.size() != 0) {
-			seeAllLocations();
-		}
-		else cout << "You have no locations so far." << endl;
+		seeAllLocations();
 		system("PAUSE");
 		break;
-	}
+		}
 	}
 }
 
-
 void ManagerUI::addingMultipleLocations() {
 	int numberOfLocations;
-	Data locationRepo;
 	vector<Location> locations = service.getLocations();
 	Location location;
 	seeAllLocations();
@@ -241,54 +239,49 @@ void ManagerUI::addingMultipleLocations() {
 void ManagerUI::deleteMultipleLocations() {
 	char input;
 	seeAllLocations();
-	cout << "What location would you like to delete. Please input a number: " << endl;
-	cout << "Input: ";
-	cin >> input;
-	//Changing the input from char to int
-	int inputInInt = (int)input - 49;
-	service.deleteLocation(inputInInt);
-}
-
-
-void ManagerUI::seeAllLocations() {
-	Data locationRepo;
-	vector<Location> locations = service.getLocations();
-	Location location;
-	cout << "Here are the locations you have so far: " << endl;
-	for (unsigned int i = 0; i < locations.size(); i++) {
-		cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
+	if ((service.getLocations()).size() != 0) {
+		cout << "What location would you like to delete. Please input a number: " << endl;
+		cout << "Input: ";
+		cin >> input;
+		//Changing the input from char to int
+		int inputInInt = (int)input - 49;
+		service.deleteLocation(inputInInt);
 	}
 }
 
 
+void ManagerUI::seeAllLocations() {
+	vector<Location> locations = service.getLocations();
+	if (locations.size() != 0) {
+		cout << "Here are the locations you have so far: " << endl;
+		for (unsigned int i = 0; i < locations.size(); i++) {
+			cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
+		}
+	}
+	else {
+		cout << "You have no locations so far." << endl;
+	}
+}
+
 /*			SIDE ORDERS		*/
 
 void ManagerUI::validateOtherInput(char input) {
-	Data sideOrderRepo;
-	vector <SideOrder> sides = sideOrderRepo.RetrieveAllFromFile<SideOrder>();
+	vector <SideOrder> sides = service.getSides();
 	SideOrder sideOrder;
 	switch (input) {
 	case '1': {
 		//Add a side order
-		seeAllSides();
 		addMultipleSides();
 		break;
 	}
 	case '2': {
 		//delete a side order
-		if (sides.size() != 0) {
-			seeAllSides();
-			deleteMultipleSides();
-		}
-		else cout << "You have no side orders so far." << endl;
+		deleteMultipleSides();
 		break;
 	}
 	case '3': {
 		//See all side orders
-		if (sides.size() != 0) {
-			seeAllSides();
-		}
-		else cout << "You have no side orders so far." << endl;
+		seeAllSides();
 		break;
 	}
 	case '4': {
@@ -303,9 +296,8 @@ void ManagerUI::validateOtherInput(char input) {
 
 void ManagerUI::addMultipleSides() {
 	int numberOfSides;
-	Data sideOrderRepo;
-	vector <SideOrder> sides = sideOrderRepo.RetrieveAllFromFile<SideOrder>();
 	SideOrder sideOrder;
+	//seeAllSides();
 	cout << "How many side orders would you like to add? ";
 	cin >> numberOfSides;
 	cout << "What would you like as a side order? " << endl;
@@ -319,21 +311,53 @@ void ManagerUI::addMultipleSides() {
 
 void ManagerUI::deleteMultipleSides() {
 	char input;
-	cout << "What topping would you like to delete. Please input a number: " << endl;
-	cout << "Input: ";
-	cin >> input;
-	//Changing the input from char to int
-	int inputInInt = (int)input - 49;
-	service.deleteSideOrder(inputInInt);
+	seeAllSides();
+	if ((service.getSides()).size() != 0) {
+		cout << "What topping would you like to delete. Please input a number: " << endl;
+		cout << "Input: ";
+		cin >> input;
+		//Changing the input from char to int
+		int inputInInt = (int)input - 49;
+		service.deleteSideOrder(inputInInt);
+	}
 }
 
 
 void ManagerUI::seeAllSides() {
-	Data sideOrderRepo;
-	vector <SideOrder> sides = sideOrderRepo.RetrieveAllFromFile<SideOrder>();
-	SideOrder sideOrder;
-	cout << "Here are the side orders you have so far: " << endl;
-	for (unsigned int i = 0; i < sides.size(); i++) {
-		cout << i + 1 << ": " << sides.at(i) << endl;
+	vector <SideOrder> sides = service.getSides();
+	if (sides.size() != 0) {
+		cout << "Here are the side orders you have so far: " << endl;
+		for (unsigned int i = 0; i < sides.size(); i++) {
+			cout << i + 1 << ": " << sides.at(i) << endl;
+		}
+	}
+	else {
+		cout << "You have no Sides so far." << endl;
+	}
+}
+
+/*			PIZZA MENU			*/	
+
+void ManagerUI::validatePizzaMenuOption(char input) {
+	switch (input) {
+	case '1': {
+		//Add a Pizza to the menu
+		break;
+	}
+	case '2': {
+		//delete a Pizza from the menu
+		break;
+	}
+	case '3': {
+		//See the men
+		break;
+	}
+	case '4': {
+		//go back
+		break;
+	}
+	default:
+		cout << "Invalid input." << endl;
+		break;
 	}
 }

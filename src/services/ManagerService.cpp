@@ -93,14 +93,20 @@ void ManagerService::addLocation(Location& location) {
 
 vector<Location>ManagerService::getLocations() {
 	vector<Location> locations = repo.RetrieveAllFromFile<Location>();
-
-	if (locations.size() == 0) {
+	/*if (locations.size() == 0) {
 		throw EmptyVector();
-	}
+	}*/
 	return locations;
 }
 
-
+//Getting side Orders
+vector<SideOrder> ManagerService::getSides() {
+	vector<SideOrder> sides = repo.RetrieveAllFromFile<SideOrder>();
+	/*if (sides.size() == 0) {
+		throw EmptyVector();
+	}*/
+	return sides;
+}
 
 /*
 *************************************************

@@ -22,6 +22,7 @@ public:
 	vector<Topping> getToppings();
 	void addLocation(Location& location);
 	vector<Location> getLocations();
+	vector<SideOrder> getSides();
 
 private:
 	void containsOnlyAlpha(string s);
