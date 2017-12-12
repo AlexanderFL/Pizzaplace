@@ -40,7 +40,7 @@ void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
 }
 
 // Appends a pizza to a order
-void SalesmanService::appendToOrder(Order& firstOrder, Pizza & pizza)
+void SalesmanService::appendToOrder(Order& firstOrder, Pizza &pizza)
 {
 	// Get the pizzas from a order
 	vector<Pizza> pizzaVector = firstOrder.getPizzas();
@@ -48,6 +48,14 @@ void SalesmanService::appendToOrder(Order& firstOrder, Pizza & pizza)
 	pizzaVector.push_back(pizza);
 	// Set the vector back in order
 	firstOrder.setPizzas(pizzaVector);
+}
+
+// Appends sides to a order
+void SalesmanService::appendToOrder(Order& order, SideOrder &sideAppend)
+{
+	vector<SideOrder> sidesVector = order.getSides();
+	sidesVector.push_back(sideAppend);
+	order.setSides(sidesVector);
 }
 
 Pizza SalesmanService::getPizza()
@@ -105,6 +113,11 @@ void SalesmanService::setOrderAsPaid(Order& order){
 
 void SalesmanService::setComments(Order& order, string comment){
 	order.setComment(comment);
+}
+
+SideOrder SalesmanService::getSideOrder()
+{
+	return _sides;
 }
 
 vector<Order> SalesmanService::getAllOrders()
