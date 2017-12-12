@@ -521,7 +521,6 @@ void ManagerUI::addMultiplePizza() {
 	}
 }
 
-
 void ManagerUI::seePizzaMenu() {
 	vector <Offer> offers = service.getAll<Offer>();
 	if (offers.size() != 0) {
