@@ -4,12 +4,12 @@
 const string PizzaSize::filename = "pizzasizes.dat";
 
 PizzaSize::PizzaSize() {
-	this->pricemod = 1;
+	this->pricemod = 0;
 }
 
 PizzaSize::PizzaSize(string name, double pricemod) {
 	this->name = name;
-	this->pricemod = pricemod;
+	setPriceMod(pricemod);
 }
 
 string PizzaSize::getName() const {
@@ -25,7 +25,10 @@ void PizzaSize::setName(const string& name) {
 }
 
 void PizzaSize::setPriceMod(const double& pricemod) {
-	this->pricemod = pricemod;
+	double setModPercentage = 0;
+	setModPercentage = pricemod / 100;
+	setModPercentage += 1;
+	this->pricemod = setModPercentage;
 }
 
 ostream& operator << (ostream& out, const PizzaSize& size) {
