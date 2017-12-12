@@ -195,7 +195,7 @@ void SalesmanService::overrideOrder(int index, Order edit) {
 
 void SalesmanService::assignID(Order& order) {
 	try {
-		vector<Order> orders = get<Order>();
+		vector<Order> orders = getAll<Order>();
 		if (orders.size() == 0) {
 			order.setID(1);
 		}

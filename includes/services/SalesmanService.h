@@ -34,7 +34,7 @@ public:
 	vector<PizzaSize> getAllPizzaSizes();
 
 	template<class T> 
-	vector<T> get();
+	vector<T> getAll();
 
 private:
 	int calculateCost(const Order& order);
@@ -45,6 +45,6 @@ private:
 };
 
 template<class T> vector<T> 
-SalesmanService::get() {
+SalesmanService::getAll() {
 	return _repo.RetrieveAllFromFile<T>();
 }
