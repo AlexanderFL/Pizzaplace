@@ -1,53 +1,41 @@
 #include "CommonUI.h"
 
 
-string CommonUI::printMenu(vector<string> options)
+string CommonUI::printMenu(const vector<string>& options)
 {
-	string biggestString = "";
-	for (unsigned int i = 0; i < options.size(); i++)
-	{
-		if (biggestString.size() < options.at(i).size())
-		{
-			biggestString = options.at(i);
-		}
-	}
+	size_t biggest = biggestStringSize(options);
 	string output = "\n";
 	for (unsigned int i = 0; i < options.size(); i++)
 	{
-		output += printLines(biggestString.size());
+		output += printLines(biggest);
 		output += "\t| ";
 		output += to_string(i + 1);
 		output += ". ";
 		output += options.at(i);
-		for (unsigned int j = 0; j < (biggestString.size() - options.at(i).size()); j++)
-		{
+		for (unsigned int j = 0; j < (biggest - options.at(i).size()); j++) {
 			output += " ";
 		}
 		output += " | ";
 		i++;
 
 		//if there is an odd number of options, then the last box needs to be empty
-		if (options.size() == i)
-		{
+		if (options.size() == i) {
 			output += "   ";
-			for (unsigned int j = 0; j < biggestString.size(); j++)
-			{
+			for (unsigned int j = 0; j < biggest; j++) {
 				output += " ";
 			}
 		}
-		else
-		{
+		else {
 			output += to_string(i + 1);
 			output += ". ";
 			output += options.at(i);
-			for (unsigned int j = 0; j < (biggestString.size() - options.at(i).size()); j++)
-			{
+			for (unsigned int j = 0; j < (biggest - options.at(i).size()); j++) {
 				output += " ";
 			}
 		}
 		output += " |\n";
 	}
-	output += printLines(biggestString.size());
+	output += printLines(biggest);
 	return output;
 }
 
@@ -64,3 +52,12 @@ string CommonUI::printLines(unsigned int size)
 	return output;
 }
 
+size_t CommonUI::biggestStringSize(const vector<string>& vec) {
+	size_t biggest = 0;
+	for (size_t i = 0; i < vec.size(); i++) {
+		if (biggest < vec.at(i).size()) {
+			biggest = vec.at(i).size();
+		}
+	}
+	return biggest;
+}
