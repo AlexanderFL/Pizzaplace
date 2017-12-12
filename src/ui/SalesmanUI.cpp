@@ -136,15 +136,15 @@ void SalesmanUI::makeNewOrder()
 			}*/
 
 			//Adding a comment to the order
-			string comment;
+			string comment = "None";
 			cout << "Is there any information we should know (y/n)? ";
 			cin >> input;
 			if (tolower(input) == 'y') {
 				cout << "Comment: ";
 				cin >> ws;
 				getline(cin, comment);
-				service.setComments(order, comment);
 			}
+			service.setComments(order, comment);
 
 			cout << "Would you like to add another order to this?" << endl;
 			cout << "Input (y/n): ";
