@@ -29,6 +29,9 @@ public:
 	void managerMenu();
 	//Pizza
 	void validateSizeOptions();
+	void addSizeMenu();
+	void deleteSizeMenu();
+	void seeAllSizesMenu();
 	//Side orders
 	void validateOtherInput(char input);
 	void addMultipleSides();

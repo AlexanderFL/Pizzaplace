@@ -128,6 +128,10 @@ void ManagerService::deletePizzaOnMenu(int index) {
 	repo.RemoveFromFileAtIndex<Offer>(index);
 }
 
+void ManagerService::addSize(PizzaSize& size) {
+	repo.WriteToFile(size);
+}
+
 /*
 *************************************************
 *****			PRIVATE FUNCTIONS			*****

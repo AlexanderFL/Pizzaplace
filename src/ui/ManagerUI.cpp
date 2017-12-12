@@ -78,20 +78,23 @@ void ManagerUI::pizzaOption() {
 }*/
 
 void ManagerUI::validateSizeOptions() {
+	cout << menu.printMenu({ "Add a new Size", "Delete a Size", "See all Sizes", "Go back" }) << endl;
+	cout << "Input: ";
+	cin >> input;
 	switch (input) {
 	case '1': {
 		//Adding a topping
-		addMultipleToppings();
+		addSizeMenu();
 		break;
 	}
 	case '2': {
 		//Delete a topping
-		deleteToppings();
+		deleteSizeMenu();
 		break;
 	}
 	case '3': {
 		//See all toppings
-		seeAllToppings();
+		seeAllSizesMenu();
 		system("PAUSE");
 		break;
 	}
@@ -106,11 +109,25 @@ void ManagerUI::validateSizeOptions() {
 	}
 }
 
+void ManagerUI::addSizeMenu() {
+	string name;
+	double mod;
+	cout << "Name of the new size: ";
+	cin >> ws;
+	getline(cin, name);
+	cout << "Price modifier of the new size: ";
+	cin >> mod;
+	PizzaSize size(name, mod);
+	service.addSize(size);
+}
 
+void ManagerUI::deleteSizeMenu() {
 
+}
 
+void ManagerUI::seeAllSizesMenu() {
 
-
+}
 
 
 
