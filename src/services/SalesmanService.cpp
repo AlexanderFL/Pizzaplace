@@ -176,7 +176,7 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 		total += pizza.getToppings().at(j).getPrice(); // Add each topping to price
 	}
 	total += pizza.getCrust().getPrice(); // Add type of crust to price
-	total *= pizza.getPizzaSize().getPriceMod(); // Add the pizza size to price
+	total *= pizza.getPizzaSize().getPriceMod(); // Multiply the pizza size mod to price
 	return total;
 }
 
