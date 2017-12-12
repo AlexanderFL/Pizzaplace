@@ -116,10 +116,20 @@ void SalesmanUI::makeNewOrder()
 				service.getSideOrder().setName(sideOrder.at(index).getName());
 				service.getSideOrder().setPrice(sideOrder.at(index).getPrice());
 
-				service.appendToOrder(order, service.getSideOrder());
-				
+				service.appendToOrder(order, service.getSideOrder());	
 			}
-			cout << "You have ordered:" << order << "\Would you like to add another order to this?" << endl;
+		/*	cout << "Your order is:" << endl;
+			string info = "A ";
+			info += pizza.getPizzaSize().getName() + " pizza with ";
+			if (toppings.size() == 0) {
+				info += "no toppings, ";
+			}
+			else {
+				for (size_t i = 0; i < toppings.size(); ++i) {
+					info += toppings.at(i).getName() + ", ";
+				}
+			}*/
+			cout << "Would you like to add another order to this?" << endl;
 			cout << "Input (y/n): ";
 			cin >> input;
 			if (tolower(input) != 'y') {
@@ -132,5 +142,7 @@ void SalesmanUI::makeNewOrder()
 			cout << "Failed to open a critical file...";
 			break;
 		}
+		//Add the new order to file
+		service.registerNewOrder(order);
 	}
 }
