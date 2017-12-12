@@ -2,7 +2,6 @@
 
 KitchenUI::KitchenUI() {}
 
-//TODO: Only allow certain workplaces and let the user pick from that
 void KitchenUI::kitchenMenu() {
 	string input;
 	while (true) {
