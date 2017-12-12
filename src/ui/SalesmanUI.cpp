@@ -14,7 +14,7 @@ void SalesmanUI::salesmanMenu() {
 	Menu menu;
 	char input;
 	while (true) {
-		cout << menu.printMenu({ "Register an order", "Add another order", "Price of the order", "Home address", "Food delivered", "Food picked up", "Mark paid for", "Comments", "Go back" }) << endl;
+		cout << menu.printMenu({ "Register an order", "Go back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to do? "; 
 
 		cin.ignore();
@@ -26,23 +26,7 @@ void SalesmanUI::salesmanMenu() {
 		case '1':
 			makeNewOrder();
 			break;
-		case '2':{
-			makeNewOrder();
-			break;
-		}
-		case '3': {
-			Order order;
-			//Todo replace with service
-			double totalCost = 0;//order.getTotalCost();
-			cout << "The total cost is: " << totalCost << " kr" << endl;
-			break;
-		}
-		case '4':
-		case '5':
-		case '6':
-		case '7':
-		case '8':
-		case '9':
+		case '2':
 			return;
 		case 'q':
 		case 'Q':
@@ -56,9 +40,11 @@ void SalesmanUI::makeNewOrder()
 	Order order;
 	SalesmanService service;
 	char input;
+	int i = 1;
 	while (true) {
 		try
 		{
+			cout << "Order number " << i << endl;
 			// Select type of crust
 			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
 			cout << "Here are the crusts you can choose from:" << endl;
@@ -88,7 +74,7 @@ void SalesmanUI::makeNewOrder()
 					cout << i + 1 << ": " << toppings.at(i).getName() << endl;
 				}
 				cout << "How many toppings would you like? ";
-				cout << "\nPlease enter 0 if you wish to have no toppings" << endl;
+				cout << "\nPlease enter 0 if you wish to have no toppings.\nInput: ";
 				char numberOfToppings;
 				cin >> numberOfToppings;
 				int numberOfToppingsInt = (int)numberOfToppings - 48;
@@ -104,11 +90,10 @@ void SalesmanUI::makeNewOrder()
 			}
 			
 			service.appendToOrder(order, service.getPizza());
-
 			// Ask user if he wants any sides
 			cout << endl << "Would you like any sides with your order? Y/N (yes/no): ";
 			cin >> input;
-			if (toupper(input) == 'y') {
+			if (toupper(input) == 'Y') {
 				cout << "Here are side orders you can choose from: " << endl;
 				vector<SideOrder> sideOrder = service.getAllSideOrders();
 				for (size_t i = 0; i < sideOrder.size(); i++)
@@ -124,10 +109,16 @@ void SalesmanUI::makeNewOrder()
 				service.getSideOrder().setPrice(sideOrder.at(index).getPrice());
 
 				service.appendToOrder(order, service.getSideOrder());
+				
 			}
-			else {
-
+			cout << "You have ordered:" << order << "\Would you like to add another order to this?" << endl;
+			cout << "Input (y/n): ";
+			cin >> input;
+			if (tolower(input) != 'y') {
+				break;
 			}
+			cout << endl;
+			i++;
 		}
 		catch (FailedOpenFile) {
 			cout << "Failed to open a critical file...";
