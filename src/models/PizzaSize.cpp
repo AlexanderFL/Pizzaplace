@@ -26,8 +26,7 @@ void PizzaSize::setName(const string& name) {
 
 void PizzaSize::setPriceMod(const double& pricemod) {
 	double setModPercentage = 0;
-	setModPercentage = pricemod / 100;
-	setModPercentage += 1;
+	setModPercentage = (pricemod / 100) + 1;
 	this->pricemod = setModPercentage;
 }
 
