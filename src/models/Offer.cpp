@@ -17,7 +17,7 @@ string Offer::getName() const {
 	return this->name;
 }
 
-Order Offer::getOrder() const {
+Order Offer::getOrder()const {
 	return this->order;
 }
 

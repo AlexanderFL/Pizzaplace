@@ -8,13 +8,19 @@
 */
 
 Pizza::Pizza() {
+	this->name = "Custom Pizza";
+	this->price = 1000; //cheapest pizza you can get
+	this->size = PizzaSize(); 
+	this->crust = PizzaCrust(); 
 	this->phase = PREPERATION;
 }
 
-Pizza::Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size) {
+Pizza::Pizza(string name, vector<Topping> toppings, int price)  {
+	this->name = name; 
 	this->toppings = toppings;
-	this->crust = crust;
-	this->size = size;
+	this->price = price;
+	this->size = PizzaSize();
+	this->crust = PizzaCrust();
 	this->phase = PREPERATION;
 }
 
@@ -40,8 +46,9 @@ size_t Pizza::getID() const {
 	return this->id;
 }
 
-void Pizza::setToppings(const vector<Topping>& toppings) {
-	this->toppings = toppings;
+void Pizza::addToppings(Topping topping) {
+	this->toppings.push_back(topping);
+	this->price += topping.getPrice() * size.getPriceMod();
 }
 
 void Pizza::setCrust(const PizzaCrust& crust) {
