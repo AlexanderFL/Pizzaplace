@@ -11,16 +11,17 @@ enum status { PREPERATION = 0, BAKING, READY, SENT };
 class Pizza
 {
 private:
-	// Change to vector
 	vector<Topping> toppings;
 	PizzaCrust crust;
 	PizzaSize size;
 	status phase;
 	size_t id;
+	string name;
+	int price;
 public:
 	// Constructors
 	Pizza();
-	Pizza(vector<Topping> toppings, PizzaCrust crust, PizzaSize size);
+	Pizza(string name, vector<Topping> toppings, int price);
 
 	// Get functions
 	vector<Topping> getToppings() const;
@@ -30,7 +31,7 @@ public:
 	size_t getID() const;
 
 	// Set Functions
-	void setToppings(const vector<Topping>& toppings);
+	void addToppings(Topping topping);
 	void setCrust(const PizzaCrust& crust);
 	void setPizzaSize(const PizzaSize& size);
 	void setPhase(const status& phase);

@@ -10,5 +10,7 @@ public:
 	SalesmanUI();
 	void salesmanMenu();
 
-	void makeNewOrder(Menu& m);
+	void makeNewOrder();
 };
+
+

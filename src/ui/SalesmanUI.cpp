@@ -13,8 +13,7 @@ void SalesmanUI::salesmanMenu() {
 	string option;
 	Menu menu;
 	char input;
-	bool stillSalesman = true;
-	while (stillSalesman) {
+	while (true) {
 		cout << menu.printMenu({ "Register an order", "Add another order", "Price of the order", "Home address", "Food delivered", "Food picked up", "Mark paid for", "Comments", "Go back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to do? "; 
 
@@ -25,12 +24,10 @@ void SalesmanUI::salesmanMenu() {
 
 		switch (input) {
 		case '1':
-			makeNewOrder(menu);
+			makeNewOrder();
 			break;
 		case '2':{
-			Order order;
-			//Todo replace with service
-			//order.MakeOrder();
+			makeNewOrder();
 			break;
 		}
 		case '3': {
@@ -46,8 +43,7 @@ void SalesmanUI::salesmanMenu() {
 		case '7':
 		case '8':
 		case '9':
-			stillSalesman = false;
-			break;
+			return;
 		case 'q':
 		case 'Q':
 			exit(1);
@@ -55,38 +51,38 @@ void SalesmanUI::salesmanMenu() {
 	}
 }
 
-void SalesmanUI::makeNewOrder(Menu& m)
+void SalesmanUI::makeNewOrder()
 {
 	SalesmanService service;
-	Order newOrder;
-
-	PizzaCrust newCrust;
-	PizzaSize newSize;
-
-	try
-	{
-		// TODO: Get all pizza sizes and crusts available and display them
-		//		 for the salesman to select from.
-		vector<PizzaCrust> crustVector = service.getAllPizzaCrusts();
-		//vector<PizzaSize> sizeVector = service.getAllPizzaSizes();
-
-		// Vector to put names of either size or crusts in
-		vector<string> stringVec;
-
-		// Place all crust names in a string vector
-		for (int i = 0; i < crustVector.size(); i++){
-			stringVec.push_back(crustVector[i].getName());
+	Pizza pizza;
+	char input;
+	while (true) {
+		vector<Topping> toppings = service.getAllToppings();
+		cout << "Here are the toppings you can choose from:" << endl;
+		for (size_t i = 0; i < toppings.size(); ++i) {
+			cout << i + 1 << ": " << toppings.at(i).getName() << endl;
 		}
+		cout << "Please choose one of them. \nInput: ";
+		cin >> input;
 
-		cout << "Choose a crust";
-		// Print out the vector
-		cout << m.printMenu(stringVec);
-		system("pause");
-	}
-	catch (FailedOpenFile)
-	{
-		cout << "Failed to open a file" << endl;
-		system("pause");
-	}
+		pizza.getToppings().push_back(toppings.at((int)input - 49));
 
+		vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
+		cout << "Here are the crusts you can choose from:" << endl;
+		for (size_t i = 0; i < crusts.size(); ++i) {
+			cout << i + 1 << ": " << crusts.at(i).getName();
+		}
+		cout << "Please choose one of them. \nInput: ";
+		cin >> input;
+		pizza.setCrust(crusts.at((int)input - 49));
+
+		vector<PizzaSize> sizes = service.getAllPizzaSizes();
+		cout << "Here are the sizes you can choose from:" << endl;
+		for (size_t i = 0; i < sizes.size(); ++i) {
+			cout << i + 1 << ": " << sizes.at(i).getName();
+		}
+		cout << "Please choose one of them. \nInput: ";
+		cin >> input;
+		pizza.setPizzaSize(sizes.at((int)input - 49));
+	}
 }
