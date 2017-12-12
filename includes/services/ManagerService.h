@@ -13,6 +13,7 @@ public:
 	ManagerService();
 	void addTopping(Topping& topping);
 	void addSideOrder(SideOrder& side);
+	void addCrust(PizzaCrust& crust);
 	void addSpecialOrder(string ordername, const Order& order);
 	void addDeliveryPlace(string place);
 	void deleteTopping(int index);

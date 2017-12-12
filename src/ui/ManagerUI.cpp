@@ -52,7 +52,7 @@ void ManagerUI::managerMenu() {
 void ManagerUI::pizzaOption() {
 	//TODO: Add options to add sizes/bottoms/crust or delete them
 	while (true) {
-		cout << menu.printMenu({ "Size", "Bottom", "Crust", "Go Back" }) << endl;
+		cout << menu.printMenu({ "Size", "Bottom / Crust", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 		cin >> input;
 		if (input == '4') break;
@@ -62,10 +62,8 @@ void ManagerUI::pizzaOption() {
 			validateSizeOptions();
 			break;
 		case '2':
-			//Bottom
-			break;
-		case '3':
 			//Crust
+			validateCrustOptions();
 			break;
 		default:
 			cout << "Invalid input" << endl;
@@ -73,9 +71,59 @@ void ManagerUI::pizzaOption() {
 	}
 }
 
-/*void ManagerUI::validateCrustOptions() {
+void ManagerUI::validateCrustOptions() {
+	char input;
+	while (true) {
+		cout << menu.printMenu({ "Add a crust", "Delete a crust", "See all crusts available", "Go Back" }) << endl;
+		cout << "Input: ";
+		cin >> input;
+		system("CLS");
+		validateCrustInput(input);
+		if (input == '4') return;
+	}
+}
 
-}*/
+void ManagerUI::validateCrustInput(char input) {
+	switch (input) {
+	case '1': {
+		//Adding a crust
+		addingMultipleCrusts();
+		break;
+	}
+	case '2': {
+		//Delete a crust
+		//deleteToppings();
+		break;
+	}
+	case '3': {
+		//See all crust options
+		//seeAllToppings();
+		system("PAUSE");
+		break;
+	}
+	case '4': {
+		//Go back
+		break;
+	}
+	default: {
+		cout << "Invalid input." << endl;
+		break;
+		}
+	}
+}
+void ManagerUI::addingMultipleCrusts() {
+	int numberOfCrusts;
+	PizzaCrust crust;
+	cout << "How many crusts would you like to add? ";
+	cin >> numberOfCrusts;
+	cout << "What would you like as a crust? " << endl;
+
+	for (int i = 0; i < numberOfCrusts; ++i) {
+		cout << "crust number " << i + 1 << ": ";
+		cin >> crust;
+		service.addCrust(crust);
+	}
+}
 
 void ManagerUI::validateSizeOptions() {
 	cout << menu.printMenu({ "Add a new Size", "Delete a Size", "See all Sizes", "Go back" }) << endl;
@@ -83,18 +131,18 @@ void ManagerUI::validateSizeOptions() {
 	cin >> input;
 	switch (input) {
 	case '1': {
-		//Adding a topping
+		//Adding a size
 		addSizeMenu();
 		break;
 	}
 	case '2': {
-		//Delete a topping
-		deleteSizeMenu();
+		//Delete a size
+	//	deleteSizeMenu();
 		break;
 	}
 	case '3': {
-		//See all toppings
-		seeAllSizesMenu();
+		//See all size
+		//seeAllSizesMenu();
 		system("PAUSE");
 		break;
 	}
@@ -119,7 +167,7 @@ void ManagerUI::addSizeMenu() {
 	cin >> mod;
 	service.addItem(PizzaSize(name, mod));
 }
-
+/*
 void ManagerUI::deleteSizeMenu() {
 	vector<PizzaSize> sizes = service.getAll<PizzaSize>();
 	for (size_t i = 0; i < sizes.size(); ++i) {
@@ -136,14 +184,7 @@ void ManagerUI::seeAllSizesMenu() {
 		cout << sizes.at(i).getName() << " : " << sizes.at(i).getPriceMod();
 	}
 }
-
-
-
-
-
-
-
-
+*/
 void ManagerUI::toppingOption() {
 	while (true) {
 		cout << menu.printMenu({ "Add a topping", "Delete a topping", "See all toppings", "Go Back" }) << endl;

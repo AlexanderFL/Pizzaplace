@@ -51,5 +51,11 @@ istream& operator >> (istream& in, PizzaCrust& crust) {
 		delete[] str;
 		in.read((char*)(&crust.price), sizeof(int));
 	}
+	else {
+		cout << "\nName: ";
+		in >> crust.name;
+		cout << "Price: ";
+		in >> crust.price;
+	}
 	return in;
 }
