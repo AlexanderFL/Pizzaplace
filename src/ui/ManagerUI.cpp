@@ -167,7 +167,7 @@ void ManagerUI::addSizeMenu() {
 	cin >> mod;
 	service.addItem(PizzaSize(name, mod));
 }
-/*
+
 void ManagerUI::deleteSizeMenu() {
 	vector<PizzaSize> sizes = service.getAll<PizzaSize>();
 	for (size_t i = 0; i < sizes.size(); ++i) {
@@ -184,7 +184,7 @@ void ManagerUI::seeAllSizesMenu() {
 		cout << sizes.at(i).getName() << " : " << sizes.at(i).getPriceMod();
 	}
 }
-*/
+
 void ManagerUI::toppingOption() {
 	while (true) {
 		cout << menu.printMenu({ "Add a topping", "Delete a topping", "See all toppings", "Go Back" }) << endl;

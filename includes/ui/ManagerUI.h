@@ -33,8 +33,8 @@ public:
 	void validateCrustInput(char input);
 	void addingMultipleCrusts();
 	void addSizeMenu();
-	//void deleteSizeMenu();
-	//void seeAllSizesMenu();
+	void deleteSizeMenu();
+	void seeAllSizesMenu();
 	//Side orders
 	void validateOtherInput(char input);
 	void addMultipleSides();
