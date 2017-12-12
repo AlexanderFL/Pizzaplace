@@ -30,12 +30,12 @@ private:
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
 	void validateString(const string& str);
-	template<class T> void validateVector(const vector<T>& items);
+	template<class T> void validateVectorNotEmpty(const vector<T>& items);
 };
 
 template<class T> vector<T> ManagerService::getAll() {
 	vector<T> items = repo.RetrieveAllFromFile<T>();
-	validateVector(items);
+	validateVectorNotEmpty(items);
 	return items;
 }
 
@@ -47,7 +47,7 @@ template<class T> void ManagerService::deleteItem(int index) {
 	repo.RemoveFromFileAtIndex<T>(index);
 }
 
-template<class T> void ManagerService::validateVector(const vector<T>& items) {
+template<class T> void ManagerService::validateVectorNotEmpty(const vector<T>& items) {
 	if (items.size() == 0) {
 		throw EmptyVector();
 	}
