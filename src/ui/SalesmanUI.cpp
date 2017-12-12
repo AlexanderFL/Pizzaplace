@@ -52,6 +52,7 @@ void SalesmanUI::makeNewOrder()
 	while (true) {
 		try
 		{
+			Pizza pizza;
 			cout << "Order number " << i << "." << endl;
 			// Select type of crust
 			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
@@ -61,7 +62,7 @@ void SalesmanUI::makeNewOrder()
 			}
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
-			service.getPizza().setCrust(crusts.at((int)input - 49));
+			pizza.setCrust(crusts.at((int)input - 49));
 
 			// Select the size of the pizza
 			vector<PizzaSize> sizes = service.getAllPizzaSizes();
@@ -71,7 +72,7 @@ void SalesmanUI::makeNewOrder()
 			}
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
-			service.getPizza().setPizzaSize(sizes.at((int)input - 49));
+			pizza.setPizzaSize(sizes.at((int)input - 49));
 
 			// Select all toppings
 			vector<Topping> toppings = service.getAllToppings();
@@ -92,12 +93,12 @@ void SalesmanUI::makeNewOrder()
 					if ((int)input - 48 == (toppings.size() + 1)) {
 						break;
 					}
-					service.getPizza().getToppings().push_back(toppings.at((int)input - 49));
+					pizza.addToppings(toppings.at((int)input - 49));
 				}
 				break;
 			}
 			
-			service.appendToOrder(order, service.getPizza());
+			service.appendToOrder(order, pizza);
 			// Ask user if he wants any sides
 			cout << endl << "Would you like any sides with your order? Y/N (yes/no): ";
 			cin >> input;
@@ -113,10 +114,7 @@ void SalesmanUI::makeNewOrder()
 				
 				//Set the selected side order in service
 				int index = (int)input - 49;
-				service.getSideOrder().setName(sideOrder.at(index).getName());
-				service.getSideOrder().setPrice(sideOrder.at(index).getPrice());
-
-				service.appendToOrder(order, service.getSideOrder());	
+				service.appendToOrder(order, sideOrder.at(index));
 			}
 		/*	cout << "Your order is:" << endl;
 			string info = "A ";
@@ -133,6 +131,8 @@ void SalesmanUI::makeNewOrder()
 			cout << "Input (y/n): ";
 			cin >> input;
 			if (tolower(input) != 'y') {
+				//Add the new order to file
+				service.registerNewOrder(order);
 				break;
 			}
 			cout << endl;
@@ -142,7 +142,5 @@ void SalesmanUI::makeNewOrder()
 			cout << "Failed to open a critical file...";
 			break;
 		}
-		//Add the new order to file
-		service.registerNewOrder(order);
 	}
 }
