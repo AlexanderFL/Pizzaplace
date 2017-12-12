@@ -358,13 +358,13 @@ void ManagerUI::addMultiplePizza() {
 	int numberOfPizzas;
 	Offer offer;
 	vector<Topping> tops;
-	//seeAllOrders();
+	seePizzaMenu();
 	cout << "How many pizza offers would you like to add? ";
 	cin >> numberOfPizzas;
-	cout << "What would you like as a pizza offer? " << endl;
+	cout << "What would you like as a pizza offer? " << endl << endl;
 
 	for (int i = 0; i < numberOfPizzas; ++i) {
-		cout << "Pizza number " << i + 1 << ": " << endl;
+		cout << "Pizza number " << i + 1 << ": ";
 		cin >> offer;
 		char numOfToppings;
 		cout << "How many toppings would you like on this pizza? ";
@@ -382,5 +382,19 @@ void ManagerUI::addMultiplePizza() {
 		pizza.push_back(Pizza(offer.getName(), tops, offer.getPrice()));
 		offer.getOrder().setPizzas(pizza);
 		service.addOffer(offer);
+	}
+}
+
+
+void ManagerUI::seePizzaMenu() {
+	vector <Offer> offers = service.getOffers();
+	if (offers.size() != 0) {
+		cout << "Here are the offers you have so far: " << endl;
+		for (unsigned int i = 0; i < offers.size(); i++) {
+			cout << i + 1 << ": " << offers.at(i) << endl;
+		}
+	}
+	else {
+		cout << "You have no pizza offers so far." << endl;
 	}
 }

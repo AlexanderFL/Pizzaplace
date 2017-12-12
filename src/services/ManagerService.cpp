@@ -120,6 +120,10 @@ vector<SideOrder> ManagerService::getSides() {
 	return sides;
 }
 
+vector<Offer> ManagerService::getOffers() {
+	return repo.RetrieveAllFromFile<Offer>();
+}
+
 /*
 *************************************************
 *****			PRIVATE FUNCTIONS			*****

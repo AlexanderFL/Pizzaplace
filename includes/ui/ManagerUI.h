@@ -46,5 +46,6 @@ public:
 	void pizzaMenuOption();
 	void validatePizzaMenuOption(char input);
 	void addMultiplePizza();
+	void seePizzaMenu();
 };
 
