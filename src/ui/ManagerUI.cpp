@@ -357,13 +357,13 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 void ManagerUI::addMultiplePizza() {
 	int numberOfPizzas;
 	Offer offer;
-	vector<Pizza> pizza;
 	seePizzaMenu();
 	cout << "How many pizza offers would you like to add? ";
 	cin >> numberOfPizzas;
 	cout << "What would you like as a pizza offer? " << endl << endl;
 
 	for (int i = 0; i < numberOfPizzas; ++i) {
+		vector<Pizza> pizza;
 		vector<Topping> tops;
 		cout << "Pizza number " << i + 1 << ": ";
 		cin >> offer;
@@ -380,9 +380,11 @@ void ManagerUI::addMultiplePizza() {
 			tops.push_back(toppings.at((int)toppingID - 49));
 		}
 		pizza.push_back(Pizza(offer.getName(), tops, offer.getPrice()));
+		Order order;
+		order.setPizzas(pizza);
+		offer.setOrder(order);
+		service.addOffer(offer);
 	}
-	offer.getOrder().setPizzas(pizza);
-	service.addOffer(offer);
 }
 
 
