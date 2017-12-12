@@ -114,7 +114,7 @@ string KitchenUI::showPizzaInfo(const Pizza& pizza) const {
 }
 
 string KitchenUI::showPizzaInfoShort(const Pizza& pizza) const {
-	string info = "";
+	string info = "Pizza ";
 	info += pizza.getID() + " - ";
 	info += pizza.getToppings().size() + " toppings, ";
 	info += pizza.getPizzaSize().getName() + " ";

@@ -14,8 +14,8 @@ public:
 	void deliveryMenu();
 	void allOrdersMenu();
 	void ordersMenu();
-	string showPizzaInfoShort(const Pizza& pizza) const;
-	string showOrderInfo(const Order& order) const;
-	string showOrderInfoShort(const Order& order) const;
+	void showPizzaInfoShort(const Pizza& pizza) const;
+	void showOrderInfo(const Order& order) const;
+	void showOrderInfoShort(const Order& order) const;
 };
 

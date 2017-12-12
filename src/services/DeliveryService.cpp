@@ -25,10 +25,10 @@ vector<Order> DeliveryService::getOrders() {
 
 vector<Order> DeliveryService::getOrders(const Location& location) {
 	vector<Order> orders;
-	vector<Order> allorders = getOrders();
+	vector<Order> allorders = repo.RetrieveAllFromFile<Order>();
 	for (size_t i = 0; i < allorders.size(); i++) {
 		if (allorders.at(i).getStatus() == READY && allorders.at(i).getLocation() == location) {
-			orders.push_back(orders.at(i));
+			orders.push_back(allorders.at(i));
 		}
 	}
 	//TODO validate
