@@ -492,7 +492,7 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 void ManagerUI::addMultiplePizza() {
 	int numberOfPizzas;
 	Offer offer;
-	seePizzaMenu();
+	//seePizzaMenu();
 	cout << "How many pizza offers would you like to add? ";
 	cin >> numberOfPizzas;
 	cout << "What would you like as a pizza offer? " << endl << endl;
