@@ -41,10 +41,57 @@ void SalesmanUI::makeNewOrder()
 	SalesmanService service;
 	char input;
 	int i = 1;
+	cout << "Welcome! Please pick a Pizza location from one of the following:" << endl;
+	vector<Location> locations = service.getAll<Location>();
+	for (unsigned int i = 0; i < locations.size(); i++) {
+		cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
+	}
+	cout << "Input: ";
+	cin >> input;
+	order.setLocation(locations.at((int)input - 49));
+
+
+
+
+	/*
+		cout << "Please pick on of those. Input: ";
+		for (int i = 0; i < inputInInt; i++) {
+			vector <Topping> toppings = service.getAll<Topping>();
+			char toppingID;
+			cin >> toppingID;
+			tops.push_back(toppings.at((int)toppingID - 49));
+		}
+		pizza.push_back(Pizza(offer.getName(), tops, offer.getPrice()));
+		Order order;
+		order.setPizzas(pizza);
+		offer.setOrder(order);
+		service.addOffer(offer);*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	while (true) {
 		try
 		{
-			cout << "Order number " << i << endl;
+			cout << "Order number " << i << "." << endl;
 			// Select type of crust
 			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
 			cout << "Here are the crusts you can choose from:" << endl;

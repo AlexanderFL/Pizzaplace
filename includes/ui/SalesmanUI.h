@@ -9,7 +9,6 @@ class SalesmanUI
 public:
 	SalesmanUI();
 	void salesmanMenu();
-
 	void makeNewOrder();
 };
 
