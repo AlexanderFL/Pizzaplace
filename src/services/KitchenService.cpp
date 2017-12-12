@@ -21,16 +21,18 @@ void KitchenService::setOrderAsReady(const size_t& id) {
 	for (size_t i = 0; i < orders.size(); ++i) {
 		for (size_t j = 0; j < orders.at(i).getPizzas().size(); ++j) {
 			if (orders.at(i).getPizzas().at(j).getID() == id) {
-				orders.at(i).getPizzas().at(j).setPhase(READY);
+				vector<Pizza> pizzas = orders.at(i).getPizzas();
+				pizzas.at(j).setPhase(READY);
 				int counter = 0;
-				for (size_t k = 0; k < orders.at(i).getPizzas().size(); ++k) {
-					if (orders.at(i).getPizzas().at(k).getPhase() == READY) {
+				for (size_t k = 0; k < pizzas.size(); ++k) {
+					if (pizzas.at(k).getPhase() == READY) {
 						++counter;
 					}
 				}
 				if (orders.at(i).getPizzas().size() == counter) {
 					orders.at(i).setStatus(READY);
 				}
+				orders.at(i).setPizzas(pizzas);
 				repo.WriteMultipleLinesToFile(orders);
 				return;
 			}
