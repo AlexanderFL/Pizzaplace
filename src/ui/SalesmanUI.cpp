@@ -3,6 +3,7 @@
 #include "Order.h"
 #include "SalesmanService.h"
 #include <stdlib.h>
+#include <iomanip> // setw
 
 SalesmanUI::SalesmanUI()
 {
@@ -65,7 +66,7 @@ void SalesmanUI::makeNewOrder()
 			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
 			cout << "Here are the crusts you can choose from:" << endl;
 			for (size_t i = 0; i < crusts.size(); ++i) {
-				cout << i + 1 << ": " << crusts.at(i).getName() << endl;
+				cout << i + 1 << ": " << crusts.at(i).getName() << std::setw(10) << crusts.at(i).getPrice() << " kr.-" << endl;
 			}
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
