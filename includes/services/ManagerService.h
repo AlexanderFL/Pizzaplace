@@ -23,6 +23,7 @@ public:
 	void addLocation(Location& location);
 	vector<Location> getLocations();
 	vector<SideOrder> getSides();
+	template<class T> vector<T> getAll();
 	//Order
 	void addOffer(Offer& offer);
 	vector<Offer> getOffers();
@@ -33,3 +34,6 @@ private:
 	void validPrice(int p);
 };
 
+template<class T> vector<T> ManagerService::getAll() {
+	return repo.RetrieveAllFromFile<T>();
+}

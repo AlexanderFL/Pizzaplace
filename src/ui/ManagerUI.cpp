@@ -126,7 +126,10 @@ void ManagerUI::deleteSizeMenu() {
 }
 
 void ManagerUI::seeAllSizesMenu() {
-
+	vector<PizzaSize> sizes = service.getAll<PizzaSize>();
+	for (size_t i = 0; i < sizes.size(); ++i) {
+		cout << sizes.at(i).getName() << " : " << sizes.at(i).getPriceMod();
+	}
 }
 
 
