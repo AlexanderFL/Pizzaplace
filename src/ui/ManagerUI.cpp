@@ -338,6 +338,7 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 	}
 	case '2': {
 		//delete a Pizza from the menu
+		deletePizzaOnMenu();
 		break;
 	}
 	case '3': {
@@ -362,7 +363,6 @@ void ManagerUI::addMultiplePizza() {
 	cout << "How many pizza offers would you like to add? ";
 	cin >> numberOfPizzas;
 	cout << "What would you like as a pizza offer? " << endl << endl;
-
 	for (int i = 0; i < numberOfPizzas; ++i) {
 		vector<Topping> tops;
 		cout << "Pizza number " << i + 1 << ": ";
@@ -397,5 +397,18 @@ void ManagerUI::seePizzaMenu() {
 	}
 	else {
 		cout << "You have no pizza offers so far." << endl;
+	}
+}
+
+void ManagerUI::deletePizzaOnMenu() {
+	char input;
+	seePizzaMenu();
+	if ((service.getOffers()).size() != 0) {
+		cout << "What offer would you like to delete. Please input a number: " << endl;
+		cout << "Input: ";
+		cin >> input;
+		//Changing the input from char to int
+		int inputInInt = (int)input - 49;
+		service.deletePizzaOnMenu(inputInInt);
 	}
 }
