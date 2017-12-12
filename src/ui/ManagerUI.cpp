@@ -393,8 +393,13 @@ void ManagerUI::seePizzaMenu() {
 	if (offers.size() != 0) {
 		cout << "Here are the offers you have so far: " << endl;
 		for (unsigned int i = 0; i < offers.size(); i++) {
+			cout << endl;
 			cout << "Pizzan nr." << i + 1 << ": " << endl;
-			cout << offers.at(i) << endl;
+			cout << offers.at(i);
+			cout << "Toppings: ";
+			for (unsigned int j = 0; j <offers.at(i).getOrder().getPizzas().size(); j++) {
+				cout << offers.at(i).getOrder().getPizzas().at(j) << endl;
+			}
 		}
 	}
 	else {
