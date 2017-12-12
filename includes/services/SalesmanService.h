@@ -15,6 +15,7 @@ public:
 	SalesmanService();
 	void registerNewOrder(Order& order);
 	void appendToOrder(Order& firstOrder, Order& secondOrder);
+	void appendToOrder(Order& firstOrder, Pizza& pizza);
 	int getPriceOfOrder(Order& order);
 	void assignHomeAddress(Order& order, string address);
 	void setOrderToDelivery(Order& order);
