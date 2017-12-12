@@ -132,6 +132,10 @@ void ManagerService::addSize(PizzaSize& size) {
 	repo.WriteToFile(size);
 }
 
+void ManagerService::deleteSize(int index) {
+	repo.RemoveFromFileAtIndex<Offer>(index);
+}
+
 /*
 *************************************************
 *****			PRIVATE FUNCTIONS			*****

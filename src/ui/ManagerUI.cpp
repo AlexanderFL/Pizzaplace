@@ -117,12 +117,17 @@ void ManagerUI::addSizeMenu() {
 	getline(cin, name);
 	cout << "Price modifier of the new size: ";
 	cin >> mod;
-	PizzaSize size(name, mod);
-	service.addSize(size);
+	service.addItem(PizzaSize(name, mod));
 }
 
 void ManagerUI::deleteSizeMenu() {
-
+	vector<PizzaSize> sizes = service.getAll<PizzaSize>();
+	for (size_t i = 0; i < sizes.size(); ++i) {
+		cout << i + 1 << ": " <<  sizes.at(i).getName() << " : " << sizes.at(i).getPriceMod();
+	}
+	cin >> input;
+	int inputInInt = (int)input - 49;
+	service.deleteItem<PizzaSize>(inputInInt);
 }
 
 void ManagerUI::seeAllSizesMenu() {
