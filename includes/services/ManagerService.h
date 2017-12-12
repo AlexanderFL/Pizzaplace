@@ -25,7 +25,7 @@ public:
 	vector<SideOrder> getSides();
 	//Order
 	void addOffer(Offer& offer);
-
+	vector<Offer> getOffers();
 private:
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
