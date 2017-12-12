@@ -5,13 +5,12 @@ ManagerUI::ManagerUI() {
 
 void ManagerUI::managerMenu() {
 	while (true) {
-		cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Locations", "Side orders", "Menu options", "Go Back" }) << endl;
+		cout << menu.printMenu({ "Pizza", "Toppings", "Locations", "Side orders", "Menu options", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 
 		cin.ignore();
 		cin >> input;
 		system("CLS");
-
 		switch (input)
 		{
 			case '1':{
@@ -25,23 +24,18 @@ void ManagerUI::managerMenu() {
 				break;
 			}
 			case '3':{
-				//Price
-				priceOption();
-				break;
-			}
-			case '4':{
 				//Location
 				locationOption();
 				break;
 			}
-			case '5':
+			case '4':
 				//Side orders
 				sideOrderOption();
 				break;
-			case '6':
+			case '5':
 				//Pizza Menu
 				pizzaMenuOption();
-			case '7':
+			case '6':
 				//Go back
 				return;
 			case 'q':
@@ -53,18 +47,77 @@ void ManagerUI::managerMenu() {
 	}
 }
 
-
 /*			OPTIONS AVAILABLE			*/	
 
 void ManagerUI::pizzaOption() {
-	//TODO: Add options to add sizes/ bottoms   or delete them
+	//TODO: Add options to add sizes/bottoms/crust or delete them
 	while (true) {
-		cout << menu.printMenu({ "Size", "Bottom", "Go Back" }) << endl;
+		cout << menu.printMenu({ "Size", "Bottom", "Crust", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 		cin >> input;
-		if (input == '3') break;
+		if (input == '4') break;
+		switch (input) {
+		case '1':
+			//Size
+			validateSizeOptions();
+			break;
+		case '2':
+			//Bottom
+			break;
+		case '3':
+			//Crust
+			break;
+		default:
+			cout << "Invalid input" << endl;
+		}
 	}
 }
+
+/*void ManagerUI::validateCrustOptions() {
+
+}*/
+
+void ManagerUI::validateSizeOptions() {
+	switch (input) {
+	case '1': {
+		//Adding a topping
+		addMultipleToppings();
+		break;
+	}
+	case '2': {
+		//Delete a topping
+		deleteToppings();
+		break;
+	}
+	case '3': {
+		//See all toppings
+		seeAllToppings();
+		system("PAUSE");
+		break;
+	}
+	case '4': {
+		//Go back
+		break;
+	}
+	default: {
+		cout << "Invalid input." << endl;
+		break;
+	}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void ManagerUI::toppingOption() {
 	while (true) {

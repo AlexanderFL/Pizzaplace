@@ -27,6 +27,8 @@ private:
 public:
 	ManagerUI();
 	void managerMenu();
+	//Pizza
+	void validateSizeOptions();
 	//Side orders
 	void validateOtherInput(char input);
 	void addMultipleSides();
