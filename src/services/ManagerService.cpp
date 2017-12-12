@@ -60,26 +60,6 @@ void ManagerService::addDeliveryPlace(string address)
 	repo.WriteToFile(l);
 }
 
-/*			Get all toppings		*/
-vector<Topping> ManagerService::getToppings() {
-	return repo.RetrieveAllFromFile<Topping>();
-}
-
-/*			Delete topping			*/
-void ManagerService::deleteTopping(int index) {
-	repo.RemoveFromFileAtIndex<Topping>(index);
-}
-
-/*			Delete a side order		*/
-void ManagerService::deleteSideOrder(int index) {
-	repo.RemoveFromFileAtIndex<SideOrder>(index);
-}
-
-/*			Delete a Location		*/
-void ManagerService::deleteLocation(int index) {
-	repo.RemoveFromFileAtIndex<Location>(index);
-}
-
 /*			Returns total cost for the order		*/
 int ManagerService::getOrderTotalCost(const Order& order) {
 	int total = 0;
@@ -110,39 +90,6 @@ void ManagerService::addLocation(Location& location) {
 	containsOnlyAlpha(locationName);
 	// Write it to file
 	repo.WriteToFile(location);
-}
-
-vector<Location>ManagerService::getLocations() {
-	vector<Location> locations = repo.RetrieveAllFromFile<Location>();
-	/*if (locations.size() == 0) {
-		throw EmptyVector();
-	}*/
-	return locations;
-}
-
-//Getting side Orders
-vector<SideOrder> ManagerService::getSides() {
-	vector<SideOrder> sides = repo.RetrieveAllFromFile<SideOrder>();
-	/*if (sides.size() == 0) {
-		throw EmptyVector();
-	}*/
-	return sides;
-}
-
-vector<Offer> ManagerService::getOffers() {
-	return repo.RetrieveAllFromFile<Offer>();
-}
-
-void ManagerService::deletePizzaOnMenu(int index) {
-	repo.RemoveFromFileAtIndex<Offer>(index);
-}
-
-void ManagerService::addSize(PizzaSize& size) {
-	repo.WriteToFile(size);
-}
-
-void ManagerService::deleteSize(int index) {
-	repo.RemoveFromFileAtIndex<Offer>(index);
 }
 
 /*

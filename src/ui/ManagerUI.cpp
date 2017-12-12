@@ -285,20 +285,20 @@ void ManagerUI::addMultipleToppings() {
 
 void ManagerUI::deleteToppings() {
 	char input;
-	if ((service.getToppings()).size() != 0) {
+	if ((service.getAll<Topping>()).size() != 0) {
 		seeAllToppings();
 		cout << "What topping would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
 		cin >> input;
 		//Changing the input from char to int
 		int inputInInt = (int)input - 49;
-		service.deleteTopping(inputInInt);
+		service.deleteItem<Topping>(inputInInt);
 	}
 }
 
 
 void ManagerUI::seeAllToppings() {
-	vector <Topping> toppings = service.getToppings();
+	vector <Topping> toppings = service.getAll<Topping>();
 	if (toppings.size() != 0) {
 		cout << "Here are the toppings you have so far: " << endl;
 		for (unsigned int i = 0; i < toppings.size(); i++) {
@@ -338,7 +338,7 @@ void ManagerUI::validateLocationOptions(char input) {
 
 void ManagerUI::addingMultipleLocations() {
 	int numberOfLocations;
-	vector<Location> locations = service.getLocations();
+	vector<Location> locations = service.getAll<Location>();
 	Location location;
 	cout << "How many locations would you like to add? ";
 	cin >> numberOfLocations;
@@ -353,18 +353,18 @@ void ManagerUI::addingMultipleLocations() {
 
 void ManagerUI::deleteMultipleLocations() {
 	char input;
-	if ((service.getLocations()).size() != 0) {
+	if ((service.getAll<Location>()).size() != 0) {
 		cout << "What location would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
 		cin >> input;
 		//Changing the input from char to int
 		int inputInInt = (int)input - 49;
-		service.deleteLocation(inputInInt);
+		service.deleteItem<Location>(inputInInt);
 	}
 }
 
 void ManagerUI::seeAllLocations() {
-	vector<Location> locations = service.getLocations();
+	vector<Location> locations = service.getAll<Location>();
 	if (locations.size() != 0) {
 		cout << "Here are the locations you have so far: " << endl;
 		for (unsigned int i = 0; i < locations.size(); i++) {
@@ -422,19 +422,19 @@ void ManagerUI::addMultipleSides() {
 
 void ManagerUI::deleteMultipleSides() {
 	char input;
-	if ((service.getSides()).size() != 0) {
+	if ((service.getAll<SideOrder>()).size() != 0) {
 		cout << "What topping would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
 		cin >> input;
 		//Changing the input from char to int
 		int inputInInt = (int)input - 49;
-		service.deleteSideOrder(inputInInt);
+		service.deleteItem<SideOrder>(inputInInt);
 	}
 }
 
 
 void ManagerUI::seeAllSides() {
-	vector <SideOrder> sides = service.getSides();
+	vector <SideOrder> sides = service.getAll<SideOrder>();
 	if (sides.size() != 0) {
 		cout << "Here are the side orders you have so far: " << endl;
 		for (unsigned int i = 0; i < sides.size(); i++) {
@@ -493,7 +493,7 @@ void ManagerUI::addMultiplePizza() {
 		seeAllToppings();
 		cout << "Please pick on of those. Input: ";
 		for (int i = 0; i < inputInInt; i++) {
-			vector <Topping> toppings = service.getToppings();
+			vector <Topping> toppings = service.getAll<Topping>();
 			char toppingID;
 			cin >> toppingID;
 			tops.push_back(toppings.at((int)toppingID - 49));
@@ -508,7 +508,7 @@ void ManagerUI::addMultiplePizza() {
 
 
 void ManagerUI::seePizzaMenu() {
-	vector <Offer> offers = service.getOffers();
+	vector <Offer> offers = service.getAll<Offer>();
 	if (offers.size() != 0) {
 		cout << "Here are the offers you have so far: " << endl;
 		for (unsigned int i = 0; i < offers.size(); i++) {
@@ -529,12 +529,12 @@ void ManagerUI::seePizzaMenu() {
 void ManagerUI::deletePizzaOnMenu() {
 	char input;
 	seePizzaMenu();
-	if ((service.getOffers()).size() != 0) {
+	if ((service.getAll<Offer>()).size() != 0) {
 		cout << "What offer would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
 		cin >> input;
 		//Changing the input from char to int
 		int inputInInt = (int)input - 49;
-		service.deletePizzaOnMenu(inputInInt);
+		service.deleteItem<Offer>(inputInInt);
 	}
 }

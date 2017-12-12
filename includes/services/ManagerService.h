@@ -5,6 +5,9 @@
 #include "InvalidPrice.h"
 #include "Offer.h"
 #include "EmptyVector.h"
+#include "NumberInString.h"
+#include "InvalidString.h"
+
 class ManagerService
 {
 private:
@@ -16,30 +19,24 @@ public:
 	void addCrust(PizzaCrust& crust);
 	void addSpecialOrder(string ordername, const Order& order);
 	void addDeliveryPlace(string place);
-	void deleteTopping(int index);
-	void deleteSideOrder(int index);
-	void deleteLocation(int index);
 	int getOrderTotalCost(const Order& order);
-	vector<Topping> getToppings();
 	void addLocation(Location& location);
-	vector<Location> getLocations();
-	vector<SideOrder> getSides();
 	//Order
 	void addOffer(Offer& offer);
-	vector<Offer> getOffers();
-	void deletePizzaOnMenu(int index);
-	void addSize(PizzaSize& size);
-	void deleteSize(int index);
 	template<class T> vector<T> getAll();
 	template<class T> void addItem(T item);
 	template<class T> void deleteItem(int index);
 private:
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
+	void validateString(const string& str);
+	template<class T> void validateVector(const vector<T>& items);
 };
 
 template<class T> vector<T> ManagerService::getAll() {
-	return repo.RetrieveAllFromFile<T>();
+	vector<T> items = repo.RetrieveAllFromFile<T>();
+	validateVector(items);
+	return items;
 }
 
 template<class T> void ManagerService::addItem(T item) {
@@ -48,4 +45,10 @@ template<class T> void ManagerService::addItem(T item) {
 
 template<class T> void ManagerService::deleteItem(int index) {
 	repo.RemoveFromFileAtIndex<T>(index);
+}
+
+template<class T> void ManagerService::validateVector(const vector<T>& items) {
+	if (items.size() == 0) {
+		throw EmptyVector();
+	}
 }
