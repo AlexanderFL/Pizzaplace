@@ -4,7 +4,7 @@
 KitchenService::KitchenService() {}
 
 void KitchenService::setOrderAsBaking(const size_t& id) {
-	vector<Order> orders = getOrders();
+	vector<Order> orders = getItems<Order>();
 	for (size_t i = 0; i < orders.size(); ++i) {
 		for (size_t j = 0; j < orders.at(i).getPizzas().size(); ++j) {
 			if (orders.at(i).getPizzas().at(j).getID() == id) {
@@ -19,7 +19,7 @@ void KitchenService::setOrderAsBaking(const size_t& id) {
 }
 
 void KitchenService::setOrderAsReady(const size_t& id) {
-	vector<Order> orders = getOrders();
+	vector<Order> orders = getItems<Order>();
 	for (size_t i = 0; i < orders.size(); ++i) {
 		for (size_t j = 0; j < orders.at(i).getPizzas().size(); ++j) {
 			if (orders.at(i).getPizzas().at(j).getID() == id) {
@@ -42,21 +42,9 @@ void KitchenService::setOrderAsReady(const size_t& id) {
 	}
 }
 
-vector<Location> KitchenService::getLocations() {
-	vector<Location> locations = repo.RetrieveAllFromFile<Location>();
-	validateVector(locations);
-	return locations;
-}
-
-vector<Order> KitchenService::getOrders() {
-	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
-	validateVector(orders);
-	return orders;
-}
-
 vector<Pizza> KitchenService::getPizzas(const Location& location) {
 	vector<Pizza> pizzas;
-	vector<Order> orders = getOrders();
+	vector<Order> orders = getItems<Order>();
 	for (size_t i = 0; i < orders.size(); ++i) {
 		if (orders.at(i).getLocation() == location && orders.at(i).getStatus() == PREPERATION) {
 			for (size_t j = 0; j < orders.at(i).getPizzas().size(); ++j) {
@@ -66,7 +54,7 @@ vector<Pizza> KitchenService::getPizzas(const Location& location) {
 			}
 		}
 	}
-	validateVector(pizzas);
+	validateVectorNotEmpty(pizzas);
 	return pizzas;
 }
 

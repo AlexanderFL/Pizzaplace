@@ -43,7 +43,7 @@ void SalesmanUI::makeNewOrder()
 	char input;
 	int i = 1;
 	cout << "Welcome! Please pick a Pizza location from one of the following:" << endl;
-	vector<Location> locations = service.getAll<Location>();
+	vector<Location> locations = service.getItems<Location>();
 	for (unsigned int i = 0; i < locations.size(); i++) {
 		cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
 	}
@@ -62,7 +62,7 @@ void SalesmanUI::makeNewOrder()
 				pizzaFromMenu = true;
 			}
 			// Select type of crust
-			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
+			vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
 			cout << "Here are the crusts you can choose from:" << endl;
 			for (size_t i = 0; i < crusts.size(); ++i) {
 				cout << i + 1 << ": " << crusts.at(i).getName() << std::setw(10) << crusts.at(i).getPrice() << " kr.-" << endl;
@@ -72,7 +72,7 @@ void SalesmanUI::makeNewOrder()
 			pizza.setCrust(crusts.at((int)input - 49));
 
 			// Select the size of the pizza
-			vector<PizzaSize> sizes = service.getAllPizzaSizes();
+			vector<PizzaSize> sizes = service.getItems<PizzaSize>();
 			cout << "Here are the sizes you can choose from:" << endl;
 			for (size_t i = 0; i < sizes.size(); ++i) {
 				cout << i + 1 << ": " << sizes.at(i).getName() << endl;
@@ -82,7 +82,7 @@ void SalesmanUI::makeNewOrder()
 			pizza.setPizzaSize(sizes.at((int)input - 49));
 			if (!pizzaFromMenu) {
 				// Select all toppings
-				vector<Topping> toppings = service.getAllToppings();
+				vector<Topping> toppings = service.getItems<Topping>();
 				while (true)
 				{
 					cout << "Here are the toppings you can choose from:" << endl;
@@ -111,7 +111,7 @@ void SalesmanUI::makeNewOrder()
 			cin >> input;
 			if (toupper(input) == 'Y') {
 				cout << "Here are side orders you can choose from: " << endl;
-				vector<SideOrder> sideOrder = service.getAllSideOrders();
+				vector<SideOrder> sideOrder = service.getItems<SideOrder>();
 				for (size_t i = 0; i < sideOrder.size(); i++)
 				{
 					cout << i + 1 << ": " << sideOrder.at(i).getName() << endl;
@@ -167,7 +167,7 @@ void SalesmanUI::makeNewOrder()
 
 void SalesmanUI::pickFromMenu() {
 	system("CLS");
-	vector <Offer> offers = service.getAll<Offer>();
+	vector <Offer> offers = service.getItems<Offer>();
 	cout <<"\n\t\tPIZZA MENU!" << endl;
 	for (size_t i = 0; i < offers.size(); i++) {
 		cout << endl;

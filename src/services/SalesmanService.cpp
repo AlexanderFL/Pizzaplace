@@ -120,31 +120,6 @@ SideOrder SalesmanService::getSideOrder()
 	return _sides;
 }
 
-vector<Order> SalesmanService::getAllOrders()
-{
-	return _repo.RetrieveAllFromFile<Order>();
-}
-
-vector<Location> SalesmanService::getAllLocations() {
-	return _repo.RetrieveAllFromFile<Location>();
-}
-
-vector<SideOrder> SalesmanService::getAllSideOrders() {
-	return _repo.RetrieveAllFromFile<SideOrder>();
-}
-
-vector<Topping> SalesmanService::getAllToppings() {
-	return _repo.RetrieveAllFromFile<Topping>();
-}
-
-vector<PizzaCrust> SalesmanService::getAllPizzaCrusts() {
-	return _repo.RetrieveAllFromFile<PizzaCrust>();
-}
-
-vector<PizzaSize> SalesmanService::getAllPizzaSizes() {
-	return _repo.RetrieveAllFromFile<PizzaSize>();
-}
-
 /*
 
 	PRIVATE FUNCTIONS
@@ -195,7 +170,7 @@ void SalesmanService::overrideOrder(int index, Order edit) {
 
 void SalesmanService::assignID(Order& order) {
 	try {
-		vector<Order> orders = getAll<Order>();
+		vector<Order> orders = getItems<Order>();
 		size_t id = 1;
 		if (orders.size() == 0) {
 			order.setID(1);

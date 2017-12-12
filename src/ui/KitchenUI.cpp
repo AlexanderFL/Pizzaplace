@@ -6,7 +6,7 @@ void KitchenUI::kitchenMenu() {
 	string input;
 	while (true) {
 		try {
- 			vector<Location> locations = service.getLocations();
+ 			vector<Location> locations = service.getItems<Location>();
 			cout << "Choose the location of your workplace" << endl;
 			for (size_t i = 0; i < locations.size(); ++i) {
 				cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
