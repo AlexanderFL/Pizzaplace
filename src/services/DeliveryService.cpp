@@ -16,7 +16,7 @@ vector<Order> DeliveryService::getOrders() {
 	//TODO validate
 	for (size_t i = 0; i < allorders.size(); i++) {
 		if (allorders.at(i).getStatus() == READY) {
-			orders.push_back(orders.at(i));
+			orders.push_back(allorders.at(i));
 		}
 	}
 	validateVector(orders);
@@ -37,7 +37,7 @@ vector<Order> DeliveryService::getOrders(const Location& location) {
 }
 
 void DeliveryService::setOrderPaid(const size_t& id) {
-	vector<Order> orders = getOrders();
+	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
 	//TODO validate
 	for (size_t i = 0; i < orders.size(); ++i) {
 		if (orders.at(i).getID() == id) {
@@ -49,7 +49,7 @@ void DeliveryService::setOrderPaid(const size_t& id) {
 }
 
 void DeliveryService::setOrderDelivered(const size_t& id) {
-	vector<Order> orders = getOrders();
+	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
 	//TODO validate
 	for (size_t i = 0; i < orders.size(); ++i) {
 		if (orders.at(i).getID() == id) {
