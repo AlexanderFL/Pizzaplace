@@ -54,35 +54,41 @@ void SalesmanUI::salesmanMenu() {
 void SalesmanUI::makeNewOrder()
 {
 	SalesmanService service;
-	Pizza pizza;
 	char input;
 	while (true) {
-		vector<Topping> toppings = service.getAllToppings();
-		cout << "Here are the toppings you can choose from:" << endl;
-		for (size_t i = 0; i < toppings.size(); ++i) {
-			cout << i + 1 << ": " << toppings.at(i).getName() << endl;
-		}
-		cout << "Please choose one of them. \nInput: ";
-		cin >> input;
+		try
+		{
+			vector<Topping> toppings = service.getAllToppings();
+			cout << "Here are the toppings you can choose from:" << endl;
+			for (size_t i = 0; i < toppings.size(); ++i) {
+				cout << i + 1 << ": " << toppings.at(i).getName() << endl;
+			}
+			cout << "Please choose one of them. \nInput: ";
+			cin >> input;
 
-		pizza.getToppings().push_back(toppings.at((int)input - 49));
+			service.getPizza().getToppings().push_back(toppings.at((int)input - 49));
 
-		vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
-		cout << "Here are the crusts you can choose from:" << endl;
-		for (size_t i = 0; i < crusts.size(); ++i) {
-			cout << i + 1 << ": " << crusts.at(i).getName();
-		}
-		cout << "Please choose one of them. \nInput: ";
-		cin >> input;
-		pizza.setCrust(crusts.at((int)input - 49));
+			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
+			cout << "Here are the crusts you can choose from:" << endl;
+			for (size_t i = 0; i < crusts.size(); ++i) {
+				cout << i + 1 << ": " << crusts.at(i).getName();
+			}
+			cout << "Please choose one of them. \nInput: ";
+			cin >> input;
+			service.getPizza().setCrust(crusts.at((int)input - 49));
 
-		vector<PizzaSize> sizes = service.getAllPizzaSizes();
-		cout << "Here are the sizes you can choose from:" << endl;
-		for (size_t i = 0; i < sizes.size(); ++i) {
-			cout << i + 1 << ": " << sizes.at(i).getName();
+			vector<PizzaSize> sizes = service.getAllPizzaSizes();
+			cout << "Here are the sizes you can choose from:" << endl;
+			for (size_t i = 0; i < sizes.size(); ++i) {
+				cout << i + 1 << ": " << sizes.at(i).getName();
+			}
+			cout << "Please choose one of them. \nInput: ";
+			cin >> input;
+			service.getPizza().setPizzaSize(sizes.at((int)input - 49));
 		}
-		cout << "Please choose one of them. \nInput: ";
-		cin >> input;
-		pizza.setPizzaSize(sizes.at((int)input - 49));
+		catch (FailedOpenFile) {
+			cout << "Failed to open a critical file...";
+			break;
+		}
 	}
 }

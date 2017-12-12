@@ -39,6 +39,11 @@ void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
 	}
 }
 
+Pizza SalesmanService::getPizza()
+{
+	return _pizza;
+}
+
 int SalesmanService::getPriceOfOrder(Order& order)
 {
 	int price = calculateCost(order);

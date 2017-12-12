@@ -10,6 +10,7 @@ class SalesmanService
 {
 private:
 	Data _repo;
+	Pizza _pizza;
 public:
 	SalesmanService();
 	void registerNewOrder(Order& order);
@@ -20,6 +21,7 @@ public:
 	void setOrderToPickUp(Order& order);
 	void setOrderAsPaid(Order& order);
 	void setComments(Order& order, string comment);
+	Pizza getPizza();
 	vector<Order> getAllOrders();
 	vector<Location> getAllLocations();
 	vector<SideOrder> getAllSideOrders();
