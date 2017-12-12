@@ -73,7 +73,7 @@ void SalesmanUI::makeNewOrder()
 			vector<PizzaSize> sizes = service.getAllPizzaSizes();
 			cout << "Here are the sizes you can choose from:" << endl;
 			for (size_t i = 0; i < sizes.size(); ++i) {
-				cout << i + 1 << ": " << sizes.at(i).getName();
+				cout << i + 1 << ": " << sizes.at(i).getName() << endl;
 			}
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
