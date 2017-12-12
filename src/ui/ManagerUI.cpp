@@ -183,7 +183,12 @@ void ManagerUI::validateSizeOptions() {
 }
 
 void ManagerUI::addSizeMenu() {
-	seeAllSizesMenu();
+	try {
+		seeAllSizesMenu();
+	}
+	catch (EmptyVector) {
+		cout << "There are currently no toppings." << endl;
+	}
 	string name;
 	double mod;
 	cout << "Name of the new size: ";
@@ -196,10 +201,16 @@ void ManagerUI::addSizeMenu() {
 
 void ManagerUI::deleteSizeMenu() {
 	seeAllSizesMenu();
+	cout << "Input: ";
 	char input;
 	cin >> input;
 	int inputInInt = (int)input - 49;
-	service.deleteItem<PizzaSize>(inputInInt);
+	try {
+		service.deleteItem<PizzaSize>(inputInInt);
+	}
+	catch (out_of_range) {
+		cout << "Invalid index." << endl;
+	}
 }
 
 void ManagerUI::seeAllSizesMenu() {
