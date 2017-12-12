@@ -39,7 +39,7 @@ void DeliveryUI::allOrdersMenu() {
 		cin >> ws;
 		getline(cin, input);
 		try {
-			int order = service.convertStringToInt(input);
+			int order = service.convertStringToInt(input) - 1;
 			cout << orders.at(order) << endl;
 			cout << "1: Set as paid" << endl;
 			cout << "2: Set as delivered" << endl;
@@ -97,7 +97,7 @@ void DeliveryUI::ordersMenu() {
 		cin >> ws;
 		getline(cin, input);
 		try {
-			int index = service.convertStringToInt(input);
+			int index = service.convertStringToInt(input) - 1;
 			vector<Order> orders = service.getOrders(locations.at(index));
 			for (size_t i = 0; i < orders.size(); ++i) {
 				cout << i + 1 << ": " << showOrderInfoShort(orders.at(i)) << endl;
@@ -105,8 +105,8 @@ void DeliveryUI::ordersMenu() {
 			cout << "Input: ";
 			cin >> ws;
 			getline(cin, input);
+			int order = service.convertStringToInt(input) - 1;
 			try {
-				int order = service.convertStringToInt(input);
 				cout << showOrderInfo(orders.at(order)) << endl;
 				cout << "1: Set as paid" << endl;
 				cout << "2: Set as delivered" << endl;

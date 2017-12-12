@@ -20,7 +20,7 @@ void KitchenUI::kitchenMenu() {
 			}
 			else {
 				try {
-					int index = service.convertStringToInt(input);
+					int index = service.convertStringToInt(input) - 1;
 					vector<Pizza> pizzas = service.getPizzas(locations.at(index));
 					while (true) {
 						for (size_t i = 0; i < pizzas.size(); ++i) {
@@ -35,8 +35,8 @@ void KitchenUI::kitchenMenu() {
 						}
 						else {
 							try {
+								int pizzanr = service.convertStringToInt(input) - 1;
 								while (true) {
-									int pizzanr = service.convertStringToInt(input);
 									cout << showPizzaInfo(pizzas.at(pizzanr)) << endl;
 									cout << "1: Set as Baking" << endl;
 									cout << "2: Set as Ready" << endl;
@@ -46,9 +46,11 @@ void KitchenUI::kitchenMenu() {
 									getline(cin, input);
 									if (input == "1") {
 										service.setOrderAsBaking(pizzas.at(pizzanr).getID());
+										pizzas = service.getPizzas(locations.at(index));
 									}
 									else if (input == "2") {
 										service.setOrderAsReady(pizzas.at(pizzanr).getID());
+										pizzas = service.getPizzas(locations.at(index));
 									}
 									else if (input == "3") {
 										break;

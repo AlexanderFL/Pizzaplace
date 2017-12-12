@@ -8,7 +8,9 @@ void KitchenService::setOrderAsBaking(const size_t& id) {
 	for (size_t i = 0; i < orders.size(); ++i) {
 		for (size_t j = 0; j < orders.at(i).getPizzas().size(); ++j) {
 			if (orders.at(i).getPizzas().at(j).getID() == id) {
-				orders.at(i).getPizzas().at(j).setPhase(BAKING);
+				vector<Pizza> pizzas = orders.at(i).getPizzas();
+				pizzas.at(j).setPhase(BAKING);
+				orders.at(i).setPizzas(pizzas);
 				repo.WriteMultipleLinesToFile(orders);
 				return;
 			}

@@ -202,9 +202,9 @@ void SalesmanService::assignID(Order& order) {
 		}
 		else {
 			order.setID(orders.at(orders.size() - 1).getID() + 1);
-			for (size_t i = orders.size() - 1; i > 0; --i) {
-				if (orders.at(i).getPizzas().size() > 0) {
-					id = orders.at(i).getPizzas().at(orders.at(i).getPizzas().size() - 1).getID() + 1;
+			for (size_t i = orders.size(); i > 0; --i) {
+				if (orders.at(i - 1).getPizzas().size() > 0) {
+					id = orders.at(i - 1).getPizzas().at(orders.at(i - 1).getPizzas().size() - 1).getID() + 1;
 				}
 			}
 		}
