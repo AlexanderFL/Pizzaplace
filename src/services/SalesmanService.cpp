@@ -39,6 +39,17 @@ void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
 	}
 }
 
+// Appends a pizza to a order
+void SalesmanService::appendToOrder(Order& firstOrder, Pizza & pizza)
+{
+	// Get the pizzas from a order
+	vector<Pizza> pizzaVector = firstOrder.getPizzas();
+	// Append the pizza given in parameter
+	pizzaVector.push_back(pizza);
+	// Set the vector back in order
+	firstOrder.setPizzas(pizzaVector);
+}
+
 Pizza SalesmanService::getPizza()
 {
 	return _pizza;

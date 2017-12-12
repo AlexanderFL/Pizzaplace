@@ -53,30 +53,23 @@ void SalesmanUI::salesmanMenu() {
 
 void SalesmanUI::makeNewOrder()
 {
+	Order order;
 	SalesmanService service;
 	char input;
 	while (true) {
 		try
 		{
-			vector<Topping> toppings = service.getAllToppings();
-			cout << "Here are the toppings you can choose from:" << endl;
-			for (size_t i = 0; i < toppings.size(); ++i) {
-				cout << i + 1 << ": " << toppings.at(i).getName() << endl;
-			}
-			cout << "Please choose one of them. \nInput: ";
-			cin >> input;
-
-			service.getPizza().getToppings().push_back(toppings.at((int)input - 49));
-
+			// Select type of crust
 			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
 			cout << "Here are the crusts you can choose from:" << endl;
 			for (size_t i = 0; i < crusts.size(); ++i) {
-				cout << i + 1 << ": " << crusts.at(i).getName();
+				cout << i + 1 << ": " << crusts.at(i).getName() << endl;
 			}
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
 			service.getPizza().setCrust(crusts.at((int)input - 49));
 
+			// Select the size of the pizza
 			vector<PizzaSize> sizes = service.getAllPizzaSizes();
 			cout << "Here are the sizes you can choose from:" << endl;
 			for (size_t i = 0; i < sizes.size(); ++i) {
@@ -85,6 +78,37 @@ void SalesmanUI::makeNewOrder()
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
 			service.getPizza().setPizzaSize(sizes.at((int)input - 49));
+
+			// Select all toppings
+			vector<Topping> toppings = service.getAllToppings();
+			while (true)
+			{
+				cout << "Here are the toppings you can choose from:" << endl;
+				for (size_t i = 0; i < toppings.size(); ++i) {
+					cout << i + 1 << ": " << toppings.at(i).getName() << endl;
+				}
+				cout << toppings.size() << ": Continue with order" << endl;
+
+				cout << "Please choose one of them. \nInput: ";
+				cin >> input;
+				if (input == toppings.size()) {
+					break;
+				}
+				service.getPizza().getToppings().push_back(toppings.at((int)input - 49));
+			}
+			
+			service.appendToOrder(order, service.getPizza());
+			system("CLS");
+			// Ask user if he wants any sides
+
+			cout << "Would you like any sides with your order? Y/N (yes/no): ";
+			cin >> input;
+			if (toupper(input) == 'Y') {
+				
+			}
+			else {
+
+			}
 		}
 		catch (FailedOpenFile) {
 			cout << "Failed to open a critical file...";
