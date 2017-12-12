@@ -1,5 +1,4 @@
-#ifndef MAINUI_H
-#define MAINUI_H
+#pragma once
 
 //#include "Pizza.h"
 
@@ -17,5 +16,3 @@ class MainUI: public CommonUI
     public:
         void startUI();
 };
-
-#endif // MAINUI_H
