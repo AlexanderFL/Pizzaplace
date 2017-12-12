@@ -328,7 +328,7 @@ void ManagerUI::seeAllToppings() {
 /*				LOCATIONS			*/
 
 void ManagerUI::validateLocationOptions(char input) {
-	//seeAllLocations();
+	seeAllLocations();
 	switch (input) {
 	case '1':
 	{
@@ -353,6 +353,7 @@ void ManagerUI::validateLocationOptions(char input) {
 
 void ManagerUI::addingMultipleLocations() {
 	int numberOfLocations;
+	vector<Location> locations = service.getAll<Location>();
 	Location location;
 	cout << "How many locations would you like to add? ";
 	cin >> numberOfLocations;

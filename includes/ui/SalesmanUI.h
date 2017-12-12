@@ -10,6 +10,7 @@ public:
 	SalesmanUI();
 	void salesmanMenu();
 	void makeNewOrder();
+	void pickFromMenu();
 };
 
 
