@@ -1,41 +1,25 @@
 #include "CommonUI.h"
 
-
 string CommonUI::printMenu(const vector<string>& options)
 {
-	size_t biggest = biggestStringSize(options);
-	string output = "\n";
-	for (unsigned int i = 0; i < options.size(); i++)
-	{
-		output += printLines(biggest);
-		output += "\t| ";
-		output += to_string(i + 1);
-		output += ". ";
-		output += options.at(i);
-		for (unsigned int j = 0; j < (biggest - options.at(i).size()); j++) {
-			output += " ";
-		}
-		output += " | ";
-		i++;
+	string output = "";
+	output += printOptions(options, biggestStringSize(options));
+	return output;
+}
 
-		//if there is an odd number of options, then the last box needs to be empty
-		if (options.size() == i) {
-			output += "   ";
-			for (unsigned int j = 0; j < biggest; j++) {
-				output += " ";
-			}
-		}
-		else {
-			output += to_string(i + 1);
-			output += ". ";
-			output += options.at(i);
-			for (unsigned int j = 0; j < (biggest - options.at(i).size()); j++) {
-				output += " ";
-			}
-		}
-		output += " |\n";
-	}
+string CommonUI::printMenu(const vector<string>& options, const string& title) {
+	string output = "";
+	vector<string> temp = options;
+	temp.push_back(title);
+	size_t biggest = biggestStringSize(temp);
 	output += printLines(biggest);
+	output += "\t| ";
+	output += title;
+	for (size_t j = 0; j < ((biggest * 2) - title.size()); j++) {
+		output += " ";
+	}
+	output += "          |\n";
+	output += printOptions(options, biggest);
 	return output;
 }
 
@@ -49,6 +33,41 @@ string CommonUI::printLines(unsigned int size)
 		output += "-";
 	}
 	output += "-------------\n";
+	return output;
+}
+
+string CommonUI::printOptions(const vector<string>& options, size_t biggest) {
+	string output = "";
+	for (size_t i = 0; i < options.size(); i++) {
+		output += printLines(biggest);
+		output += "\t| ";
+		output += to_string(i + 1);
+		output += ". ";
+		output += options.at(i);
+		for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
+			output += " ";
+		}
+		output += " | ";
+		i++;
+
+		//if there is an odd number of options, then the last box needs to be empty
+		if (options.size() == i) {
+			output += "   ";
+			for (size_t j = 0; j < biggest; j++) {
+				output += " ";
+			}
+		}
+		else {
+			output += to_string(i + 1);
+			output += ". ";
+			output += options.at(i);
+			for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
+				output += " ";
+			}
+		}
+		output += " |\n";
+	}
+	output += printLines(biggest);
 	return output;
 }
 

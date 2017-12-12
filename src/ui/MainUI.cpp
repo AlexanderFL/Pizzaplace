@@ -13,7 +13,7 @@ void MainUI::startUI()
 	{
 		system("CLS");
 		cout << "\nPlease Pick one of the following jobs:\n"
-			<< printMenu({ "Manager", "Salesman", "Kitchen", "Delivery" })
+			<< printMenu({ "Manager", "Salesman", "Kitchen", "Delivery" }, "Main Menu")
 			<< "\nPress 'q' to quit.\nJob: ";
 
 		cin >> input;
