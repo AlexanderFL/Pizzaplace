@@ -339,7 +339,7 @@ void ManagerUI::seeAllToppings() {
 /*				LOCATIONS			*/
 
 void ManagerUI::validateLocationOptions(char input) {
-	//seeAllLocations();
+	seeAllLocations();
 	switch (input) {
 	case '1':
 	{
@@ -364,6 +364,7 @@ void ManagerUI::validateLocationOptions(char input) {
 
 void ManagerUI::addingMultipleLocations() {
 	int numberOfLocations;
+	vector<Location> locations = service.getAll<Location>();
 	Location location;
 	cout << "How many locations would you like to add? ";
 	cin >> numberOfLocations;
@@ -502,7 +503,7 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 void ManagerUI::addMultiplePizza() {
 	int numberOfPizzas;
 	Offer offer;
-	seePizzaMenu();
+	//seePizzaMenu();
 	cout << "How many pizza offers would you like to add? ";
 	cin >> numberOfPizzas;
 	cout << "What would you like as a pizza offer? " << endl << endl;
@@ -530,7 +531,6 @@ void ManagerUI::addMultiplePizza() {
 		service.addOffer(offer);
 	}
 }
-
 
 void ManagerUI::seePizzaMenu() {
 	vector <Offer> offers = service.getAll<Offer>();

@@ -3,6 +3,7 @@
 #include "Order.h"
 #include "SalesmanService.h"
 #include <stdlib.h>
+#include <iomanip> // setw
 
 SalesmanUI::SalesmanUI()
 {
@@ -34,11 +35,12 @@ void SalesmanUI::salesmanMenu() {
 		}
 	}
 }
-
+//Let the user pick from menu
 void SalesmanUI::makeNewOrder()
 {
 	Order order;
 	SalesmanService service;
+	bool pizzaFromMenu = false;
 	char input;
 	int i = 1;
 	cout << "Welcome! Please pick a Pizza location from one of the following:" << endl;
@@ -54,11 +56,17 @@ void SalesmanUI::makeNewOrder()
 		{
 			Pizza pizza;
 			cout << "Order number " << i << "." << endl;
+			cout << "Would you like to pick from the menu (y/n)? ";
+			cin >> input;
+			if (tolower(input) == 'y') {
+				pickFromMenu();
+				pizzaFromMenu = true;
+			}
 			// Select type of crust
 			vector<PizzaCrust> crusts = service.getAllPizzaCrusts();
 			cout << "Here are the crusts you can choose from:" << endl;
 			for (size_t i = 0; i < crusts.size(); ++i) {
-				cout << i + 1 << ": " << crusts.at(i).getName() << endl;
+				cout << i + 1 << ": " << crusts.at(i).getName() << std::setw(10) << crusts.at(i).getPrice() << " kr.-" << endl;
 			}
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
@@ -73,31 +81,31 @@ void SalesmanUI::makeNewOrder()
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
 			pizza.setPizzaSize(sizes.at((int)input - 49));
-
-			// Select all toppings
-			vector<Topping> toppings = service.getAllToppings();
-			while (true)
-			{
-				cout << "Here are the toppings you can choose from:" << endl;
-				for (size_t i = 0; i < toppings.size(); ++i) {
-					cout << i + 1 << ": " << toppings.at(i).getName() << endl;
-				}
-				cout << "How many toppings would you like? ";
-				cout << "\nPlease enter 0 if you wish to have no toppings.\nInput: ";
-				char numberOfToppings;
-				cin >> numberOfToppings;
-				int numberOfToppingsInt = (int)numberOfToppings - 48;
-				for (int i = 0; i < numberOfToppingsInt; i++) {
-					cout << "Topping number " << i + 1 << " is: ";
-					cin >> input;
-					if ((int)input - 48 == (toppings.size() + 1)) {
-						break;
+			if (!pizzaFromMenu) {
+				// Select all toppings
+				vector<Topping> toppings = service.getAllToppings();
+				while (true)
+				{
+					cout << "Here are the toppings you can choose from:" << endl;
+					for (size_t i = 0; i < toppings.size(); ++i) {
+						cout << i + 1 << ": " << toppings.at(i).getName() << endl;
 					}
-					pizza.addToppings(toppings.at((int)input - 49));
+					cout << "How many toppings would you like? ";
+					cout << "\nPlease enter 0 if you wish to have no toppings.\nInput: ";
+					char numberOfToppings;
+					cin >> numberOfToppings;
+					int numberOfToppingsInt = (int)numberOfToppings - 48;
+					for (int i = 0; i < numberOfToppingsInt; i++) {
+						cout << "Topping number " << i + 1 << " is: ";
+						cin >> input;
+						if ((int)input - 48 == (toppings.size() + 1)) {
+							break;
+						}
+						pizza.addToppings(toppings.at((int)input - 49));
+					}
+					break;
 				}
-				break;
 			}
-			
 			service.appendToOrder(order, pizza);
 			// Ask user if he wants any sides
 			cout << endl << "Would you like any sides with your order? Y/N (yes/no): ";
@@ -127,6 +135,18 @@ void SalesmanUI::makeNewOrder()
 					info += toppings.at(i).getName() + ", ";
 				}
 			}*/
+
+			//Adding a comment to the order
+			string comment = "None";
+			cout << "Is there any information we should know (y/n)? ";
+			cin >> input;
+			if (tolower(input) == 'y') {
+				cout << "Comment: ";
+				cin >> ws;
+				getline(cin, comment);
+			}
+			service.setComments(order, comment);
+
 			cout << "Would you like to add another order to this?" << endl;
 			cout << "Input (y/n): ";
 			cin >> input;
@@ -143,4 +163,24 @@ void SalesmanUI::makeNewOrder()
 			break;
 		}
 	}
+	cout << "This order will cost: " << service.getPriceOfOrder(order) << "Kr." << endl;
+}
+
+void SalesmanUI::pickFromMenu() {
+	system("CLS");
+	vector <Offer> offers = service.getAll<Offer>();
+	cout <<"\n\t\tPIZZA MENU!" << endl;
+	for (size_t i = 0; i < offers.size(); i++) {
+		cout << endl;
+		cout << "Pizzan nr." << i + 1 << ": " << endl;
+		cout << offers.at(i);
+		cout << "Toppings: ";
+		for (unsigned int j = 0; j < offers.at(i).getOrder().getPizzas().size(); j++) {
+			cout << offers.at(i).getOrder().getPizzas().at(j) << endl;
+		}
+	}
+	cout << "Which pizza would you like?\nInput: ";
+	char input;
+	cin >> input;
+	int inputInInt = (int)input - 49;
 }

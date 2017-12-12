@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Data.h"
+#include "Offer.h"
 #include "InvalidOrder.h"
 #include "InvalidAddress.h"
 using namespace std;

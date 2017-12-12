@@ -25,9 +25,15 @@ void PizzaSize::setName(const string& name) {
 }
 
 void PizzaSize::setPriceMod(const double& pricemod) {
-	double setModPercentage = 0;
-	setModPercentage = (pricemod / 100) + 1;
-	this->pricemod = setModPercentage;
+	if (pricemod <= 35 && pricemod >= 1)
+	{
+		double setModPercentage = 0;
+		setModPercentage = (pricemod / 100) + 1;
+		this->pricemod = setModPercentage;
+	}
+	else {
+		this->pricemod = 5; // Some number to work with
+	}
 }
 
 ostream& operator << (ostream& out, const PizzaSize& size) {
