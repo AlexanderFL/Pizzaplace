@@ -122,7 +122,6 @@ void ManagerUI::pizzaMenuOption() {
 /*				TOPPINGS			*/
 
 void ManagerUI::validateToppingInput(char input) {
-	seeAllToppings();
 	switch (input) {
 	case '1': {
 		//Adding a topping
@@ -168,6 +167,7 @@ void ManagerUI::addMultipleToppings() {
 void ManagerUI::deleteToppings() {
 	char input;
 	if ((service.getToppings()).size() != 0) {
+		seeAllToppings();
 		cout << "What topping would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
 		cin >> input;
