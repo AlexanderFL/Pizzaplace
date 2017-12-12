@@ -341,7 +341,7 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 		break;
 	}
 	case '3': {
-		//See the men
+		seePizzaMenu();
 		break;
 	}
 	case '4': {
@@ -357,19 +357,20 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 void ManagerUI::addMultiplePizza() {
 	int numberOfPizzas;
 	Offer offer;
-	vector<Topping> tops;
+	vector<Pizza> pizza;
 	seePizzaMenu();
 	cout << "How many pizza offers would you like to add? ";
 	cin >> numberOfPizzas;
 	cout << "What would you like as a pizza offer? " << endl << endl;
 
 	for (int i = 0; i < numberOfPizzas; ++i) {
+		vector<Topping> tops;
 		cout << "Pizza number " << i + 1 << ": ";
 		cin >> offer;
 		char numOfToppings;
 		cout << "How many toppings would you like on this pizza? ";
 		cin >> numOfToppings;
-		int inputInInt = (int)numOfToppings - 49;
+		int inputInInt = (int)numOfToppings - 48;
 		seeAllToppings();
 		cout << "Please pick on of those. Input: ";
 		for (int i = 0; i < inputInInt; i++) {
@@ -378,11 +379,10 @@ void ManagerUI::addMultiplePizza() {
 			cin >> toppingID;
 			tops.push_back(toppings.at((int)toppingID - 49));
 		}
-		vector<Pizza> pizza;
 		pizza.push_back(Pizza(offer.getName(), tops, offer.getPrice()));
-		offer.getOrder().setPizzas(pizza);
-		service.addOffer(offer);
 	}
+	offer.getOrder().setPizzas(pizza);
+	service.addOffer(offer);
 }
 
 
@@ -391,7 +391,8 @@ void ManagerUI::seePizzaMenu() {
 	if (offers.size() != 0) {
 		cout << "Here are the offers you have so far: " << endl;
 		for (unsigned int i = 0; i < offers.size(); i++) {
-			cout << i + 1 << ": " << offers.at(i) << endl;
+			cout << "Pizzan nr." << i + 1 << ": " << endl;
+			cout << offers.at(i) << endl;
 		}
 	}
 	else {
