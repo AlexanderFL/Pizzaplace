@@ -49,45 +49,6 @@ void SalesmanUI::makeNewOrder()
 	cout << "Input: ";
 	cin >> input;
 	order.setLocation(locations.at((int)input - 49));
-
-
-
-
-	/*
-		cout << "Please pick on of those. Input: ";
-		for (int i = 0; i < inputInInt; i++) {
-			vector <Topping> toppings = service.getAll<Topping>();
-			char toppingID;
-			cin >> toppingID;
-			tops.push_back(toppings.at((int)toppingID - 49));
-		}
-		pizza.push_back(Pizza(offer.getName(), tops, offer.getPrice()));
-		Order order;
-		order.setPizzas(pizza);
-		offer.setOrder(order);
-		service.addOffer(offer);*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	while (true) {
 		try
 		{
