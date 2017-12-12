@@ -34,5 +34,6 @@ public:
 	// Operator overloads
 	friend ostream& operator << (ostream& out, const User& user);
 	friend istream& operator >> (istream& in, User& user);
+	friend bool operator == (const User& first, const User& second);
 };
 
