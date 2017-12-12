@@ -3,7 +3,6 @@
 #include "ManagerUI.h"
 #include "SalesmanUI.h"
 #include "KitchenUI.h"
-#include "CommonUI.h"
 #include <stdlib.h>
 
 void MainUI::startUI()
@@ -11,44 +10,46 @@ void MainUI::startUI()
 	char input;
 	while (true)
 	{
-		system("CLS");
-		cout << "\nPlease Pick one of the following jobs:\n"
-			<< printMenu({ "Manager", "Salesman", "Kitchen", "Delivery" }, "Main Menu")
-			<< "\nPress 'q' to quit.\nJob: ";
-
+		
+		cout << printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit" }, "Main Menu") << printInput("Input");
 		cin >> input;
 
 		switch (input)
 		{
 		case '1':
 		{
+			system("CLS");
 			ManagerUI managerUI;
 			managerUI.managerMenu();
 			break;
 		}
 		case '2':
 		{
+			system("CLS");
 			SalesmanUI salesmanUI;
 			salesmanUI.salesmanMenu();
 			break;
 		}
 		case '3':
 		{
+			system("CLS");
 			KitchenUI kitchenUI;
 			kitchenUI.kitchenMenu();
 			break;
 		}
 		case '4':
 		{
+			system("CLS");
 			DeliveryUI deliveryUI;
 			deliveryUI.deliveryMenu();
 			break;
 		}
 		case 'q':
 		case 'Q':
-			exit(1);
+			exit(0);
 		default:
-			cout << "Not a valid option." << endl;
+			system("CLS");
+			cout << printMessage("Not a valid option.") << endl;
 		}
 	}
 }

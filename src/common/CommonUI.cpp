@@ -23,13 +23,35 @@ string CommonUI::printMenu(const vector<string>& options, const string& title) {
 	return output;
 }
 
+string CommonUI::printInput(const string& str) {
+	string output = "\t|\n\t-->";
+	output += str;
+	output += ": ";
+	return output;
+}
+
+string CommonUI::printMessage(const string& str) {
+	string output = "\t";
+	for (unsigned int i = 0; i < str.size() + 4; i++) {
+		output += "-";
+	}
+	output += "\n\t| ";
+	output += str;
+	output += " |\n\t";
+	for (unsigned int i = 0; i < str.size() + 4; i++) {
+		output += "-";
+	}
+	return output;
+}
+
+//Private functions
+
 //print out minus signs (for lines)
 string CommonUI::printLines(unsigned int size)
 {
 	string output = "";
 	output += "\t";
-	for (unsigned int i = 0; i < size * 2; i++)
-	{
+	for (unsigned int i = 0; i < size * 2; i++) {
 		output += "-";
 	}
 	output += "-------------\n";
