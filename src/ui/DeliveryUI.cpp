@@ -112,6 +112,8 @@ void DeliveryUI::ordersMenu() {
 				cout << "2: Set as delivered" << endl;
 				cout << "3: Go back" << endl;
 				cout << "Input: " << endl;
+				cin >> ws;
+				getline(cin, input);
 				if (input == "1") {
 					try {
 						service.setOrderPaid(orders.at(order).getID());
