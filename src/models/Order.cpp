@@ -145,6 +145,7 @@ ostream& operator <<(ostream& out, const Order& order)
 		len = order.homeAddress.length() + 1;
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(order.homeAddress.c_str(), len);
+		out.write((char*)(&order.paidFor), sizeof(bool));
 		out.write((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
 		out.write((char*)(&order.id), sizeof(size_t));
 	}
@@ -189,6 +190,7 @@ istream& operator >> (istream& in, Order& order) {
 		in.read(str, len);
 		order.homeAddress = str;
 		delete[] str;
+		in.read((char*)(&order.paidFor), sizeof(bool));
 		in.read((char*)(&order._deliveryMethod), sizeof(deliveryMethod));
 		in.read((char*)(&order.id), sizeof(size_t));
 	}

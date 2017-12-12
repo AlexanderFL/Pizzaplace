@@ -40,7 +40,7 @@ void DeliveryUI::allOrdersMenu() {
 		getline(cin, input);
 		try {
 			int order = service.convertStringToInt(input) - 1;
-			cout << orders.at(order) << endl;
+			cout << showOrderInfo(orders.at(order)) << endl;
 			cout << "1: Set as paid" << endl;
 			cout << "2: Set as delivered" << endl;
 			cout << "3: Go back" << endl;
@@ -202,7 +202,7 @@ string DeliveryUI::showOrderInfo(const Order& order) const {
 	else if (order.getDeliveryMethod() == SEND) {
 		info += "Send to " + order.getHomeAddress();
 	}
-	info += "Paid: ";
+	info += "\nPaid: ";
 	if (order.isPaidFor()) {
 		info += "True";
 	}
