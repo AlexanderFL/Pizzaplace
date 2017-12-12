@@ -5,13 +5,12 @@ ManagerUI::ManagerUI() {
 
 void ManagerUI::managerMenu() {
 	while (true) {
-		cout << menu.printMenu({ "Pizza", "Toppings", "Price", "Locations", "Side orders", "Menu options", "Go Back" }) << endl;
+		cout << menu.printMenu({ "Pizza", "Toppings", "Locations", "Side orders", "Menu options", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 
 		cin.ignore();
 		cin >> input;
 		system("CLS");
-
 		switch (input)
 		{
 			case '1':{
@@ -25,23 +24,18 @@ void ManagerUI::managerMenu() {
 				break;
 			}
 			case '3':{
-				//Price
-				priceOption();
-				break;
-			}
-			case '4':{
 				//Location
 				locationOption();
 				break;
 			}
-			case '5':
+			case '4':
 				//Side orders
 				sideOrderOption();
 				break;
-			case '6':
+			case '5':
 				//Pizza Menu
 				pizzaMenuOption();
-			case '7':
+			case '6':
 				//Go back
 				return;
 			case 'q':
@@ -53,18 +47,77 @@ void ManagerUI::managerMenu() {
 	}
 }
 
-
 /*			OPTIONS AVAILABLE			*/	
 
 void ManagerUI::pizzaOption() {
-	//TODO: Add options to add sizes/ bottoms   or delete them
+	//TODO: Add options to add sizes/bottoms/crust or delete them
 	while (true) {
-		cout << menu.printMenu({ "Size", "Bottom", "Go Back" }) << endl;
+		cout << menu.printMenu({ "Size", "Bottom", "Crust", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 		cin >> input;
-		if (input == '3') break;
+		if (input == '4') break;
+		switch (input) {
+		case '1':
+			//Size
+			validateSizeOptions();
+			break;
+		case '2':
+			//Bottom
+			break;
+		case '3':
+			//Crust
+			break;
+		default:
+			cout << "Invalid input" << endl;
+		}
 	}
 }
+
+/*void ManagerUI::validateCrustOptions() {
+
+}*/
+
+void ManagerUI::validateSizeOptions() {
+	switch (input) {
+	case '1': {
+		//Adding a topping
+		addMultipleToppings();
+		break;
+	}
+	case '2': {
+		//Delete a topping
+		deleteToppings();
+		break;
+	}
+	case '3': {
+		//See all toppings
+		seeAllToppings();
+		system("PAUSE");
+		break;
+	}
+	case '4': {
+		//Go back
+		break;
+	}
+	default: {
+		cout << "Invalid input." << endl;
+		break;
+	}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void ManagerUI::toppingOption() {
 	while (true) {
@@ -122,7 +175,6 @@ void ManagerUI::pizzaMenuOption() {
 /*				TOPPINGS			*/
 
 void ManagerUI::validateToppingInput(char input) {
-	seeAllToppings();
 	switch (input) {
 	case '1': {
 		//Adding a topping
@@ -168,6 +220,7 @@ void ManagerUI::addMultipleToppings() {
 void ManagerUI::deleteToppings() {
 	char input;
 	if ((service.getToppings()).size() != 0) {
+		seeAllToppings();
 		cout << "What topping would you like to delete. Please input a number: " << endl;
 		cout << "Input: ";
 		cin >> input;
@@ -338,6 +391,7 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 	}
 	case '2': {
 		//delete a Pizza from the menu
+		deletePizzaOnMenu();
 		break;
 	}
 	case '3': {
@@ -357,13 +411,12 @@ void ManagerUI::validatePizzaMenuOption(char input) {
 void ManagerUI::addMultiplePizza() {
 	int numberOfPizzas;
 	Offer offer;
-	vector<Pizza> pizza;
 	seePizzaMenu();
 	cout << "How many pizza offers would you like to add? ";
 	cin >> numberOfPizzas;
 	cout << "What would you like as a pizza offer? " << endl << endl;
-
 	for (int i = 0; i < numberOfPizzas; ++i) {
+		vector<Pizza> pizza;
 		vector<Topping> tops;
 		cout << "Pizza number " << i + 1 << ": ";
 		cin >> offer;
@@ -380,9 +433,11 @@ void ManagerUI::addMultiplePizza() {
 			tops.push_back(toppings.at((int)toppingID - 49));
 		}
 		pizza.push_back(Pizza(offer.getName(), tops, offer.getPrice()));
+		Order order;
+		order.setPizzas(pizza);
+		offer.setOrder(order);
+		service.addOffer(offer);
 	}
-	offer.getOrder().setPizzas(pizza);
-	service.addOffer(offer);
 }
 
 
@@ -391,11 +446,29 @@ void ManagerUI::seePizzaMenu() {
 	if (offers.size() != 0) {
 		cout << "Here are the offers you have so far: " << endl;
 		for (unsigned int i = 0; i < offers.size(); i++) {
+			cout << endl;
 			cout << "Pizzan nr." << i + 1 << ": " << endl;
-			cout << offers.at(i) << endl;
+			cout << offers.at(i);
+			cout << "Toppings: ";
+			for (unsigned int j = 0; j <offers.at(i).getOrder().getPizzas().size(); j++) {
+				cout << offers.at(i).getOrder().getPizzas().at(j) << endl;
+			}
 		}
 	}
 	else {
 		cout << "You have no pizza offers so far." << endl;
+	}
+}
+
+void ManagerUI::deletePizzaOnMenu() {
+	char input;
+	seePizzaMenu();
+	if ((service.getOffers()).size() != 0) {
+		cout << "What offer would you like to delete. Please input a number: " << endl;
+		cout << "Input: ";
+		cin >> input;
+		//Changing the input from char to int
+		int inputInInt = (int)input - 49;
+		service.deletePizzaOnMenu(inputInInt);
 	}
 }

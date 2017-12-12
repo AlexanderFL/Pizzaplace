@@ -108,9 +108,9 @@ void DeliveryUI::ordersMenu() {
 			try {
 				int order = service.convertStringToInt(input);
 				cout << showOrderInfo(orders.at(order)) << endl;
-				cout << "Set as paid" << endl;
-				cout << "Set as delivered" << endl;
-				cout << "Go back" << endl;
+				cout << "1: Set as paid" << endl;
+				cout << "2: Set as delivered" << endl;
+				cout << "3: Go back" << endl;
 				cout << "Input: " << endl;
 				if (input == "1") {
 					try {
@@ -122,6 +122,7 @@ void DeliveryUI::ordersMenu() {
 				}
 				if(input == "2") {
 					try {
+						service.setOrderPaid(orders.at(order).getID());
 						service.setOrderDelivered(orders.at(order).getID());
 					}
 					catch (out_of_range) {
@@ -168,13 +169,7 @@ string DeliveryUI::showPizzaInfoShort(const Pizza& pizza) const {
 	info += pizza.getID() + " - ";
 	info += pizza.getToppings().size() + " toppings, ";
 	info += pizza.getPizzaSize().getName() + " ";
-	info += pizza.getCrust().getName() + " pizza - ";
-	if (pizza.getPhase() == PREPERATION) {
-		info += "in preperation";
-	}
-	else if (pizza.getPhase() == BAKING) {
-		info += "baking";
-	}
+	info += pizza.getCrust().getName() + " pizza.";
 	return info;
 }
 
@@ -232,7 +227,7 @@ string DeliveryUI::showOrderInfoShort(const Order& order) const {
 		info += " needs to be sent";
 	}
 	else {
-		info += " needs to be picked up";
+		info += " awaiting pickup";
 	}
 	return info;
 }

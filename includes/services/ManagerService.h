@@ -26,6 +26,7 @@ public:
 	//Order
 	void addOffer(Offer& offer);
 	vector<Offer> getOffers();
+	void deletePizzaOnMenu(int index);
 private:
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
