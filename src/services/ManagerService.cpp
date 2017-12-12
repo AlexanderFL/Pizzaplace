@@ -124,6 +124,10 @@ vector<Offer> ManagerService::getOffers() {
 	return repo.RetrieveAllFromFile<Offer>();
 }
 
+void ManagerService::deletePizzaOnMenu(int index) {
+	repo.RemoveFromFileAtIndex<Offer>(index);
+}
+
 /*
 *************************************************
 *****			PRIVATE FUNCTIONS			*****
