@@ -3,7 +3,7 @@
 #include <vector>
 
 using namespace std;
-class Menu
+class CommonUI
 {
 public:
 	 string printMenu(vector<string> options);

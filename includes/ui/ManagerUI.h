@@ -6,19 +6,18 @@
 #include "Data.h"
 #include "SideOrder.h"
 #include "DeliveryUI.h"
-#include "Menu.h"
+#include "CommonUI.h"
 #include "Order.h"
 #include "Location.h"
 //For clearing the screen
 #include <stdlib.h>
 using namespace std;
 
-class ManagerUI
+class ManagerUI: CommonUI
 {
 private:
 	char input;  //<----- shouldn't be here
 	ManagerService service;
-	Menu menu;
 	void pizzaOption();
 	void toppingOption();
 	void priceOption();

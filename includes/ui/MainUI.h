@@ -8,10 +8,11 @@
 #include <string>
 #include <algorithm> //tolower case string in MainUI cpp (start ui)
 #include <vector>
+#include "CommonUI.h"
 
 using namespace std;
 
-class MainUI
+class MainUI: CommonUI
 {
     public:
         void startUI();

@@ -1,7 +1,7 @@
-#include "Menu.h"
+#include "CommonUI.h"
 
 
-string Menu::printMenu(vector<string> options)
+string CommonUI::printMenu(vector<string> options)
 {
 	string biggestString = "";
 	for (unsigned int i = 0; i < options.size(); i++)
@@ -52,7 +52,7 @@ string Menu::printMenu(vector<string> options)
 }
 
 //print out minus signs (for lines)
-string Menu::printLines(unsigned int size)
+string CommonUI::printLines(unsigned int size)
 {
 	string output = "";
 	output += "\t";

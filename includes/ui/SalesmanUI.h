@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include "Menu.h"
+#include "CommonUI.h"
 #include "SalesmanService.h"
 using namespace std;
 
-class SalesmanUI
+class SalesmanUI: CommonUI
 {
 private:
 	SalesmanService service;

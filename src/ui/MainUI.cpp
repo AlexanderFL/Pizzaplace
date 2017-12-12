@@ -3,18 +3,18 @@
 #include "ManagerUI.h"
 #include "SalesmanUI.h"
 #include "KitchenUI.h"
-#include "Menu.h"
+#include "CommonUI.h"
 #include <stdlib.h>
 
 void MainUI::startUI()
 {
 	char input;
-	Menu menu;
+	CommonUI menu;
 	while (true)
 	{
 		system("CLS");
 		cout << "\nPlease Pick one of the following jobs:\n"
-			<< menu.printMenu({ "Manager", "Salesman", "Kitchen", "Delivery" })
+			<< printMenu({ "Manager", "Salesman", "Kitchen", "Delivery" })
 			<< "\nPress 'q' to quit.\nJob: ";
 
 		cin >> input;

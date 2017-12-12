@@ -12,7 +12,7 @@ SalesmanUI::SalesmanUI()
 
 void SalesmanUI::salesmanMenu() {
 	string option;
-	Menu menu;
+	CommonUI menu;
 	char input;
 	while (true) {
 		cout << menu.printMenu({ "Register an order", "Go back" }) << endl;

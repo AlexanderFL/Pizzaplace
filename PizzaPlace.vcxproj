@@ -159,7 +159,7 @@
     <ClInclude Include="includes\ui\DeliveryUI.h" />
     <ClInclude Include="includes\ui\MainUI.h" />
     <ClInclude Include="includes\services\ManagerService.h" />
-    <ClInclude Include="includes\common\Menu.h" />
+    <ClInclude Include="includes\common\CommonUI.h" />
     <ClInclude Include="includes\models\Location.h" />
     <ClInclude Include="includes\models\PizzaCrust.h" />
     <ClInclude Include="includes\models\PizzaSize.h" />
@@ -195,7 +195,7 @@
     <ClCompile Include="src\models\PizzaSize.cpp" />
     <ClCompile Include="src\models\PizzaCrust.cpp" />
     <ClCompile Include="src\models\Location.cpp" />
-    <ClCompile Include="src\common\Menu.cpp" />
+    <ClCompile Include="src\common\CommonUI.cpp" />
     <ClCompile Include="src\services\ManagerService.cpp" />
     <ClCompile Include="src\repositories\Data.cpp" />
     <ClCompile Include="src\models\SideOrder.cpp" />

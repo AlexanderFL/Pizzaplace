@@ -3,9 +3,10 @@
 #include <string>
 #include "DeliveryService.h"
 #include "EmptyVector.h"
+#include "CommonUI.h"
 using namespace std;
 
-class DeliveryUI
+class DeliveryUI: CommonUI
 {
 private:
 	DeliveryService service;
