@@ -5,7 +5,7 @@
 #include "SalesmanService.h"
 using namespace std;
 
-class SalesmanUI: CommonUI
+class SalesmanUI: public CommonUI
 {
 private:
 	SalesmanService service;

@@ -12,7 +12,7 @@
 
 using namespace std;
 
-class MainUI: CommonUI
+class MainUI: public CommonUI
 {
     public:
         void startUI();

@@ -13,7 +13,7 @@
 #include <stdlib.h>
 using namespace std;
 
-class ManagerUI: CommonUI
+class ManagerUI: public CommonUI
 {
 private:
 	char input;  //<----- shouldn't be here

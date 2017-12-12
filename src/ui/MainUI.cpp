@@ -9,7 +9,6 @@
 void MainUI::startUI()
 {
 	char input;
-	CommonUI menu;
 	while (true)
 	{
 		system("CLS");

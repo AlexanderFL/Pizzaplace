@@ -12,10 +12,9 @@ SalesmanUI::SalesmanUI()
 
 void SalesmanUI::salesmanMenu() {
 	string option;
-	CommonUI menu;
 	char input;
 	while (true) {
-		cout << menu.printMenu({ "Register an order", "Go back" }) << endl;
+		cout << printMenu({ "Register an order", "Go back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to do? "; 
 
 		cin.ignore();

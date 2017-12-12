@@ -3,7 +3,7 @@
 #include "CommonUI.h"
 #include "LoginService.h"
 
-class LoginUI: CommonUI
+class LoginUI: public CommonUI
 {
 private:
 	LoginService service;

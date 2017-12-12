@@ -6,7 +6,7 @@
 #include "CommonUI.h"
 using namespace std;
 
-class DeliveryUI: CommonUI
+class DeliveryUI: public CommonUI
 {
 private:
 	DeliveryService service;
