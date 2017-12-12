@@ -55,7 +55,7 @@ void ManagerUI::pizzaOption() {
 		cout << menu.printMenu({ "Size", "Bottom / Crust", "Go Back" }) << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 		cin >> input;
-		if (input == '4') break;
+		if (input == '3') break;
 		switch (input) {
 		case '1':
 			//Size
@@ -92,12 +92,12 @@ void ManagerUI::validateCrustInput(char input) {
 	}
 	case '2': {
 		//Delete a crust
-		//deleteToppings();
+		deleteMultipleCrusts();
 		break;
 	}
 	case '3': {
 		//See all crust options
-		//seeAllToppings();
+		seeAllCrust();
 		system("PAUSE");
 		break;
 	}
@@ -112,6 +112,7 @@ void ManagerUI::validateCrustInput(char input) {
 	}
 }
 void ManagerUI::addingMultipleCrusts() {
+	seeAllCrust();
 	int numberOfCrusts;
 	PizzaCrust crust;
 	cout << "How many crusts would you like to add? ";
@@ -122,6 +123,29 @@ void ManagerUI::addingMultipleCrusts() {
 		cout << "crust number " << i + 1 << ": ";
 		cin >> crust;
 		service.addCrust(crust);
+	}
+}
+
+void ManagerUI::deleteMultipleCrusts() {
+	seeAllCrust();
+	vector<PizzaCrust> crusts = service.getAll<PizzaCrust>();
+	char input;
+	cout << "\nPlease input a number: ";
+	cin >> input;
+	int inputInInt = (int)input - 49;
+	service.deleteItem<PizzaCrust>(inputInInt);
+}
+
+void ManagerUI::seeAllCrust() {
+	vector <PizzaCrust> crusts = service.getAll<PizzaCrust>();
+	if (crusts.size() != 0) {
+		cout << "Here are the crusts you have so far: " << endl;
+		for (unsigned int i = 0; i < crusts.size(); i++) {
+			cout << i + 1 << ": " << crusts.at(i) << endl;
+		}
+	}
+	else {
+		cout << "You have no crusts so far." << endl;
 	}
 }
 
@@ -137,12 +161,12 @@ void ManagerUI::validateSizeOptions() {
 	}
 	case '2': {
 		//Delete a size
-	//	deleteSizeMenu();
+		deleteSizeMenu();
 		break;
 	}
 	case '3': {
 		//See all size
-		//seeAllSizesMenu();
+		seeAllSizesMenu();
 		system("PAUSE");
 		break;
 	}
@@ -153,11 +177,12 @@ void ManagerUI::validateSizeOptions() {
 	default: {
 		cout << "Invalid input." << endl;
 		break;
-	}
+		}
 	}
 }
 
 void ManagerUI::addSizeMenu() {
+	seeAllSizesMenu();
 	string name;
 	double mod;
 	cout << "Name of the new size: ";
@@ -169,10 +194,8 @@ void ManagerUI::addSizeMenu() {
 }
 
 void ManagerUI::deleteSizeMenu() {
-	vector<PizzaSize> sizes = service.getAll<PizzaSize>();
-	for (size_t i = 0; i < sizes.size(); ++i) {
-		cout << i + 1 << ": " <<  sizes.at(i).getName() << " : " << sizes.at(i).getPriceMod();
-	}
+	seeAllSizesMenu();
+	char input;
 	cin >> input;
 	int inputInInt = (int)input - 49;
 	service.deleteItem<PizzaSize>(inputInInt);
@@ -181,8 +204,9 @@ void ManagerUI::deleteSizeMenu() {
 void ManagerUI::seeAllSizesMenu() {
 	vector<PizzaSize> sizes = service.getAll<PizzaSize>();
 	for (size_t i = 0; i < sizes.size(); ++i) {
-		cout << sizes.at(i).getName() << " : " << sizes.at(i).getPriceMod();
+		cout << "Crust " << i + 1 << ": " << sizes.at(i).getName() << " - " << sizes.at(i).getPriceMod() << " Kr.";
 	}
+	cout << endl;
 }
 
 void ManagerUI::toppingOption() {
@@ -194,16 +218,6 @@ void ManagerUI::toppingOption() {
 		validateToppingInput(input);
 		if (input == '4') return;
 	}
-}
-
-void ManagerUI::priceOption() {
-	//TODO: get the total price of an order
-	//Data orderRepo;
-	//vector<Order> order;
-	//order = orderRepo.RetrieveAllFromFile<Order>();
-	//Todo replace with service
-	//cout << order.getTotalCost();
-	//cout << "The total price of the order is: " << service.getOrderTotalCost(order) << " kr." << endl;
 }
 
 void ManagerUI::locationOption() {

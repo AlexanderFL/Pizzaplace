@@ -32,6 +32,8 @@ public:
 	void validateCrustOptions();
 	void validateCrustInput(char input);
 	void addingMultipleCrusts();
+	void deleteMultipleCrusts();
+	void seeAllCrust();
 	void addSizeMenu();
 	void deleteSizeMenu();
 	void seeAllSizesMenu();

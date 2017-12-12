@@ -87,24 +87,37 @@ void SalesmanUI::makeNewOrder()
 				for (size_t i = 0; i < toppings.size(); ++i) {
 					cout << i + 1 << ": " << toppings.at(i).getName() << endl;
 				}
-				cout << toppings.size() << ": Continue with order" << endl;
+				cout << toppings.size() + 1 << ": Continue with order" << endl;
 
 				cout << "Please choose one of them. \nInput: ";
 				cin >> input;
-				if (input == toppings.size()) {
+				if ((int)input - 48 == (toppings.size() + 1)) {
 					break;
 				}
 				service.getPizza().getToppings().push_back(toppings.at((int)input - 49));
 			}
 			
 			service.appendToOrder(order, service.getPizza());
-			system("CLS");
-			// Ask user if he wants any sides
 
-			cout << "Would you like any sides with your order? Y/N (yes/no): ";
+			// Ask user if he wants any sides
+			cout << endl << "Would you like any sides with your order? Y/N (yes/no): ";
 			cin >> input;
 			if (toupper(input) == 'Y') {
+				cout << "Here are side orders you can choose from: " << endl;
+				vector<SideOrder> sideOrder = service.getAllSideOrders();
+				for (size_t i = 0; i < sideOrder.size(); i++)
+				{
+					cout << i + 1 << ": " << sideOrder.at(i).getName() << endl;
+				}
+				cout << "Please choose one of them. \nInput: ";
+				cin >> input;
 				
+				//Set the selected side order in service
+				int index = (int)input - 49;
+				service.getSideOrder().setName(sideOrder.at(index).getName());
+				service.getSideOrder().setPrice(sideOrder.at(index).getPrice());
+
+				service.appendToOrder(order, service.getSideOrder());
 			}
 			else {
 
