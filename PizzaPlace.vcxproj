@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\common\CommonService.h" />
     <ClInclude Include="includes\services\DeliveryService.h" />
     <ClInclude Include="includes\exceptions\EmptyVector.h" />
     <ClInclude Include="includes\exceptions\FailedOpenFile.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="includes\exceptions\InvalidString.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\common\CommonService.cpp" />
     <ClCompile Include="src\exceptions\InvalidString.cpp" />
     <ClCompile Include="src\exceptions\InvalidAddress.cpp" />
     <ClCompile Include="src\exceptions\InvalidOrder.cpp" />
