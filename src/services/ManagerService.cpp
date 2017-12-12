@@ -23,6 +23,15 @@ void ManagerService::addSideOrder(SideOrder& side) {
 	// Write it to file
 	repo.WriteToFile(side);
 }
+/*		Adding a crust		*/
+void ManagerService::addCrust(PizzaCrust& crust) {
+	// Validate topping
+	string crustName = crust.getName();
+	containsOnlyAlpha(crustName);
+	validPrice(crust.getPrice());
+	// Write it to file
+	repo.WriteToFile(crust);
+}
 
 /*		Add a new Order				*/
 void ManagerService::addOffer(Offer& offer) {
