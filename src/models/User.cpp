@@ -4,12 +4,12 @@
 const string User::filename = "users.dat";
 
 User::User() {
-	this->job = ADMIN;
+	this->job = DELIVERY;
 };
 
 User::User(string username, string password, string name, profession job) {
 	this->username = username;
-	this->password = password;
+	setPassword(password);
 	this->name = name;
 	this->job = job;
 }
@@ -35,7 +35,9 @@ void User::setUsername(const string& username) {
 }
 
 void User::setPassword(const string& password) {
-	this->password = password;
+	std::hash<std::string> str_hash;
+	size_t tempStor = str_hash(password);
+	this->password = to_string(tempStor);
 }
 
 void User::setName(const string& name) {
@@ -83,4 +85,18 @@ istream& operator >> (istream& in, User& user) {
 		in.read((char*)(&user.job), sizeof(profession));
 	}
 	return in;
+}
+
+bool operator == (const User& first, const User& second)
+{
+	if (first.getName() == second.getName()) {
+		if (first.getPassword() == second.getPassword()) {
+			if (first.getJob() == second.getJob()) {
+				if (first.getUsername() == second.getUsername()) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }

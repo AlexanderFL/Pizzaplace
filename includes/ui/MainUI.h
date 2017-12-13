@@ -1,20 +1,9 @@
-#ifndef MAINUI_H
-#define MAINUI_H
+#pragma once
 
-//#include "Pizza.h"
+#include "CommonUI.h"
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <algorithm> //tolower case string in MainUI cpp (start ui)
-#include <vector>
-
-using namespace std;
-
-class MainUI
+class MainUI: public CommonUI
 {
     public:
         void startUI();
 };
-
-#endif // MAINUI_H

@@ -1,24 +1,25 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
+#pragma once
+
 #include "ManagerService.h"
-#include "Topping.h"
-#include "Data.h"
-#include "SideOrder.h"
-#include "DeliveryUI.h"
-#include "Menu.h"
-#include "Order.h"
-#include "Location.h"
-//For clearing the screen
-#include <stdlib.h>
+#include "CommonUI.h"
+
 using namespace std;
 
-class ManagerUI
+class ManagerUI: public CommonUI
 {
 private:
 	char input;  //<----- shouldn't be here
 	ManagerService service;
-	Menu menu;
+	void showToppingsMenu();
+	void showToppingCreationMenu();
+	void showToppingViewMenu();
+	void showToppingDeleteMenu();
+
+	void showOffersMenu();
+	void showOfferCreationMenu();
+	void showOfferViewMenu();
+	void showOfferDeleteMenu();
+	void showCreatePizzaMenu(Pizza& pizza);
 	void pizzaOption();
 	void toppingOption();
 	void priceOption();
@@ -26,6 +27,7 @@ private:
 	void sideOrderOption();
 public:
 	ManagerUI();
+	//void showMainMenu();
 	void managerMenu();
 	//Pizza
 	void validateSizeOptions();

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Data.h"
+#include "CommonService.h"
 #include "User.h"
 #include "InvalidLogin.h"
 #include "EmptyVector.h"
 
-class LoginService
+class LoginService: public CommonService
 {
 private:
 	Data repo;

@@ -1,12 +1,11 @@
 #pragma once
 
-#include "Menu.h"
+#include "CommonUI.h"
 #include "LoginService.h"
 
-class LoginUI
+class LoginUI: public CommonUI
 {
 private:
-	Menu menu;
 	LoginService service;
 public:
 	void startUI();

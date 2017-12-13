@@ -4,6 +4,7 @@
 const string Offer::filename = "offers.dat";
 
 Offer::Offer() {
+	name = "Unnamed";
 	price = 0;
 	fixed = true;
 }

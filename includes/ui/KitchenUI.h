@@ -1,10 +1,12 @@
 #pragma once
+
 #include <iostream>
 #include <string>
 #include "KitchenService.h"
+#include "CommonUI.h"
 using namespace std;
 
-class KitchenUI
+class KitchenUI: public CommonUI
 {
 private: 
 	KitchenService service;

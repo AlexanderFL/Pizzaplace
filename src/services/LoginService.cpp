@@ -14,8 +14,5 @@ profession LoginService::login(string username, string password) {
 }
 
 void LoginService::checkForUsers() {
-	vector<User> users = repo.RetrieveAllFromFile<User>();
-	if (users.size() == 0) {
-		throw EmptyVector();
-	}
+	vector<User> users = getItems<User>();
 }

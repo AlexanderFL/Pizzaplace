@@ -1,11 +1,12 @@
 #pragma once
+
 #include <iostream>
 #include <string>
 #include "DeliveryService.h"
-#include "EmptyVector.h"
+#include "CommonUI.h"
 using namespace std;
 
-class DeliveryUI
+class DeliveryUI: public CommonUI
 {
 private:
 	DeliveryService service;

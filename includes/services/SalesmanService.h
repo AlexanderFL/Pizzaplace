@@ -1,13 +1,14 @@
 #pragma once
+
 #include <iostream>
 #include <string>
-#include "Data.h"
+#include "CommonService.h"
 #include "Offer.h"
 #include "InvalidOrder.h"
 #include "InvalidAddress.h"
 using namespace std;
 
-class SalesmanService
+class SalesmanService: public CommonService
 {
 private:
 	Data _repo;
@@ -27,15 +28,6 @@ public:
 	void setComments(Order& order, string comment);
 	SideOrder getSideOrder();
 	Pizza getPizza();
-	vector<Order> getAllOrders();
-	vector<Location> getAllLocations();
-	vector<SideOrder> getAllSideOrders();
-	vector<Topping> getAllToppings();
-	vector<PizzaCrust> getAllPizzaCrusts();
-	vector<PizzaSize> getAllPizzaSizes();
-
-	template<class T> 
-	vector<T> getAll();
 
 private:
 	int calculateCost(const Order& order);
@@ -44,8 +36,3 @@ private:
 	void overrideOrder(int index, Order edit);
 	void assignID(Order& order);
 };
-
-template<class T> vector<T> 
-SalesmanService::getAll() {
-	return _repo.RetrieveAllFromFile<T>();
-}

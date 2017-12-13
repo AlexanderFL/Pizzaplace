@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Data.h"
+#include "CommonService.h"
 #include "NumberInString.h"
 #include "InvalidPrice.h"
 #include "Offer.h"
@@ -8,7 +8,7 @@
 #include "NumberInString.h"
 #include "InvalidString.h"
 
-class ManagerService
+class ManagerService: public CommonService
 {
 private:
 	Data repo;
@@ -23,32 +23,8 @@ public:
 	void addLocation(Location& location);
 	//Order
 	void addOffer(Offer& offer);
-	template<class T> vector<T> getAll();
-	template<class T> void addItem(T item);
-	template<class T> void deleteItem(int index);
 private:
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
 	void validateString(const string& str);
-	template<class T> void validateVectorNotEmpty(const vector<T>& items);
 };
-
-template<class T> vector<T> ManagerService::getAll() {
-	vector<T> items = repo.RetrieveAllFromFile<T>();
-	validateVectorNotEmpty(items);
-	return items;
-}
-
-template<class T> void ManagerService::addItem(T item) {
-	repo.WriteToFile(item);
-}
-
-template<class T> void ManagerService::deleteItem(int index) {
-	repo.RemoveFromFileAtIndex<T>(index);
-}
-
-template<class T> void ManagerService::validateVectorNotEmpty(const vector<T>& items) {
-	if (items.size() == 0) {
-		throw EmptyVector();
-	}
-}

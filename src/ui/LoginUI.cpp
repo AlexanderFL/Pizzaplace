@@ -25,7 +25,8 @@ void LoginUI::startUI() {
 	}
 	
 	while (true) {
-		cout << menu.printMenu({ "Login", "Exit" }) << endl;
+		printMenu({ "Login", "Exit" });
+		cout << endl;
 		cout << "Input: ";
 		cin >> input;
 		switch (input)
@@ -49,6 +50,7 @@ void LoginUI::startUI() {
 				case MANAGER: {
 					ManagerUI managerUI;
 					managerUI.managerMenu();
+					//managerUI.showMainMenu();
 					break;
 				}
 				case SALESMAN: {

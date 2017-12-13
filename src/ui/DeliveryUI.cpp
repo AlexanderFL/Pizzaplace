@@ -1,6 +1,6 @@
 #include "DeliveryUI.h"
 #include "Order.h"
-#include "Menu.h"
+#include "CommonUI.h"
 
 //TODO: Fix home address! 
 
@@ -8,9 +8,9 @@ DeliveryUI::DeliveryUI() {}
 
 void DeliveryUI::deliveryMenu() {
 	string input;
-	Menu menu;
 	while (true) {
-		cout << menu.printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" }) << endl;
+		printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" });
+		cout << endl;
 		cout << "Input: ";
 		cin >> ws;
 		getline(cin, input);
@@ -91,7 +91,7 @@ void DeliveryUI::allOrdersMenu() {
 void DeliveryUI::ordersMenu() {
 	string input;
 	try {
-		vector<Location> locations = service.getLocations();
+		vector<Location> locations = service.getItems<Location>();
 		cout << "Choose the location of your workplace" << endl;
 		for (size_t i = 0; i < locations.size(); ++i) {
 			cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
