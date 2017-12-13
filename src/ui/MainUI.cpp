@@ -9,14 +9,14 @@ void MainUI::startUI()
 	string input;
 	while (true)
 	{
-		printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit" }, "Main Menu");
+		printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit"}, "Main Menu");
 		getInput(input);
 
 		if (input == "1") {
 			clear();
 			ManagerUI managerUI;
-			managerUI.managerMenu();
-			//managerUI.showMainMenu();
+			//managerUI.managerMenu();
+			managerUI.showMainMenu();
 		}
 		else if (input == "2") {
 			clear();

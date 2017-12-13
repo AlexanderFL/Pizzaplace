@@ -2,18 +2,14 @@
 #include "Order.h"
 #include "CommonUI.h"
 
-//TODO: Fix home address! 
-
 DeliveryUI::DeliveryUI() {}
 
 void DeliveryUI::deliveryMenu() {
 	string input;
 	while (true) {
-		printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" });
-		cout << endl;
-		cout << "Input: ";
-		cin >> ws;
-		getline(cin, input);
+		printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" }, "Delivery");
+		getInput(input);
+		clear();
 		if (input == "1") {
 			allOrdersMenu();
 		}
@@ -24,7 +20,7 @@ void DeliveryUI::deliveryMenu() {
 			return;
 		}
 		else {
-			cout << "Invalid input." << endl;
+			printMessage("Invalid input.");
 		}
 	}
 }
@@ -38,24 +34,18 @@ void DeliveryUI::allOrdersMenu() {
 			cout << i + 1 << ": ";
 			showOrderInfoShort(orders.at(i));
 		}
-		cout << "Input: ";
-		cin >> ws;
-		getline(cin, input);
+		getInput(input);
 		try {
 			int order = service.convertStringToInt(input) - 1;
 			showOrderInfo(orders.at(order));
-			cout << "1: Set as paid" << endl;
-			cout << "2: Set as delivered" << endl;
-			cout << "3: Go back" << endl;
-			cout << "Input: " << endl;
-			cin >> ws;
-			getline(cin, input);
+			printMenu({ "Set as paid", "Set as delivered", "Go Back" });
+			getInput(input);
 			if (input == "1") {
 				try {
 					service.setOrderPaid(orders.at(order).getID());
 				}
 				catch (out_of_range) {
-					cout << "Invalid index." << endl;
+					printMessage("Invalid input.");
 				}
 			}
 			else if (input == "2") {
@@ -63,28 +53,28 @@ void DeliveryUI::allOrdersMenu() {
 					service.setOrderDelivered(orders.at(order).getID());
 				}
 				catch (out_of_range) {
-					cout << "Invalid index." << endl;
+					printMessage("Invalid index.");
 				}
 			}
 			else if (input == "3") {
 				return;
 			}
 			else {
-				cout << "Invalid input." << endl;
+				printMessage("Invalid input.");
 			}
 		}
 		catch (InvalidString) {
-			cout << "Invalid input." << endl;
+			printMessage("Invalid input.");
 		}
 		catch (out_of_range) {
-			cout << "Invalid index." << endl;
+			printMessage("Invalid index.");
 		}
 	}
 	catch (EmptyVector) {
-		cout << "No orders availabe." << endl;
+		printMessage("No orders available.");
 	}
 	catch (FailedOpenFile) {
-		cout << "Failed to open file." << endl;
+		printMessage("Failed to open file.");
 	}
 }
 
@@ -92,13 +82,13 @@ void DeliveryUI::ordersMenu() {
 	string input;
 	try {
 		vector<Location> locations = service.getItems<Location>();
-		cout << "Choose the location of your workplace" << endl;
+		vector<string> names;
 		for (size_t i = 0; i < locations.size(); ++i) {
-			cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
+			names.push_back(locations.at(i).getAddress());
 		}
-		cout << "Input: ";
-		cin >> ws;
-		getline(cin, input);
+		names.push_back("Back");
+		printMenu(names, "Select Location");
+		getInput(input);
 		try {
 			int index = service.convertStringToInt(input) - 1;
 			vector<Order> orders = service.getOrders(locations.at(index));
@@ -106,24 +96,19 @@ void DeliveryUI::ordersMenu() {
 				cout << i + 1 << ": ";
 				showOrderInfoShort(orders.at(i));
 			}
-			cout << "Input: ";
-			cin >> ws;
-			getline(cin, input);
+			getInput(input);
 			int order = service.convertStringToInt(input) - 1;
 			try {
 				showOrderInfo(orders.at(order));
-				cout << "1: Set as paid" << endl;
-				cout << "2: Set as delivered" << endl;
-				cout << "3: Go back" << endl;
-				cout << "Input: ";
-				cin >> ws;
-				getline(cin, input);
+				//Add the address here
+				printMenu({ "Set as paid", "Set as delivered", "Go Back" });
+				getInput(input);
 				if (input == "1") {
 					try {
 						service.setOrderPaid(orders.at(order).getID());
 					}
 					catch (out_of_range) {
-						cout << "Invalid index." << endl;
+						printMessage("Invalid index.");
 					}
 				}
 				if(input == "2") {
@@ -132,41 +117,41 @@ void DeliveryUI::ordersMenu() {
 						service.setOrderDelivered(orders.at(order).getID());
 					}
 					catch (out_of_range) {
-						cout << "Invalid index." << endl;
+						printMessage("Invalid index.");
 					}
 				}
 				if (input == "3") {
 					return;
 				}
 				else {
-					cout << "Invalid input." << endl;
+					printMessage("Invalid input.");
 				}
 			}
 			catch (InvalidString) {
-				cout << "Invalid input." << endl;
+				printMessage("Invalid input.");
 			}
 			catch (out_of_range) {
-				cout << "Invalid index." << endl;
+				printMessage("Invalid index.");
 			}
 		}
 		catch (InvalidString) {
-			cout << "Invalid input." << endl;
+			printMessage("Invalid input.");
 		}
 		catch (out_of_range) {
-			cout << "Invalid index." << endl;
+			printMessage("Invalid index.");
 		}
 		catch (EmptyVector) {
-			cout << "No orders available for this location." << endl;
+			printMessage("No orders available for this location");
 		}
 		catch (FailedOpenFile) {
-			cout << "Failed to open file." << endl;
+			printMessage("Failed to open file.");
 		}
 	}
 	catch (EmptyVector) {
-		cout << "No locations available." << endl;
+		printMessage("No locations available.");
 	}
 	catch (FailedOpenFile) {
-		cout << "Failed to open file." << endl;
+		printMessage("Failed to open file.");
 	}
 }
 
