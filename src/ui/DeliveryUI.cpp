@@ -29,11 +29,13 @@ void DeliveryUI::allOrdersMenu() {
 	string input;
 	try {
 		vector<Order> orders = service.getOrders();
-		cout << "Select an option" << endl;
+		vector<string> names;
 		for (size_t i = 0; i < orders.size(); ++i) {
-			cout << i + 1 << ": ";
-			showOrderInfoShort(orders.at(i));
+			//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
+			names.push_back("Pizza " + to_string(orders.at(i).getID()));
 		}
+		names.push_back("Back");
+		printMenu(names, "Pizzas ready to be delivered");
 		getInput(input);
 		try {
 			int order = service.convertStringToInt(input) - 1;
@@ -162,14 +164,15 @@ void DeliveryUI::showPizzaInfoShort(const Pizza& pizza) const {
 }
 
 void DeliveryUI::showOrderInfo(const Order& order) const {
-	cout << "Order: " << order.getID() << endl << "Pizzas: ";
+	cout << "Order: " << order.getID() << endl;
+	//cout << "Pizza: ";
 	if (order.getPizzas().size() == 0) {
 		cout << "None";
 	}
 	else {
 		cout << endl;
 		for (size_t i = 0; i < order.getPizzas().size(); ++i) {
-			cout << "\tPizza " << i + 1 << ": ";
+			cout << "Pizza " << i + 1 << ": ";
 			showPizzaInfoShort(order.getPizzas().at(i));
 		}
 		

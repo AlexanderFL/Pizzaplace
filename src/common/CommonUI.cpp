@@ -40,7 +40,7 @@ void CommonUI::printMessage(const string& str) const {
 
 void CommonUI::getInput(string& str) const {
 	printInput("Input");
-	cin >> ws;
+	cin >> ws; 
 	getline(cin, str);
 }
 
