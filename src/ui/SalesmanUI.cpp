@@ -123,7 +123,7 @@ void SalesmanUI::makeNewOrder()
 				int index = (int)input - 49;
 				service.appendToOrder(order, sideOrder.at(index));
 			}
-		/*	cout << "Your order is:" << endl;
+			/*cout << "Your order is:" << endl;
 			string info = "A ";
 			info += pizza.getPizzaSize().getName() + " pizza with ";
 			if (toppings.size() == 0) {
