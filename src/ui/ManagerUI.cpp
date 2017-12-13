@@ -523,8 +523,8 @@ void ManagerUI::managerMenu() {
 		cout << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 
-		cin.ignore();
 		cin >> input;
+		cin.ignore();
 		system("CLS");
 		switch (input)
 		{
@@ -734,7 +734,7 @@ void ManagerUI::deleteSizeMenu() {
 void ManagerUI::seeAllSizesMenu() {
 	vector<PizzaSize> sizes = service.getItems<PizzaSize>();
 	for (size_t i = 0; i < sizes.size(); ++i) {
-		cout << "Crust " << i + 1 << ": " << sizes.at(i).getName() << " - " << sizes.at(i).getPriceMod() << " Kr.";
+		cout << "Crust " << i + 1 << ": " << sizes.at(i).getName() << " - " << (sizes.at(i).getPriceMod() - 1)*100 << " %";
 	}
 	cout << endl;
 }

@@ -18,8 +18,8 @@ void SalesmanUI::salesmanMenu() {
 		cout << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to do? "; 
 
-		cin.ignore();
 		cin >> input;
+		cin.ignore();
 
 		system("CLS");
 
@@ -66,7 +66,7 @@ void SalesmanUI::makeNewOrder()
 			vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
 			cout << "Here are the crusts you can choose from:" << endl;
 			for (size_t i = 0; i < crusts.size(); ++i) {
-				cout << i + 1 << ": " << crusts.at(i).getName() << std::setw(10) << crusts.at(i).getPrice() << " kr.-" << endl;
+				cout << i + 1 << ": " << crusts.at(i).getName() << " \t" << crusts.at(i).getPrice() << " kr.-" << endl;
 			}
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
@@ -76,7 +76,7 @@ void SalesmanUI::makeNewOrder()
 			vector<PizzaSize> sizes = service.getItems<PizzaSize>();
 			cout << "Here are the sizes you can choose from:" << endl;
 			for (size_t i = 0; i < sizes.size(); ++i) {
-				cout << i + 1 << ": " << sizes.at(i).getName() << endl;
+				cout << i + 1 << ": " << sizes.at(i).getName() << " \t+" << (sizes.at(i).getPriceMod()-1)*100 << " %" << endl;
 			}
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
@@ -88,7 +88,7 @@ void SalesmanUI::makeNewOrder()
 				{
 					cout << "Here are the toppings you can choose from:" << endl;
 					for (size_t i = 0; i < toppings.size(); ++i) {
-						cout << i + 1 << ": " << toppings.at(i).getName() << endl;
+						cout << i + 1 << ": " << toppings.at(i).getName() << "  \t" << (toppings.at(i).getPrice()) << " kr.-" << endl;
 					}
 					cout << "How many toppings would you like? ";
 					cout << "\nPlease enter 0 if you wish to have no toppings.\nInput: ";
@@ -115,7 +115,7 @@ void SalesmanUI::makeNewOrder()
 				vector<SideOrder> sideOrder = service.getItems<SideOrder>();
 				for (size_t i = 0; i < sideOrder.size(); i++)
 				{
-					cout << i + 1 << ": " << sideOrder.at(i).getName() << endl;
+					cout << i + 1 << ": " << sideOrder.at(i).getName() << " \t" << sideOrder.at(i).getPrice() << " kr.-" << endl;
 				}
 				cout << "Please choose one of them. \nInput: ";
 				cin >> input;
@@ -124,7 +124,7 @@ void SalesmanUI::makeNewOrder()
 				int index = (int)input - 49;
 				service.appendToOrder(order, sideOrder.at(index));
 			}
-		/*	cout << "Your order is:" << endl;
+			/*cout << "Your order is:" << endl;
 			string info = "A ";
 			info += pizza.getPizzaSize().getName() + " pizza with ";
 			if (toppings.size() == 0) {

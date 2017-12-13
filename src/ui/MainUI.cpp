@@ -9,7 +9,7 @@ void MainUI::startUI()
 	string input;
 	while (true)
 	{
-		printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit" }, "Main Menu");
+		printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit"}, "Main Menu");
 		getInput(input);
 
 		if (input == "1") {
