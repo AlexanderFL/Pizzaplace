@@ -50,6 +50,13 @@ void CommonUI::getInput(const string& text, string& str) const {
 	getline(cin, str);
 }
 
+void CommonUI::getInput(const string& text, char & input) const
+{
+	printInput(text);
+	cin >> input;
+	cin.ignore();
+}
+
 //Private functions
 
 //print out minus signs (for lines)

@@ -117,13 +117,13 @@ void SalesmanUI::pickFromMenu(Order& order, char& input) {
 
 void SalesmanUI::selectLocation(Order& order, char & input)
 {
-	cout << "Welcome! Please pick a Pizza location from one of the following:" << endl;
 	vector<Location> locations = service.getItems<Location>();
+	vector<string> stringifyLocations;
 	for (size_t i = 0; i < locations.size(); i++) {
-		cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
+		stringifyLocations.push_back(locations.at(i).getAddress());
 	}
-	cout << "Input: ";
-	cin >> input;
+	printMenu({stringifyLocations}, "Please A Select Location");
+	getInput("Input: ", input);
 	order.setLocation(locations.at((int)input - 49));
 }
 
@@ -141,23 +141,19 @@ void SalesmanUI::selectFromMenu(Order& order, bool& pizzaFromMenu, char & input)
 void SalesmanUI::selectCrust(Pizza& pizza, char& input)
 {
 	vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
-	cout << "Here are the crusts you can choose from:" << endl;
-	printMenu(makeStringVector(crusts));
-	cout << "Please choose one of them. \nInput: ";
-	cin >> input;
+	printMenu(makeStringVector(crusts), "Select the Pizza Crust");
+	getInput("Input: ", input);
 	pizza.setCrust(crusts.at((int)input - 49));
-	system("CLS");
+	clear();
 }
 
 void SalesmanUI::selectSize(Pizza & pizza, char& input)
 {
 	vector<PizzaSize> sizes = service.getItems<PizzaSize>();
-	cout << "Here are the sizes you can choose from:" << endl;
-	printMenu(makeStringVectorFromPizzaSize(sizes));
-	cout << "Please choose one of them. \nInput: ";
-	cin >> input;
+	printMenu(makeStringVectorFromPizzaSize(sizes), "Select the Pizza Size");
+	getInput("Input: ", input);
 	pizza.setPizzaSize(sizes.at((int)input - 49));
-	system("CLS");
+	clear();
 }
 
 void SalesmanUI::selectToppings(Pizza & pizza, char& input)
@@ -165,16 +161,12 @@ void SalesmanUI::selectToppings(Pizza & pizza, char& input)
 	vector<Topping> toppings = service.getItems<Topping>();
 	while (true)
 	{
-		cout << "Here are the toppings you can choose from:" << endl;
-		printMenu(makeStringVector(toppings));
-		cout << "How many toppings would you like? ";
-		cout << "\nPlease enter 0 if you wish to have no toppings.\nInput: ";
-		char numberOfToppings;
-		cin >> numberOfToppings;
-		int numberOfToppingsInt = (int)numberOfToppings - 48;
+		printMenu(makeStringVector(toppings), "Select the Toppings");
+		getInput("Please enter the number of toppings: ", input);
+		int numberOfToppingsInt = (int)input - 48;
 		for (int i = 0; i < numberOfToppingsInt; i++) {
-			cout << "Topping number " << i + 1 << " is: ";
-			cin >> input;
+			string inputString = "Select topping nr " + to_string(i+1) + ": ";
+			getInput(inputString, input);
 			if ((int)input - 48 == (toppings.size() + 1)) {
 				break;
 			}
@@ -287,7 +279,7 @@ vector<string> SalesmanUI::makeStringVectorFromPizzaSize(vector<PizzaSize> pizza
 	for(size_t i = 0; i < pizzaSizeVector.size(); i++)
 	{
 		tempString = pizzaSizeVector.at(i).getName();
-		tempString += " | ";
+		tempString += " | +";
 		convertionString = to_string((pizzaSizeVector.at(i).getPriceMod()-1) * 100);
 		// Remove trailing 0's
 		convertionString.erase(convertionString.find_last_not_of('0') + 1, string::npos);
