@@ -7,6 +7,7 @@ DeliveryUI::DeliveryUI() {}
 void DeliveryUI::deliveryMenu() {
 	string input;
 	while (true) {
+		clear();
 		printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" }, "Delivery");
 		getInput(input);
 		clear();
@@ -27,58 +28,61 @@ void DeliveryUI::deliveryMenu() {
 
 void DeliveryUI::allOrdersMenu() {
 	string input;
-	try {
-		vector<Order> orders = service.getOrders();
-		vector<string> names;
-		for (size_t i = 0; i < orders.size(); ++i) {
-			//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
-			names.push_back("Pizza " + to_string(orders.at(i).getID()));
-		}
-		names.push_back("Back");
-		printMenu(names, "Pizzas ready to be delivered");
-		getInput(input);
+	while (true) {
 		try {
 			clear();
-			int order = service.convertStringToInt(input) - 1;
-			showOrderInfo(orders.at(order));
-			cout << endl;
-			printMenu({ "Set as paid", "Set as delivered", "Go Back" });
+			vector<Order> orders = service.getOrders();
+			vector<string> names;
+			for (size_t i = 0; i < orders.size(); ++i) {
+				//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
+				names.push_back("Pizza " + to_string(orders.at(i).getID()));
+			}
+			names.push_back("Back");
+			printMenu(names, "Pizzas ready to be delivered");
 			getInput(input);
-			if (input == "1") {
-				try {
-					service.setOrderPaid(orders.at(order).getID());
+			try {
+				clear();
+				int order = service.convertStringToInt(input) - 1;
+				showOrderInfo(orders.at(order));
+				cout << endl;
+				printMenu({ "Paid", "Delivered", "Go Back" }, "Set order as:");
+				getInput(input);
+				if (input == "1") {
+					try {
+						service.setOrderPaid(orders.at(order).getID());
+					}
+					catch (out_of_range) {
+						printMessage("Invalid input.");
+					}
 				}
-				catch (out_of_range) {
+				else if (input == "2") {
+					try {
+						service.setOrderDelivered(orders.at(order).getID());
+					}
+					catch (out_of_range) {
+						printMessage("Invalid index.");
+					}
+				}
+				else if (input == "3") {
+					break;
+				}
+				else {
 					printMessage("Invalid input.");
 				}
 			}
-			else if (input == "2") {
-				try {
-					service.setOrderDelivered(orders.at(order).getID());
-				}
-				catch (out_of_range) {
-					printMessage("Invalid index.");
-				}
-			}
-			else if (input == "3") {
-				return;
-			}
-			else {
+			catch (InvalidString) {
 				printMessage("Invalid input.");
 			}
+			catch (out_of_range) {
+				printMessage("Invalid index.");
+			}
 		}
-		catch (InvalidString) {
-			printMessage("Invalid input.");
+		catch (EmptyVector) {
+			printMessage("No orders available.");
 		}
-		catch (out_of_range) {
-			printMessage("Invalid index.");
+		catch (FailedOpenFile) {
+			printMessage("Failed to open file.");
 		}
-	}
-	catch (EmptyVector) {
-		printMessage("No orders available.");
-	}
-	catch (FailedOpenFile) {
-		printMessage("Failed to open file.");
 	}
 }
 
@@ -113,7 +117,7 @@ void DeliveryUI::ordersMenu() {
 				clear();
 				showOrderInfo(orders.at(order));
 				cout << endl;
-				printMenu({ "Set as paid", "Set as delivered", "Go Back" });
+				printMenu({ "Paid", "Delivered", "Go Back" }, "Set order as:");
 				getInput(input);
 				if (input == "1") {
 					try {
@@ -174,9 +178,12 @@ void DeliveryUI::showPizzaInfoShort(const Pizza& pizza) const {
 }
 
 void DeliveryUI::showOrderInfo(const Order& order) const {
-	printMenu({}, "Pizza Place Receipt");
+	//TODO: FIX
+	cout << "\n\t\tPizza Place " << endl;
+	cout << "------------------------------------------------------" << endl;
 	cout << "Order ID: " << order.getID() << endl;
-	cout << "Pizza: ";
+	cout << "------------------------------------------------------" << endl;
+	cout << "Pizza:\t\t\t";
 	if (order.getPizzas().size() == 0) {
 		cout << "None";
 	}
@@ -186,7 +193,7 @@ void DeliveryUI::showOrderInfo(const Order& order) const {
 		}
 		
 	}
-	cout << endl << "Side Orders: ";
+	cout << endl << "Side Orders:\t\t";
 	if (order.getSides().size() == 0) {
 		cout <<"None";
 	}
@@ -195,21 +202,21 @@ void DeliveryUI::showOrderInfo(const Order& order) const {
 			cout << order.getSides().at(i).getName();
 		}
 	}
-	cout << endl << "Comment: " + order.getComment() << endl;
-	cout << "Location: " + order.getLocation().getAddress() << endl;
-	cout << "Delivery Method: ";
+	cout << endl << "Comment:\t\t" + order.getComment() << endl;
+	cout << "Location:\t\t" + order.getLocation().getAddress() << endl;
+	cout << "Delivery Method:\t";
 	if (order.getDeliveryMethod() == PICKUP) {
 		cout << "Pickup" << endl;
 	}
 	else if (order.getDeliveryMethod() == SEND) {
 		cout << "Send to " << order.getHomeAddress() << endl;
 	}
-	cout << "Paid: ";
+	cout << "Paid:\t\t\t";
 	if (order.isPaidFor()) {
 		cout << "True";
 	}
 	else {
-		cout << "False";
+		cout << "False" << endl;
 	}
 	cout << endl;
 }
