@@ -36,7 +36,7 @@ void KitchenUI::showMainMenu() {
 								index = service.convertStringToInt(input);
 								if (index == names.size()) {
 									clear();
-									return;
+									break;
 								}
 								clear();
 								while (true) {
@@ -221,7 +221,7 @@ string KitchenUI::showPizzaInfo(const Pizza& pizza) const {
 		}
 	}
 	info += pizza.getCrust().getName() + " crust.";
-	info += " It is currently ";
+	info += " It is currently";
 	if (pizza.getPhase() == PREPERATION) {
 		info += " in preperation.";
 	}
