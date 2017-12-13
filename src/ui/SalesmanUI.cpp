@@ -274,6 +274,10 @@ void SalesmanUI::showTotalOrder(Order & order)
 	}
 }
 
+/*
+	Converting the PizzaSize vector to a string vector by 
+	displaying the name and price modifier in a single string
+*/
 vector<string> SalesmanUI::makeStringVectorFromPizzaSize(vector<PizzaSize> pizzaSizeVector)
 {
 	vector<string> returnVector;
