@@ -19,4 +19,3 @@ private:
 	void printLines(size_t size) const;
 	size_t biggestStringSize(const vector<string>& vec) const;
 };
-

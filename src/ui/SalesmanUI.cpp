@@ -65,9 +65,10 @@ void SalesmanUI::makeNewOrder()
 			// Select type of crust
 			vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
 			cout << "Here are the crusts you can choose from:" << endl;
-			for (size_t i = 0; i < crusts.size(); ++i) {
-				cout << i + 1 << ": " << crusts.at(i).getName() << " \t" << crusts.at(i).getPrice() << " kr.-" << endl;
-			}
+			//for (size_t i = 0; i < crusts.size(); ++i) {
+			//	cout << i + 1 << ": " << crusts.at(i).getName() << " \t" << crusts.at(i).getPrice() << " kr.-" << endl;
+			//}
+			printMenu(makeStringVector(crusts));
 			cout << "Please choose one of them. \nInput: ";
 			cin >> input;
 			pizza.setCrust(crusts.at((int)input - 49));
@@ -107,43 +108,42 @@ void SalesmanUI::makeNewOrder()
 				}
 			}
 			service.appendToOrder(order, pizza);
-			// Ask user if he wants any sides
+			// Ask user if he wants any sides (can have multiple sides)
 			cout << endl << "Would you like any sides with your order? Y/N (yes/no): ";
 			cin >> input;
-			if (toupper(input) == 'Y') {
-				cout << "Here are side orders you can choose from: " << endl;
-				vector<SideOrder> sideOrder = service.getItems<SideOrder>();
-				for (size_t i = 0; i < sideOrder.size(); i++)
-				{
-					cout << i + 1 << ": " << sideOrder.at(i).getName() << " \t" << sideOrder.at(i).getPrice() << " kr.-" << endl;
-				}
-				cout << "Please choose one of them. \nInput: ";
-				cin >> input;
+			while (true)
+			{
+				if (toupper(input) == 'Y') {
+					cout << "Here are side orders you can choose from: " << endl;
+					vector<SideOrder> sideOrder = service.getItems<SideOrder>();
+					for (size_t i = 0; i < sideOrder.size(); i++)
+					{
+						cout << i + 1 << ": " << sideOrder.at(i).getName() << " \t" << sideOrder.at(i).getPrice() << " kr.-" << endl;
+					}
+					cout << "Please choose one of them. \nInput: ";
+					cin >> input;
 				
-				//Set the selected side order in service
-				int index = (int)input - 49;
-				service.appendToOrder(order, sideOrder.at(index));
-			}
-		/*	cout << "Your order is:" << endl;
-			string info = "A ";
-			info += pizza.getPizzaSize().getName() + " pizza with ";
-			if (toppings.size() == 0) {
-				info += "no toppings, ";
-			}
-			else {
-				for (size_t i = 0; i < toppings.size(); ++i) {
-					info += toppings.at(i).getName() + ", ";
+					//Set the selected side order in service
+					int index = (int)input - 49;
+					service.appendToOrder(order, sideOrder.at(index));
 				}
-			}*/
+				else {
+					break;
+				}
 
+				cout << "Would you like any more sides with your order? Y/N (yes/no): ";
+				cin >> input;
+			}
+	
 			//Adding a comment to the order
 			string comment = "None";
 			cout << "Is there any information we should know (y/n)? ";
 			cin >> input;
 			if (tolower(input) == 'y') {
 				cout << "Comment: ";
-				cin >> ws;
-				getline(cin, comment);
+				//cin >> ws; 
+				//getline(cin, comment);
+				getInput(comment);
 			}
 			service.setComments(order, comment);
 
