@@ -3,7 +3,6 @@
 #include "Order.h"
 #include "SalesmanService.h"
 #include <stdlib.h>
-#include <iomanip> // setw
 
 SalesmanUI::SalesmanUI()
 {
@@ -263,7 +262,6 @@ void SalesmanUI::showTotalOrder(Order & order)
 				}
 				cout << "\tComment: " << endl;
 				cout << "\t\t  " << order.getComment() << endl;
-
 			}
 			cout << endl;
 			cout << "---------- TOTAL ----------" << endl;
