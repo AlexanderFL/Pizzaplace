@@ -92,18 +92,19 @@ void ManagerService::addLocation(Location& location) {
 	repo.WriteToFile(location);
 }
 
-/*
-*************************************************
-*****			PRIVATE FUNCTIONS			*****
-*************************************************
-*/
+void ManagerService::replaceToppingInFile(const Topping & topping, int index)
+{
+	vector<Topping> toppings = repo.RetrieveAllFromFile<Topping>();
+	toppings[index] = topping;
+	repo.WriteMultipleLinesToFile<Topping>(toppings);
+}
 
 /*		Checks if string contains only alpha characters
-		Returns true if it does and false otherwise.
-		
-		Examples for usage: If topping contains a number,
-							the function will return false,
-							because it is not a valid topping name.
+Returns true if it does and false otherwise.
+
+Examples for usage: If topping contains a number,
+the function will return false,
+because it is not a valid topping name.
 */
 void ManagerService::containsOnlyAlpha(string s)
 {
@@ -113,6 +114,12 @@ void ManagerService::containsOnlyAlpha(string s)
 		}
 	}
 }
+
+/*
+*************************************************
+*****			PRIVATE FUNCTIONS			*****
+*************************************************
+*/
 
 /*
 		Checks if price is valid, a price is valid if it is

@@ -49,6 +49,7 @@ public:
 	void addMultipleToppings();
 	void deleteToppings();
 	void seeAllToppings();
+	void editTopping(vector<Topping> toppings, int index);
 	//Location
 	void addingMultipleLocations();
 	void validateLocationOptions(char input);

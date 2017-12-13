@@ -44,7 +44,7 @@ void SalesmanUI::makeNewOrder()
 	int nrOfOrder = 1;
 	
 	selectLocation(order, input);
-
+	system("CLS");
 	while (true) {
 		try
 		{
