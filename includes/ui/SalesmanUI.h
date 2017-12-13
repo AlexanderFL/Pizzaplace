@@ -16,6 +16,17 @@ public:
 	void salesmanMenu();
 	void makeNewOrder();
 	void pickFromMenu();
+private:
+	void selectLocation(Order& order, char& input);
+	void selectFromMenu(bool& pizzaFromMenu, char& input);
+	void selectCrust(Pizza& pizza, char& input);
+	void selectSize(Pizza& pizza, char& input);
+	void selectToppings(Pizza& pizza, char& input);
+	void selectSides(Order& order, char& input);
+	void addComment(Order& order, char& input);
+	bool addAnotherOrder(char& input);
+	
+	vector<string> makeStringVectorFromPizzaSize(vector<PizzaSize> pizzaSizeVector);
 
 	template<typename T>
 	vector<string> makeStringVector(T tempVector);
@@ -30,7 +41,7 @@ vector<string> SalesmanUI::makeStringVector(T tempVector)
 	for (size_t i = 0; i < tempVector.size(); i++) {
 		tempString = tempVector.at(i).getName();
 		tempString += " | ";
-		tempString += tempVector.at(i).getPrice();
+		tempString += to_string(tempVector.at(i).getPrice());
 		tempString += " kr.-";
 
 		tmpReturnString.push_back(tempString);
