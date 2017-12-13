@@ -2,13 +2,16 @@
 
 #include "Data.h"
 #include "EmptyVector.h"
+#include "InvalidString.h"
+#include "NumberInString.h"
 
 class CommonService
 {
 private:
 	Data repo;
 public:
-	
+	void validateStringIsDigit(const string& str) const;
+	int convertStringToInt(const string& str) const;
 	// Templates
 	template<class T> vector<T> getItems();
 	template<class T> void addItem(T& item) const;

@@ -1,4 +1,5 @@
 #include "CommonUI.h"
+#include <stdlib.h>
 
 void CommonUI::clear() const {
 	system("CLS");
@@ -34,10 +35,17 @@ void CommonUI::printMessage(const string& str) const {
 	for (unsigned int i = 0; i < str.size() + 4; i++) {
 		cout << "-";
 	}
+	cout << endl;
 }
 
 void CommonUI::getInput(string& str) const {
 	printInput("Input");
+	cin >> ws;
+	getline(cin, str);
+}
+
+void CommonUI::getInput(const string& text, string& str) const {
+	printInput(text);
 	cin >> ws;
 	getline(cin, str);
 }

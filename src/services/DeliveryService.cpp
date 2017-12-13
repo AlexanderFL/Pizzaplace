@@ -52,19 +52,3 @@ void DeliveryService::setOrderDelivered(const size_t& id) {
 		}
 	}
 }
-
-int DeliveryService::convertStringToInt(const string& str) const {
-	validateString(str);
-	return stoi(str);
-}
-
-void DeliveryService::validateString(const string& str) const {
-	if (str.length() == 0) {
-		throw InvalidString();
-	}
-	for (size_t i = 0; i < str.length(); ++i) {
-		if (!isdigit(str[i])) {
-			throw InvalidString();
-		}
-	}
-}

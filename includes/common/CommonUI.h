@@ -13,6 +13,7 @@ public:
 	void printInput(const string& str) const;
 	void printMessage(const string& str) const;
 	void getInput(string& str) const;
+	void getInput(const string& text, string& str) const;
 private:
 	void printOptions(const vector<string>& options, size_t biggest) const;
 	void printLines(size_t size) const;

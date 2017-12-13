@@ -16,6 +16,7 @@ void MainUI::startUI()
 			clear();
 			ManagerUI managerUI;
 			managerUI.managerMenu();
+			//managerUI.showMainMenu();
 		}
 		else if (input == "2") {
 			clear();
@@ -38,7 +39,6 @@ void MainUI::startUI()
 		else {
 			clear();
 			printMessage("Not a valid option.");
-			cout << endl;
 		}
 	}
 }

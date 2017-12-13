@@ -145,12 +145,12 @@ istream& operator>> (istream& in, Pizza& pizza)
 	Compares whether the two pizzas have the same toppings
 */
 bool operator == (const Pizza& left, const Pizza& right) {
-	if (left.size == right.size) {
+	//if (left.size == right.size) {
 		Pizza pizza = left * right;
-		if (pizza.toppings.size() == left.toppings.size() && pizza.toppings.size() ==		right.toppings.size()) {
+		if (pizza.toppings.size() == left.toppings.size() && pizza.toppings.size() == right.toppings.size()) {
 			return true;
 		}
-	}
+	//}
 	return false;
 }
 
@@ -185,5 +185,28 @@ Pizza operator + (const Pizza& left, const Pizza& right) {
 	for (int i = 0; i < right.toppings.size(); ++i) {
 		pizza.toppings.push_back(right.toppings.at(i));
 	}
+	return pizza;
+}
+
+/*
+Returns a pizza with the compenation for the toppings of two Pizzas
+*/
+Pizza operator - (const Pizza& left, const Pizza& right) {
+	Pizza pizza;
+	int found = 0;
+	/*for (int i = 0; i < left.toppings.size(); i++) {
+		for (int k = 0; k < right.toppings.size(); k++) {
+			if (left.toppings[i] == right.toppings[k]) {
+				found = 0; // add this
+				break;
+			}
+			else if (mod[i] != pat[k]) {
+				found = mod[i];
+			}
+		}
+		if (found != 0) { // to trigger this and not save garbage
+			pizza.toppings.push_back(found);
+		}
+	}*/
 	return pizza;
 }

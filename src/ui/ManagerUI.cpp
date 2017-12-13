@@ -2,6 +2,521 @@
 
 ManagerUI::ManagerUI() {}
 
+/*void ManagerUI::showMainMenu() {
+	string input;
+	while (true) {
+		printMenu({ "Toppings", "Locations", "Pizza Sizes", "Pizza Crusts", "Sides", "Offers", "Back" }, "Manager Menu");
+		getInput(input);
+
+		if (input == "1") {
+			clear();
+			showToppingsMenu();
+		}
+		else if (input == "2") {
+			clear();
+
+		}
+		else if (input == "3") {
+			clear();
+
+		}
+		else if (input == "4") {
+			clear();
+
+		}
+		else if (input == "5") {
+			clear();
+
+		}
+		else if (input == "6") {
+			clear();
+			showOffersMenu();
+		}
+		else if (input == "7") {
+			clear();
+			return;
+		}
+		else {
+			clear();
+			printMessage("Not a valid option.");
+		}
+	}
+}
+
+void ManagerUI::showToppingsMenu() {
+	string input;
+	while (true) {
+		printMenu({ "Create Topping", "View Toppings", "Delete Topping", "Back" }, "Toppings Menu");
+		getInput(input);
+
+		if (input == "1") {
+			clear();
+			showToppingCreationMenu();
+		}
+		else if (input == "2") {
+			clear();
+			showToppingViewMenu();
+		}
+		else if (input == "3") {
+			clear();
+			showToppingDeleteMenu();
+		}
+		else if (input == "4") {
+			clear();
+			return;
+		}
+		else {
+			clear();
+			printMessage("Not a valid option.");
+		}
+	}
+}
+
+void ManagerUI::showToppingCreationMenu() {
+	string input;
+	printMessage("Creating a new Topping");
+	try {
+		string name;
+		getInput("Name", name);
+		//Validate name
+		getInput("Price", input);
+		int price = service.convertStringToInt(input);
+		//Validate price
+		service.addItem<Topping>(Topping(name, price));
+		clear();
+		printMessage("Topping was created.");
+	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid name.");
+	}
+	catch (NumberInString) {
+		clear();
+		printMessage("Invalid price.");
+	}
+	catch (InvalidPrice) {
+		clear();
+		printMessage("Invalid price.");
+	}
+}
+
+void ManagerUI::showToppingViewMenu() {
+	string input;
+	try {
+		while (true) {
+			vector<Topping> toppings = service.getItems<Topping>();
+			vector<string> names;
+			for (size_t i = 0; i < toppings.size(); ++i) {
+				names.push_back(toppings.at(i).getName());
+			}
+			names.push_back("Back");
+			printMenu(names, "Toppings");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
+				clear();
+				return;
+			}
+			else {
+				clear();
+				printMessage("Not a valid option.");
+			}
+		}
+	} 
+	catch (EmptyVector) {
+		clear();
+		printMessage("There are currently no toppings.");
+	}
+}
+
+void ManagerUI::showToppingDeleteMenu() {
+	string input;
+	try {
+		while (true) {
+			vector<Topping> toppings = service.getItems<Topping>();
+			vector<string> names;
+			for (size_t i = 0; i < toppings.size(); ++i) {
+				names.push_back(toppings.at(i).getName());
+			}
+			names.push_back("Back");
+			printMenu(names, "Toppings");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
+				clear();
+				return;
+			}
+			else {
+				try {
+					service.deleteItem<Topping>(index - 1);
+					clear();
+					printMessage("Topping deleted.");
+				}
+				catch(out_of_range) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+			}
+		}
+	}
+	catch (EmptyVector) {
+		clear();
+		printMessage("There are currently no toppings.");
+	}
+}
+
+
+
+void ManagerUI::showOffersMenu() {
+	string input;
+	while (true) {
+		printMenu({ "Create Offer", "View Offers", "Delete Offer", "Back" }, "Offers Menu");
+		getInput(input);
+		
+		if (input == "1") {
+			clear();
+			showOfferCreationMenu();
+		}
+		else if (input == "2") {
+			clear();
+			showOfferViewMenu();
+		}
+		else if (input == "3") {
+			clear();
+			showOfferDeleteMenu();
+		}
+		else if (input == "4") {
+			clear();
+			return;
+		}
+		else {
+			clear();
+			printMessage("Not a valid option.");
+		}
+	}
+}
+
+void ManagerUI::showOfferCreationMenu() {
+	string input;
+	Offer offer;
+	vector<Pizza> pizzas;
+	vector<SideOrder> sides;
+	while (true) {
+		printMenu({ "Set Name", "Set Price", "Create Pizza", "View Pizzas", "Delete Pizza", "Add Side", "View Sides", "Delete Side", "Complete", "Cancel" }, "Offer - " + offer.getName());
+		getInput(input);
+		if (input == "1") {
+			getInput("Name", input);
+			//Validate name
+			offer.setName(input);
+			clear();
+		}
+		else if (input == "2") {
+			getInput("Price", input);
+			try {
+				int price = service.convertStringToInt(input);
+				//Validate price
+				offer.setPrice(price);
+				clear();
+			}
+			catch (NumberInString) {
+				clear();
+				printMessage("Invalid Price.");
+			}
+		}
+		else if (input == "3") {
+			clear();
+			Pizza pizza;
+			showCreatePizzaMenu(pizza);
+			pizzas.push_back(pizza);
+		}
+		else if (input == "4") {
+			clear();
+
+		}
+		else if (input == "5") {
+			clear();
+			
+		}
+		else if (input == "6") {
+			clear();
+			try {
+				vector<SideOrder> allsides = service.getItems<SideOrder>();
+				vector<string> names;
+				for (size_t i = 0; i < allsides.size(); i++) {
+					names.push_back(allsides.at(i).getName());
+				}
+				names.push_back("Back");
+				printMenu(names, "Sides");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+				}
+				else {
+					try {
+						sides.push_back(allsides.at(index - 1));
+						clear();
+						printMessage("Side added.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Not a valid option.");
+					}
+				}
+			}
+			catch (EmptyVector) {
+				clear();
+				printMessage("No toppings available.");
+			}
+		}
+		else if (input == "7") {
+			clear();
+		}
+		else if (input == "8") {
+			clear();
+
+		}
+		else if (input == "9") {
+			clear();
+			Order order;
+			order.setPizzas(pizzas);
+			order.setSides(sides);
+			offer.setOrder(order);
+			//Validate stuff
+			service.addItem<Offer>(offer);
+			clear();
+			printMessage("Offer completed.");
+			return;
+		}
+		else if (input == "10") {
+			clear();
+			printMessage("Offer canceled.");
+			return;
+		}
+
+		else {
+			clear();
+			printMessage("Not a valid option.");
+		}
+	}
+}
+
+void ManagerUI::showOfferViewMenu() {
+	string input;
+	try {
+		while (true) {
+			vector<Offer> offers = service.getItems<Offer>();
+			vector<string> names;
+			for (size_t i = 0; i < offers.size(); ++i) {
+				names.push_back(offers.at(i).getName());
+			}
+			names.push_back("Back");
+			printMenu(names, "Offers");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
+				clear();
+				return;
+			}
+			else {
+				clear();
+				printMessage("Not a valid option.");
+			}
+		}
+	}
+	catch (EmptyVector) {
+		clear();
+		printMessage("There are currently no toppings.");
+	}
+}
+
+void ManagerUI::showOfferDeleteMenu() {
+	string input;
+	try {
+		while (true) {
+			vector<Offer> offers = service.getItems<Offer>();
+			vector<string> names;
+			for (size_t i = 0; i < offers.size(); ++i) {
+				names.push_back(offers.at(i).getName());
+			}
+			names.push_back("Back");
+			printMenu(names, "Offers");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
+				clear();
+				return;
+			}
+			else {
+				try {
+					service.deleteItem<Offer>(index - 1);
+					clear();
+					printMessage("Topping deleted.");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+			}
+		}
+	}
+	catch (EmptyVector) {
+		clear();
+		printMessage("There are currently no toppings.");
+	}
+}
+
+void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
+	string input;
+	while (true) {
+		printMenu({ "Add Topping", "Remove Topping", "Set Crust", "Set Size", "Complete", "Cancel" }, "Pizza Creator");
+		getInput(input);
+		if (input == "1") {
+			clear();
+			try {
+				vector<Topping> toppings = service.getItems<Topping>();
+				vector<string> names;
+				for (size_t i = 0; i < toppings.size(); i++) {
+					names.push_back(toppings.at(i).getName());
+				}
+				names.push_back("Back");
+				printMenu(names, "Toppings");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+				}
+				else {
+					try {
+						pizza.addToppings(toppings.at(index - 1));
+						clear();
+						printMessage("Topping added.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Not a valid option.");
+					}
+				}
+			}
+			catch (EmptyVector) {
+				clear();
+				printMessage("No toppings available.");
+			}
+		}
+		else if (input == "2") {
+			clear();
+			try {
+				vector<Topping> toppings = pizza.getToppings();
+				vector<string> names;
+				for (size_t i = 0; i < toppings.size(); i++) {
+					names.push_back(toppings.at(i).getName());
+				}
+				names.push_back("Back");
+				printMenu(names, "Toppings");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+				}
+				else {
+					try {
+						//Remove topping
+						clear();
+						printMessage("Topping removed.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Not a valid option.");
+					}
+				}
+			}
+			catch (EmptyVector) {
+				clear();
+				printMessage("No toppings available.");
+			}
+		}
+		else if (input == "3") {
+			clear();
+			try {
+				vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
+				vector<string> names;
+				for (size_t i = 0; i < crusts.size(); i++) {
+					names.push_back(crusts.at(i).getName());
+				}
+				names.push_back("Back");
+				printMenu(names, "Pizza Crusts");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+				}
+				else {
+					try {
+						pizza.setCrust(crusts.at(index - 1));
+						clear();
+						printMessage("Crust set.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Not a valid option.");
+					}
+				}
+			}
+			catch (EmptyVector) {
+				clear();
+				printMessage("No toppings available.");
+			}
+		}
+		else if (input == "4") {
+			clear();
+			try {
+				vector<PizzaSize> sizes = service.getItems<PizzaSize>();
+				vector<string> names;
+				for (size_t i = 0; i < sizes.size(); i++) {
+					names.push_back(sizes.at(i).getName());
+				}
+				names.push_back("Back");
+				printMenu(names, "Pizza Sizes");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+				}
+				else {
+					try {
+						pizza.setPizzaSize(sizes.at(index - 1));
+						clear();
+						printMessage("Size set.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Not a valid option.");
+					}
+				}
+			}
+			catch (EmptyVector) {
+				clear();
+				printMessage("No toppings available.");
+			}
+		}
+		else if (input == "5") {
+			//Validate stuff
+			clear();
+			printMessage("Pizza created.");
+			return;
+		}
+		else if (input == "6") {
+			clear();
+			throw 1;
+		}
+		else {
+			clear();
+			printMessage("Not a valid option.");
+		}
+	}
+}*/
+
+
 void ManagerUI::managerMenu() {
 	while (true) {
 		printMenu({ "Pizza", "Toppings", "Locations", "Side orders", "Menu options", "Go Back" });

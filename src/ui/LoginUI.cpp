@@ -50,6 +50,7 @@ void LoginUI::startUI() {
 				case MANAGER: {
 					ManagerUI managerUI;
 					managerUI.managerMenu();
+					//managerUI.showMainMenu();
 					break;
 				}
 				case SALESMAN: {
