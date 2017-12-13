@@ -38,8 +38,10 @@ void DeliveryUI::allOrdersMenu() {
 		printMenu(names, "Pizzas ready to be delivered");
 		getInput(input);
 		try {
+			clear();
 			int order = service.convertStringToInt(input) - 1;
 			showOrderInfo(orders.at(order));
+			cout << endl;
 			printMenu({ "Set as paid", "Set as delivered", "Go Back" });
 			getInput(input);
 			if (input == "1") {
@@ -91,18 +93,26 @@ void DeliveryUI::ordersMenu() {
 		names.push_back("Back");
 		printMenu(names, "Select Location");
 		getInput(input);
+		clear();
 		try {
+			names.clear();
 			int index = service.convertStringToInt(input) - 1;
 			vector<Order> orders = service.getOrders(locations.at(index));
 			for (size_t i = 0; i < orders.size(); ++i) {
-				cout << i + 1 << ": ";
-				showOrderInfoShort(orders.at(i));
+				//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
+				names.push_back("Pizza " + to_string(orders.at(i).getID()));
 			}
+			names.push_back("Back");
+
+			//ADD NAME OF PLACE HERE
+			printMenu(names, "Delivery from");
 			getInput(input);
+
 			int order = service.convertStringToInt(input) - 1;
 			try {
+				clear();
 				showOrderInfo(orders.at(order));
-				//Add the address here
+				cout << endl;
 				printMenu({ "Set as paid", "Set as delivered", "Go Back" });
 				getInput(input);
 				if (input == "1") {
@@ -164,15 +174,14 @@ void DeliveryUI::showPizzaInfoShort(const Pizza& pizza) const {
 }
 
 void DeliveryUI::showOrderInfo(const Order& order) const {
-	cout << "Order: " << order.getID() << endl;
-	//cout << "Pizza: ";
+	printMenu({}, "Pizza Place Receipt");
+	cout << "Order ID: " << order.getID() << endl;
+	cout << "Pizza: ";
 	if (order.getPizzas().size() == 0) {
 		cout << "None";
 	}
 	else {
-		cout << endl;
 		for (size_t i = 0; i < order.getPizzas().size(); ++i) {
-			cout << "Pizza " << i + 1 << ": ";
 			showPizzaInfoShort(order.getPizzas().at(i));
 		}
 		
@@ -182,9 +191,7 @@ void DeliveryUI::showOrderInfo(const Order& order) const {
 		cout <<"None";
 	}
 	else {
-		cout << endl;
 		for (size_t i = 0; i < order.getSides().size(); ++i) {
-			cout << "\t";
 			cout << order.getSides().at(i).getName();
 		}
 	}
@@ -208,7 +215,6 @@ void DeliveryUI::showOrderInfo(const Order& order) const {
 }
 
 void DeliveryUI::showOrderInfoShort(const Order& order) const {
-	cout << "Order " << order.getID() << " - ";
 	cout <<  order.getPizzas().size() << " pizzas, ";
 	cout << order.getSides().size() << " side orders, ";
 	if (order.isPaidFor()) {
