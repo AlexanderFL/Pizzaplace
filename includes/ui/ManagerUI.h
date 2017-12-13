@@ -27,7 +27,7 @@ private:
 	void sideOrderOption();
 public:
 	ManagerUI();
-	//void showMainMenu();
+	void showMainMenu();
 	void managerMenu();
 	//Pizza
 	void validateSizeOptions();

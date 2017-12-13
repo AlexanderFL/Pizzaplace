@@ -2,18 +2,14 @@
 #include "Order.h"
 #include "CommonUI.h"
 
-//TODO: Fix home address! 
-
 DeliveryUI::DeliveryUI() {}
 
 void DeliveryUI::deliveryMenu() {
 	string input;
 	while (true) {
-		printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" });
-		cout << endl;
-		cout << "Input: ";
-		cin >> ws;
-		getline(cin, input);
+		printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" }, "Delivery");
+		getInput(input);
+		clear();
 		if (input == "1") {
 			allOrdersMenu();
 		}
@@ -24,7 +20,7 @@ void DeliveryUI::deliveryMenu() {
 			return;
 		}
 		else {
-			cout << "Invalid input." << endl;
+			printMessage("Invalid input.");
 		}
 	}
 }
@@ -38,9 +34,7 @@ void DeliveryUI::allOrdersMenu() {
 			cout << i + 1 << ": ";
 			showOrderInfoShort(orders.at(i));
 		}
-		cout << "Input: ";
-		cin >> ws;
-		getline(cin, input);
+		getInput(input);
 		try {
 			int order = service.convertStringToInt(input) - 1;
 			showOrderInfo(orders.at(order));
@@ -48,8 +42,7 @@ void DeliveryUI::allOrdersMenu() {
 			cout << "2: Set as delivered" << endl;
 			cout << "3: Go back" << endl;
 			cout << "Input: " << endl;
-			cin >> ws;
-			getline(cin, input);
+			getInput(input);
 			if (input == "1") {
 				try {
 					service.setOrderPaid(orders.at(order).getID());
@@ -96,9 +89,7 @@ void DeliveryUI::ordersMenu() {
 		for (size_t i = 0; i < locations.size(); ++i) {
 			cout << i + 1 << ": " << locations.at(i).getAddress() << endl;
 		}
-		cout << "Input: ";
-		cin >> ws;
-		getline(cin, input);
+		getInput(input);
 		try {
 			int index = service.convertStringToInt(input) - 1;
 			vector<Order> orders = service.getOrders(locations.at(index));
@@ -106,18 +97,13 @@ void DeliveryUI::ordersMenu() {
 				cout << i + 1 << ": ";
 				showOrderInfoShort(orders.at(i));
 			}
-			cout << "Input: ";
-			cin >> ws;
-			getline(cin, input);
+			getInput(input);
 			int order = service.convertStringToInt(input) - 1;
 			try {
 				showOrderInfo(orders.at(order));
-				cout << "1: Set as paid" << endl;
-				cout << "2: Set as delivered" << endl;
-				cout << "3: Go back" << endl;
-				cout << "Input: ";
-				cin >> ws;
-				getline(cin, input);
+				//Add the address here
+				printMenu({ "Set as paid", "Set as delivered", "Go Back" });
+				getInput(input);
 				if (input == "1") {
 					try {
 						service.setOrderPaid(orders.at(order).getID());

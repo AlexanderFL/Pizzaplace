@@ -9,7 +9,7 @@ void MainUI::startUI()
 	string input;
 	while (true)
 	{
-		printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit","banana","apple", "pear", "candy", "silly","moose","tiger" }, "Main Menu");
+		printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit"}, "Main Menu");
 		getInput(input);
 
 		if (input == "1") {
@@ -26,7 +26,8 @@ void MainUI::startUI()
 		else if (input == "3") {
 			clear();
 			KitchenUI kitchenUI;
-			kitchenUI.kitchenMenu();
+			//kitchenUI.kitchenMenu();
+			kitchenUI.showMainMenu();
 		}
 		else if (input == "4") {
 			clear();

@@ -2,7 +2,7 @@
 
 ManagerUI::ManagerUI() {}
 
-/*void ManagerUI::showMainMenu() {
+void ManagerUI::showMainMenu() {
 	string input;
 	while (true) {
 		printMenu({ "Toppings", "Locations", "Pizza Sizes", "Pizza Crusts", "Sides", "Offers", "Back" }, "Manager Menu");
@@ -107,7 +107,7 @@ void ManagerUI::showToppingViewMenu() {
 			vector<Topping> toppings = service.getItems<Topping>();
 			vector<string> names;
 			for (size_t i = 0; i < toppings.size(); ++i) {
-				names.push_back(toppings.at(i).getName());
+				names.push_back(toppings.at(i).getName() + " | " + to_string(toppings.at(i).getPrice()));
 			}
 			names.push_back("Back");
 			printMenu(names, "Toppings");
@@ -514,7 +514,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 			printMessage("Not a valid option.");
 		}
 	}
-}*/
+}
 
 
 void ManagerUI::managerMenu() {
