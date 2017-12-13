@@ -15,8 +15,8 @@ void MainUI::startUI()
 		if (input == "1") {
 			clear();
 			ManagerUI managerUI;
-			managerUI.managerMenu();
-			//managerUI.showMainMenu();
+			//managerUI.managerMenu();
+			managerUI.showMainMenu();
 		}
 		else if (input == "2") {
 			clear();
