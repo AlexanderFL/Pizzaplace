@@ -523,8 +523,8 @@ void ManagerUI::managerMenu() {
 		cout << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 
-		cin.ignore();
 		cin >> input;
+		cin.ignore();
 		system("CLS");
 		switch (input)
 		{
