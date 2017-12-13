@@ -67,6 +67,9 @@ void SalesmanUI::makeNewOrder()
 			addComment(order, input);
 			// Asks the user if he wants to add another order
 			if (!addAnotherOrder(input)) {
+				showTotalOrder(order);
+				system("pause");
+
 				service.registerNewOrder(order);
 				break;
 			}
@@ -78,7 +81,6 @@ void SalesmanUI::makeNewOrder()
 			break;
 		}
 	}
-	cout << "This order will cost: " << service.getPriceOfOrder(order) << "Kr." << endl;
 }
 
 void SalesmanUI::pickFromMenu() {
@@ -220,6 +222,34 @@ bool SalesmanUI::addAnotherOrder(char & input)
 		return false;
 	}
 	return true;
+}
+
+void SalesmanUI::showTotalOrder(Order & order)
+{
+	try 
+	{
+		if (service.validateOrder(order))
+		{
+			Pizza tempPizza;
+			for (size_t i = 0; i < order.getPizzas().size(); i++) {
+				tempPizza = order.getPizzas().at(i);
+				cout << "Order nr. " << (i + 1) << ": " << endl;
+				cout << "\t    Size: " << tempPizza.getPizzaSize().getName() << "  \t+" << (tempPizza.getPizzaSize().getPriceMod() - 1)*100 << " %" << endl;
+				cout << "\t   Crust: " << tempPizza.getCrust().getName() << "  \t" << tempPizza.getCrust().getPrice() << " kr.-" << endl;
+				cout << "\tToppings: " << endl;
+				vector<Topping> tempTopping = tempPizza.getToppings();
+				for (size_t j = 0; j < tempTopping.size(); j++) {
+					cout << "\t\t  " << tempTopping.at(j).getName() << "   \t" << tempTopping.at(j).getPrice() << " kr.-" << endl;
+				}
+			}
+			cout << "---------- TOTAL ----------" << endl;
+			cout << "\t   " << service.getPriceOfOrder(order) << "kr.-" << endl;
+			cout << "---------------------------" << endl;
+		}
+	}
+	catch (InvalidOrder) {
+		cout << "Order is not valid..." << endl;
+	}
 }
 
 vector<string> SalesmanUI::makeStringVectorFromPizzaSize(vector<PizzaSize> pizzaSizeVector)

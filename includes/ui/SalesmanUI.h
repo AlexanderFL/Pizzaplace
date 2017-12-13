@@ -25,6 +25,7 @@ private:
 	void selectSides(Order& order, char& input);
 	void addComment(Order& order, char& input);
 	bool addAnotherOrder(char& input);
+	void showTotalOrder(Order& order);
 	
 	vector<string> makeStringVectorFromPizzaSize(vector<PizzaSize> pizzaSizeVector);
 
