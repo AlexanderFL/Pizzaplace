@@ -29,7 +29,7 @@ void KitchenUI::showMainMenu() {
 							names.push_back("Pizza " + to_string(pizzas.at(i).getID()));
 						}
 						names.push_back("Back");
-						printMenu(names, "Pizzas in need");
+						printMenu(names, "Incomplete Pizzas");
 						getInput(input);
 							try {
 								index = service.convertStringToInt(input);
@@ -40,28 +40,42 @@ void KitchenUI::showMainMenu() {
 								clear();
 								while (true) {
 									printMessage(showPizzaInfo(pizzas.at(index - 1)));
-									printMenu({ "Set as Baking", "Set as Ready", "Back" }, "Pizza things menu");
-									getInput(input);
-									if (input == "1") {
-										clear();
-										service.setOrderAsBaking(pizzas.at(index - 1).getID());
-										pizzas = service.getPizzas(locations.at(index - 1));
-										printMessage("Pizza set to baking.");
-									}
-									else if (input == "2") {
-										clear();
-										service.setOrderAsReady(pizzas.at(index - 1).getID());
-										pizzas = service.getPizzas(locations.at(index - 1));
-										printMessage("Pizza set to ready.");
-										break;
-									}
-									else if (input == "3") {
-										clear();
-										break;
+									if (pizzas.at(index - 1).getPhase() == PREPERATION) {
+										printMenu({ "Set as Baking", "Back" }, "Select option");
+										getInput(input);
+										if (input == "1") {
+											clear();
+											service.setOrderAsBaking(pizzas.at(index - 1).getID());
+											pizzas = service.getPizzas(locations.at(index - 1));
+											printMessage("Pizza set to baking.");
+										}
+										else if (input == "2") {
+											clear();
+											break;
+										}
+										else {
+											clear();
+											printMessage("Invalid input.");
+										}
 									}
 									else {
-										clear();
-										printMessage("Invalid input.");
+										printMenu({ "Set as Ready", "Back" }, "Pizza things menu");
+										getInput(input);
+										if (input == "1") {
+											clear();
+											service.setOrderAsReady(pizzas.at(index - 1).getID());
+											pizzas = service.getPizzas(locations.at(index - 1));
+											printMessage("Pizza set to ready.");
+											break;
+										}
+										else if (input == "2") {
+											clear();
+											break;
+										}
+										else {
+											clear();
+											printMessage("Invalid input.");
+										}
 									}
 								}
 							}
