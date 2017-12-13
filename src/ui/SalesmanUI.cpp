@@ -218,6 +218,7 @@ bool SalesmanUI::addAnotherOrder(char & input)
 	cout << "Would you like to add another order to this?" << endl;
 	cout << "Input (y/n): ";
 	cin >> input;
+	system("CLS");
 	if (tolower(input) != 'y') {
 		return false;
 	}
@@ -241,7 +242,16 @@ void SalesmanUI::showTotalOrder(Order & order)
 				for (size_t j = 0; j < tempTopping.size(); j++) {
 					cout << "\t\t  " << tempTopping.at(j).getName() << "   \t" << tempTopping.at(j).getPrice() << " kr.-" << endl;
 				}
+				cout << "\t  Sides: " << endl;
+				vector<SideOrder> tempSides = order.getSides();
+				for (size_t j = 0; j < tempSides.size(); j++) {
+					cout << "\t\t  " << tempSides.at(j).getName() << "   \t" << tempSides.at(j).getPrice() << " kr.-" << endl;
+				}
+				cout << "\tComment: " << endl;
+				cout << "\t\t  " << order.getComment() << endl;
+
 			}
+			cout << endl;
 			cout << "---------- TOTAL ----------" << endl;
 			cout << "\t   " << service.getPriceOfOrder(order) << "kr.-" << endl;
 			cout << "---------------------------" << endl;
