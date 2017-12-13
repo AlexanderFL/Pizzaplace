@@ -26,13 +26,13 @@ public:
 	void setOrderToPickUp(Order& order);
 	void setOrderAsPaid(Order& order);
 	void setComments(Order& order, string comment);
+	bool validateOrder(Order order);
 	SideOrder getSideOrder();
 	Pizza getPizza();
 
 private:
 	int calculateCost(const Order& order);
 	int calculateCost(const Pizza& pizza);
-	bool validateOrder(Order order);
 	void overrideOrder(int index, Order edit);
 	void assignID(Order& order);
 };

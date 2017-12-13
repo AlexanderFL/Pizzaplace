@@ -99,6 +99,15 @@ void SalesmanService::assignHomeAddress(Order& order, string address)
 	}
 }
 
+/*			Validate the Order			*/
+bool SalesmanService::validateOrder(Order order) {
+	// Just check if both pizzas and sides vectors are emtpy
+	if (order.getPizzas().empty() && order.getSides().empty()) {
+		return false;
+	}
+	return true;
+}
+
 void SalesmanService::setOrderToDelivery(Order& order) {
 	order.setDeliveryMethod(SEND);
 }
@@ -153,15 +162,6 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 	total += pizza.getCrust().getPrice(); // Add type of crust to price
 	total *= pizza.getPizzaSize().getPriceMod(); // Multiply the pizza size mod to price
 	return total;
-}
-
-/*			Validate the Order			*/
-bool SalesmanService::validateOrder(Order order) {
-	// Just check if both pizzas and sides vectors are emtpy
-	if (order.getPizzas().empty() && order.getSides().empty()) {
-		return false;
-	}
-	return true;
 }
 
 void SalesmanService::overrideOrder(int index, Order edit) {
