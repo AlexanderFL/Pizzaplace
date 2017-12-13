@@ -180,6 +180,7 @@ void SalesmanService::assignID(Order& order) {
 			for (size_t i = orders.size(); i > 0; --i) {
 				if (orders.at(i - 1).getPizzas().size() > 0) {
 					id = orders.at(i - 1).getPizzas().at(orders.at(i - 1).getPizzas().size() - 1).getID() + 1;
+					break;
 				}
 			}
 		}
