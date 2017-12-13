@@ -15,10 +15,10 @@ public:
 	SalesmanUI();
 	void salesmanMenu();
 	void makeNewOrder();
-	void pickFromMenu();
 private:
 	void selectLocation(Order& order, char& input);
-	void selectFromMenu(bool& pizzaFromMenu, char& input);
+	void selectFromMenu(Order& order, bool& pizzaFromMenu, char& input);
+	void pickFromMenu(Order& order, char& input);
 	void selectCrust(Pizza& pizza, char& input);
 	void selectSize(Pizza& pizza, char& input);
 	void selectToppings(Pizza& pizza, char& input);

@@ -52,15 +52,16 @@ void SalesmanUI::makeNewOrder()
 			Pizza pizza;
 			cout << "Order number " << nrOfOrder << "." << endl;
 			// Asks the user if he wants to select a pizza from the menu
-			selectFromMenu(pizzaFromMenu, input);
+			selectFromMenu(order, pizzaFromMenu, input);
 
-			selectCrust(pizza, input);
-			selectSize(pizza, input);
 			if (!pizzaFromMenu) {
+				selectCrust(pizza, input);
+				selectSize(pizza, input);
 				selectToppings(pizza, input);
+				
+				// Append the pizza to the order
+				service.appendToOrder(order, pizza);
 			}
-			// Append the pizza to the order
-			service.appendToOrder(order, pizza);
 			// Ask user if he wants any sides (can have multiple sides)
 			selectSides(order, input);
 			// Asks the user if he wants to add a comment
@@ -81,25 +82,38 @@ void SalesmanUI::makeNewOrder()
 			break;
 		}
 	}
+	system("CLS");
 }
 
-void SalesmanUI::pickFromMenu() {
+void SalesmanUI::pickFromMenu(Order& order, char& input) {
 	system("CLS");
 	vector <Offer> offers = service.getItems<Offer>();
 	cout <<"\n\t\tPIZZA MENU!" << endl;
 	for (size_t i = 0; i < offers.size(); i++) {
 		cout << endl;
-		cout << "Pizzan nr." << i + 1 << ": " << endl;
-		cout << offers.at(i);
-		cout << "Toppings: ";
-		for (size_t j = 0; j < offers.at(i).getOrder().getPizzas().size(); j++) {
-			cout << offers.at(i).getOrder().getPizzas().at(j) << endl;
+		cout << "-------------------------" << endl << endl;
+		cout << "Order nr." << i + 1 << ": ";
+		cout << offers.at(i).getName() << endl;
+		
+		vector<Pizza> tempPizza = offers.at(i).getOrder().getPizzas();
+		for (size_t j = 0; j < tempPizza.size(); j++) {
+			cout << "Pizza nr." << j+1 << endl; 
+			cout << "   Crust: " << tempPizza.at(j).getCrust().getName() << "  \t" << tempPizza.at(j).getCrust().getPrice() << " kr.-" << endl;
+			cout << "    Size: " << tempPizza.at(j).getPizzaSize().getName() << " \t+" << (tempPizza.at(j).getPizzaSize().getPriceMod()-1)*100 << " %" << endl;
+			cout << "Toppings: " << endl;
+			vector<Topping> tempToppings = tempPizza.at(j).getToppings();
+			for (size_t k = 0; k < tempToppings.size(); k++) {
+				cout << "\t  " << tempToppings.at(k).getName() << "    \t" << tempToppings.at(k).getPrice() << " kr.-" << endl;
+			}
 		}
+		cout << "TOTAL: " << service.getPriceOfOrder(offers.at(i).getOrder()) << " kr.- " << endl;
 	}
-	cout << "Which pizza would you like?\nInput: ";
-	char input;
+	cout << endl;
+	cout << "Which order would you like?\nInput order number: ";
 	cin >> input;
 	int inputInInt = (int)input - 49;
+	
+	order = offers.at(inputInInt).getOrder();
 }
 
 void SalesmanUI::selectLocation(Order& order, char & input)
@@ -114,12 +128,12 @@ void SalesmanUI::selectLocation(Order& order, char & input)
 	order.setLocation(locations.at((int)input - 49));
 }
 
-void SalesmanUI::selectFromMenu(bool& pizzaFromMenu, char & input)
+void SalesmanUI::selectFromMenu(Order& order, bool& pizzaFromMenu, char & input)
 {
 	cout << "Would you like to pick from the menu (y/n)? ";
 	cin >> input;
 	if (tolower(input) == 'y') {
-		pickFromMenu();
+		pickFromMenu(order, input);
 		pizzaFromMenu = true;
 	}
 	system("CLS");

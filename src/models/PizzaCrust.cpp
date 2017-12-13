@@ -38,9 +38,6 @@ ostream& operator << (ostream& out, const PizzaCrust& crust) {
 		out.write(crust.name.c_str(), len);
 		out.write((char*)(&crust.price), sizeof(int));
 	}
-	else {
-		out << "Name: " << crust.name << " | Price: " << crust.price << " Kr.";
-	}
 	return out;
 }
 
