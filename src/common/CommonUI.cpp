@@ -1,99 +1,77 @@
 #include "CommonUI.h"
 
-string CommonUI::printMenu(const vector<string>& options)
-{
-	string output = "";
-	output += printOptions(options, biggestStringSize(options));
-	return output;
+void CommonUI::printMenu(const vector<string>& options) const {
+	printOptions(options, biggestStringSize(options));
 }
 
-string CommonUI::printMenu(const vector<string>& options, const string& title) {
-	string output = "";
+void CommonUI::printMenu(const vector<string>& options, const string& title) const {
 	vector<string> temp = options;
 	temp.push_back(title);
 	size_t biggest = biggestStringSize(temp);
-	output += printLines(biggest);
-	output += "\t| ";
-	output += title;
+	printLines(biggest);
+	cout << "\t| " << title;
 	for (size_t j = 0; j < ((biggest * 2) - title.size()); j++) {
-		output += " ";
+		cout << " ";
 	}
-	output += "          |\n";
-	output += printOptions(options, biggest);
-	return output;
+	cout << "          |\n";
+	printOptions(options, biggest);
 }
 
-string CommonUI::printInput(const string& str) {
-	string output = "\t|\n\t-->";
-	output += str;
-	output += ": ";
-	return output;
+void CommonUI::printInput(const string& str) const {
+	cout << "\t|\n\t-->" << str << ": ";
 }
 
-string CommonUI::printMessage(const string& str) {
-	string output = "\t";
+void CommonUI::printMessage(const string& str) const {
+	cout << "\t";
 	for (unsigned int i = 0; i < str.size() + 4; i++) {
-		output += "-";
+		cout << "-";
 	}
-	output += "\n\t| ";
-	output += str;
-	output += " |\n\t";
+	cout << "\n\t| " << str << " |\n\t";
 	for (unsigned int i = 0; i < str.size() + 4; i++) {
-		output += "-";
+		cout << "-";
 	}
-	return output;
 }
 
 //Private functions
 
 //print out minus signs (for lines)
-string CommonUI::printLines(unsigned int size)
-{
-	string output = "";
-	output += "\t";
+void CommonUI::printLines(size_t size) const {
+	cout << "\t";
 	for (unsigned int i = 0; i < size * 2; i++) {
-		output += "-";
+		cout << "-";
 	}
-	output += "-------------\n";
-	return output;
+	cout << "-------------\n";
 }
 
-string CommonUI::printOptions(const vector<string>& options, size_t biggest) {
-	string output = "";
+void CommonUI::printOptions(const vector<string>& options, size_t biggest) const {
 	for (size_t i = 0; i < options.size(); i++) {
-		output += printLines(biggest);
-		output += "\t| ";
-		output += to_string(i + 1);
-		output += ". ";
-		output += options.at(i);
+		printLines(biggest);
+		cout << "\t| " << i + 1 << ". " << options.at(i);
 		for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
-			output += " ";
+			cout << " ";
 		}
-		output += " | ";
+		cout << " | ";
 		i++;
 
 		//if there is an odd number of options, then the last box needs to be empty
 		if (options.size() == i) {
-			output += "   ";
+			cout << "   ";
 			for (size_t j = 0; j < biggest; j++) {
-				output += " ";
+				cout << " ";
 			}
 		}
 		else {
-			output += to_string(i + 1);
-			output += ". ";
-			output += options.at(i);
+			cout << i + 1 << ". " << options.at(i);
 			for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
-				output += " ";
+				cout << " ";
 			}
 		}
-		output += " |\n";
+		cout << " |\n";
 	}
-	output += printLines(biggest);
-	return output;
+	printLines(biggest);
 }
 
-size_t CommonUI::biggestStringSize(const vector<string>& vec) {
+size_t CommonUI::biggestStringSize(const vector<string>& vec) const {
 	size_t biggest = 0;
 	for (size_t i = 0; i < vec.size(); i++) {
 		if (biggest < vec.at(i).size()) {

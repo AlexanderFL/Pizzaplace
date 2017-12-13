@@ -9,7 +9,8 @@ DeliveryUI::DeliveryUI() {}
 void DeliveryUI::deliveryMenu() {
 	string input;
 	while (true) {
-		cout << printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" }) << endl;
+		printMenu({ "Dislpay Orders", "Display Orders at location", "Go Back" });
+		cout << endl;
 		cout << "Input: ";
 		cin >> ws;
 		getline(cin, input);

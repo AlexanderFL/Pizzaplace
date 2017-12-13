@@ -25,7 +25,8 @@ void LoginUI::startUI() {
 	}
 	
 	while (true) {
-		cout << printMenu({ "Login", "Exit" }) << endl;
+		printMenu({ "Login", "Exit" });
+		cout << endl;
 		cout << "Input: ";
 		cin >> input;
 		switch (input)

@@ -14,7 +14,8 @@ void SalesmanUI::salesmanMenu() {
 	string option;
 	char input;
 	while (true) {
-		cout << printMenu({ "Register an order", "Go back" }) << endl;
+		printMenu({ "Register an order", "Go back" });
+		cout << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to do? "; 
 
 		cin.ignore();

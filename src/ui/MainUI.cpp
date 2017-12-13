@@ -10,8 +10,8 @@ void MainUI::startUI()
 	char input;
 	while (true)
 	{
-		
-		cout << printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit" }, "Main Menu") << printInput("Input");
+		printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit" }, "Main Menu");
+		printInput("Input");
 		cin >> input;
 
 		switch (input)
@@ -49,7 +49,8 @@ void MainUI::startUI()
 			exit(0);
 		default:
 			system("CLS");
-			cout << printMessage("Not a valid option.") << endl;
+			printMessage("Not a valid option.");
+			cout << endl;
 		}
 	}
 }

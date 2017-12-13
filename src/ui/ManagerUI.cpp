@@ -4,7 +4,8 @@ ManagerUI::ManagerUI() {}
 
 void ManagerUI::managerMenu() {
 	while (true) {
-		cout << printMenu({ "Pizza", "Toppings", "Locations", "Side orders", "Menu options", "Go Back" }) << endl;
+		printMenu({ "Pizza", "Toppings", "Locations", "Side orders", "Menu options", "Go Back" });
+		cout << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 
 		cin.ignore();
@@ -51,7 +52,8 @@ void ManagerUI::managerMenu() {
 void ManagerUI::pizzaOption() {
 	//TODO: Add options to add sizes/bottoms/crust or delete them
 	while (true) {
-		cout << printMenu({ "Size", "Bottom / Crust", "Go Back" }) << endl;
+		printMenu({ "Size", "Bottom / Crust", "Go Back" });
+		cout << endl;
 		cout << "Press 'q' to quit.\nWhat would you like to register? ";
 		cin >> input;
 		if (input == '3') break;
@@ -73,7 +75,8 @@ void ManagerUI::pizzaOption() {
 void ManagerUI::validateCrustOptions() {
 	char input;
 	while (true) {
-		cout << printMenu({ "Add a crust", "Delete a crust", "See all crusts available", "Go Back" }) << endl;
+		printMenu({ "Add a crust", "Delete a crust", "See all crusts available", "Go Back" });
+		cout << endl;
 		cout << "Input: ";
 		cin >> input;
 		system("CLS");
@@ -150,7 +153,8 @@ void ManagerUI::seeAllCrust() {
 }
 
 void ManagerUI::validateSizeOptions() {
-	cout << printMenu({ "Add a new Size", "Delete a Size", "See all Sizes", "Go back" }) << endl;
+	printMenu({ "Add a new Size", "Delete a Size", "See all Sizes", "Go back" });
+	cout << endl;
 	cout << "Input: ";
 	cin >> input;
 	switch (input) {
@@ -222,7 +226,8 @@ void ManagerUI::seeAllSizesMenu() {
 
 void ManagerUI::toppingOption() {
 	while (true) {
-		cout << printMenu({ "Add a topping", "Delete a topping", "See all toppings", "Go Back" }) << endl;
+		printMenu({ "Add a topping", "Delete a topping", "See all toppings", "Go Back" });
+		cout << endl;
 		cout << "Input: ";
 		cin >> input;
 		system("CLS");
@@ -233,7 +238,8 @@ void ManagerUI::toppingOption() {
 
 void ManagerUI::locationOption() {
 	while (true) {
-		cout << printMenu({ "Add a location", "Remove a location", "See all Locations", "Go Back" }) << endl;
+		printMenu({ "Add a location", "Remove a location", "See all Locations", "Go Back" });
+		cout << endl;
 		cout << "What would you like to do? ";
 		cin >> input;
 		validateLocationOptions(input);
@@ -243,7 +249,8 @@ void ManagerUI::locationOption() {
 
 void ManagerUI::sideOrderOption() {
 	while(true){
-		cout << printMenu({ "Add a side order", "delete a side order",  "See all side orders", "Go Back" }) << endl;
+		printMenu({ "Add a side order", "delete a side order",  "See all side orders", "Go Back" });
+		cout << endl;
 		cout << "Input: ";
 		cin >> input;
 		system("CLS");
@@ -254,7 +261,8 @@ void ManagerUI::sideOrderOption() {
 
 void ManagerUI::pizzaMenuOption() {
 	while (true) {
-		cout << printMenu({ "Add a pizza", "Remove a pizza", "Pizza menu", "Go Back" }) << endl;
+		printMenu({ "Add a pizza", "Remove a pizza", "Pizza menu", "Go Back" });
+		cout << endl;
 		cout << "What would you like to do? ";
 		cin >> input;
 		validatePizzaMenuOption(input);
