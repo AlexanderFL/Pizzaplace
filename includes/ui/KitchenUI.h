@@ -1,10 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <string>
 #include "KitchenService.h"
 #include "CommonUI.h"
-using namespace std;
 
 class KitchenUI: public CommonUI
 {
@@ -13,6 +10,7 @@ private:
 public:
 	KitchenUI();
 	void kitchenMenu();
+	void showMainMenu();
 	string showPizzaInfo(const Pizza& pizza) const;
 	string showPizzaInfoShort(const Pizza& pizza) const;
 };

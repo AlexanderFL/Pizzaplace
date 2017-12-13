@@ -10,7 +10,7 @@ class ManagerUI: public CommonUI
 private:
 	char input;  //<----- shouldn't be here
 	ManagerService service;
-	/*void showToppingsMenu();
+	void showToppingsMenu();
 	void showToppingCreationMenu();
 	void showToppingViewMenu();
 	void showToppingDeleteMenu();
@@ -19,7 +19,7 @@ private:
 	void showOfferCreationMenu();
 	void showOfferViewMenu();
 	void showOfferDeleteMenu();
-	void showCreatePizzaMenu(Pizza& pizza);*/
+	void showCreatePizzaMenu(Pizza& pizza);
 	void pizzaOption();
 	void toppingOption();
 	void priceOption();
@@ -27,7 +27,7 @@ private:
 	void sideOrderOption();
 public:
 	ManagerUI();
-	//void showMainMenu();
+	void showMainMenu();
 	void managerMenu();
 	//Pizza
 	void validateSizeOptions();

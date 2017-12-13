@@ -2,6 +2,109 @@
 
 KitchenUI::KitchenUI() {}
 
+void KitchenUI::showMainMenu() {
+	string input;
+	while (true) {
+		try {
+			vector<Location> locations = service.getItems<Location>();
+			vector<string> names;
+			for (size_t i = 0; i < locations.size(); ++i) {
+				names.push_back(locations.at(i).getAddress());
+			}
+			names.push_back("Back");
+			printMenu(names, "Select Location");
+				try {
+					getInput(input);
+					int index = service.convertStringToInt(input);
+					if (index == names.size()) {
+						clear();
+						return;
+					}
+					vector<Pizza> pizzas = service.getPizzas(locations.at(index - 1));
+					clear();
+					while (true) {
+						names.clear();
+						for (size_t i = 0; i < pizzas.size(); ++i) {
+							//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
+							names.push_back("Pizza " + to_string(pizzas.at(i).getID()));
+						}
+						names.push_back("Back");
+						printMenu(names, "Pizzas in need");
+						getInput(input);
+							try {
+								index = service.convertStringToInt(input);
+								if (index == names.size()) {
+									clear();
+									return;
+								}
+								clear();
+								while (true) {
+									printMessage(showPizzaInfo(pizzas.at(index - 1)));
+									printMenu({ "Set as Baking", "Set as Ready", "Back" }, "Pizza things menu");
+									getInput(input);
+									if (input == "1") {
+										clear();
+										service.setOrderAsBaking(pizzas.at(index - 1).getID());
+										pizzas = service.getPizzas(locations.at(index - 1));
+										printMessage("Pizza set to baking.");
+									}
+									else if (input == "2") {
+										clear();
+										service.setOrderAsReady(pizzas.at(index - 1).getID());
+										pizzas = service.getPizzas(locations.at(index - 1));
+										printMessage("Pizza set to ready.");
+										break;
+									}
+									else if (input == "3") {
+										clear();
+										break;
+									}
+									else {
+										clear();
+										printMessage("Invalid input.");
+									}
+								}
+							}
+							catch (out_of_range) {
+								clear();
+								printMessage("Invalid index.");
+							}
+					}
+				}
+				catch (NumberInString) {
+					clear();
+					printMessage("Invalid input.");
+				}
+				catch (InvalidString) {
+					clear();
+					printMessage("Invalid input.");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Invalid index.");
+				}
+				catch (EmptyVector) {
+					clear();
+					printMessage("No pizzas available for this location.");
+				}
+				catch (FailedOpenFile) {
+					clear();
+					printMessage("Failed to open file.");
+				}
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("No locations available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("Failed to open file.");
+			return;
+		}
+	}
+}
+
 void KitchenUI::kitchenMenu() {
 	string input;
 	while (true) {
