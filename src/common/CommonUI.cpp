@@ -1,5 +1,9 @@
 #include "CommonUI.h"
 
+void CommonUI::clear() const {
+	system("CLS");
+}
+
 void CommonUI::printMenu(const vector<string>& options) const {
 	printOptions(options, biggestStringSize(options));
 }
@@ -30,6 +34,12 @@ void CommonUI::printMessage(const string& str) const {
 	for (unsigned int i = 0; i < str.size() + 4; i++) {
 		cout << "-";
 	}
+}
+
+void CommonUI::getInput(string& str) const {
+	printInput("Input");
+	cin >> ws;
+	getline(cin, str);
 }
 
 //Private functions
