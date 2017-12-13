@@ -14,7 +14,7 @@ private:
 public:
 	// Constructors
 	Location();
-	Location(string address);
+	explicit Location(string address);
 
 	// Get functions
 	string getAddress() const;

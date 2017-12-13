@@ -5,7 +5,7 @@ const string Location::filename = "locations.dat";
 
 Location::Location() {}
 
-Location::Location(string address)
+Location::Location(const string address)
 	:address(address)
 {
 }

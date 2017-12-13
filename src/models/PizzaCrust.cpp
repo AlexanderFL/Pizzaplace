@@ -9,7 +9,7 @@ PizzaCrust::PizzaCrust()
 
 }
 
-PizzaCrust::PizzaCrust(string name, int price) 
+PizzaCrust::PizzaCrust(const string name, int price) 
 	:name(name), price(price)
 {
 
