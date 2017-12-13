@@ -1,6 +1,6 @@
 #include "MainUI.h"
 
-/*#include "Data.h"
+#include "Data.h"
 #include "Offer.h"
 #include <cmath>
 
@@ -13,6 +13,18 @@ vector<Offer> getPizzaOffers() {
 	vector<Offer> alloffers = repo.RetrieveAllFromFile<Offer>();
 	for (size_t i = 0; i < alloffers.size(); ++i) {
 		if (alloffers.at(i).getOrder().getPizzas().size() == 1 && alloffers.at(i).getOrder().getSides().size() == 0) {
+			offers.push_back(alloffers.at(i));
+		}
+	}
+	return offers;
+}
+
+vector<Offer> getCompOffers() {
+	Data repo;
+	vector<Offer> offers;
+	vector<Offer> alloffers = repo.RetrieveAllFromFile<Offer>();
+	for (size_t i = 0; i < alloffers.size(); ++i) {
+		if (!(alloffers.at(i).getOrder().getPizzas().size() == 1 && alloffers.at(i).getOrder().getSides().size() == 0)) {
 			offers.push_back(alloffers.at(i));
 		}
 	}
@@ -80,6 +92,11 @@ int getMostSimilarPrice(const vector<Offer>& offers, const Pizza& pizza) {
 	return total;
 }
 
+double sim(const Order& left, const Order& right) {
+
+	return ((left * right).getPizzas().size() + (left * right).getSides().size()) / ((sqrt(left.getPizzas().size()) * sqrt(right.getPizzas().size())) + (sqrt(left.getSides().size()) * sqrt(right.getSides().size())));
+}
+
 int calcPrice(const Order& order) {
 	int total = 0;
 	vector<Pizza> pizzas = order.getPizzas();
@@ -92,51 +109,81 @@ int calcPrice(const Order& order) {
 	return total;
 }
 
-vector<int> vector_diff(vector<int> model, vector<int> pattern) {
-	vector<int> mod = model;
-	vector<int> pat = pattern;
-	vector<int> temp;
-	int found = 0;
-
-	for (int i = 0; i < mod.size(); i++) {
-		for (int k = 0; k < pat.size(); k++) {
-			if (mod[i] == pat[k]) {
-				found = 0; // add this
+void detectOffers(const Order& order) {
+	vector<Offer> singles = getPizzaOffers();
+	vector<Offer> comps = getCompOffers();
+	vector<Offer> tempExt;
+	vector<Offer> ext;
+	Order temp = order;
+	while (comps.size() > 0) {
+		if (comps.at(0).getOrder() == order) {
+			cout << comps.at(0).getName() << " " << comps.at(0).getPrice() << endl;
+			return;
+		}
+		else if (comps.at(0).getOrder() <= order) {
+			tempExt.push_back(comps.at(0));
+		}
+		comps.erase(comps.begin());
+	}
+	while (tempExt.size() > 0) {
+		bool unique = true;
+		for (size_t i = 1; i < tempExt.size(); ++i) {
+			if (sim(tempExt.at(0).getOrder(), tempExt.at(i).getOrder()) != 0) {
+				if (sim(tempExt.at(0).getOrder(), order) < sim(tempExt.at(i).getOrder(), order)) {
+					tempExt.erase(tempExt.begin());
+				}
+				else {
+					tempExt.erase(tempExt.begin() + i);
+				}
+				unique = false;
 				break;
 			}
-			else if (mod[i] != pat[k]) {
-				found = mod[i];
-			}
 		}
-		if (found != 0) { // to trigger this and not save garbage
-			temp.push_back(found);
+		if (unique) {
+			ext.push_back(tempExt.at(0));
+			tempExt.erase(tempExt.begin());
 		}
 	}
-	return temp;
-}*/
+	for (size_t i = 0; i < ext.size(); ++i) {
+		cout << ext.at(i).getName() << " " << ext.at(i).getPrice() << endl;
+		temp = temp - ext.at(i).getOrder();
+	}
+	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
+		cout << getMostSimilarName(singles, temp.getPizzas().at(i)) << " " << getMostSimilarPrice(singles, temp.getPizzas().at(i)) << endl;
+	}
+	for (size_t i = 0; i < temp.getSides().size(); ++i) {
+
+	}
+}
 
 int main() {
 	/*Order order;
 	vector<Pizza> pizzas;
 	Pizza pizza;
 	pizza.addToppings(Topping("Spinach", 32));
-	pizzas.push_back(pizza);
-	pizza.addToppings(Topping("Spinach", 32));
 	pizza.addToppings(Topping("Kale", 43));
-	pizza.addToppings(Topping("Kale", 43));
+	Pizza pizza2;
+	pizza2.addToppings(Topping("Pineapple", 50));
+	pizza2.addToppings(Topping("Pineapple", 50));
+	Pizza pizza3;
+	pizza3.addToppings(Topping("Spinach", 32));
+	pizza3.addToppings(Topping("Kale", 43));
+	pizza3.addToppings(Topping("Pineapple", 50));
 	pizzas.push_back(pizza);
+	pizzas.push_back(pizza2);
+	pizzas.push_back(pizza3);
 	order.setPizzas(pizzas);
 	
 	vector<Offer> offers = getPizzaOffers();
-	for (size_t i = 0; i < order.getPizzas().size(); ++i) {
+	/*for (size_t i = 0; i < order.getPizzas().size(); ++i) {
 		cout << getMostSimilarName(offers, order.getPizzas().at(i)) << endl;
 	}
 	for (size_t i = 0; i < order.getPizzas().size(); ++i) {
 		cout << getMostSimilarPrice(offers, order.getPizzas().at(i)) << endl;
-	}
-	
+	}*/
+	//detectOffers(order);
 
-	system("PAUSE");*/
+	//system("PAUSE");
 	MainUI mainUI;
 	mainUI.startUI();
 

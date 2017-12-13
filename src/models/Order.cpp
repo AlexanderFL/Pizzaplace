@@ -199,7 +199,7 @@ istream& operator >> (istream& in, Order& order) {
 
 bool operator == (const Order& left, const Order& right) {
 	Order order = left * right;
-	return left.pizzas.size() == order.pizzas.size() && left.sides.size() == order.sides.size();
+	return left.pizzas.size() == order.pizzas.size() && left.sides.size() == order.sides.size() && right.pizzas.size() == order.pizzas.size() && right.sides.size() == right.sides.size();
 }
 
 bool operator != (const Order& left, const Order& right) {
@@ -248,5 +248,29 @@ Order operator + (const Order& left, const Order& right) {
 		newOrder.sides.push_back(left.sides[i]);
 	}
 	
+	return newOrder;
+}
+
+Order operator - (const Order& left, const Order& right) {
+	Order newOrder = left;
+	Order temp = right;
+	while (temp.pizzas.size() > 0) {
+		for (size_t i = 0; i < newOrder.pizzas.size(); ++i) {
+			if (newOrder.pizzas.at(i) == temp.pizzas.at(0)) {
+				newOrder.pizzas.erase(newOrder.pizzas.begin() + i);
+				temp.pizzas.erase(temp.pizzas.begin());
+				break;
+			}
+		}
+	}
+	while (temp.sides.size() > 0) {
+		for (size_t i = 0; i < newOrder.sides.size(); ++i) {
+			if (newOrder.sides.at(i) == temp.sides.at(0)) {
+				newOrder.sides.erase(newOrder.sides.begin() + i);
+				temp.sides.erase(temp.sides.begin());
+				break;
+			}
+		}
+	}
 	return newOrder;
 }
