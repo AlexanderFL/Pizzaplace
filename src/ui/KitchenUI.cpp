@@ -16,11 +16,12 @@ void KitchenUI::showMainMenu() {
 				try {
 					getInput(input);
 					int index = service.convertStringToInt(input);
+					int place = index - 1;
 					if (index == names.size()) {
 						clear();
 						return;
 					}
-					vector<Pizza> pizzas = service.getPizzas(locations.at(index - 1));
+					vector<Pizza> pizzas = service.getPizzas(locations.at(place));
 					clear();
 					while (true) {
 						names.clear();
@@ -46,7 +47,7 @@ void KitchenUI::showMainMenu() {
 										if (input == "1") {
 											clear();
 											service.setOrderAsBaking(pizzas.at(index - 1).getID());
-											pizzas = service.getPizzas(locations.at(index - 1));
+											pizzas = service.getPizzas(locations.at(place));
 											printMessage("Pizza set to baking.");
 										}
 										else if (input == "2") {
@@ -64,7 +65,7 @@ void KitchenUI::showMainMenu() {
 										if (input == "1") {
 											clear();
 											service.setOrderAsReady(pizzas.at(index - 1).getID());
-											pizzas = service.getPizzas(locations.at(index - 1));
+											pizzas = service.getPizzas(locations.at(place));
 											printMessage("Pizza set to ready.");
 											break;
 										}
