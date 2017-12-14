@@ -108,8 +108,27 @@ void ManagerService::containsOnlyAlpha(string s){
 	Checks if price is valid, a price is valid if it is
 	not a number below zero.
 */
+
 void ManagerService::validPrice(int p){
-	if (p < 0) {
+	if (p <= 0) {
 		throw InvalidPrice();
+	}
+}
+
+void ManagerService::validProcent(int p) {
+	if (p <= 0 || p >= 100) {
+		throw InvalidPrice();
+	}
+}
+
+void ManagerService::validateOffer(const Offer& offer) {
+	if (offer.getOrder().getPizzas().empty() && offer.getOrder().getSides().empty()) {
+		throw InvalidOffer("Offer needs to have a pizza or side in it.");
+	}
+	if (offer.getPrice() == 0) {
+		throw InvalidOffer("Price needs to be set.");
+	}
+	if (offer.getName() == "Unnamed") {
+		throw InvalidOffer("Offer can't be Unnamed");
 	}
 }

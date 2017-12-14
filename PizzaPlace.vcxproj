@@ -178,8 +178,10 @@
     <ClInclude Include="includes\exceptions\InvalidString.h" />
     <ClInclude Include="includes\exceptions\InvalidInt.h" />
     <ClInclude Include="includes\exceptions\InvalidInput.h" />
+    <ClInclude Include="includes\exceptions\InvalidOffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\exceptions\InvalidOffer.cpp" />
     <ClCompile Include="src\exceptions\InvalidInput.cpp" />
     <ClCompile Include="src\exceptions\Canceled.cpp" />
     <ClCompile Include="src\common\CommonService.cpp" />

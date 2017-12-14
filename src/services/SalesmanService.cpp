@@ -104,11 +104,11 @@ bool SalesmanService::validateOrder(Order order) {
 	return true;
 }
 
-void SalesmanService::validInput(const char& input, const int& max, const int& min) const{
-	if (isalpha(input)) {
+void SalesmanService::validInput(const string& input, const int& max, const int& min) const{
+	if (std::string::npos == input.find_first_of("0123456789")) {
 		throw InvalidInput("Input cannot be a character");
 	}
-	int numberEntered = (int)input - 48;
+	int numberEntered = convertStringToInt(input);
 	if (numberEntered < min) {
 		const std::string& msg = "Input cannot be lower than " + to_string(min);
 		throw InvalidInput(msg);
@@ -194,7 +194,7 @@ string SalesmanService::getSingleOfferName(const Pizza& pizza) {
 			}
 		}
 	}
-	if (index != -1) {
+	if (index != -1 && sim >= 0.75) {
 		Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
 		Pizza specials = pizza - extras;
 		if (!extras.getToppings().empty()) {
@@ -289,7 +289,7 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 			}
 		}
 	}
-	if (index == -1) {
+	if (index == -1 || sim < 75) {
 		//normal
 		return calculateSimpleCost(pizza);
 	}
