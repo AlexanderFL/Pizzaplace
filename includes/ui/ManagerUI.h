@@ -2,6 +2,7 @@
 
 #include "ManagerService.h"
 #include "CommonUI.h"
+#include "Canceled.h"
 
 using namespace std;
 

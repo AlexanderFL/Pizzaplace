@@ -658,8 +658,13 @@ void ManagerUI::showOfferCreationMenu() {
 		else if (input == "3") {
 			clear();
 			Pizza pizza;
-			showCreatePizzaMenu(pizza);
-			pizzas.push_back(pizza);
+			try {
+				showCreatePizzaMenu(pizza);
+				pizzas.push_back(pizza);
+			}
+			catch (Canceled) {
+
+			}
 		}
 		else if (input == "4") {
 			clear();
@@ -975,7 +980,8 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 		}
 		else if (input == "6") {
 			clear();
-			throw 1;
+			printMessage("Pizza canceled.");
+			throw Canceled();
 		}
 		else {
 			clear();
