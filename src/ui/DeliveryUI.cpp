@@ -34,7 +34,6 @@ void DeliveryUI::allOrdersMenu() {
 			vector<Order> orders = service.getOrders();
 			vector<string> names;
 			for (size_t i = 0; i < orders.size(); ++i) {
-				//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
 				names.push_back("Pizza " + to_string(orders.at(i).getID()));
 			}
 			names.push_back("Back");
@@ -103,7 +102,6 @@ void DeliveryUI::ordersMenu() {
 			int index = service.convertStringToInt(input) - 1;
 			vector<Order> orders = service.getOrders(locations.at(index));
 			for (size_t i = 0; i < orders.size(); ++i) {
-				//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
 				names.push_back("Pizza " + to_string(orders.at(i).getID()));
 			}
 			names.push_back("Back");
@@ -169,72 +167,4 @@ void DeliveryUI::ordersMenu() {
 	catch (FailedOpenFile) {
 		printMessage("Failed to open file.");
 	}
-}
-
-void DeliveryUI::showPizzaInfoShort(const Pizza& pizza) const {
-	cout << pizza.getToppings().size() << " toppings, ";
-	cout << pizza.getPizzaSize().getName() << " ";
-	cout << pizza.getCrust().getName() << " pizza.";
-}
-
-void DeliveryUI::showOrderInfo(const Order& order) const {
-	//TODO: FIX
-	cout << "\n\t\tPizza Place " << endl;
-	cout << "------------------------------------------------------" << endl;
-	cout << "Order ID: " << order.getID() << endl;
-	cout << "------------------------------------------------------" << endl;
-	cout << "Pizza:\t\t\t";
-	if (order.getPizzas().size() == 0) {
-		cout << "None";
-	}
-	else {
-		for (size_t i = 0; i < order.getPizzas().size(); ++i) {
-			showPizzaInfoShort(order.getPizzas().at(i));
-		}
-		
-	}
-	cout << endl << "Side Orders:\t\t";
-	if (order.getSides().size() == 0) {
-		cout <<"None";
-	}
-	else {
-		for (size_t i = 0; i < order.getSides().size(); ++i) {
-			cout << order.getSides().at(i).getName();
-		}
-	}
-	cout << endl << "Comment:\t\t" + order.getComment() << endl;
-	cout << "Location:\t\t" + order.getLocation().getAddress() << endl;
-	cout << "Delivery Method:\t";
-	if (order.getDeliveryMethod() == PICKUP) {
-		cout << "Pickup" << endl;
-	}
-	else if (order.getDeliveryMethod() == SEND) {
-		cout << "Send to " << order.getHomeAddress() << endl;
-	}
-	cout << "Paid:\t\t\t";
-	if (order.isPaidFor()) {
-		cout << "True";
-	}
-	else {
-		cout << "False" << endl;
-	}
-	cout << endl;
-}
-
-void DeliveryUI::showOrderInfoShort(const Order& order) const {
-	cout <<  order.getPizzas().size() << " pizzas, ";
-	cout << order.getSides().size() << " side orders, ";
-	if (order.isPaidFor()) {
-		cout << "paid, ";
-	}
-	else {
-		cout <<  "unpaid, ";
-	}
-	if (order.getDeliveryMethod() == SEND) {
-		cout << "needs to be sent";
-	}
-	else {
-		cout << "awaiting pickup";
-	}
-	cout << endl;
 }

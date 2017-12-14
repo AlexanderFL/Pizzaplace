@@ -129,3 +129,73 @@ size_t CommonUI::biggestStringSize(const vector<string>& vec) const {
 	}
 	return biggest;
 }
+
+
+//Printing the order
+void CommonUI::showPizzaInfoShort(const Pizza& pizza) const {
+	cout << pizza.getToppings().size() << " toppings, ";
+	cout << pizza.getPizzaSize().getName() << " ";
+	cout << pizza.getCrust().getName() << " pizza.";
+}
+
+void CommonUI::showOrderInfo(const Order& order) const {
+	//TODO: FIX
+	cout << "\n\t\tPizza Place " << endl;
+	cout << "------------------------------------------------------" << endl;
+	cout << "Order ID: " << order.getID() << endl;
+	cout << "------------------------------------------------------" << endl;
+	cout << "Pizza:\t\t\t";
+	if (order.getPizzas().size() == 0) {
+		cout << "None";
+	}
+	else {
+		for (size_t i = 0; i < order.getPizzas().size(); ++i) {
+			showPizzaInfoShort(order.getPizzas().at(i));
+		}
+
+	}
+	cout << endl << "Side Orders:\t\t";
+	if (order.getSides().size() == 0) {
+		cout << "None";
+	}
+	else {
+		for (size_t i = 0; i < order.getSides().size(); ++i) {
+			cout << order.getSides().at(i).getName();
+		}
+	}
+	cout << endl << "Comment:\t\t" + order.getComment() << endl;
+	cout << "Location:\t\t" + order.getLocation().getAddress() << endl;
+	cout << "Delivery Method:\t";
+	if (order.getDeliveryMethod() == PICKUP) {
+		cout << "Pickup" << endl;
+	}
+	else if (order.getDeliveryMethod() == SEND) {
+		cout << "Send to " << order.getHomeAddress() << endl;
+	}
+	cout << "Paid:\t\t\t";
+	if (order.isPaidFor()) {
+		cout << "True";
+	}
+	else {
+		cout << "False" << endl;
+	}
+	cout << endl;
+}
+
+void CommonUI::showOrderInfoShort(const Order& order) const {
+	cout << order.getPizzas().size() << " pizzas, ";
+	cout << order.getSides().size() << " side orders, ";
+	if (order.isPaidFor()) {
+		cout << "paid, ";
+	}
+	else {
+		cout << "unpaid, ";
+	}
+	if (order.getDeliveryMethod() == SEND) {
+		cout << "needs to be sent";
+	}
+	else {
+		cout << "awaiting pickup";
+	}
+	cout << endl;
+}
