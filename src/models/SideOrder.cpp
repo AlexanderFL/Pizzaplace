@@ -8,7 +8,7 @@ SideOrder::SideOrder() {
 	this->price = 0;
 }
 
-SideOrder::SideOrder(string name, int price) {
+SideOrder::SideOrder(const string& name, int price) {
 	this->name = name;
 	this->price = price;
 }

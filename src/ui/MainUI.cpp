@@ -15,7 +15,6 @@ void MainUI::startUI()
 		if (input == "1") {
 			clear();
 			ManagerUI managerUI;
-			//managerUI.managerMenu();
 			managerUI.showMainMenu();
 		}
 		else if (input == "2") {
@@ -26,7 +25,6 @@ void MainUI::startUI()
 		else if (input == "3") {
 			clear();
 			KitchenUI kitchenUI;
-			//kitchenUI.kitchenMenu();
 			kitchenUI.showMainMenu();
 		}
 		else if (input == "4") {

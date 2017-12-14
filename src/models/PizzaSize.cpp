@@ -7,7 +7,8 @@ PizzaSize::PizzaSize() {
 	this->pricemod = 0;
 }
 
-PizzaSize::PizzaSize(string name, double pricemod) {
+PizzaSize::PizzaSize(const string& name, double pricemod)
+{
 	this->name = name;
 	setPriceMod(pricemod);
 }
