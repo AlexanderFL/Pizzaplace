@@ -254,7 +254,7 @@ void ManagerUI::showOfferCreationMenu() {
 	vector<Pizza> pizzas;
 	vector<SideOrder> sides;
 	while (true) {
-		printMenu({ "Set Name", "Set Price", "Create Pizza", "View Pizzas", "Delete Pizza", "Add Side", "View Sides", "Delete Side", "Complete", "Cancel" }, "Offer - " + offer.getName());
+		printMenu({ "Set Name", "Set Price", "Create Pizza", "Delete Pizza", "Add Side", "Delete Side", "Complete", "Cancel" }, "Offer - " + offer.getName());
 		getInput(input);
 		if (input == "1") {
 			getInput("Name", input);
@@ -283,16 +283,39 @@ void ManagerUI::showOfferCreationMenu() {
 		}
 		else if (input == "4") {
 			clear();
-
+			clear();
+			try {
+				vector<string> names;
+				for (size_t i = 0; i < pizzas.size(); ++i) {
+					names.push_back("Pizza with " + to_string(pizzas.at(i).getToppings().size()) + " toppings");
+				}
+				names.push_back("Back");
+				printMenu(names, "Current Pizzas");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+				}
+				else {
+					try {
+						pizzas = service.deleteItem(pizzas, index - 1);
+						clear();
+						printMessage("Pizza removed.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Not a valid option.");
+					}
+				}
+			}
+			catch (EmptyVector) {
+				clear();
+				printMessage("No pizzas available.");
+			}
 		}
 		else if (input == "5") {
 			clear();
-			
-		}
-		else if (input == "6") {
-			clear();
 			try {
-				vector<SideOrder> allsides = service.getItems<SideOrder>();
 				vector<string> names = service.getNames<SideOrder>();
 				names.push_back("Back");
 				printMenu(names, "Sides");
@@ -303,7 +326,7 @@ void ManagerUI::showOfferCreationMenu() {
 				}
 				else {
 					try {
-						sides.push_back(allsides.at(index - 1));
+						sides.push_back(service.getItem<SideOrder>(index - 1));
 						clear();
 						printMessage("Side added.");
 					}
@@ -318,14 +341,35 @@ void ManagerUI::showOfferCreationMenu() {
 				printMessage("No toppings available.");
 			}
 		}
+		else if (input == "6") {
+			clear();
+			try {
+				vector<string> names = service.getNames(sides);
+				names.push_back("Back");
+				printMenu(names, "Current Sides");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+				}
+				else {
+					try {
+						sides = service.deleteItem(sides, index - 1);
+						clear();
+						printMessage("Side removed.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Not a valid option.");
+					}
+				}
+			}
+			catch (EmptyVector) {
+				clear();
+				printMessage("No sides available.");
+			}
+		}
 		else if (input == "7") {
-			clear();
-		}
-		else if (input == "8") {
-			clear();
-
-		}
-		else if (input == "9") {
 			clear();
 			Order order;
 			order.setPizzas(pizzas);
@@ -337,7 +381,7 @@ void ManagerUI::showOfferCreationMenu() {
 			printMessage("Offer completed.");
 			return;
 		}
-		else if (input == "10") {
+		else if (input == "8") {
 			clear();
 			printMessage("Offer canceled.");
 			return;
@@ -417,12 +461,18 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 			clear();
 			try {
 				vector<string> names = service.getNames<Topping>();
+				names.push_back("Any Topping");
 				names.push_back("Back");
 				printMenu(names, "Toppings");
 				getInput(input);
 				int index = service.convertStringToInt(input);
 				if (index == names.size()) {
 					clear();
+				}
+				else if (index == names.size() - 1) {
+					pizza.addToppings(Topping("Any Topping", 0));
+					clear();
+					printMessage("Topping added.");
 				}
 				else {
 					try {
@@ -473,12 +523,18 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 			clear();
 			try {
 				vector<string> names = service.getNames<PizzaCrust>();
+				names.push_back("Any Crust");
 				names.push_back("Back");
 				printMenu(names, "Pizza Crusts");
 				getInput(input);
 				int index = service.convertStringToInt(input);
 				if (index == names.size()) {
 					clear();
+				}
+				else if (index == names.size() - 1) {
+					pizza.setCrust(PizzaCrust("Any Crust", 0));
+					clear();
+					printMessage("Crust set.");
 				}
 				else {
 					try {
@@ -501,12 +557,18 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 			clear();
 			try {
 				vector<string> names = service.getNames<PizzaSize>();
+				names.push_back("Any Size");
 				names.push_back("Back");
 				printMenu(names, "Pizza Sizes");
 				getInput(input);
 				int index = service.convertStringToInt(input);
 				if (index == names.size()) {
 					clear();
+				}
+				else if (index == names.size() - 1) {
+					pizza.setPizzaSize(PizzaSize("Any Size", 0));
+					clear();
+					printMessage("Size set.");
 				}
 				else {
 					try {
