@@ -248,7 +248,7 @@ void ManagerUI::editTopping(int index)
 void ManagerUI::showLocationsMenu() {
 	string input;
 	while (true) {
-		printMenu({ "Add a loctation", "Delete a location", "see all locations", "Back" }, "Location Menu");
+		printMenu({ "Add a loctation", "Delete a location", "See all locations", "Back" }, "Location Menu");
 		getInput(input);
 		clear();
 		if (input == "1") {
