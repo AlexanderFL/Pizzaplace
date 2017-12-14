@@ -19,7 +19,6 @@ void ManagerUI::showMainMenu() {
 		}
 		else if (input == "4") {
 			showCrustMenu();
-
 		}
 		else if (input == "5") {
 			showSidesMenu();
@@ -720,14 +719,8 @@ void ManagerUI::showOfferCreationMenu() {
 		else if (input == "3") {
 			clear();
 			Pizza pizza;
-			try {
-				showCreatePizzaMenu(pizza);
-				pizzas.push_back(pizza);
-			}
-			catch (Canceled) {
-				clear();
-				printMessage("Pizza canceled.");
-			}
+			showCreatePizzaMenu(pizza);
+			pizzas.push_back(pizza);
 		}
 		else if (input == "4") {
 			clear();
@@ -1042,7 +1035,8 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 			return;
 		}
 		else if (input == "6") {
-			throw Canceled();
+			clear();
+			throw 1;
 		}
 		else {
 			clear();

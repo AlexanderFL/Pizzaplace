@@ -2,14 +2,13 @@
 
 #include "ManagerService.h"
 #include "CommonUI.h"
-#include "Canceled.h"
 
 using namespace std;
 
 class ManagerUI: public CommonUI
 {
 private:
-	char input; //
+	//char input;
 	ManagerService service;
 	//Toppings
 	void showToppingsMenu();
