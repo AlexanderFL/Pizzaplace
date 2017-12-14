@@ -1,5 +1,8 @@
 #include "MainUI.h"
 
+
+
+
 #include "Data.h"
 #include "Offer.h"
 #include <cmath>
@@ -184,6 +187,8 @@ int main() {
 	//detectOffers(order);
 
 	//system("PAUSE");
+
+
 	MainUI mainUI;
 	mainUI.startUI();
 

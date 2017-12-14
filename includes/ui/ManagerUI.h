@@ -8,13 +8,33 @@ using namespace std;
 class ManagerUI: public CommonUI
 {
 private:
-	char input;  //<----- shouldn't be here
+	char input; //
 	ManagerService service;
+	//Toppings
 	void showToppingsMenu();
 	void showToppingCreationMenu();
-	void showToppingViewMenu();
 	void showToppingDeleteMenu();
+	void showToppingViewMenu();
+	//Locations
+	void showLocationsMenu();
+	void showLocationCreationMenu();
+	void showLocationDeleteMenu();
+	void showLocationViewMenu();
+	//Sizes
+	void showSizeMenu();
+	void showSizeCreationMenu();
+	void showSizesDeleteMenu();
+	void showSizeViewMenu();
+	//Crust
+	void showCrustMenu();
+	void showCrustCreationMenu();
+	void showSCrustDeleteMenu();
+	void showCrustViewMenu();
+	//Sides
+	void showSidesMenu();
+	void showSidesCreationMenu();
 
+	//offers
 	void showOffersMenu();
 	void showOfferCreationMenu();
 	void showOfferViewMenu();

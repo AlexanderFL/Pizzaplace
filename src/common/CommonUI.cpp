@@ -64,7 +64,11 @@ void CommonUI::printLines(size_t size) const {
 void CommonUI::printOptions(const vector<string>& options, size_t biggest) const {
 	for (size_t i = 0; i < options.size(); i++) {
 		printLines(biggest);
-		cout << "\t| " << i + 1 << ". " << options.at(i);
+		cout << "\t| " << i + 1 << ".";
+		if (i + 1 < 10) {
+			cout << " ";
+		}
+		cout << options.at(i);
 		for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
 			cout << " ";
 		}
@@ -79,7 +83,12 @@ void CommonUI::printOptions(const vector<string>& options, size_t biggest) const
 			}
 		}
 		else {
-			cout << i + 1 << ". " << options.at(i);
+			cout << i + 1 << ".";
+			if (i + 1 < 10) {
+				cout<<  " ";
+			}
+			cout <<  options.at(i);
+			size_t j;
 			for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
 				cout << " ";
 			}

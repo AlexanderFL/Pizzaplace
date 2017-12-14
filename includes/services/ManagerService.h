@@ -7,6 +7,7 @@
 #include "EmptyVector.h"
 #include "NumberInString.h"
 #include "InvalidString.h"
+#include "InvalidInt.h"
 
 class ManagerService: public CommonService
 {
