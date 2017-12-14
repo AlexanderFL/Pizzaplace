@@ -63,6 +63,7 @@ void ManagerUI::showToppingsMenu() {
 			break;
 		}
 		else {
+			clear();
 			printMessage("Invalid input.");
 		}
 	}
@@ -224,7 +225,7 @@ void ManagerUI::editTopping(int index)
 				break;
 			}
 			else {
-				system("CLS");
+				clear();
 				printMessage("Invalid index.");
 			}
 		}
@@ -273,10 +274,15 @@ void ManagerUI::showLocationCreationMenu() {
 	try {
 		string name;
 		getInput("Name", name);
-		// Validate location name
+		//validating name
+		service.containsOnlyAlpha(name);
 		service.addItem<Location>(Location(name));
 		clear();
 		printMessage("Location was created.");
+	}
+	catch (NumberInString) {
+		clear();
+		printMessage("Invalid name.");
 	}
 	catch (InvalidString) {
 		clear();
@@ -295,9 +301,10 @@ void ManagerUI::showLocationDeleteMenu() {
 			getInput(input);
 			int index = service.convertStringToInt(input);
 			if (index == names.size()) {
+				clear();
 				break;
 			}
-		else {
+			else {
 				try {
 					clear();
 					service.deleteItem<Location>(index - 1);
@@ -305,12 +312,17 @@ void ManagerUI::showLocationDeleteMenu() {
 				}
 				catch (out_of_range) {
 					clear();
-				printMessage("Not a valid option.");
+					printMessage("Invalid input.");
 				}
 			}
 		}
 	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input.");
+		}
 	catch (EmptyVector) {
+		clear();
 		printMessage("There are currently no locations available.");
 	}
 }
@@ -319,20 +331,27 @@ void ManagerUI::showLocationViewMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<Location> locations = service.getItems<Location>();
-			vector<string> names;
-			for (size_t i = 0; i < locations.size(); ++i) {
-				names.push_back(locations.at(i).getAddress());
+			try {
+				vector<Location> locations = service.getItems<Location>();
+				vector<string> names;
+				for (size_t i = 0; i < locations.size(); ++i) {
+					names.push_back(locations.at(i).getAddress());
+				}
+				names.push_back("Back");
+				printMenu(names, "Locations");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					printMessage("Not a valid option.");
+				}
 			}
-			names.push_back("Back");
-			printMenu(names, "Locations");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
-				break;
-			}
-			else {
-				printMessage("Not a valid option.");
+			catch (InvalidString) {
+				clear();
+				printMessage("Invalid input.");
 			}
 		}
 	}
@@ -348,7 +367,6 @@ void ManagerUI::showLocationViewMenu() {
 void ManagerUI::showSizeMenu() {
 	string input;
 	while (true) {
-		clear();
 		printMenu({ "Create a size", "Delete a size", "View sizes", "Back" }, "Pizza size Menu");
 		getInput(input);
 		clear();
@@ -365,7 +383,8 @@ void ManagerUI::showSizeMenu() {
 			break;
 		}
 		else {
-			printMessage("Not a valid option.");
+			clear();
+			printMessage("Invalid input.");
 		}
 	}
 }
@@ -377,16 +396,27 @@ void ManagerUI::showSizeCreationMenu() {
 		string size;
 		string name;
 		getInput("Name", name);
+		//validating name
+		service.containsOnlyAlpha(name);
 		getInput("Size", size);
 		int sizeInInt  = service.convertStringToInt(size);
-		//Verify to check if it is not valid
+		//validating size
+		service.validPrice(sizeInInt);
 		service.addItem<PizzaSize>(PizzaSize(name, sizeInInt));
 		clear();
 		printMessage("Pizza size was created.");
 	}
+	catch (NumberInString) {
+		clear();
+		printMessage("Invalid name");
+	}
 	catch (InvalidString) {
 		clear();
-		printMessage("Invalid input.");
+		printMessage("Invalid size.");
+	}
+	catch (EmptyVector) {
+		clear();
+		printMessage("There are currently no sizes available.");
 	}
 }
 
@@ -414,10 +444,14 @@ void ManagerUI::showSizesDeleteMenu() {
 				}
 				catch (out_of_range) {
 					clear();
-					printMessage("Not a valid option.");
+					printMessage("Invalid input.");
 				}
 			}
 		}
+	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input");
 	}
 	catch (EmptyVector) {
 		printMessage("There are currently no sizes available.");
@@ -441,11 +475,16 @@ void ManagerUI::showSizeViewMenu() {
 				break;
 			}
 			else {
-				printMessage("Not a valid option.");
+				printMessage("Invalid input.");
 			}
 		}
 	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input");
+	}
 	catch (EmptyVector) {
+		clear();
 		printMessage("There are currently no sizes available.");
 	}
 }
@@ -460,7 +499,6 @@ void ManagerUI::showSizeViewMenu() {
 void ManagerUI::showCrustMenu() {
 	string input;
 	while (true) {
-		clear();
 		printMenu({ "Create a crust", "Delete a crust", "View crusts", "Back" }, "Pizza crust Menu");
 		getInput(input);
 		clear();
@@ -477,7 +515,8 @@ void ManagerUI::showCrustMenu() {
 			break;
 		}
 		else {
-			printMessage("Not a valid option.");
+			clear();
+			printMessage("Invalid input.");
 		}
 	}
 }
@@ -489,16 +528,23 @@ void ManagerUI::showCrustCreationMenu() {
 		string price;
 		string name;
 		getInput("Name", name);
+		//validating name
+		service.containsOnlyAlpha(name);
 		getInput("Price", price);
 		int priceInInt = service.convertStringToInt(price);
-		//Verify to check if it is not valid
+		//validating price
+		service.validPrice(priceInInt);
 		service.addItem<PizzaCrust>(PizzaCrust(name, priceInInt));
 		clear();
 		printMessage("Pizza crust was created.");
 	}
+	catch (NumberInString) {
+		clear();
+		printMessage("Invalid name");
+	}
 	catch (InvalidString) {
 		clear();
-		printMessage("Invalid input.");
+		printMessage("Invalid price.");
 	}
 }
 
@@ -516,6 +562,7 @@ void ManagerUI::showCrustDeleteMenu() {
 		getInput(input);
 			int index = service.convertStringToInt(input);
 			if (index == names.size()) {
+				clear();
 				break;
 			}
 			else {
@@ -526,12 +573,17 @@ void ManagerUI::showCrustDeleteMenu() {
 				}
 				catch (out_of_range) {
 					clear();
-					printMessage("Not a valid option.");
+					printMessage("Invalid input.");
 				}
 			}
 		}
 	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input");
+	}
 	catch (EmptyVector) {
+		clear();
 		printMessage("There are currently no crusts available.");
 	}
 }
@@ -550,14 +602,21 @@ void ManagerUI::showCrustViewMenu() {
 			getInput(input);
 			int index = service.convertStringToInt(input);
 			if (index == names.size()) {
+				clear();
 				break;
 			}
 			else {
-				printMessage("Not a valid option.");
+				clear();
+				printMessage("Invalid input");
 			}
 		}
 	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input");
+	}
 	catch (EmptyVector) {
+		clear();
 		printMessage("There are currently no crusts available.");
 	}
 }
@@ -587,10 +646,12 @@ void ManagerUI::showSidesMenu() {
 			break;
 		}
 		else {
-			printMessage("Not a valid option.");
+			clear();
+			printMessage("Invalid input.");
 		}
 	}
 }
+
 
 void ManagerUI::showSidesCreationMenu() {
 	string input;
@@ -599,16 +660,21 @@ void ManagerUI::showSidesCreationMenu() {
 		string price;
 		string name;
 		getInput("Name", name);
+		service.containsOnlyAlpha(name);
 		getInput("Price", price);
 		int priceInInt = service.convertStringToInt(price);
-		//Verify to check if it is not valid
+		service.validPrice(priceInInt);
 		service.addItem<SideOrder>(SideOrder(name, priceInInt));
 		clear();
 		printMessage("Pizza side was created.");
 	}
+	catch (NumberInString) {
+		clear();
+		printMessage("Invalid name");
+	}
 	catch (InvalidString) {
 		clear();
-		printMessage("Invalid input.");
+		printMessage("Invalid price.");
 	}
 }
 
@@ -627,6 +693,7 @@ void ManagerUI::showSidesDeleteMenu() {
 			getInput(input);
 			int index = service.convertStringToInt(input);
 			if (index == names.size()) {
+				clear();
 				break;
 			}
 			else {
@@ -637,10 +704,14 @@ void ManagerUI::showSidesDeleteMenu() {
 				}
 				catch (out_of_range) {
 					clear();
-					printMessage("Not a valid option.");
+					printMessage("Invalid input.");
 				}
 			}
 		}
+	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input.");
 	}
 	catch (EmptyVector) {
 		printMessage("There are currently no sides available.");
@@ -661,12 +732,17 @@ void ManagerUI::showSidesViewMenu() {
 			getInput(input);
 			int index = service.convertStringToInt(input);
 			if (index == names.size()) {
+				clear();
 				break;
 			}
 			else {
-				printMessage("Not a valid option.");
+				printMessage("Invalid input.");
 			}
 		}
+	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input.");
 	}
 	catch (EmptyVector) {
 		printMessage("There are currently no sides available.");
@@ -704,7 +780,7 @@ void ManagerUI::showOffersMenu() {
 		}
 		else {
 			clear();
-			printMessage("Not a valid option.");
+			printMessage("Invalid input.");
 		}
 	}
 }
