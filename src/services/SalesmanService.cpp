@@ -211,7 +211,7 @@ string SalesmanService::getSingleOfferName(const Pizza& pizza) {
 		Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
 		Pizza specials = pizza - extras;
 		if (extras.getToppings().empty()) {
-			return singles.at(index).getName() + "+");
+			return singles.at(index).getName() + "+";
 		}
 		else {
 			return singles.at(index).getName();
