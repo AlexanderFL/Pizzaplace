@@ -11,25 +11,28 @@ class SalesmanUI: public CommonUI
 {
 private:
 	SalesmanService service;
+	int _pizzaNumber;
 public:
 	SalesmanUI();
 	void salesmanMenu();
 	void makeNewOrder();
 private:
+	void makeYourOwnMenu(Order& order, char& input);
 	void selectLocation(Order& order, char& input);
-	void selectFromMenu(Order& order, bool& pizzaFromMenu, char& input);
+	void newOrderStart(Order& order, bool& pizzaFromMenu, char& input);
 	void pickFromMenu(Order& order, char& input);
 	void selectCrust(Pizza& pizza, char& input);
 	void selectSize(Pizza& pizza, char& input);
 	void selectToppings(Pizza& pizza, char& input);
 	void selectSides(Order& order, char& input);
-	void addComment(Order& order, char& input);
+	void addComment(Order& order);
 	void selectDeliveryMethod(Order& order, char& input);
 	bool addAnotherOrder(char& input);
 	void showTotalOrder(Order& order);
 	
-	vector<string> makeStringVectorFromPizzaSize(vector<PizzaSize> pizzaSizeVector);
+	void catchCharInput(char& input, const int& max, const int& min=0, const std::string& msg="Input");
 
+	vector<string> makeStringVectorFromPizzaSize(vector<PizzaSize> pizzaSizeVector);
 	template<typename T>
 	vector<string> makeStringVector(T tempVector);
 };

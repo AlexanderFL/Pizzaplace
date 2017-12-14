@@ -11,7 +11,7 @@ InvalidInput::InvalidInput(const std::string& message)
 }
 
 
-std::string InvalidInput::getMessage() 
+std::string InvalidInput::getMessage() const
 {
 	return _message;
 }

@@ -108,6 +108,22 @@ bool SalesmanService::validateOrder(Order order) {
 	return true;
 }
 
+void SalesmanService::validInput(const char& input, const int& max, const int& min) const
+{
+	if (isalpha(input)) {
+		throw InvalidInput("Input cannot be a character");
+	}
+	int numberEntered = (int)input - 48;
+	if (numberEntered < min) {
+		const std::string& msg = "Input cannot be lower than " + to_string(min);
+		throw InvalidInput(msg);
+	}
+	if (numberEntered > max) {
+		const std::string& msg = "Input cannot be bigger than " + to_string(max);
+		throw InvalidInput(msg);
+	}
+}
+
 void SalesmanService::setOrderToDelivery(Order& order) {
 	order.setDeliveryMethod(SEND);
 }
@@ -134,7 +150,6 @@ SideOrder SalesmanService::getSideOrder()
 	PRIVATE FUNCTIONS
 
 */
-
 
 /*			Returns total cost for the order		*/
 int SalesmanService::calculateCost(const Order& order) {
