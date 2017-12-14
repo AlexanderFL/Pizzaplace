@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Order.h"
 
 using namespace std;
 class CommonUI
@@ -15,6 +16,10 @@ public:
 	void getInput(string& str) const;
 	void getInput(const string& text, string& str) const;
 	void getInput(const string& text, char& input) const;
+	//printing orders
+	void showPizzaInfoShort(const Pizza& pizza) const;
+	void showOrderInfo(const Order& order) const;
+	void showOrderInfoShort(const Order& order) const;
 private:
 	void printOptions(const vector<string>& options, size_t biggest, bool displayOnly=false) const;
 	void printLines(size_t size) const;
