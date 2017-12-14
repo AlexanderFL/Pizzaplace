@@ -18,12 +18,13 @@ public:
 	void makeNewOrder();
 private:
 	void makeYourOwnMenu(Order& order, char& input);
+
 	void selectLocation(Order& order, char& input);
 	void newOrderStart(Order& order, bool& pizzaFromMenu, char& input);
 	void pickFromMenu(Order& order, char& input);
-	void selectCrust(Pizza& pizza, char& input);
-	void selectSize(Pizza& pizza, char& input);
-	void selectToppings(Pizza& pizza, char& input);
+	void selectCrust(Order& order, char& input);
+	void selectSize(Order& order, char& input);
+	void selectToppings(Order& order, char& input);
 	void selectSides(Order& order, char& input);
 	void addComment(Order& order);
 	void selectDeliveryMethod(Order& order, char& input);
@@ -31,6 +32,8 @@ private:
 	void showTotalOrder(Order& order);
 	
 	void catchCharInput(char& input, const int& max, const int& min=0, const std::string& msg="Input");
+	Pizza getCurrentPizza(Order& order);
+	int convertToInt(char& input);
 
 	vector<string> makeStringVectorFromPizzaSize(vector<PizzaSize> pizzaSizeVector);
 	template<typename T>

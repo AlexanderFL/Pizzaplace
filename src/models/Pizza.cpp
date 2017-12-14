@@ -50,7 +50,7 @@ void Pizza::setToppings(vector<Topping> toppings) {
 	this->toppings = toppings;
 }
 
-void Pizza::setCrust(const PizzaCrust& crust) {
+void Pizza::setCrust(PizzaCrust& crust) {
 	this->crust = crust;
 }
 

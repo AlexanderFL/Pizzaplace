@@ -6,7 +6,7 @@
 
 SalesmanUI::SalesmanUI()
 {
-	_pizzaNumber = 1;
+	_pizzaNumber = 0;
 }
 
 void SalesmanUI::salesmanMenu() {
@@ -45,7 +45,7 @@ void SalesmanUI::makeNewOrder()
 	int nrOfOrder = 1;
 	
 	selectLocation(order, input);
-	system("CLS");
+	clear();
 	while (true) {
 		try
 		{
@@ -124,31 +124,54 @@ void SalesmanUI::pickFromMenu(Order& order, char& input) {
 void SalesmanUI::makeYourOwnMenu(Order& order, char& input)
 {
 	Pizza newPizza;
-	printMenu(
-		{"Select crust", "Select size", "Select toppings", "Add sides", "Select delivery method", "Add comment", "Finish"}, 
-		"Make your own pizza!"
-	);
-	catchCharInput(input, 7, 1);
-	clear();
-
-	switch (input)
+	vector<Pizza> allOrderPizzas = order.getPizzas();
+	allOrderPizzas.push_back(newPizza);
+	order.setPizzas(allOrderPizzas);
+	while (true)
 	{
-	case '1':
-		selectCrust(newPizza, input);
-	case '2':
-		selectSize(newPizza, input);
-	case '3':
-		selectToppings(newPizza, input);
-	case '4':
-		selectSides(order, input);
-	case '5':
-		selectDeliveryMethod(order, input);
-	case '6':
-		addComment(order);
-	case '7':
-		break;
-	default:
-		return;
+		printMenu(
+			{"Select crust", "Select size", "Select toppings", "Add sides", "Select delivery method", "Add comment", "See current order", "Finish"}, 
+			"Make your own pizza!"
+		);
+		catchCharInput(input, 8, 1);
+		clear();
+
+		switch (input)
+		{
+		case '1':
+			selectCrust(order, input);
+			printMessage("Crust added.");
+			break;
+		case '2':
+			selectSize(order, input);
+			printMessage("Size added.");
+			break;
+		case '3':
+			selectToppings(order, input);
+			printMessage("Toppings added.");
+			break;
+		case '4':
+			selectSides(order, input);
+			printMessage("Side added.");
+			break;
+		case '5':
+			selectDeliveryMethod(order, input);
+			printMessage("Delivery method added.");
+			break;
+		case '6':
+			addComment(order);
+			printMessage("Comment added");
+			break;
+		case '7':
+			showTotalOrder(order);
+			break;
+		case '8':
+			// finish order
+			break;
+		default:
+			return;
+		}
+		
 	}
 }
 
@@ -177,26 +200,33 @@ void SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, char & input)
 	clear();
 }
 
-void SalesmanUI::selectCrust(Pizza& pizza, char& input)
+void SalesmanUI::selectCrust(Order& order, char& input)
 {
 	vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
 	printMenu(makeStringVector(crusts), "Select the Pizza Crust");
 	catchCharInput(input, crusts.size());
-	pizza.setCrust(crusts.at((int)input - 49));
+
+	vector<Pizza> pizzas = order.getPizzas();
+	pizzas.at(_pizzaNumber).setCrust(crusts.at(convertToInt(input)));
+	order.setPizzas(pizzas);
+
 	clear();
 }
 
-void SalesmanUI::selectSize(Pizza & pizza, char& input)
+void SalesmanUI::selectSize(Order& order, char& input)
 {
 	vector<PizzaSize> sizes = service.getItems<PizzaSize>();
 	printMenu(makeStringVectorFromPizzaSize(sizes), "Select the Pizza Size");
-
 	catchCharInput(input, sizes.size());
-	pizza.setPizzaSize(sizes.at((int)input - 49));
+
+	vector<Pizza> pizzas = order.getPizzas();
+	pizzas.at(_pizzaNumber).setPizzaSize(sizes.at(convertToInt(input)));
+	order.setPizzas(pizzas);
+
 	clear();
 }
 
-void SalesmanUI::selectToppings(Pizza & pizza, char& input)
+void SalesmanUI::selectToppings(Order& order, char& input)
 {
 	vector<Topping> toppings = service.getItems<Topping>();
 	while (true)
@@ -204,13 +234,13 @@ void SalesmanUI::selectToppings(Pizza & pizza, char& input)
 		printMenu(makeStringVector(toppings), "Select the Toppings");
 		
 		// Cannot have more than two of each topping so multiply all toppings by 2
-		catchCharInput(input, toppings.size() * 2, 0, "Please enter the number of toppings");
+		catchCharInput(input, toppings.size()*2, 0, "Please enter the number of toppings");
 		int numberOfToppingsInt = (int)input - 48;
 
 		for (int i = 0; i < numberOfToppingsInt; i++) {
 			string inputString = "Select topping nr " + to_string(i+1);
-			catchCharInput(input, pizza.getToppings().size(), 0, inputString);
-			pizza.addToppings(toppings.at((int)input - 49));
+			catchCharInput(input, toppings.size(), 1, inputString);
+			getCurrentPizza(order).addToppings(toppings.at(convertToInt(input)));
 		}
 		break;
 	}
@@ -233,7 +263,7 @@ void SalesmanUI::selectSides(Order& order, char& input)
 	catchCharInput(input, sideOrder.size());
 
 	//Set the selected side order in service
-	int index = (int)input - 49;
+	int index = convertToInt(input);
 	service.appendToOrder(order, sideOrder.at(index));
 
 	clear();
@@ -286,7 +316,7 @@ void SalesmanUI::showTotalOrder(Order & order)
 				//printMenu({"Test for", "a new", "feature"}, title, true);
 
 				tempPizza = order.getPizzas().at(i);
-				cout << "Order nr. " << (i + 1) << ": " << endl;
+				cout << "Pizza nr. " << (i + 1) << ": " << endl;
 				cout << "\t    Size: " << tempPizza.getPizzaSize().getName() << "  \t+" << (tempPizza.getPizzaSize().getPriceMod() - 1) * 100 << " %" << endl;
 				cout << "\t   Crust: " << tempPizza.getCrust().getName() << "  \t" << tempPizza.getCrust().getPrice() << " kr.-" << endl;
 				cout << "\tToppings: " << endl;
@@ -338,6 +368,16 @@ void SalesmanUI::catchCharInput(char& input, const int& max, const int& min, con
 			printMessage(ex.getMessage());
 		}
 	}
+}
+
+Pizza SalesmanUI::getCurrentPizza(Order& order)
+{
+	return order.getPizzas().at(_pizzaNumber);
+}
+
+int SalesmanUI::convertToInt(char & input)
+{
+	return (int)input - 49;
 }
 
 /*
