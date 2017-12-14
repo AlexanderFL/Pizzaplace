@@ -76,12 +76,12 @@ void CommonUI::printOptions(const vector<string>& options, size_t biggest, bool 
 			cout << " ";
 		}
 		cout << options.at(i);
-		if (!displayOnly) {
+		/*if (!displayOnly) {
 			cout << "\t| " << i + 1 << ". " << options.at(i);
 		}
 		else {
 			cout << "\t| " << options.at(i);
-		}
+		}*/
 		for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
 			cout << " ";
 		}
@@ -105,12 +105,12 @@ void CommonUI::printOptions(const vector<string>& options, size_t biggest, bool 
 			}
 			cout <<  options.at(i);
 			size_t j;
-			if (!displayOnly) {
+			/*if (!displayOnly) {
 				cout << i + 1 << ". " << options.at(i);
 			}
 			else {
 				cout << options.at(i) << "\t   ";
-			}
+			}*/
 			for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
 				cout << " ";
 			}
