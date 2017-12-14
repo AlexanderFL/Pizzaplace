@@ -398,11 +398,14 @@ void ManagerUI::showSizeCreationMenu() {
 		getInput("Name", name);
 		//validating name
 		service.containsOnlyAlpha(name);
+		printArrow("%");
+		cout << endl;
+		printMessage("%");
 		getInput("Size", size);
 		int sizeInInt  = service.convertStringToInt(size);
 		//validating size
 		service.validPrice(sizeInInt);
-		service.addItem<PizzaSize>(PizzaSize(name, sizeInInt));
+		service.addItem<PizzaSize>(PizzaSize(name, sizeInInt / 100));
 		clear();
 		printMessage("Pizza size was created.");
 	}
@@ -804,22 +807,32 @@ void ManagerUI::showOfferCreationMenu() {
 			try {
 				int price = service.convertStringToInt(input);
 				//Validate price
+				service.validPrice(price);
 				offer.setPrice(price);
 				clear();
 			}
-			catch (NumberInString) {
+			catch (InvalidString) {
+				clear();
+				printMessage("Invalid Price.");
+			}
+			catch (InvalidPrice) {
 				clear();
 				printMessage("Invalid Price.");
 			}
 		}
 		else if (input == "3") {
 			clear();
-			Pizza pizza;
-			showCreatePizzaMenu(pizza);
-			pizzas.push_back(pizza);
+			try {
+				Pizza pizza;
+				showCreatePizzaMenu(pizza);
+				pizzas.push_back(pizza);
+			}
+			catch (Canceled) {
+				clear();
+				printMessage("Pizza Canceled.");
+			}
 		}
 		else if (input == "4") {
-			clear();
 			clear();
 			try {
 				vector<string> names;
@@ -1005,6 +1018,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 				int index = service.convertStringToInt(input);
 				if (index == names.size()) {
 					clear();
+					break;
 				}
 				else if (index == names.size() - 1) {
 					pizza.addToppings(Topping("Any Topping", 0));
@@ -1038,6 +1052,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 				int index = service.convertStringToInt(input);
 				if (index == names.size()) {
 					clear();
+					break;
 				}
 				else {
 					try {
@@ -1101,6 +1116,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 				int index = service.convertStringToInt(input);
 				if (index == names.size()) {
 					clear();
+					//break?
 				}
 				else if (index == names.size() - 1) {
 					pizza.setPizzaSize(PizzaSize("Any Size", 0));
@@ -1157,6 +1173,12 @@ void ManagerUI::showOrders() {
 				//See more about an order
 				getInput(input);
 				int order = service.convertStringToInt(input) - 1;
+				if (order + 1 == names.size()) {
+					clear();
+					break;
+				}
+				//validating input of order
+				service.validPrice(order);
 				clear();
 				showOrderInfo(orders.at(order));
 				cout << endl;
@@ -1164,6 +1186,7 @@ void ManagerUI::showOrders() {
 				getInput(input);
 				int index = service.convertStringToInt(input);
 				if (index == names.size()) {
+					clear();
 					break;
 				}
 				if (input == "1") {
@@ -1174,10 +1197,18 @@ void ManagerUI::showOrders() {
 					}
 					catch (out_of_range) {
 						clear();
-						printMessage("Invalid index.");
+						printMessage("Invalid input.");
 					}
 			}
 		}
+	}
+	catch (out_of_range) {
+		clear();
+		printMessage("Invalid input.");
+	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input");
 	}
 	catch (EmptyVector) {
 		printMessage("There are currently no orders.");

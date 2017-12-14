@@ -25,7 +25,7 @@ void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
 		vector<Order> orders = _repo.RetrieveAllFromFile<Order>();
 		for (int i = 0; i < orders.size(); i++) {
 			//find the order to append to
-			if (orders[i] == firstOrder) {
+			if (orders[i] == firstOrder) { 
 				//append the second order to first
 				firstOrder = firstOrder + secondOrder;
 				//override in file
@@ -186,33 +186,40 @@ vector<string> SalesmanService::getOfferNames(const Order& order) {
 			extras.erase(extras.begin());
 		}
 	}
-	vector<Offer> singles = getSinglePizzaOffers();
+	
 	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
-		Pizza pizza = temp.getPizzas().at(i);
-		int index = -1;
-		double sim = 0;
-		for (size_t i = 0; i < singles.size(); ++i) {
-			Pizza comp = singles.at(i).getOrder().getPizzas().at(0) * pizza;
-			if (comp.getToppings().size() >= singles.at(i).getOrder().getPizzas().at(0).getToppings().size()) {
-				double temp = pizzaSimularity(singles.at(i).getOrder().getPizzas().at(0), pizza);
-				if (sim < temp) {
-					sim = temp;
-					index = i;
-				}
-			}
-		}
-		if (index != -1) {
-			Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
-			Pizza specials = pizza - extras;
-			if (extras.getToppings().empty()) {
-				offernames.push_back(singles.at(index).getName() + "+");
-			}
-			else {
-				offernames.push_back(singles.at(index).getName());
+		offernames.push_back(getSingleOfferName(temp.getPizzas().at(i)));
+	}
+	return offernames;
+}
+
+string SalesmanService::getSingleOfferName(const Pizza& pizza) {
+	vector<Offer> singles = getSinglePizzaOffers();
+	int index = -1;
+	double sim = 0;
+	for (size_t i = 0; i < singles.size(); ++i) {
+		Pizza comp = singles.at(i).getOrder().getPizzas().at(0) * pizza;
+		if (comp.getToppings().size() >= singles.at(i).getOrder().getPizzas().at(0).getToppings().size()) {
+			double temp = pizzaSimularity(singles.at(i).getOrder().getPizzas().at(0), pizza);
+			if (sim < temp) {
+				sim = temp;
+				index = i;
 			}
 		}
 	}
-	return offernames;
+	if (index != -1) {
+		Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
+		Pizza specials = pizza - extras;
+		if (extras.getToppings().empty()) {
+			return singles.at(index).getName() + "+";
+		}
+		else {
+			return singles.at(index).getName();
+		}
+	}
+	else {
+		return "Custom Pizza";
+	}
 }
 
 /*
