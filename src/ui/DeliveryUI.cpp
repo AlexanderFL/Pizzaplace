@@ -48,44 +48,47 @@ void DeliveryUI::allOrdersMenu() {
 				}
 				try {
 					int order = service.convertStringToInt(input) - 1;
-					showOrderInfo(orders.at(order));
-					cout << endl;
-					if (orders.at(order).isPaidFor()) {
-						printMenu({ "Paid", "Go Back" }, "Set order as:");
-						getInput(input);
-						if (input == "1") {
-							try {
-								service.setOrderPaid(orders.at(order).getID());
+					clear();
+					while (true) {
+						showOrderInfo(orders.at(order));
+						cout << endl;
+						if (orders.at(order).isPaidFor()) {
+							printMenu({ "Paid", "Go Back" }, "Set order as:");
+							getInput(input);
+							if (input == "1") {
+								try {
+									service.setOrderPaid(orders.at(order).getID());
+								}
+								catch (out_of_range) {
+									printMessage("Invalid input.");
+								}
 							}
-							catch (out_of_range) {
+							else if (input == "2") {
+								clear();
+								break;
+							}
+							else {
 								printMessage("Invalid input.");
 							}
 						}
-						else if (input == "2") {
-							clear();
-							break;
-						}
 						else {
-							printMessage("Invalid input.");
-						}
-					}
-					else {
-						printMenu({ "Delivered", "Go Back" }, "Set order as:");
-						getInput(input);
-						if (input == "1") {
-							try {
-								service.setOrderDelivered(orders.at(order).getID());
+							printMenu({ "Delivered", "Go Back" }, "Set order as:");
+							getInput(input);
+							if (input == "1") {
+								try {
+									service.setOrderDelivered(orders.at(order).getID());
+								}
+								catch (out_of_range) {
+									printMessage("Invalid index.");
+								}
 							}
-							catch (out_of_range) {
-								printMessage("Invalid index.");
+							else if (input == "2") {
+								clear();
+								break;
 							}
-						}
-						else if (input == "2") {
-							clear();
-							break;
-						}
-						else {
-							printMessage("Invalid input.");
+							else {
+								printMessage("Invalid input.");
+							}
 						}
 					}
 				}

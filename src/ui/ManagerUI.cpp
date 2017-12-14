@@ -1041,8 +1041,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 			return;
 		}
 		else if (input == "6") {
-			clear();
-			throw 1;
+			throw Canceled();
 		}
 		else {
 			clear();
