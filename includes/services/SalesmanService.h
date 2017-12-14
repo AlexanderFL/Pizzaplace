@@ -37,6 +37,7 @@ private:
 	int calculateCost(const Order& order);
 	int calculateCost(const Pizza& pizza);
 	int calculateOldCost(const Order& order);
+	int calculateSimpleCost(const Pizza& pizza);
 	int calculateOldCost(const Pizza& pizza);
 	void overrideOrder(int index, Order edit);
 	void assignID(Order& order);

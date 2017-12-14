@@ -166,20 +166,13 @@ int SalesmanService::calculateCost(const Order& order) {
 	while (comps.size() > 0) {
 		if (comps.at(0).getOrder() == order) {
 			for (size_t i = 0; i < order.getPizzas().size(); ++i) {
-				int temptotal = 0;
-				for (size_t j = 0; j < order.getPizzas().at(i).getToppings().size(); ++j) {
-					temptotal += order.getPizzas().at(i).getToppings().at(j).getPrice();
-				}
-				temptotal += order.getPizzas().at(i).getCrust().getPrice();
-				temptotal *= order.getPizzas().at(i).getPizzaSize().getPriceMod();
-				total += temptotal;
+				total += calculateSimpleCost(order.getPizzas().at(i));
 			}
 			for (size_t i = 0; i < order.getSides().size(); ++i) {
 				total += order.getSides().at(i).getPrice();
 			}
 			total *= (comps.at(0).getPrice() / 100.0);
-			return total;
-			//return comps.at(0).getPrice();
+			return total * (comps.at(0).getPrice() / 100.0);
 		}
 		else if (comps.at(0).getOrder() <= order) {
 			tempExt.push_back(comps.at(0));
@@ -209,19 +202,12 @@ int SalesmanService::calculateCost(const Order& order) {
 		//total += ext.at(i).getPrice();
 		int exttotal = 0;
 		for (size_t i = 0; i < ext.at(k).getOrder().getPizzas().size(); ++i) {
-			int temptotal = 0;
-			for (size_t j = 0; j < ext.at(k).getOrder().getPizzas().at(i).getToppings().size(); ++j) {
-				temptotal += ext.at(k).getOrder().getPizzas().at(i).getToppings().at(j).getPrice();
-			}
-			temptotal += ext.at(k).getOrder().getPizzas().at(i).getCrust().getPrice();
-			temptotal *= ext.at(k).getOrder().getPizzas().at(i).getPizzaSize().getPriceMod();
-			exttotal += temptotal;
+			exttotal += calculateSimpleCost(ext.at(k).getOrder().getPizzas().at(i);
 		}
 		for (size_t i = 0; i < ext.at(k).getOrder().getSides().size(); ++i) {
 			exttotal += ext.at(k).getOrder().getSides().at(i).getPrice();
 		}
-		exttotal *= (ext.at(k).getPrice() / 100.0);
-		total += exttotal;
+		total += exttotal * (ext.at(k).getPrice() / 100.0);
 		temp = temp - ext.at(k).getOrder();
 	}
 	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
@@ -242,45 +228,18 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 		Pizza comp = singles.at(i).getOrder().getPizzas().at(0) * pizza;
 		if (comp.getToppings().size() >= singles.at(i).getOrder().getPizzas().at(0).getToppings().size()) {
 			double temp = pizzaSimularity(singles.at(i).getOrder().getPizzas().at(0), pizza);
-			//double temp = (singles.at(i).getOrder().getPizzas().at(0) * pizza).getToppings().size() / (sqrt(singles.at(i).getOrder().getPizzas().at(0).getToppings().size()) * sqrt(pizza.getToppings().size()));
 			if (sim < temp) {
 				sim = temp;
 				index = i;
 			}
 		}
 	}
-	/*if (index == -1) {
-		//normal
-		for (size_t i = 0; i < pizza.getToppings().size(); ++i) {
-			total += pizza.getToppings().at(i).getPrice();
-		}
-	}
-	else {
-		total += singles.at(index).getPrice();
-		if (pizza != singles.at(index).getOrder().getPizzas().at(0)) {
-			Pizza temp = pizza - singles.at(index).getOrder().getPizzas().at(0);
-			for (size_t i = 0; i < temp.getToppings().size(); ++i) {
-				total += temp.getToppings().at(i).getPrice();
-			}
-		}
-	}*/
 	if (index == -1) {
 		//normal
-		for (size_t i = 0; i < pizza.getToppings().size(); ++i) {
-			total += pizza.getToppings().at(i).getPrice();
-		}
-		total += pizza.getCrust().getPrice();
-		total *= pizza.getPizzaSize().getPriceMod();
-		return total;
+		return calculateSimpleCost(pizza);
 	}
 	else {
-		Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
-		Pizza specials = pizza - extras;
-		for (size_t i = 0; i < specials.getToppings().size(); ++i) {
-			total += pizza.getToppings().at(i).getPrice();
-		}
-		total += pizza.getCrust().getPrice();
-		total *= pizza.getPizzaSize().getPriceMod();
+		total += calculateSimpleCost(pizza);
 		total *= (singles.at(index).getPrice() / 100.0);
 		for (size_t i = 0; i < extras.getToppings().size(); ++i) {
 			total += extras.getToppings().at(i).getPrice();
@@ -312,11 +271,15 @@ vector<Offer> SalesmanService::getCompOffers() {
 }
 
 double SalesmanService::orderSimularity(const Order& left, const Order& right) {
-	return ((left * right).getPizzas().size() + (left * right).getSides().size()) / ((sqrt(left.getPizzas().size()) * sqrt(right.getPizzas().size())) + (sqrt(left.getSides().size()) * sqrt(right.getSides().size())));
+	double top = ((left * right).getPizzas().size() + (left * right).getSides().size());
+	double bottom = ((sqrt(left.getPizzas().size()) * sqrt(right.getPizzas().size())) + (sqrt(left.getSides().size()) * sqrt(right.getSides().size())));
+	return top / bottom;
 }
 
 double SalesmanService::pizzaSimularity(const Pizza& left, const Pizza& right) {
-	return (left * right).getToppings().size() / (sqrt(left.getToppings().size()) * sqrt(right.getToppings().size()));
+	double top = (left * right).getToppings().size();
+	double bottom = (sqrt(left.getToppings().size()) * sqrt(right.getToppings().size()));
+	return  top / bottom;
 }
 
 /*
@@ -338,6 +301,17 @@ int SalesmanService::calculateOldCost(const Order& order) {
 }
 
 /*			Returns total cost for the pizza		*/
+int SalesmanService::calculateSimpleCost(const Pizza& pizza) {
+	int total = 0;
+	size_t numberOfToppingsOnPizza = pizza.getToppings().size();
+	for (size_t j = 0; j < numberOfToppingsOnPizza; ++j) {
+		total += pizza.getToppings().at(j).getPrice(); // Add each topping to price
+	}
+	total += pizza.getCrust().getPrice(); // Add type of crust to price
+	total *= pizza.getPizzaSize().getPriceMod(); // Multiply the pizza size mod to price
+	return total;
+}
+
 int SalesmanService::calculateOldCost(const Pizza& pizza) {
 	int total = 0;
 	size_t numberOfToppingsOnPizza = pizza.getToppings().size();
