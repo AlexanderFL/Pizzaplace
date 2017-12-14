@@ -49,8 +49,7 @@ void LoginUI::startUI() {
 				}
 				case MANAGER: {
 					ManagerUI managerUI;
-					managerUI.managerMenu();
-					//managerUI.showMainMenu();
+					managerUI.showMainMenu();
 					break;
 				}
 				case SALESMAN: {
@@ -60,7 +59,7 @@ void LoginUI::startUI() {
 				}
 				case KITCHEN: {
 					KitchenUI kitchenUI;
-					kitchenUI.kitchenMenu();
+					kitchenUI.showMainMenu();
 					break;
 				}
 				case DELIVERY: {
