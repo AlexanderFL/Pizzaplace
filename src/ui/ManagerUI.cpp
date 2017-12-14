@@ -47,7 +47,7 @@ void ManagerUI::showMainMenu() {
 void ManagerUI::showToppingsMenu() {
 	string input;
 	while (true) {
-		printMenu({ "Create Topping", "Delete Topping", "view Toppings", "Back" }, "Toppings Menu");
+		printMenu({ "Create Topping", "Delete Topping", "View Toppings", "Back" }, "Toppings Menu");
 		getInput(input);
 		clear();
 		if (input == "1") {
@@ -248,7 +248,7 @@ void ManagerUI::editTopping(int index)
 void ManagerUI::showLocationsMenu() {
 	string input;
 	while (true) {
-		printMenu({ "Add a loctation", "Delete a location", "see all locations", "Back" }, "Location Menu");
+		printMenu({ "Add a loctation", "Delete a location", "See all locations", "Back" }, "Location Menu");
 		getInput(input);
 		clear();
 		if (input == "1") {
