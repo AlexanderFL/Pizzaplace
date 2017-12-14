@@ -204,7 +204,7 @@ void SalesmanUI::selectCrust(Order& order, char& input)
 {
 	vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
 	printMenu(makeStringVector(crusts), "Select the Pizza Crust");
-	catchCharInput(input, crusts.size());
+	catchCharInput(input, crusts.size(), 1);
 
 	vector<Pizza> pizzas = order.getPizzas();
 	pizzas.at(_pizzaNumber).setCrust(crusts.at(convertToInt(input)));
