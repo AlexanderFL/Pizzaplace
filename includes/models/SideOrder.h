@@ -14,7 +14,7 @@ private:
 public:
 	// Constructors
 	SideOrder();
-	SideOrder(string name, int price);
+	SideOrder(const string& name, int price);
 
 	// Get functions
 	string getName() const;

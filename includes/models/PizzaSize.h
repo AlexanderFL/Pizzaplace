@@ -15,7 +15,7 @@ private:
 public:
 	// Constructors
 	PizzaSize();
-	PizzaSize(string name, double pricemod);
+	PizzaSize(const string& name, double pricemod);
 
 	// Get functions
 	string getName() const;
