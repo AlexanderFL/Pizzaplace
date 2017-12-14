@@ -33,8 +33,7 @@ void ManagerUI::showMainMenu() {
 			return;
 		}
 		else {
-			clear();
-			printMessage("Not a valid option.");
+			printMessage("Invalid input.");
 		}
 	}
 }
@@ -64,7 +63,7 @@ void ManagerUI::showToppingsMenu() {
 			break;
 		}
 		else {
-			printMessage("Not a valid option.");
+			printMessage("Invalid input.");
 		}
 	}
 }
@@ -75,17 +74,21 @@ void ManagerUI::showToppingCreationMenu() {
 	try {
 		string name;
 		getInput("Name", name);
+		//validating name
+		service.containsOnlyAlpha(name);
 		getInput("Price", input);
 		int price = service.convertStringToInt(input);
+		//validating price
+		service.validPrice(price);
 		service.addItem<Topping>(Topping(name, price));
 		clear();
 		printMessage("Topping was created.");
 	}
-	catch (InvalidString) {
+	catch (NumberInString) {
 		clear();
 		printMessage("Invalid name.");
 	}
-	catch (NumberInString) {
+	catch (InvalidString) {
 		clear();
 		printMessage("Invalid price.");
 	}
@@ -120,10 +123,14 @@ void ManagerUI::showToppingDeleteMenu() {
 				}
 				catch (out_of_range) {
 					clear();
-					printMessage("Not a valid option.");
+					printMessage("Invalid input.");
 				}
 			}
 		}
+	}
+	catch (InvalidString) {
+		clear();
+		printMessage("Invalid input");
 	}
 	catch (EmptyVector) {
 		clear();
@@ -135,30 +142,37 @@ void ManagerUI::showToppingViewMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<Topping> toppings = service.getItems<Topping>();
-			vector<string> names = service.getNames<Topping>();
-			names.push_back("Back");
-			printMenu(names, "Toppings");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index < names.size()) {
-				clear();
-				editTopping(index-1);
+			try {
+				vector<Topping> toppings = service.getItems<Topping>();
+				vector<string> names = service.getNames<Topping>();
+				names.push_back("Back");
+				printMenu(names, "Toppings");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+
+				if (index < names.size()) {
+					clear();
+					editTopping(index - 1);
+				}
+				else if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					clear();
+					printMessage("Invalid input.");
+				}
 			}
-			else if (index == names.size()) {
+			catch (InvalidString) {
 				clear();
-				break;
-			}
-			else {
-				clear();
-				printMessage("Not a valid option.");
+				printMessage("Invalid input.");
 			}
 		}
-	} 
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no toppings.");
 	}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no toppings.");
+		}
 }
 
 void ManagerUI::editTopping(int index)

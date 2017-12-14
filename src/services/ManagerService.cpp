@@ -116,12 +116,6 @@ void ManagerService::containsOnlyAlpha(string s)
 }
 
 /*
-*************************************************
-*****			PRIVATE FUNCTIONS			*****
-*************************************************
-*/
-
-/*
 		Checks if price is valid, a price is valid if it is
 		not a number below zero.
 */
