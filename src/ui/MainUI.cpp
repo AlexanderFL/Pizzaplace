@@ -38,7 +38,7 @@ void MainUI::startUI()
 		} 
 		else {
 			clear();
-			printMessage("Not a valid option.");
+			printMessage("Invalid input.");
 		}
 	}
 }

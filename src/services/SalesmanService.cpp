@@ -1,13 +1,11 @@
 #include "SalesmanService.h"
 
 
-SalesmanService::SalesmanService()
-{
+SalesmanService::SalesmanService(){
 	_repo = Data();
 }
 
-void SalesmanService::registerNewOrder(Order& order)
-{
+void SalesmanService::registerNewOrder(Order& order){
 	if (validateOrder(order)) {
 		assignID(order);
 		_repo.WriteToFile(order);
@@ -17,8 +15,7 @@ void SalesmanService::registerNewOrder(Order& order)
 	}
 }
 
-void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
-{
+void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder){
 	//validate
 	if (validateOrder(firstOrder) && validateOrder(secondOrder)) {
 		//grab all orders from file
@@ -40,8 +37,7 @@ void SalesmanService::appendToOrder(Order& firstOrder, Order& secondOrder)
 }
 
 // Appends a pizza to a order
-void SalesmanService::appendToOrder(Order& firstOrder, Pizza &pizza)
-{
+void SalesmanService::appendToOrder(Order& firstOrder, Pizza &pizza){
 	// Get the pizzas from a order
 	vector<Pizza> pizzaVector = firstOrder.getPizzas();
 	// Append the pizza given in parameter
@@ -51,32 +47,27 @@ void SalesmanService::appendToOrder(Order& firstOrder, Pizza &pizza)
 }
 
 // Appends sides to a order
-void SalesmanService::appendToOrder(Order& order, SideOrder &sideAppend)
-{
+void SalesmanService::appendToOrder(Order& order, SideOrder &sideAppend){
 	vector<SideOrder> sidesVector = order.getSides();
 	sidesVector.push_back(sideAppend);
 	order.setSides(sidesVector);
 }
 
-Pizza SalesmanService::getPizza()
-{
+Pizza SalesmanService::getPizza(){
 	return _pizza;
 }
 
-int SalesmanService::getPriceOfOrder(Order& order)
-{
+int SalesmanService::getPriceOfOrder(Order& order){
 	int price = calculateCost(order);
 	return price;
 }
 
-int SalesmanService::getOldPriceOfOrder(Order& order)
-{
+int SalesmanService::getOldPriceOfOrder(Order& order){
 	int price = calculateOldCost(order);
 	return price;
 }
 
-void SalesmanService::assignHomeAddress(Order& order, string address)
-{
+void SalesmanService::assignHomeAddress(Order& order, string address){
 	//address must contain at least one character and one number
 	//ex. of address: 'Menntavegur 1' or 'Skogarstigur 12'
 	//
@@ -86,8 +77,7 @@ void SalesmanService::assignHomeAddress(Order& order, string address)
 	if (address == "" && order.getDeliveryMethod() == PICKUP) {
 		order.setHomeAddress(address);
 	}
-	else
-	{
+	else{
 		for (int i = 0; i < address.length(); i++) {
 			if (isalpha(address[i]) && !containsCharacter) {
 				containsCharacter = true;
@@ -114,8 +104,7 @@ bool SalesmanService::validateOrder(Order order) {
 	return true;
 }
 
-void SalesmanService::validInput(const char& input, const int& max, const int& min) const
-{
+void SalesmanService::validInput(const char& input, const int& max, const int& min) const{
 	if (isalpha(input)) {
 		throw InvalidInput("Input cannot be a character");
 	}
@@ -146,8 +135,7 @@ void SalesmanService::setComments(Order& order, string comment){
 	order.setComment(comment);
 }
 
-SideOrder SalesmanService::getSideOrder()
-{
+SideOrder SalesmanService::getSideOrder(){
 	return _sides;
 }
 
@@ -186,7 +174,6 @@ vector<string> SalesmanService::getOfferNames(const Order& order) {
 			extras.erase(extras.begin());
 		}
 	}
-	
 	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
 		offernames.push_back(getSingleOfferName(temp.getPizzas().at(i)));
 	}
@@ -352,8 +339,6 @@ double SalesmanService::pizzaSimularity(const Pizza& left, const Pizza& right) {
 	return  top / bottom;
 }
 
-/*
-=======
 /*			Returns total cost for the order		*/
 int SalesmanService::calculateOldCost(const Order& order) {
 	int total = 0;
@@ -374,22 +359,28 @@ int SalesmanService::calculateOldCost(const Order& order) {
 int SalesmanService::calculateSimpleCost(const Pizza& pizza) {
 	int total = 0;
 	size_t numberOfToppingsOnPizza = pizza.getToppings().size();
+	// Add each topping to the price price
 	for (size_t j = 0; j < numberOfToppingsOnPizza; ++j) {
-		total += pizza.getToppings().at(j).getPrice(); // Add each topping to price
+		total += pizza.getToppings().at(j).getPrice(); 
 	}
-	total += pizza.getCrust().getPrice(); // Add type of crust to price
-	total *= pizza.getPizzaSize().getPriceMod(); // Multiply the pizza size mod to price
+	//Add each crust to the price
+	total += pizza.getCrust().getPrice(); 
+	// Multiply the pizza size mod to the price
+	total *= pizza.getPizzaSize().getPriceMod(); 
 	return total;
 }
 
 int SalesmanService::calculateOldCost(const Pizza& pizza) {
 	int total = 0;
 	size_t numberOfToppingsOnPizza = pizza.getToppings().size();
+	// Add each topping to the price
 	for (size_t j = 0; j < numberOfToppingsOnPizza; ++j) {
-		total += pizza.getToppings().at(j).getPrice(); // Add each topping to price
+		total += pizza.getToppings().at(j).getPrice();
 	}
-	total += pizza.getCrust().getPrice(); // Add type of crust to price
-	total *= pizza.getPizzaSize().getPriceMod(); // Multiply the pizza size mod to price
+	// Add type of crust to the price
+	total += pizza.getCrust().getPrice(); 
+	// Multiply the pizza size mod to the price
+	total *= pizza.getPizzaSize().getPriceMod(); 
 	return total;
 }
 

@@ -54,7 +54,7 @@ void DeliveryUI::allOrdersMenu() {
 				}
 				catch (out_of_range) {
 					clear();
-					printMessage("Invalid index.");
+					printMessage("Invalid input.");
 				}
 			}
 			catch (InvalidString) {

@@ -20,8 +20,8 @@ public:
 	void addCrust(PizzaCrust& crust);
 	void addSpecialOrder(string ordername, const Order& order);
 	void addDeliveryPlace(string place);
-	int getOrderTotalCost(const Order& order);
 	void addLocation(Location& location);
+	int getOrderTotalCost(const Order& order);
 	void replaceToppingInFile(const Topping& topping, int index);
 	//Order
 	void addOffer(Offer& offer);
