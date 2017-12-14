@@ -2,6 +2,7 @@
 
 #include "ManagerService.h"
 #include "CommonUI.h"
+#include "Canceled.h"
 
 using namespace std;
 
@@ -15,7 +16,6 @@ private:
 	void showToppingDeleteMenu();
 	void showToppingViewMenu();
 	void editTopping(int index);
-
 	//Locations
 	void showLocationsMenu();
 	void showLocationCreationMenu();
