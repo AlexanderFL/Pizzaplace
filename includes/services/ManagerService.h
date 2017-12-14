@@ -8,6 +8,7 @@
 #include "NumberInString.h"
 #include "InvalidString.h"
 #include "InvalidInt.h"
+#include "InvalidOffer.h"
 
 class ManagerService: public CommonService
 {
@@ -28,6 +29,8 @@ public:
 	//Validation
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
+	void validProcent(int p);
+	void validateOffer(const Offer& offer);
 private:
 	void validateString(const string& str);
 };

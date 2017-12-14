@@ -207,7 +207,7 @@ string SalesmanService::getSingleOfferName(const Pizza& pizza) {
 			}
 		}
 	}
-	if (index != -1) {
+	if (index != -1 && sim >= 0.75) {
 		Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
 		Pizza specials = pizza - extras;
 		if (!extras.getToppings().empty()) {
@@ -302,7 +302,7 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 			}
 		}
 	}
-	if (index == -1) {
+	if (index == -1 || sim < 75) {
 		//normal
 		return calculateSimpleCost(pizza);
 	}

@@ -139,6 +139,10 @@ void ManagerUI::showToppingDeleteMenu() {
 		clear();
 		printMessage("There are currently no toppings.");
 	}
+	catch (FailedOpenFile) {
+		clear();
+		printMessage("There are currently no toppings.");
+	}
 }
 
 void ManagerUI::showToppingViewMenu() {
@@ -173,6 +177,10 @@ void ManagerUI::showToppingViewMenu() {
 		}
 	}
 	catch (EmptyVector) {
+		clear();
+		printMessage("There are currently no toppings.");
+	}
+	catch (FailedOpenFile) {
 		clear();
 		printMessage("There are currently no toppings.");
 	}
@@ -329,6 +337,10 @@ void ManagerUI::showLocationDeleteMenu() {
 		clear();
 		printMessage("There are currently no locations available.");
 	}
+	catch (FailedOpenFile) {
+		clear();
+		printMessage("There are currently no locations available.");
+	}
 }
 
 void ManagerUI::showLocationViewMenu() {
@@ -350,6 +362,7 @@ void ManagerUI::showLocationViewMenu() {
 					break;
 				}
 				else {
+					clear();
 					printMessage("Not a valid option.");
 				}
 			}
@@ -360,6 +373,9 @@ void ManagerUI::showLocationViewMenu() {
 		}
 	}
 	catch (EmptyVector) {
+		printMessage("There are currently no locations available.");
+	}
+	catch (FailedOpenFile) {
 		printMessage("There are currently no locations available.");
 	}
 }
@@ -402,10 +418,7 @@ void ManagerUI::showSizeCreationMenu() {
 		getInput("Name", name);
 		//validating name
 		service.containsOnlyAlpha(name);
-		printArrow("%");
-		cout << endl;
-		printMessage("%");
-		getInput("Size", size);
+		getInput("Percentage for price increment", size);
 		int sizeInInt  = service.convertStringToInt(size);
 		//validating size
 		service.validPrice(sizeInInt);
@@ -466,6 +479,9 @@ void ManagerUI::showSizesDeleteMenu() {
 	catch (EmptyVector) {
 		printMessage("There are currently no sizes available.");
 	}
+	catch (FailedOpenFile) {
+		printMessage("There are currently no sizes available.");
+	}
 }
 
 void ManagerUI::showSizeViewMenu() {
@@ -499,6 +515,9 @@ void ManagerUI::showSizeViewMenu() {
 	}
 	catch (EmptyVector) {
 		clear();
+		printMessage("There are currently no sizes available.");
+	}
+	catch (FailedOpenFile) {
 		printMessage("There are currently no sizes available.");
 	}
 }
@@ -602,6 +621,10 @@ void ManagerUI::showCrustDeleteMenu() {
 		clear();
 		printMessage("There are currently no crusts available.");
 	}
+	catch (FailedOpenFile) {
+		clear();
+		printMessage("There are currently no crusts available.");
+	}
 }
 
 void ManagerUI::showCrustViewMenu() {
@@ -634,6 +657,10 @@ void ManagerUI::showCrustViewMenu() {
 		}
 	}
 	catch (EmptyVector) {
+		clear();
+		printMessage("There are currently no crusts available.");
+	}
+	catch (FailedOpenFile) {
 		clear();
 		printMessage("There are currently no crusts available.");
 	}
@@ -820,26 +847,25 @@ void ManagerUI::showOfferCreationMenu() {
 		getInput(input);
 		if (input == "1") {
 			getInput("Name", input);
-			//Validate name
 			offer.setName(input);
 			clear();
 		}
 		else if (input == "2") {
-			getInput("Price", input);
+			getInput("Procent Discount", input);
 			try {
 				int price = service.convertStringToInt(input);
-				//Validate price
-				service.validPrice(price);
-				offer.setPrice(price);
+				service.validProcent(price);
+				// 100 - x because 100% - 25% = 75% price
+				offer.setPrice(100 - price);
 				clear();
 			}
 			catch (InvalidString) {
 				clear();
-				printMessage("Invalid Price.");
+				printMessage("Invalid Price. (1-100)");
 			}
 			catch (InvalidPrice) {
 				clear();
-				printMessage("Invalid Price.");
+				printMessage("Invalid Price. (1-100)");
 			}
 		}
 		else if (input == "3") {
@@ -942,16 +968,21 @@ void ManagerUI::showOfferCreationMenu() {
 			}
 		}
 		else if (input == "7") {
-			clear();
-			Order order;
-			order.setPizzas(pizzas);
-			order.setSides(sides);
-			offer.setOrder(order);
-			//Validate stuff
-			service.addItem<Offer>(offer);
-			clear();
-			printMessage("Offer completed.");
-			return;
+			try {
+				Order order;
+				order.setPizzas(pizzas);
+				order.setSides(sides);
+				offer.setOrder(order);
+				service.validateOffer(offer);
+				service.addItem<Offer>(offer);
+				clear();
+				printMessage("Offer completed.");
+				return;
+			}
+			catch (InvalidOffer e) {
+				clear();
+				printMessage(e.getMessage());
+			}
 		}
 		else if (input == "8") {
 			clear();
@@ -1027,13 +1058,12 @@ void ManagerUI::showOfferDeleteMenu() {
 void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 	string input;
 	while (true) {
-		printMenu({ "Add Topping", "Remove Topping", "Set Crust", "Set Size", "Complete", "Cancel" }, "Pizza Creator");
+		printMenu({ "Add Topping", "Remove Topping", "Complete", "Cancel" }, "Pizza Creator");
 		getInput(input);
 		if (input == "1") {
 			clear();
 			try {
 				vector<string> names = service.getNames<Topping>();
-				names.push_back("Any Topping");
 				names.push_back("Back");
 				printMenu(names, "Toppings");
 				getInput(input);
@@ -1041,11 +1071,6 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 				if (index == names.size()) {
 					clear();
 					break;
-				}
-				else if (index == names.size() - 1) {
-					pizza.addToppings(Topping("Any Topping", 0));
-					clear();
-					printMessage("Topping added.");
 				}
 				else {
 					try {
@@ -1095,80 +1120,10 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 		}
 		else if (input == "3") {
 			clear();
-			try {
-				vector<string> names = service.getNames<PizzaCrust>();
-				names.push_back("Any Crust");
-				names.push_back("Back");
-				printMenu(names, "Pizza Crusts");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-				}
-				else if (index == names.size() - 1) {
-					pizza.setCrust(PizzaCrust("Any Crust", 0));
-					clear();
-					printMessage("Crust set.");
-				}
-				else {
-					try {
-						pizza.setCrust(service.getItem<PizzaCrust>(index - 1));
-						clear();
-						printMessage("Crust set.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Not a valid option.");
-					}
-				}
-			}
-			catch (EmptyVector) {
-				clear();
-				printMessage("No toppings available.");
-			}
-		}
-		else if (input == "4") {
-			clear();
-			try {
-				vector<string> names = service.getNames<PizzaSize>();
-				names.push_back("Any Size");
-				names.push_back("Back");
-				printMenu(names, "Pizza Sizes");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					//break?
-				}
-				else if (index == names.size() - 1) {
-					pizza.setPizzaSize(PizzaSize("Any Size", 0));
-					clear();
-					printMessage("Size set.");
-				}
-				else {
-					try {
-						pizza.setPizzaSize(service.getItem<PizzaSize>(index - 1));
-						clear();
-						printMessage("Size set.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Not a valid option.");
-					}
-				}
-			}
-			catch (EmptyVector) {
-				clear();
-				printMessage("No toppings available.");
-			}
-		}
-		else if (input == "5") {
-			//Validate stuff
-			clear();
 			printMessage("Pizza created.");
 			return;
 		}
-		else if (input == "6") {
+		else if (input == "4") {
 			throw Canceled();
 		}
 		else {
@@ -1180,59 +1135,66 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 
 void ManagerUI::showOrders() {
 	string input;
-	try {
-		while (true) { 
-				vector<Order> orders = service.getItems<Order>();
-				vector<string> names;
-				int orderCounter = orders.size();
-				for (size_t i = 0; i < orders.size(); ++i) {
-					names.push_back("Order " + to_string(orders.at(i).getID()));
-				}
-				names.push_back("Go back");
-				printMenu(names, "All orders");
-				string message = "Total orders: " + to_string(orderCounter);
-				printMessage(message);
-				//See more about an order
-				getInput(input);
-				int order = service.convertStringToInt(input) - 1;
-				if (order + 1 == names.size()) {
-					clear();
-					break;
-				}
-				//validating input of order
-				service.validPrice(order);
+	
+	while (true) {
+		try {
+			vector<Order> orders = service.getItems<Order>();
+			vector<string> names;
+			int orderCounter = orders.size();
+			for (size_t i = 0; i < orders.size(); ++i) {
+				names.push_back("Order " + to_string(orders.at(i).getID()));
+			}
+			names.push_back("Go back");
+			printMenu(names, "All orders");
+			string message = "Total orders: " + to_string(orderCounter);
+			printMessage(message);
+			//See more about an order
+			getInput(input);
+			int order = service.convertStringToInt(input) - 1;
+			if (order + 1 == names.size()) {
 				clear();
+				break;
+			}
+			clear();
+			while (true) {
 				showOrderInfo(orders.at(order));
 				cout << endl;
 				printMenu({ "Delete", "Go Back" }, "More info about order");
 				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
+				
+				if (input == "1") {
+					clear();
+					service.deleteItem<Order>(order);
+					printMessage("Order deleted");
+					break;
+				}
+				else if (input == "2") {
 					clear();
 					break;
 				}
-				if (input == "1") {
-					try {
-						clear();
-						service.deleteItem<Order>(order);
-						printMessage("Order deleted");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Invalid input.");
-					}
+				else {
+					clear();
+					printMessage("Invalid input.");
+				}
 			}
 		}
-	}
-	catch (out_of_range) {
-		clear();
-		printMessage("Invalid input.");
-	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input");
-	}
-	catch (EmptyVector) {
-		printMessage("There are currently no orders.");
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no orders.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("Failed to open file.");
+			break;
+		}
 	}
 }
