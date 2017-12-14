@@ -151,6 +151,70 @@ SideOrder SalesmanService::getSideOrder()
 	return _sides;
 }
 
+vector<string> SalesmanService::getOfferNames(const Order& order) {
+	vector<string> offernames;
+	vector<Offer> comps = getCompOffers();
+	vector<Offer> extras;
+	Order temp = order;
+	while (comps.size() > 0) {
+		if (comps.at(0).getOrder() == order) {
+			offernames.push_back(comps.at(0).getName());
+			return offernames;
+		}
+		else if (comps.at(0).getOrder() <= order) {
+			extras.push_back(comps.at(0));
+		}
+		comps.erase(comps.begin());
+	}
+	while (extras.size() > 0) {
+		bool unique = true;
+		for (size_t i = 1; i < extras.size(); ++i) {
+			if (orderSimularity(extras.at(0).getOrder(), extras.at(i).getOrder()) != 0) {
+				if (orderSimularity(extras.at(0).getOrder(), order) < orderSimularity(extras.at(i).getOrder(), order)) {
+					extras.erase(extras.begin());
+				}
+				else {
+					extras.erase(extras.begin() + i);
+				}
+				unique = false;
+				break;
+			}
+		}
+		if (unique) {
+			offernames.push_back(extras.at(0).getName());
+			temp = temp - extras.at(0).getOrder();
+			extras.erase(extras.begin());
+		}
+	}
+	vector<Offer> singles = getSinglePizzaOffers();
+	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
+		Pizza pizza = temp.getPizzas().at(i);
+		int index = -1;
+		double sim = 0;
+		for (size_t i = 0; i < singles.size(); ++i) {
+			Pizza comp = singles.at(i).getOrder().getPizzas().at(0) * pizza;
+			if (comp.getToppings().size() >= singles.at(i).getOrder().getPizzas().at(0).getToppings().size()) {
+				double temp = pizzaSimularity(singles.at(i).getOrder().getPizzas().at(0), pizza);
+				if (sim < temp) {
+					sim = temp;
+					index = i;
+				}
+			}
+		}
+		if (index != -1) {
+			Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
+			Pizza specials = pizza - extras;
+			if (extras.getToppings().empty()) {
+				offernames.push_back(singles.at(index).getName() + "+");
+			}
+			else {
+				offernames.push_back(singles.at(index).getName());
+			}
+		}
+	}
+	return offernames;
+}
+
 /*
 
 	PRIVATE FUNCTIONS
@@ -195,19 +259,17 @@ int SalesmanService::calculateCost(const Order& order) {
 		}
 		if (unique) {
 			ext.push_back(tempExt.at(0));
+			int exttotal = 0;
+			for (size_t i = 0; i < tempExt.at(0).getOrder().getPizzas().size(); ++i) {
+				exttotal += calculateSimpleCost(tempExt.at(0).getOrder().getPizzas().at(i));
+			}
+			for (size_t i = 0; i < tempExt.at(0).getOrder().getSides().size(); ++i) {
+				exttotal += tempExt.at(0).getOrder().getSides().at(i).getPrice();
+			}
+			total += exttotal * (tempExt.at(0).getPrice() / 100.0);
+			temp = temp - tempExt.at(0).getOrder();
 			tempExt.erase(tempExt.begin());
 		}
-	}
-	for (size_t k = 0; k < ext.size(); ++k) {
-		int exttotal = 0;
-		for (size_t i = 0; i < ext.at(k).getOrder().getPizzas().size(); ++i) {
-			exttotal += calculateSimpleCost(ext.at(k).getOrder().getPizzas().at(i));
-		}
-		for (size_t i = 0; i < ext.at(k).getOrder().getSides().size(); ++i) {
-			exttotal += ext.at(k).getOrder().getSides().at(i).getPrice();
-		}
-		total += exttotal * (ext.at(k).getPrice() / 100.0);
-		temp = temp - ext.at(k).getOrder();
 	}
 	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
 		total += calculateCost(temp.getPizzas().at(i));
