@@ -1,5 +1,4 @@
 #pragma once
-
 #include "ManagerService.h"
 #include "CommonUI.h"
 #include "Canceled.h"
@@ -42,11 +41,6 @@ private:
 	void showOfferViewMenu();
 	void showOfferDeleteMenu();
 	void showCreatePizzaMenu(Pizza& pizza);
-	void pizzaOption();
-	void toppingOption();
-	void priceOption();
-	void locationOption();
-	void sideOrderOption();
 	//Orders
 	void showOrders();
 public:
