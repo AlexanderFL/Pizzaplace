@@ -187,13 +187,10 @@ void SalesmanUI::selectToppings(Pizza & pizza, char& input)
 	while (true)
 	{
 		printMenu(makeStringVector(toppings), "Select the Toppings");
-		try
-		{
+		//try
+		//{
 			getInput("Please enter the number of toppings", input);
-		}
-		catch (InvalidInput) {
-
-		}
+		//}
 		int numberOfToppingsInt = (int)input - 48;
 		for (int i = 0; i < numberOfToppingsInt; i++) {
 			string inputString = "Select topping nr " + to_string(i+1);

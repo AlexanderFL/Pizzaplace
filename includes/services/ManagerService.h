@@ -27,7 +27,7 @@ public:
 	void addOffer(Offer& offer);
 	//Validation
 	void containsOnlyAlpha(string s);
-private:
 	void validPrice(int p);
+private:
 	void validateString(const string& str);
 };

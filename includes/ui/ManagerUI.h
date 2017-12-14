@@ -16,7 +16,6 @@ private:
 	void showToppingDeleteMenu();
 	void showToppingViewMenu();
 	void editTopping(int index);
-
 	//Locations
 	void showLocationsMenu();
 	void showLocationCreationMenu();
