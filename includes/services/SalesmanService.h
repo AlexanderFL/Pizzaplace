@@ -22,6 +22,7 @@ public:
 	void appendToOrder(Order& firstOrder, Pizza& pizza);
 	void appendToOrder(Order& order, SideOrder& sideAppend);
 	int getPriceOfOrder(Order& order);
+	int getOldPriceOfOrder(Order& order);
 	void assignHomeAddress(Order& order, string address);
 	void setOrderToDelivery(Order& order);
 	void setOrderToPickUp(Order& order);
@@ -37,8 +38,14 @@ public:
 private:
 	int calculateCost(const Order& order);
 	int calculateCost(const Pizza& pizza);
+	int calculateOldCost(const Order& order);
+	int calculateOldCost(const Pizza& pizza);
 	void overrideOrder(int index, Order edit);
 	void assignID(Order& order);
+	vector<Offer> getSinglePizzaOffers();
+	vector<Offer> getCompOffers();
+	double orderSimularity(const Order& left, const Order& right);
+	double pizzaSimularity(const Pizza& left, const Pizza& right);
 };
 
 template<typename T>

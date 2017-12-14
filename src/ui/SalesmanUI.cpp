@@ -108,6 +108,7 @@ void SalesmanUI::pickFromMenu(Order& order, char& input) {
 			}
 		}
 		cout << "TOTAL: " << service.getPriceOfOrder(offers.at(i).getOrder()) << " kr.- " << endl;
+		cout << "TOTAL: " << offers.at(i).getPrice() << " kr.- " << endl;
 	}
 	cout << endl;
 	cout << "Which order would you like?\nInput order number: ";
@@ -189,6 +190,9 @@ void SalesmanUI::selectToppings(Pizza & pizza, char& input)
 		try
 		{
 			getInput("Please enter the number of toppings", input);
+		}
+		catch (InvalidInput) {
+
 		}
 		int numberOfToppingsInt = (int)input - 48;
 		for (int i = 0; i < numberOfToppingsInt; i++) {
@@ -326,6 +330,7 @@ void SalesmanUI::showTotalOrder(Order & order)
 			cout << endl;
 			cout << "---------- TOTAL ----------" << endl;
 			cout << "\t   " << service.getPriceOfOrder(order) << "kr.-" << endl;
+			cout << "\t   " << service.getOldPriceOfOrder(order) << "kr.-" << endl;
 			cout << "---------------------------" << endl;
 		}
 	}
