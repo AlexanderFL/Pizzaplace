@@ -191,23 +191,22 @@ Pizza operator + (const Pizza& left, const Pizza& right) {
 Returns a pizza with the compenation for the toppings of two Pizzas
 */
 Pizza operator - (const Pizza& left, const Pizza& right) {
-	Pizza pizza = right;
-	Pizza temp = left;
-	if (left.getToppings().size() > right.getToppings().size()) {
-		Pizza pizza = left;
-		Pizza temp = right;
-	}
-	while (temp.toppings.empty()) {
+	Pizza pizza = left;
+	Pizza temp = right;
+	bool found = false;
+	while (!temp.toppings.empty()) {
 		for (size_t i = 0; i < pizza.toppings.size(); ++i) {
 			if (pizza.toppings.at(i) == temp.toppings.at(0)) {
 				pizza.toppings.erase(pizza.toppings.begin() + i);
 				temp.toppings.erase(temp.toppings.begin());
+				found = true;
 				break;
 			}
 		}
-		if (!temp.toppings.empty()) {
+		if (!found) {
 			temp.toppings.erase(temp.toppings.begin());
 		}
+		found = false;
 	}
 	return pizza;
 }

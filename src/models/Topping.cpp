@@ -63,5 +63,5 @@ ostream& operator<< (ostream& out, const Topping& topping)
 }
 
 bool operator == (const Topping& left, const Topping& right) {
-	return left.name == right.name && left.price == right.price;
+	return left.name == right.name;
 }

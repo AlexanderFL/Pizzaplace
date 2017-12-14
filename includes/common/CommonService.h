@@ -71,4 +71,4 @@ template<class T> void CommonService::validateVectorNotEmpty(const vector<T>& it
 	if (items.size() == 0) {
 		throw EmptyVector();
 	}
-}
+ }
