@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\exceptions\Canceled.h" />
     <ClInclude Include="includes\common\CommonService.h" />
     <ClInclude Include="includes\services\DeliveryService.h" />
     <ClInclude Include="includes\exceptions\EmptyVector.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="includes\exceptions\InvalidInt.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\exceptions\Canceled.cpp" />
     <ClCompile Include="src\common\CommonService.cpp" />
     <ClCompile Include="src\exceptions\InvalidInt.cpp" />
     <ClCompile Include="src\exceptions\InvalidString.cpp" />

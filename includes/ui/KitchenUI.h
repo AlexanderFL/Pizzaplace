@@ -9,7 +9,6 @@ private:
 	KitchenService service;
 public:
 	KitchenUI();
-	void kitchenMenu();
 	void showMainMenu();
 	string showPizzaInfo(const Pizza& pizza) const;
 	string showPizzaInfoShort(const Pizza& pizza) const;
