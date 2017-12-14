@@ -29,7 +29,7 @@ public:
 	void setOrderAsPaid(Order& order);
 	void setComments(Order& order, string comment);
 	bool validateOrder(Order order);
-	void validInput(const char& input, const int& max, const int& min=0) const;
+	void validInput(const string& input, const int& max, const int& min=1) const;
 	SideOrder getSideOrder();
 	Pizza getPizza();
 	vector<string> getOfferNames(const Order& order);
