@@ -47,7 +47,7 @@ void ManagerUI::showMainMenu() {
 void ManagerUI::showToppingsMenu() {
 	string input;
 	while (true) {
-		printMenu({ "Create Topping", "Delete Topping", "view Toppings", "Back" }, "Toppings Menu");
+		printMenu({ "Create Topping", "Delete Topping", "View Toppings", "Back" }, "Toppings Menu");
 		getInput(input);
 		clear();
 		if (input == "1") {
