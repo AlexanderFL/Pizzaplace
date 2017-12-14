@@ -48,7 +48,6 @@ private:
 	void locationOption();
 	void sideOrderOption();
 	//Orders
-	void showOrdersMenu();
 	void showOrders();
 public:
 	ManagerUI();
