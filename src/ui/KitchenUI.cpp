@@ -85,10 +85,6 @@ void KitchenUI::showMainMenu() {
 							}
 					}
 				}
-				catch (NumberInString) {
-					clear();
-					printMessage("Invalid input.");
-				}
 				catch (InvalidString) {
 					clear();
 					printMessage("Invalid input.");

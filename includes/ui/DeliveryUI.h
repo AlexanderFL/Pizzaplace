@@ -15,5 +15,6 @@ public:
 	void deliveryMenu();
 	void allOrdersMenu();
 	void ordersMenu();
+	void orderMenu(int index, vector<Order>& orders, int loc);
 };
 

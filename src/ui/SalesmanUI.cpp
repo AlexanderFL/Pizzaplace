@@ -144,18 +144,40 @@ void SalesmanUI::selectCrust(Pizza& pizza, char& input)
 {
 	vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
 	printMenu(makeStringVector(crusts), "Select the Pizza Crust");
-	getInput("Input", input);
-	pizza.setCrust(crusts.at((int)input - 49));
-	clear();
+	while (true) {
+		try
+		{
+			getInput("Input", input);
+			service.validInput(input, crusts);
+			pizza.setCrust(crusts.at((int)input - 49));
+			clear();
+			break;
+		}
+		catch (InvalidInput ex) {
+			printMessage(ex.getMessage());
+		}
+	}
 }
 
 void SalesmanUI::selectSize(Pizza & pizza, char& input)
 {
 	vector<PizzaSize> sizes = service.getItems<PizzaSize>();
 	printMenu(makeStringVectorFromPizzaSize(sizes), "Select the Pizza Size");
-	getInput("Input", input);
-	pizza.setPizzaSize(sizes.at((int)input - 49));
-	clear();
+	while (true)
+	{
+		try 
+		{
+			getInput("Input", input);
+			pizza.setPizzaSize(sizes.at((int)input - 49));
+			service.validInput(input, sizes);
+			clear();
+			break;
+		}
+		catch (InvalidInput ex)
+		{
+			printMessage(ex.getMessage());
+		}
+	}
 }
 
 void SalesmanUI::selectToppings(Pizza & pizza, char& input)
@@ -164,15 +186,26 @@ void SalesmanUI::selectToppings(Pizza & pizza, char& input)
 	while (true)
 	{
 		printMenu(makeStringVector(toppings), "Select the Toppings");
-		getInput("Please enter the number of toppings", input);
+		try
+		{
+			getInput("Please enter the number of toppings", input);
+		}
 		int numberOfToppingsInt = (int)input - 48;
 		for (int i = 0; i < numberOfToppingsInt; i++) {
 			string inputString = "Select topping nr " + to_string(i+1);
-			getInput(inputString, input);
-			if ((int)input - 48 == (toppings.size() + 1)) {
-				break;
+			// Keeps asking the user for the next topping if he enters a invalid input
+			while (true)
+			{
+				try
+				{
+					getInput(inputString, input);
+					pizza.addToppings(toppings.at((int)input - 49));
+					break;
+				}
+				catch (InvalidInput ex) {
+					printMessage(ex.getMessage());
+				}
 			}
-			pizza.addToppings(toppings.at((int)input - 49));
 		}
 		break;
 	}
