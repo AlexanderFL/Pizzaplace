@@ -16,12 +16,10 @@ private:
 	PizzaSize size;
 	status phase;
 	size_t id;
-	string name;
-	int price;
 public:
 	// Constructors
 	Pizza();
-	Pizza(string name, vector<Topping> toppings, int price);
+	Pizza(string name, vector<Topping> toppings);
 
 	// Get functions
 	vector<Topping> getToppings() const;

@@ -32,7 +32,7 @@ public:
 	void validInput(const char& input, const int& max, const int& min=0) const;
 	SideOrder getSideOrder();
 	Pizza getPizza();
-
+	vector<string> getOfferNames(const Order& order);
 private:
 	int calculateCost(const Order& order);
 	int calculateCost(const Pizza& pizza);
