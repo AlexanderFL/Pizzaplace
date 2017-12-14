@@ -15,6 +15,8 @@ private:
 	void showToppingCreationMenu();
 	void showToppingDeleteMenu();
 	void showToppingViewMenu();
+	void editTopping(vector<Topping> toppings, int index);
+
 	//Locations
 	void showLocationsMenu();
 	void showLocationCreationMenu();
