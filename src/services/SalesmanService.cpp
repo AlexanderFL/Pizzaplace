@@ -199,10 +199,9 @@ int SalesmanService::calculateCost(const Order& order) {
 		}
 	}
 	for (size_t k = 0; k < ext.size(); ++k) {
-		//total += ext.at(i).getPrice();
 		int exttotal = 0;
 		for (size_t i = 0; i < ext.at(k).getOrder().getPizzas().size(); ++i) {
-			exttotal += calculateSimpleCost(ext.at(k).getOrder().getPizzas().at(i);
+			exttotal += calculateSimpleCost(ext.at(k).getOrder().getPizzas().at(i));
 		}
 		for (size_t i = 0; i < ext.at(k).getOrder().getSides().size(); ++i) {
 			exttotal += ext.at(k).getOrder().getSides().at(i).getPrice();
@@ -239,6 +238,8 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 		return calculateSimpleCost(pizza);
 	}
 	else {
+		Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
+		Pizza specials = pizza - extras;
 		total += calculateSimpleCost(pizza);
 		total *= (singles.at(index).getPrice() / 100.0);
 		for (size_t i = 0; i < extras.getToppings().size(); ++i) {
