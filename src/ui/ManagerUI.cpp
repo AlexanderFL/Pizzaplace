@@ -103,35 +103,37 @@ void ManagerUI::showToppingDeleteMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<Topping> toppings = service.getItems<Topping>();
-			vector<string> names;
-			for (size_t i = 0; i < toppings.size(); ++i) {
-				names.push_back(toppings.at(i).getName());
+			try {
+				vector<Topping> toppings = service.getItems<Topping>();
+				vector<string> names;
+				for (size_t i = 0; i < toppings.size(); ++i) {
+					names.push_back(toppings.at(i).getName());
+				}
+				names.push_back("Back");
+				printMenu(names, "Toppings");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					try {
+						service.deleteItem<Topping>(index - 1);
+						clear();
+						printMessage("Topping deleted.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Invalid input.");
+					}
+				}
 			}
-			names.push_back("Back");
-			printMenu(names, "Toppings");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
+			catch (InvalidString) {
 				clear();
-				break;
-			}
-			else {
-				try {
-					service.deleteItem<Topping>(index - 1);
-					clear();
-					printMessage("Topping deleted.");
-				}
-				catch (out_of_range) {
-					clear();
-					printMessage("Invalid input.");
-				}
+				printMessage("Invalid input");
 			}
 		}
-	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input");
 	}
 	catch (EmptyVector) {
 		clear();
@@ -170,10 +172,10 @@ void ManagerUI::showToppingViewMenu() {
 			}
 		}
 	}
-		catch (EmptyVector) {
-			clear();
-			printMessage("There are currently no toppings.");
-		}
+	catch (EmptyVector) {
+		clear();
+		printMessage("There are currently no toppings.");
+	}
 }
 
 void ManagerUI::editTopping(int index)
@@ -294,33 +296,35 @@ void ManagerUI::showLocationDeleteMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<Location> locations = service.getItems<Location>();
-			vector<string> names = service.getNames<Location>();
-			names.push_back("Back");
-			printMenu(names, "Deleting a location");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
-				clear();
-				break;
+			try {
+				vector<Location> locations = service.getItems<Location>();
+				vector<string> names = service.getNames<Location>();
+				names.push_back("Back");
+				printMenu(names, "Deleting a location");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					try {
+						clear();
+						service.deleteItem<Location>(index - 1);
+						printMessage("Location deleted.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Invalid input.");
+					}
+				}
 			}
-			else {
-				try {
-					clear();
-					service.deleteItem<Location>(index - 1);
-					printMessage("Location deleted.");
-				}
-				catch (out_of_range) {
-					clear();
-					printMessage("Invalid input.");
-				}
+			catch (InvalidString) {
+				clear();
+				printMessage("Invalid input.");
 			}
 		}
 	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input.");
-		}
 	catch (EmptyVector) {
 		clear();
 		printMessage("There are currently no locations available.");
@@ -427,34 +431,37 @@ void ManagerUI::showSizesDeleteMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<PizzaSize> sizes = service.getItems<PizzaSize>();
-			vector<string> names;
-			for (size_t i = 0; i < sizes.size(); ++i) {
-				names.push_back(sizes.at(i).getName() + " " + to_string(sizes.at(i).getPriceMod()));
-			}
-			names.push_back("Back");
-			printMenu(names, "Deleting a size");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
-				break;
-			}
-			else {
-				try {
-					clear();
-					service.deleteItem<PizzaSize>(index - 1);
-					printMessage("Size deleted.");
+			try {
+				vector<PizzaSize> sizes = service.getItems<PizzaSize>();
+				vector<string> names;
+				for (size_t i = 0; i < sizes.size(); ++i) {
+					names.push_back(sizes.at(i).getName() + " " + to_string(sizes.at(i).getPriceMod()));
 				}
-				catch (out_of_range) {
+				names.push_back("Back");
+				printMenu(names, "Deleting a size");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
 					clear();
-					printMessage("Invalid input.");
+					break;
 				}
+				else {
+					try {
+						clear();
+						service.deleteItem<PizzaSize>(index - 1);
+						printMessage("Size deleted.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Invalid input.");
+					}
+				}
+			}
+			catch (InvalidString) {
+				clear();
+				printMessage("Invalid input");
 			}
 		}
-	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input");
 	}
 	catch (EmptyVector) {
 		printMessage("There are currently no sizes available.");
@@ -465,26 +472,30 @@ void ManagerUI::showSizeViewMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<PizzaSize> sizes = service.getItems<PizzaSize>();
-			vector<string> names;
-			for (size_t i = 0; i < sizes.size(); ++i) {
-				names.push_back(sizes.at(i).getName() + " " + to_string(sizes.at(i).getPriceMod()));
+			try {
+				vector<PizzaSize> sizes = service.getItems<PizzaSize>();
+				vector<string> names;
+				for (size_t i = 0; i < sizes.size(); ++i) {
+					names.push_back(sizes.at(i).getName() + " " + to_string(sizes.at(i).getPriceMod()));
+				}
+				names.push_back("Back");
+				printMenu(names, "Pizza sizes");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					clear();
+					printMessage("Invalid input.");
+				}
 			}
-			names.push_back("Back");
-			printMenu(names, "Pizza sizes");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
-				break;
-			}
-			else {
-				printMessage("Invalid input.");
+			catch (InvalidString) {
+				clear();
+				printMessage("Invalid input");
 			}
 		}
-	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input");
 	}
 	catch (EmptyVector) {
 		clear();
@@ -554,36 +565,38 @@ void ManagerUI::showCrustCreationMenu() {
 void ManagerUI::showCrustDeleteMenu() {
 	string input;
 	try {
-		while(true){
-		vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
-		vector<string> names;
-		for (size_t i = 0; i < crusts.size(); ++i) {
-			names.push_back(crusts.at(i).getName() + " " + to_string(crusts.at(i).getPrice()));
-		}
-		names.push_back("Back");
-		printMenu(names, "Deleting pizza crust");
-		getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
+		while (true) {
+			try {
+				vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
+				vector<string> names;
+				for (size_t i = 0; i < crusts.size(); ++i) {
+					names.push_back(crusts.at(i).getName() + " " + to_string(crusts.at(i).getPrice()));
+				}
+				names.push_back("Back");
+				printMenu(names, "Deleting pizza crust");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					try {
+						clear();
+						service.deleteItem<PizzaCrust>(index - 1);
+						printMessage("Crust deleted.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Invalid input.");
+					}
+				}
+			}
+			catch (InvalidString) {
 				clear();
-				break;
-			}
-			else {
-				try {
-					clear();
-					service.deleteItem<PizzaCrust>(index - 1);
-					printMessage("Crust deleted.");
-				}
-				catch (out_of_range) {
-					clear();
-					printMessage("Invalid input.");
-				}
+				printMessage("Invalid input");
 			}
 		}
-	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input");
 	}
 	catch (EmptyVector) {
 		clear();
@@ -595,28 +608,30 @@ void ManagerUI::showCrustViewMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
-			vector<string> names;
-			for (size_t i = 0; i < crusts.size(); ++i) {
-				names.push_back(crusts.at(i).getName() + " " + to_string(crusts.at(i).getPrice()));
+			try {
+				vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
+				vector<string> names;
+				for (size_t i = 0; i < crusts.size(); ++i) {
+					names.push_back(crusts.at(i).getName() + " " + to_string(crusts.at(i).getPrice()));
+				}
+				names.push_back("Back");
+				printMenu(names, "Pizza crusts");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					clear();
+					printMessage("Invalid input");
+				}
 			}
-			names.push_back("Back");
-			printMenu(names, "Pizza crusts");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
-				clear();
-				break;
-			}
-			else {
+			catch (InvalidString) {
 				clear();
 				printMessage("Invalid input");
 			}
 		}
-	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input");
 	}
 	catch (EmptyVector) {
 		clear();
@@ -646,6 +661,7 @@ void ManagerUI::showSidesMenu() {
 			showSidesViewMenu();
 		}
 		else if (input == "4") {
+			clear();
 			break;
 		}
 		else {
@@ -686,35 +702,37 @@ void ManagerUI::showSidesDeleteMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<SideOrder> sides = service.getItems<SideOrder>();
-			vector<string> names;
-			for (size_t i = 0; i < sides.size(); ++i) {
-				names.push_back(sides.at(i).getName() + " " + to_string(sides.at(i).getPrice()));
+			try {
+				vector<SideOrder> sides = service.getItems<SideOrder>();
+				vector<string> names;
+				for (size_t i = 0; i < sides.size(); ++i) {
+					names.push_back(sides.at(i).getName() + " " + to_string(sides.at(i).getPrice()));
+				}
+				names.push_back("Back");
+				printMenu(names, "Sides");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					try {
+						clear();
+						service.deleteItem<SideOrder>(index - 1);
+						printMessage("Side deleted.");
+					}
+					catch (out_of_range) {
+						clear();
+						printMessage("Invalid input.");
+					}
+				}
 			}
-			names.push_back("Back");
-			printMenu(names, "Sides");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
+			catch (InvalidString) {
 				clear();
-				break;
-			}
-			else {
-				try {
-					clear();
-					service.deleteItem<SideOrder>(index - 1);
-					printMessage("Side deleted.");
-				}
-				catch (out_of_range) {
-					clear();
-					printMessage("Invalid input.");
-				}
+				printMessage("Invalid input.");
 			}
 		}
-	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input.");
 	}
 	catch (EmptyVector) {
 		printMessage("There are currently no sides available.");
@@ -725,29 +743,33 @@ void ManagerUI::showSidesViewMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<SideOrder> sides = service.getItems<SideOrder>();
-			vector<string> names;
-			for (size_t i = 0; i < sides.size(); ++i) {
-				names.push_back(sides.at(i).getName() + " " + to_string(sides.at(i).getPrice()));
+			try {
+				vector<SideOrder> sides = service.getItems<SideOrder>();
+				vector<string> names;
+				for (size_t i = 0; i < sides.size(); ++i) {
+					names.push_back(sides.at(i).getName() + " " + to_string(sides.at(i).getPrice()));
+				}
+				names.push_back("Back");
+				printMenu(names, "Sides");
+				getInput(input);
+				int index = service.convertStringToInt(input);
+				if (index == names.size()) {
+					clear();
+					break;
+				}
+				else {
+					clear();
+					printMessage("Invalid input.");
+				}
 			}
-			names.push_back("Back");
-			printMenu(names, "Sides");
-			getInput(input);
-			int index = service.convertStringToInt(input);
-			if (index == names.size()) {
+			catch (InvalidString) {
 				clear();
-				break;
-			}
-			else {
 				printMessage("Invalid input.");
 			}
 		}
 	}
-	catch (InvalidString) {
-		clear();
-		printMessage("Invalid input.");
-	}
 	catch (EmptyVector) {
+		clear();
 		printMessage("There are currently no sides available.");
 	}
 }
