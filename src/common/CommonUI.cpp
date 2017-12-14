@@ -1,4 +1,5 @@
 #include "CommonUI.h"
+#include <iomanip> //setw
 #include <stdlib.h>
 
 void CommonUI::clear() const {
@@ -53,8 +54,8 @@ void CommonUI::getInput(const string& text, string& str) const {
 void CommonUI::getInput(const string& text, char & input) const
 {
 	printArrow(text);
-	cin >> input;
-	cin.ignore();
+	input = _getwche();
+	cout << endl;
 }
 
 //Private functions

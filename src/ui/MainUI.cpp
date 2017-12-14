@@ -7,6 +7,7 @@
 void MainUI::startUI()
 {
 	string input;
+	clear();
 	while (true)
 	{
 		printMenu({ "Manager", "Salesman", "Kitchen", "Delivery", "Exit"}, "Main Menu");

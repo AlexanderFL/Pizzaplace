@@ -17,23 +17,25 @@ public:
 	void salesmanMenu();
 	void makeNewOrder();
 private:
-	void makeYourOwnMenu(Order& order, char& input);
+	void makeYourOwnMenu(Order& order, string& input);
 
-	void selectLocation(Order& order, char& input);
-	void newOrderStart(Order& order, bool& pizzaFromMenu, char& input);
-	void pickFromMenu(Order& order, char& input);
-	void selectCrust(Order& order, char& input);
-	void selectSize(Order& order, char& input);
-	void selectToppings(Order& order, char& input);
-	void selectSides(Order& order, char& input);
+	void selectLocation(Order& order, string& input);
+	void newOrderStart(Order& order, bool& pizzaFromMenu, string& input);
+	void pickFromMenu(Order& order, string& input);
+	void selectCrust(Order& order, string& input);
+	void selectSize(Order& order, string& input);
+	void selectToppings(Order& order, string& input);
+	void selectSides(Order& order, string& input);
 	void addComment(Order& order);
-	void selectDeliveryMethod(Order& order, char& input);
-	bool addAnotherOrder(char& input);
+	void selectDeliveryMethod(Order& order, string& input);
+	bool addAnotherOrder(string& input);
 	void showTotalOrder(Order& order);
+	void finishOrder(Order& order);
 	
-	void catchCharInput(char& input, const int& max, const int& min=0, const std::string& msg="Input");
+	void catchStringInput(string& input, const int& max, const int& min=1, const std::string& msg="Input");
 	Pizza getCurrentPizza(Order& order);
-	int convertToInt(char& input);
+	int convertToInt(string& input);
+
 
 	vector<string> makeStringVectorFromPizzaSize(vector<PizzaSize> pizzaSizeVector);
 	template<typename T>

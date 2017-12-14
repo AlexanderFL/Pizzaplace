@@ -10,29 +10,7 @@ SalesmanUI::SalesmanUI()
 }
 
 void SalesmanUI::salesmanMenu() {
-	string option;
-	char input;
-	while (true) {
-		printMenu({ "Register an order", "Go back" });
-		std::cout << endl;
-		cout << "Press 'q' to quit.\nWhat would you like to do? ";
-
-		cin >> input;
-		cin.ignore();
-
-		system("CLS");
-
-		switch (input) {
-		case '1':
-			makeNewOrder();
-			break;
-		case '2':
-			return;
-		case 'q':
-		case 'Q':
-			exit(1);
-		}
-	}
+	makeNewOrder();
 }
 
 //Let the user pick from menu
@@ -41,7 +19,7 @@ void SalesmanUI::makeNewOrder()
 	Order order;
 	SalesmanService service;
 	bool pizzaFromMenu = false;
-	char input;
+	string input;
 	int nrOfOrder = 1;
 	
 	selectLocation(order, input);
@@ -56,39 +34,18 @@ void SalesmanUI::makeNewOrder()
 			if (!pizzaFromMenu) {
 
 				makeYourOwnMenu(order, input);
-
-				//selectCrust(pizza, input);
-				//selectSize(pizza, input);
-				//selectToppings(pizza, input);
-				
-				// Append the pizza to the order
-				//service.appendToOrder(order, pizza);
-			}
-			// Ask user if he wants any sides (can have multiple sides)
-			// selectSides(order, input);
-			// Asks the user if he wants to add a comment
-			// addComment(order);
-			// Ask for delivery method
-			// selectDeliveryMethod(order, input);
-			// Asks the user if he wants to add another order
-			if (!addAnotherOrder(input)) {
-				showTotalOrder(order);
-				system("pause");
-				service.registerNewOrder(order);
 				break;
 			}
-			system("CLS");
-			nrOfOrder++;
 		}
 		catch (FailedOpenFile) {
 			cout << "Failed to open a critical file...";
 			break;
 		}
 	}
-	system("CLS");
+	clear();
 }
 
-void SalesmanUI::pickFromMenu(Order& order, char& input) {
+void SalesmanUI::pickFromMenu(Order& order, string& input) {
 	system("CLS");
 	vector <Offer> offers = service.getItems<Offer>();
 	cout <<"\n\t\tPIZZA MENU!" << endl;
@@ -116,66 +73,81 @@ void SalesmanUI::pickFromMenu(Order& order, char& input) {
 	cout << endl;
 	cout << "Which order would you like?\nInput order number: ";
 	cin >> input;
-	int inputInInt = (int)input - 49;
+	int inputInInt = convertToInt(input);
 	
 	order = offers.at(inputInInt).getOrder();
 }
 
-void SalesmanUI::makeYourOwnMenu(Order& order, char& input)
+void SalesmanUI::makeYourOwnMenu(Order& order, string& input)
 {
 	Pizza newPizza;
 	vector<Pizza> allOrderPizzas = order.getPizzas();
 	allOrderPizzas.push_back(newPizza);
 	order.setPizzas(allOrderPizzas);
+	vector<string> makeYourOwnStringVector = 
+		{
+			"Select crust", 
+			"Select size", 
+			"Select toppings",
+			"Add sides", 
+			"Select delivery method",
+			"Add comment",
+			"Add another pizza", 
+			"See order", 
+			"Finish"
+		};
 	while (true)
 	{
 		printMenu(
-		{ "Select crust", "Select size", "Select toppings", "Add sides", "Select delivery method", "Add comment", "See current order", "Finish" },
+			makeYourOwnStringVector, 
 			service.getSingleOfferName(order.getPizzas().at(_pizzaNumber)) + " " +  to_string(service.calculateCost(order.getPizzas().at(_pizzaNumber))) + " kr.-"
 		);
-		catchCharInput(input, 8, 1);
+		catchStringInput(input, makeYourOwnStringVector.size());
+		int selection = convertToInt(input);
 		clear();
 
-		switch (input)
+		switch (selection)
 		{
-		case '1':
+		case 1:
 			selectCrust(order, input);
 			printMessage("Crust added.");
 			break;
-		case '2':
+		case 2:
 			selectSize(order, input);
 			printMessage("Size added.");
 			break;
-		case '3':
+		case 3:
 			selectToppings(order, input);
 			printMessage("Toppings added.");
 			break;
-		case '4':
+		case 4:
 			selectSides(order, input);
 			printMessage("Side added.");
 			break;
-		case '5':
+		case 5:
 			selectDeliveryMethod(order, input);
 			printMessage("Delivery method added.");
 			break;
-		case '6':
+		case 6:
 			addComment(order);
 			printMessage("Comment added");
 			break;
-		case '7':
-			showTotalOrder(order);
+		case 7:
+			// add another pizza
 			break;
-		case '8':
-			// finish order
+		case 8:
+			// see order
 			break;
+		case 9:
+			finishOrder(order);
+			return;
 		default:
 			return;
 		}
-		
 	}
 }
 
-void SalesmanUI::selectLocation(Order& order, char & input)
+void SalesmanUI::selectLocation(Order& order, string& input)
 {
 	vector<Location> locations = service.getItems<Location>();
 	vector<string> stringifyLocations;
@@ -183,28 +155,29 @@ void SalesmanUI::selectLocation(Order& order, char & input)
 		stringifyLocations.push_back(locations.at(i).getAddress());
 	}
 	printMenu({stringifyLocations}, "Please A Select Location");
-	getInput("Input", input);
-	order.setLocation(locations.at((int)input - 49));
+	catchStringInput(input, locations.size(), 1);
+	order.setLocation(locations.at(convertToInt(input)-1));
 }
 
-void SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, char & input)
+
+void SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, string& input)
 {
 	printMenu({"Select from menu", "Make your own pizza!"}, "Make a new order");
 
-	catchCharInput(input, 2, 1);
+	catchStringInput(input, 2, 1);
 
-	if (tolower(input) == '1') {
+	if (tolower(convertToInt(input)) == '1') {
 		pickFromMenu(order, input);
 		pizzaFromMenu = true;
 	}
 	clear();
 }
 
-void SalesmanUI::selectCrust(Order& order, char& input)
+void SalesmanUI::selectCrust(Order& order, string& input)
 {
 	vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
 	printMenu(makeStringVector(crusts), "Select the Pizza Crust");
-	catchCharInput(input, crusts.size(), 1);
+	catchStringInput(input, crusts.size(), 1);
 
 	vector<Pizza> pizzas = order.getPizzas();
 	pizzas.at(_pizzaNumber).setCrust(crusts.at(convertToInt(input)));
@@ -213,11 +186,11 @@ void SalesmanUI::selectCrust(Order& order, char& input)
 	clear();
 }
 
-void SalesmanUI::selectSize(Order& order, char& input)
+void SalesmanUI::selectSize(Order& order, string& input)
 {
 	vector<PizzaSize> sizes = service.getItems<PizzaSize>();
 	printMenu(makeStringVectorFromPizzaSize(sizes), "Select the Pizza Size");
-	catchCharInput(input, sizes.size());
+	catchStringInput(input, sizes.size());
 
 	vector<Pizza> pizzas = order.getPizzas();
 	pizzas.at(_pizzaNumber).setPizzaSize(sizes.at(convertToInt(input)));
@@ -226,7 +199,7 @@ void SalesmanUI::selectSize(Order& order, char& input)
 	clear();
 }
 
-void SalesmanUI::selectToppings(Order& order, char& input)
+void SalesmanUI::selectToppings(Order& order, string& input)
 {
 	vector<Topping> toppings = service.getItems<Topping>();
 	while (true)
@@ -234,15 +207,14 @@ void SalesmanUI::selectToppings(Order& order, char& input)
 		printMenu(makeStringVector(toppings), "Select the Toppings");
 		
 		// Cannot have more than two of each topping so multiply all toppings by 2
-		catchCharInput(input, toppings.size()*2, 0, "Please enter the number of toppings");
-		int numberOfToppingsInt = (int)input - 48;
+		catchStringInput(input, toppings.size()*2, 0, "Please enter the number of toppings");
+		int numberOfToppingsInt = convertToInt(input);
 
 		for (int i = 0; i < numberOfToppingsInt; i++) {
 			string inputString = "Select topping nr " + to_string(i+1);
-			catchCharInput(input, toppings.size(), 1, inputString);
+			catchStringInput(input, toppings.size(), 1, inputString);
 			vector<Pizza> pizzas = order.getPizzas();
-			pizzas.at(_pizzaNumber).addToppings(toppings.at(convertToInt(input)));
-			//getCurrentPizza(order).addToppings(toppings.at(convertToInt(input)));
+			pizzas.at(_pizzaNumber).addToppings(toppings.at(convertToInt(input)-1));
 			order.setPizzas(pizzas);
 		}
 		break;
@@ -250,7 +222,7 @@ void SalesmanUI::selectToppings(Order& order, char& input)
 	clear();
 }
 
-void SalesmanUI::selectSides(Order& order, char& input)
+void SalesmanUI::selectSides(Order& order, string& input)
 {
 	vector<SideOrder> sideOrder = service.getItems<SideOrder>();
 	vector<string> stringifySideOrder;
@@ -263,10 +235,10 @@ void SalesmanUI::selectSides(Order& order, char& input)
 		stringifySideOrder.push_back(tempString);
 	}
 	printMenu(stringifySideOrder, "Please choose a side order");
-	catchCharInput(input, sideOrder.size());
+	catchStringInput(input, sideOrder.size());
 
 	//Set the selected side order in service
-	int index = convertToInt(input);
+	int index = convertToInt(input)-1;
 	service.appendToOrder(order, sideOrder.at(index));
 
 	clear();
@@ -280,26 +252,26 @@ void SalesmanUI::addComment(Order & order)
 	clear();
 }
 
-void SalesmanUI::selectDeliveryMethod(Order & order, char & input)
+void SalesmanUI::selectDeliveryMethod(Order & order, string& input)
 {
 	printMenu({"Pickup", "Send"}, "How would you like your pizza delivered?");
-	catchCharInput(input, 2, 1);
+	catchStringInput(input, 2, 1);
 
-	if (input == '1') {
+	if (input == "1") {
 		service.setOrderToPickUp(order);
 	}
-	else if (input == '2') {
+	else if (input == "2") {
 		service.setOrderToDelivery(order);
 	}
 	clear();
 }
 
-bool SalesmanUI::addAnotherOrder(char & input)
+bool SalesmanUI::addAnotherOrder(string& input)
 {
-	printMenu({ "Yes | (Y)", "No | (N)" }, "Would you like to add another order to this?");
-	getInput("Input", input);
+	printMenu({ "Yes", "No" }, "Would you like to add another order to this?");
+	catchStringInput(input, 2, 1);
 	clear();
-	if (tolower(input) != 'y') {
+	if (input == "1") {
 		return false;
 	}
 	return true;
@@ -347,15 +319,20 @@ void SalesmanUI::showTotalOrder(Order & order)
 	}
 }
 
+void SalesmanUI::finishOrder(Order& order)
+{
+	service.registerNewOrder(order);
+}
+
 /*
 	Takes in input from user and makes sure the input is within a set limit.
 
-	@required-param		char input		"Input that's read"
+	@required-param		string input	"Input that's read"
 	@required-param		int max			"Max value that input can recieve"
-	@optional-param		int min			"Minimum value that input can recieve",		default-value: 0
+	@optional-param		int min			"Minimum value that input can recieve",		default-value: 1
 	@optional-param		string message	"Message to display when prompting user",	default-value: "Input"
 */
-void SalesmanUI::catchCharInput(char& input, const int& max, const int& min, const std::string& msg)
+void SalesmanUI::catchStringInput(string& input, const int& max, const int& min, const std::string& msg)
 {
 	// Keeps prompting the user for input if exception is caught
 	while (true)
@@ -378,9 +355,9 @@ Pizza SalesmanUI::getCurrentPizza(Order& order)
 	return order.getPizzas().at(_pizzaNumber);
 }
 
-int SalesmanUI::convertToInt(char & input)
+int SalesmanUI::convertToInt(string& input)
 {
-	return (int)input - 49;
+	return std::atoi(input.c_str());
 }
 
 /*

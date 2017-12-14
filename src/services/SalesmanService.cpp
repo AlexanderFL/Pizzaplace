@@ -114,12 +114,12 @@ bool SalesmanService::validateOrder(Order order) {
 	return true;
 }
 
-void SalesmanService::validInput(const char& input, const int& max, const int& min) const
+void SalesmanService::validInput(const string& input, const int& max, const int& min) const
 {
-	if (isalpha(input)) {
+	if (std::string::npos == input.find_first_of("0123456789")) {
 		throw InvalidInput("Input cannot be a character");
 	}
-	int numberEntered = (int)input - 48;
+	int numberEntered = convertStringToInt(input);
 	if (numberEntered < min) {
 		const std::string& msg = "Input cannot be lower than " + to_string(min);
 		throw InvalidInput(msg);
