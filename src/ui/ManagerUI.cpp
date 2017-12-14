@@ -142,7 +142,7 @@ void ManagerUI::showToppingViewMenu() {
 			int index = service.convertStringToInt(input);
 			if (index < names.size()) {
 				clear();
-				editTopping(toppings, index-1);
+				editTopping(index-1);
 			}
 			else if (index == names.size()) {
 				clear();
@@ -160,57 +160,63 @@ void ManagerUI::showToppingViewMenu() {
 	}
 }
 
-void ManagerUI::editTopping(vector<Topping> toppings, int index)
+void ManagerUI::editTopping(int index)
 {
 	string input;
-	Topping toppingToEdit = toppings[index];
-	while (true)
-	{
-		printMenu({ "Edit name", "Edit price", "Back" }, ("Edit topping %s", toppingToEdit.getName()));
-		getInput(input);
+	try {
+		Topping toppingToEdit = service.getItem<Topping>(index);
+		while (true)
+		{
+			printMenu({ "Edit name", "Edit price", "Back" }, ("Edit topping %s", toppingToEdit.getName()));
+			getInput(input);
 
-		if (input == "1") {
-			printMessage("Changing name");
-			getInput(input);
-			try {
-				service.containsOnlyAlpha(input);
-				toppingToEdit.setName(input);
-				service.replaceToppingInFile(toppingToEdit, index);
-				clear();
-				printMessage("Topping was successfully renamed");
+			if (input == "1") {
+				printMessage("Changing name");
+				getInput(input);
+				try {
+					service.containsOnlyAlpha(input);
+					toppingToEdit.setName(input);
+					service.replaceToppingInFile(toppingToEdit, index);
+					clear();
+					printMessage("Topping was successfully renamed");
+				}
+				catch (NumberInString) {
+					printMessage("Number in string name is not valid");
+				}
 			}
-			catch (NumberInString) {
-				printMessage("Number in string name is not valid");
+			else if (input == "2") {
+				printMessage("Changing price");
+				getInput(input);
+				try {
+					service.validateStringIsDigit(input);
+					int value = atoi(input.c_str());
+					toppingToEdit.setPrice(value);
+					service.replaceToppingInFile(toppingToEdit, index);
+					clear();
+					printMessage("Topping was successufully edited");
+				}
+				catch (InvalidString) {
+					clear();
+					printMessage("Number can't be empty");
+				}
+				catch (NumberInString) {
+					clear();
+					printMessage("Number can't contain a character");
+				}
+			}
+			else if (input == "3") {
+				clear();
+				break;
+			}
+			else {
+				system("CLS");
+				printMessage("Invalid index.");
 			}
 		}
-		else if (input == "2") {
-			printMessage("Changing price");
-			getInput(input);
-			try {
-				service.validateStringIsDigit(input);
-				int value = atoi(input.c_str());
-				toppingToEdit.setPrice(value);
-				service.replaceToppingInFile(toppingToEdit, index);
-				clear();
-				printMessage("Topping was successufully edited");
-			}
-			catch (InvalidString) {
-				clear();
-				printMessage("Number can't be empty");
-			}
-			catch (NumberInString) {
-				clear();
-				printMessage("Number can't contain a character");
-			}
-		}
-		else if (input == "3") {
-			clear();
-			break;
-		}
-		else {
-			system("CLS");
-			printMessage("Invalid index.");
-		}
+	}
+	catch (out_of_range) {
+		clear();
+		printMessage("Invalid index");
 	}
 }
 
@@ -252,6 +258,7 @@ void ManagerUI::showLocationCreationMenu() {
 	try {
 		string name;
 		getInput("Name", name);
+		// Validate location name
 		service.addItem<Location>(Location(name));
 		clear();
 		printMessage("Location was created.");
@@ -267,10 +274,7 @@ void ManagerUI::showLocationDeleteMenu() {
 	try {
 		while (true) {
 			vector<Location> locations = service.getItems<Location>();
-			vector<string> names;
-			for (size_t i = 0; i < locations.size(); ++i) {
-				names.push_back(locations.at(i).getAddress());
-			}
+			vector<string> names = service.getNames<Location>();
 			names.push_back("Back");
 			printMenu(names, "Deleting a location");
 			getInput(input);

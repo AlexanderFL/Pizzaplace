@@ -26,7 +26,6 @@ void KitchenUI::showMainMenu() {
 					while (true) {
 						names.clear();
 						for (size_t i = 0; i < pizzas.size(); ++i) {
-							//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
 							names.push_back("Pizza " + to_string(pizzas.at(i).getID()));
 						}
 						names.push_back("Back");

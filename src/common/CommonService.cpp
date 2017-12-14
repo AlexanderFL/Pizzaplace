@@ -7,6 +7,9 @@ void CommonService::validateStringIsDigit(const string& str) const {
 	size_t i = 0;
 	if (str[0] == '-') {
 		++i;
+		if (str.length() < 2) {
+			throw InvalidString();
+		}
 	}
 	for (i; i < str.length(); ++i) {
 		if (!isdigit(str[i])) {
