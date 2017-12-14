@@ -6,6 +6,7 @@
 #include "Offer.h"
 #include "InvalidOrder.h"
 #include "InvalidAddress.h"
+#include "InvalidInput.h"
 using namespace std;
 
 class SalesmanService: public CommonService
@@ -30,9 +31,28 @@ public:
 	SideOrder getSideOrder();
 	Pizza getPizza();
 
+	template<typename T>
+	void validInput(const char& input, const vector<T>& vec) const;
+
 private:
 	int calculateCost(const Order& order);
 	int calculateCost(const Pizza& pizza);
 	void overrideOrder(int index, Order edit);
 	void assignID(Order& order);
 };
+
+template<typename T>
+inline void SalesmanService::validInput(const char& input, const vector<T>& vec) const
+{
+	if (isalpha(input)) {
+		throw InvalidInput("Input cannot be a character");
+	}
+	int numberEntered = (int)input - 49;
+	if (numberEntered < 0) {
+		throw InvalidInput("Input cannot be lower than 0");
+	}
+	if (numberEntered > vec.size()) {
+		string msg = "Input cannot be bigger than " + to_string(vec.size());
+		throw InvalidInput(msg);
+	}
+}
