@@ -8,5 +8,5 @@ public:
 	InvalidInput();
 	explicit InvalidInput(const std::string& message);
 
-	std::string getMessage();
+	std::string getMessage() const;
 };
