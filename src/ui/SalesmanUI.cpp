@@ -130,8 +130,8 @@ void SalesmanUI::makeYourOwnMenu(Order& order, char& input)
 	while (true)
 	{
 		printMenu(
-			{"Select crust", "Select size", "Select toppings", "Add sides", "Select delivery method", "Add comment", "See current order", "Finish"}, 
-			"Make your own pizza!"
+		{ "Select crust", "Select size", "Select toppings", "Add sides", "Select delivery method", "Add comment", "See current order", "Finish" },
+			service.getSingleOfferName(order.getPizzas().at(_pizzaNumber))
 		);
 		catchCharInput(input, 8, 1);
 		clear();
@@ -240,7 +240,10 @@ void SalesmanUI::selectToppings(Order& order, char& input)
 		for (int i = 0; i < numberOfToppingsInt; i++) {
 			string inputString = "Select topping nr " + to_string(i+1);
 			catchCharInput(input, toppings.size(), 1, inputString);
-			getCurrentPizza(order).addToppings(toppings.at(convertToInt(input)));
+			vector<Pizza> pizzas = order.getPizzas();
+			pizzas.at(_pizzaNumber).addToppings(toppings.at(convertToInt(input)));
+			//getCurrentPizza(order).addToppings(toppings.at(convertToInt(input)));
+			order.setPizzas(pizzas);
 		}
 		break;
 	}
