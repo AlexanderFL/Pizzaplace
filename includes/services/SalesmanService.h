@@ -34,9 +34,9 @@ public:
 	Pizza getPizza();
 	vector<string> getOfferNames(const Order& order);
 	string getSingleOfferName(const Pizza& pizza);
+	int calculateCost(const Pizza& pizza);
 private:
 	int calculateCost(const Order& order);
-	int calculateCost(const Pizza& pizza);
 	int calculateOldCost(const Order& order);
 	int calculateSimpleCost(const Pizza& pizza);
 	int calculateOldCost(const Pizza& pizza);

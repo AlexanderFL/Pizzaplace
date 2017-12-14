@@ -131,7 +131,7 @@ void SalesmanUI::makeYourOwnMenu(Order& order, char& input)
 	{
 		printMenu(
 		{ "Select crust", "Select size", "Select toppings", "Add sides", "Select delivery method", "Add comment", "See current order", "Finish" },
-			service.getSingleOfferName(order.getPizzas().at(_pizzaNumber))
+			service.getSingleOfferName(order.getPizzas().at(_pizzaNumber)) + " " +  to_string(service.calculateCost(order.getPizzas().at(_pizzaNumber))) + " kr.-"
 		);
 		catchCharInput(input, 8, 1);
 		clear();
