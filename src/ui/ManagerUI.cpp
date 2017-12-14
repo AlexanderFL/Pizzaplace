@@ -27,7 +27,7 @@ void ManagerUI::showMainMenu() {
 			showOffersMenu();
 		}
 		else if (input == "7") {
-			showOrdersMenu();
+			showOrders();
 		}
 		else if (input == "8") {
 			return;
@@ -1051,26 +1051,6 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 	}
 }
 
-void ManagerUI::showOrdersMenu() {
-	string input;
-	while (true) {
-		printMenu({ "See orders", "Delete order", "Back" }, "Orders Menu");
-		getInput(input);
-		clear();
-		if (input == "1") {
-			showOrders();
-		}
-		else if (input == "2") {
-		}
-		else if (input == "3") {
-			break;
-		}
-		else {
-			printMessage("Not a valid option.");
-		}
-	}
-}
-
 void ManagerUI::showOrders() {
 	string input;
 	try {
@@ -1081,21 +1061,36 @@ void ManagerUI::showOrders() {
 			for (size_t i = 0; i < orders.size(); ++i) {
 				names.push_back("Order " + to_string(orders.at(i).getID()));
 			}
-			names.push_back("Back");
+			names.push_back("Go back");
 			printMenu(names, "All orders");
 			string message = "Total orders: " + to_string(orderCounter);
 			printMessage(message);
+			//See more about an order
+			getInput(input);
+			int order = service.convertStringToInt(input) - 1;
+			clear();
+			showOrderInfo(orders.at(order));
+			cout << endl;
+			printMenu({ "Delete", "Go Back"}, "More info about order");
 			getInput(input);
 			int index = service.convertStringToInt(input);
 			if (index == names.size()) {
 				break;
 			}
-			else {
-				printMessage("Not a valid option.");
+			if (input == "1") {
+				try {
+					clear();
+					service.deleteItem<Order>(order);
+					printMessage("Order deleted");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Invalid index.");
+				}
 			}
 		}
 	}
 	catch (EmptyVector) {
-		printMessage("There are currently no sides available.");
+		printMessage("There are currently no orders.");
 	}
 }
