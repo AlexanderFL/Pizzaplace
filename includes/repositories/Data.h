@@ -86,7 +86,7 @@ template<class Repos>
 inline void Data::RemoveFromFileAtIndex(int index)
 {
 	vector<Repos> vec = RetrieveAllFromFile<Repos>();
-	if (index < 0 || index > vec.size() - 1) {
+	if (index < 0 || index >= vec.size()) {
 		throw out_of_range("Out of range");
 	}
 	vec.erase(vec.begin() + index);

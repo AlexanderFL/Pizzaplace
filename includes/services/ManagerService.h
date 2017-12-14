@@ -22,10 +22,12 @@ public:
 	void addDeliveryPlace(string place);
 	int getOrderTotalCost(const Order& order);
 	void addLocation(Location& location);
+	void replaceToppingInFile(const Topping& topping, int index);
 	//Order
 	void addOffer(Offer& offer);
-private:
+	//Validation
 	void containsOnlyAlpha(string s);
+private:
 	void validPrice(int p);
 	void validateString(const string& str);
 };

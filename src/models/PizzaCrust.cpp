@@ -9,7 +9,7 @@ PizzaCrust::PizzaCrust()
 
 }
 
-PizzaCrust::PizzaCrust(string name, int price) 
+PizzaCrust::PizzaCrust(const string name, int price) 
 	:name(name), price(price)
 {
 
@@ -37,9 +37,6 @@ ostream& operator << (ostream& out, const PizzaCrust& crust) {
 		out.write((char*)(&len), sizeof(size_t));
 		out.write(crust.name.c_str(), len);
 		out.write((char*)(&crust.price), sizeof(int));
-	}
-	else {
-		out << "Name: " << crust.name << " | Price: " << crust.price << " Kr.";
 	}
 	return out;
 }
