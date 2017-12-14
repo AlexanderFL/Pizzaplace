@@ -14,6 +14,10 @@ string Location::getAddress() const {
 	return this->address;
 }
 
+string Location::getName() const {
+	return this->address;
+}
+
 void Location::setAddress(const string& address) {
 	this->address = address;
 }

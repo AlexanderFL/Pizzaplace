@@ -51,6 +51,10 @@ void Pizza::addToppings(Topping topping) {
 	this->price += topping.getPrice() * size.getPriceMod();
 }
 
+void Pizza::setToppings(vector<Topping> toppings) {
+	this->toppings = toppings;
+}
+
 void Pizza::setCrust(const PizzaCrust& crust) {
 	this->crust = crust;
 }

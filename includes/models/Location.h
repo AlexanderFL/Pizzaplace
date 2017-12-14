@@ -18,6 +18,8 @@ public:
 
 	// Get functions
 	string getAddress() const;
+	// Just for a template
+	string getName() const;
 
 	// Set functions
 	void setAddress(const string& address);

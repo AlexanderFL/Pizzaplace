@@ -10,7 +10,7 @@ void CommonService::validateStringIsDigit(const string& str) const {
 	}
 	for (i; i < str.length(); ++i) {
 		if (!isdigit(str[i])) {
-			throw NumberInString();
+			throw InvalidString();
 		}
 	}
 }

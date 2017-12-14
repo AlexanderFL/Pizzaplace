@@ -22,7 +22,7 @@ void CommonUI::printMenu(const vector<string>& options, const string& title, con
 	printOptions(options, biggest, displayOnly);
 }
 
-void CommonUI::printInput(const string& str) const {
+void CommonUI::printArrow(const string& str) const {
 	cout << "\t|\n\t-->" << str << ": ";
 }
 
@@ -39,20 +39,20 @@ void CommonUI::printMessage(const string& str) const {
 }
 
 void CommonUI::getInput(string& str) const {
-	printInput("Input");
+	printArrow("Input");
 	cin >> ws; 
 	getline(cin, str);
 }
 
 void CommonUI::getInput(const string& text, string& str) const {
-	printInput(text);
+	printArrow(text);
 	cin >> ws;
 	getline(cin, str);
 }
 
 void CommonUI::getInput(const string& text, char & input) const
 {
-	printInput(text);
+	printArrow(text);
 	cin >> input;
 	cin.ignore();
 }

@@ -32,6 +32,7 @@ public:
 
 	// Set Functions
 	void addToppings(Topping topping);
+	void setToppings(vector<Topping> toppings);
 	void setCrust(const PizzaCrust& crust);
 	void setPizzaSize(const PizzaSize& size);
 	void setPhase(const status& phase);

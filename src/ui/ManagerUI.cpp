@@ -105,10 +105,7 @@ void ManagerUI::showToppingViewMenu() {
 	try {
 		while (true) {
 			vector<Topping> toppings = service.getItems<Topping>();
-			vector<string> names;
-			for (size_t i = 0; i < toppings.size(); ++i) {
-				names.push_back(toppings.at(i).getName() + " | " + to_string(toppings.at(i).getPrice()));
-			}
+			vector<string> names = service.getNames<Topping>();
 			names.push_back("Back");
 			printMenu(names, "Toppings");
 			getInput(input);
@@ -192,10 +189,7 @@ void ManagerUI::showToppingDeleteMenu() {
 	try {
 		while (true) {
 			vector<Topping> toppings = service.getItems<Topping>();
-			vector<string> names;
-			for (size_t i = 0; i < toppings.size(); ++i) {
-				names.push_back(toppings.at(i).getName());
-			}
+			vector<string> names = service.getNames<Topping>();
 			names.push_back("Back");
 			printMenu(names, "Toppings");
 			getInput(input);
@@ -299,10 +293,7 @@ void ManagerUI::showOfferCreationMenu() {
 			clear();
 			try {
 				vector<SideOrder> allsides = service.getItems<SideOrder>();
-				vector<string> names;
-				for (size_t i = 0; i < allsides.size(); i++) {
-					names.push_back(allsides.at(i).getName());
-				}
+				vector<string> names = service.getNames<SideOrder>();
 				names.push_back("Back");
 				printMenu(names, "Sides");
 				getInput(input);
@@ -364,10 +355,7 @@ void ManagerUI::showOfferViewMenu() {
 	try {
 		while (true) {
 			vector<Offer> offers = service.getItems<Offer>();
-			vector<string> names;
-			for (size_t i = 0; i < offers.size(); ++i) {
-				names.push_back(offers.at(i).getName());
-			}
+			vector<string> names = service.getNames<Offer>();
 			names.push_back("Back");
 			printMenu(names, "Offers");
 			getInput(input);
@@ -392,11 +380,7 @@ void ManagerUI::showOfferDeleteMenu() {
 	string input;
 	try {
 		while (true) {
-			vector<Offer> offers = service.getItems<Offer>();
-			vector<string> names;
-			for (size_t i = 0; i < offers.size(); ++i) {
-				names.push_back(offers.at(i).getName());
-			}
+			vector<string> names = service.getNames<Offer>();
 			names.push_back("Back");
 			printMenu(names, "Offers");
 			getInput(input);
@@ -432,11 +416,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 		if (input == "1") {
 			clear();
 			try {
-				vector<Topping> toppings = service.getItems<Topping>();
-				vector<string> names;
-				for (size_t i = 0; i < toppings.size(); i++) {
-					names.push_back(toppings.at(i).getName());
-				}
+				vector<string> names = service.getNames<Topping>();
 				names.push_back("Back");
 				printMenu(names, "Toppings");
 				getInput(input);
@@ -446,7 +426,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 				}
 				else {
 					try {
-						pizza.addToppings(toppings.at(index - 1));
+						pizza.addToppings(service.getItem<Topping>(index - 1));
 						clear();
 						printMessage("Topping added.");
 					}
@@ -464,11 +444,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 		else if (input == "2") {
 			clear();
 			try {
-				vector<Topping> toppings = pizza.getToppings();
-				vector<string> names;
-				for (size_t i = 0; i < toppings.size(); i++) {
-					names.push_back(toppings.at(i).getName());
-				}
+				vector<string> names = service.getNames(pizza.getToppings());
 				names.push_back("Back");
 				printMenu(names, "Toppings");
 				getInput(input);
@@ -478,7 +454,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 				}
 				else {
 					try {
-						//Remove topping
+						pizza.setToppings(service.deleteItem(pizza.getToppings(), index - 1));
 						clear();
 						printMessage("Topping removed.");
 					}
@@ -496,11 +472,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 		else if (input == "3") {
 			clear();
 			try {
-				vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
-				vector<string> names;
-				for (size_t i = 0; i < crusts.size(); i++) {
-					names.push_back(crusts.at(i).getName());
-				}
+				vector<string> names = service.getNames<PizzaCrust>();
 				names.push_back("Back");
 				printMenu(names, "Pizza Crusts");
 				getInput(input);
@@ -510,7 +482,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 				}
 				else {
 					try {
-						pizza.setCrust(crusts.at(index - 1));
+						pizza.setCrust(service.getItem<PizzaCrust>(index - 1));
 						clear();
 						printMessage("Crust set.");
 					}
@@ -528,11 +500,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 		else if (input == "4") {
 			clear();
 			try {
-				vector<PizzaSize> sizes = service.getItems<PizzaSize>();
-				vector<string> names;
-				for (size_t i = 0; i < sizes.size(); i++) {
-					names.push_back(sizes.at(i).getName());
-				}
+				vector<string> names = service.getNames<PizzaSize>();
 				names.push_back("Back");
 				printMenu(names, "Pizza Sizes");
 				getInput(input);
@@ -542,7 +510,7 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 				}
 				else {
 					try {
-						pizza.setPizzaSize(sizes.at(index - 1));
+						pizza.setPizzaSize(service.getItem<PizzaSize>(index - 1));
 						clear();
 						printMessage("Size set.");
 					}

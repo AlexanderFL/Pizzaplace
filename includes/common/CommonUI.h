@@ -10,7 +10,7 @@ public:
 	void clear() const;
 	void printMenu(const vector<string>& options) const;
 	void printMenu(const vector<string>& options, const string& title, const bool& displayOnly=false) const;
-	void printInput(const string& str) const;
+	void printArrow(const string& str) const;
 	void printMessage(const string& str) const;
 	void getInput(string& str) const;
 	void getInput(const string& text, string& str) const;
