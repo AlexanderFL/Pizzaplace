@@ -398,11 +398,14 @@ void ManagerUI::showSizeCreationMenu() {
 		getInput("Name", name);
 		//validating name
 		service.containsOnlyAlpha(name);
+		printArrow("%");
+		cout << endl;
+		printMessage("%");
 		getInput("Size", size);
 		int sizeInInt  = service.convertStringToInt(size);
 		//validating size
 		service.validPrice(sizeInInt);
-		service.addItem<PizzaSize>(PizzaSize(name, sizeInInt));
+		service.addItem<PizzaSize>(PizzaSize(name, sizeInInt / 100));
 		clear();
 		printMessage("Pizza size was created.");
 	}
@@ -804,22 +807,32 @@ void ManagerUI::showOfferCreationMenu() {
 			try {
 				int price = service.convertStringToInt(input);
 				//Validate price
+				service.validPrice(price);
 				offer.setPrice(price);
 				clear();
 			}
-			catch (NumberInString) {
+			catch (InvalidString) {
+				clear();
+				printMessage("Invalid Price.");
+			}
+			catch (InvalidPrice) {
 				clear();
 				printMessage("Invalid Price.");
 			}
 		}
 		else if (input == "3") {
 			clear();
-			Pizza pizza;
-			showCreatePizzaMenu(pizza);
-			pizzas.push_back(pizza);
+			try {
+				Pizza pizza;
+				showCreatePizzaMenu(pizza);
+				pizzas.push_back(pizza);
+			}
+			catch (Canceled) {
+				clear();
+				printMessage("Pizza Canceled.");
+			}
 		}
 		else if (input == "4") {
-			clear();
 			clear();
 			try {
 				vector<string> names;
