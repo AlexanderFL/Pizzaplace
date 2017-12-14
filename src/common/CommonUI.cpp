@@ -9,7 +9,7 @@ void CommonUI::printMenu(const vector<string>& options) const {
 	printOptions(options, biggestStringSize(options));
 }
 
-void CommonUI::printMenu(const vector<string>& options, const string& title) const {
+void CommonUI::printMenu(const vector<string>& options, const string& title, const bool& displayOnly) const {
 	vector<string> temp = options;
 	temp.push_back(title);
 	size_t biggest = biggestStringSize(temp);
@@ -19,7 +19,7 @@ void CommonUI::printMenu(const vector<string>& options, const string& title) con
 		cout << " ";
 	}
 	cout << "          |\n";
-	printOptions(options, biggest);
+	printOptions(options, biggest, displayOnly);
 }
 
 void CommonUI::printInput(const string& str) const {
@@ -68,10 +68,15 @@ void CommonUI::printLines(size_t size) const {
 	cout << "-------------\n";
 }
 
-void CommonUI::printOptions(const vector<string>& options, size_t biggest) const {
+void CommonUI::printOptions(const vector<string>& options, size_t biggest, bool displayOnly) const {
 	for (size_t i = 0; i < options.size(); i++) {
 		printLines(biggest);
-		cout << "\t| " << i + 1 << ". " << options.at(i);
+		if (!displayOnly) {
+			cout << "\t| " << i + 1 << ". " << options.at(i);
+		}
+		else {
+			cout << "\t| " << options.at(i);
+		}
 		for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
 			cout << " ";
 		}
@@ -84,9 +89,17 @@ void CommonUI::printOptions(const vector<string>& options, size_t biggest) const
 			for (size_t j = 0; j < biggest; j++) {
 				cout << " ";
 			}
+			if (displayOnly) {
+				cout << "   ";
+			}
 		}
 		else {
-			cout << i + 1 << ". " << options.at(i);
+			if (!displayOnly) {
+				cout << i + 1 << ". " << options.at(i);
+			}
+			else {
+				cout << options.at(i) << "\t   ";
+			}
 			for (size_t j = 0; j < (biggest - options.at(i).size()); j++) {
 				cout << " ";
 			}

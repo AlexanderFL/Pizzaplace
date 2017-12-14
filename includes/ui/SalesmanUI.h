@@ -24,6 +24,7 @@ private:
 	void selectToppings(Pizza& pizza, char& input);
 	void selectSides(Order& order, char& input);
 	void addComment(Order& order, char& input);
+	void selectDeliveryMethod(Order& order, char& input);
 	bool addAnotherOrder(char& input);
 	void showTotalOrder(Order& order);
 	

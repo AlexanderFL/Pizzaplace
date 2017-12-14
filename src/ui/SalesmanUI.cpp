@@ -65,11 +65,12 @@ void SalesmanUI::makeNewOrder()
 			selectSides(order, input);
 			// Asks the user if he wants to add a comment
 			addComment(order, input);
+			// Ask for delivery method
+			selectDeliveryMethod(order, input);
 			// Asks the user if he wants to add another order
 			if (!addAnotherOrder(input)) {
 				showTotalOrder(order);
 				system("pause");
-
 				service.registerNewOrder(order);
 				break;
 			}
@@ -88,6 +89,7 @@ void SalesmanUI::pickFromMenu(Order& order, char& input) {
 	system("CLS");
 	vector <Offer> offers = service.getItems<Offer>();
 	cout <<"\n\t\tPIZZA MENU!" << endl;
+
 	for (size_t i = 0; i < offers.size(); i++) {
 		cout << endl;
 		cout << "-------------------------" << endl << endl;
@@ -123,26 +125,26 @@ void SalesmanUI::selectLocation(Order& order, char & input)
 		stringifyLocations.push_back(locations.at(i).getAddress());
 	}
 	printMenu({stringifyLocations}, "Please A Select Location");
-	getInput("Input: ", input);
+	getInput("Input", input);
 	order.setLocation(locations.at((int)input - 49));
 }
 
 void SalesmanUI::selectFromMenu(Order& order, bool& pizzaFromMenu, char & input)
 {
-	cout << "Would you like to pick from the menu (y/n)? ";
-	cin >> input;
+	printMenu({"Yes | (Y)", "No | (N)"}, "Would you like to pick from the menu?");
+	getInput("Input", input);
 	if (tolower(input) == 'y') {
 		pickFromMenu(order, input);
 		pizzaFromMenu = true;
 	}
-	system("CLS");
+	clear();
 }
 
 void SalesmanUI::selectCrust(Pizza& pizza, char& input)
 {
 	vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
 	printMenu(makeStringVector(crusts), "Select the Pizza Crust");
-	getInput("Input: ", input);
+	getInput("Input", input);
 	pizza.setCrust(crusts.at((int)input - 49));
 	clear();
 }
@@ -151,7 +153,7 @@ void SalesmanUI::selectSize(Pizza & pizza, char& input)
 {
 	vector<PizzaSize> sizes = service.getItems<PizzaSize>();
 	printMenu(makeStringVectorFromPizzaSize(sizes), "Select the Pizza Size");
-	getInput("Input: ", input);
+	getInput("Input", input);
 	pizza.setPizzaSize(sizes.at((int)input - 49));
 	clear();
 }
@@ -162,10 +164,10 @@ void SalesmanUI::selectToppings(Pizza & pizza, char& input)
 	while (true)
 	{
 		printMenu(makeStringVector(toppings), "Select the Toppings");
-		getInput("Please enter the number of toppings: ", input);
+		getInput("Please enter the number of toppings", input);
 		int numberOfToppingsInt = (int)input - 48;
 		for (int i = 0; i < numberOfToppingsInt; i++) {
-			string inputString = "Select topping nr " + to_string(i+1) + ": ";
+			string inputString = "Select topping nr " + to_string(i+1);
 			getInput(inputString, input);
 			if ((int)input - 48 == (toppings.size() + 1)) {
 				break;
@@ -174,56 +176,84 @@ void SalesmanUI::selectToppings(Pizza & pizza, char& input)
 		}
 		break;
 	}
-	system("CLS");
+	clear();
 }
 
 void SalesmanUI::selectSides(Order & order, char & input)
 {
-	cout << endl << "Would you like any sides with your order? Y/N (yes/no): ";
-	cin >> input;
+	printMenu({ "Yes | (Y)", "No | (N)" }, "Would you like any sides with your order?");
+	getInput("Input", input);
+	clear();
 	while (true)
 	{
 		if (toupper(input) == 'Y') {
-			cout << "Here are side orders you can choose from: " << endl;
 			vector<SideOrder> sideOrder = service.getItems<SideOrder>();
+			vector<string> stringifySideOrder;
+			string tempString;
 			for (size_t i = 0; i < sideOrder.size(); i++)
 			{
-				cout << i + 1 << ": " << sideOrder.at(i).getName() << " \t" << sideOrder.at(i).getPrice() << " kr.-" << endl;
+				tempString = sideOrder.at(i).getName();
+				tempString += " | ";
+				tempString += to_string(sideOrder.at(i).getPrice()) + " kr.-";
+				stringifySideOrder.push_back(tempString);
 			}
-			cout << "Please choose one of them. \nInput: ";
-			cin >> input;
+			printMenu(stringifySideOrder, "Please choose a side order");
+			getInput("Input", input);
 
 			//Set the selected side order in service
 			int index = (int)input - 49;
 			service.appendToOrder(order, sideOrder.at(index));
+
+			clear();
+			printMenu({ "Yes | (Y)", "No | (N)" }, "Would you like any more sides with your order?");
+			getInput("Input", input);
 		}
 		else {
 			break;
 		}
-
-		cout << "Would you like any more sides with your order? Y/N (yes/no): ";
-		cin >> input;
 	}
+	clear();
 }
 
 void SalesmanUI::addComment(Order & order, char & input)
 {
 	string comment = "None";
-	cout << "Would you like to add a comment (y/n)? ";
-	cin >> input;
+	printMenu({ "Yes | (Y)", "No | (N)" }, "Would you like to add a comment?");
+	getInput("Input", input);
 	if (tolower(input) == 'y') {
-		cout << "Comment: ";
-		getInput(comment);
+		getInput("Comment", comment);
 	}
 	service.setComments(order, comment);
+	clear();
+}
+
+void SalesmanUI::selectDeliveryMethod(Order & order, char & input)
+{
+	while (true)
+	{
+		printMenu({"Pickup", "Send"}, "How would you like your pizza delivered?");
+		getInput("Input", input);
+		if (input == '1') {
+			service.setOrderToPickUp(order);
+			break;
+		}
+		else if (input == '2') {
+			service.setOrderToDelivery(order);
+			break;
+		}
+		else {
+			clear();
+			printMessage("Input not valid");
+		}
+	}
+	clear();
 }
 
 bool SalesmanUI::addAnotherOrder(char & input)
 {
-	cout << "Would you like to add another order to this?" << endl;
-	cout << "Input (y/n): ";
-	cin >> input;
-	system("CLS");
+	printMenu({ "Yes | (Y)", "No | (N)" }, "Would you like to add another order to this?");
+	getInput("Input", input);
+	clear();
 	if (tolower(input) != 'y') {
 		return false;
 	}
@@ -233,11 +263,16 @@ bool SalesmanUI::addAnotherOrder(char & input)
 void SalesmanUI::showTotalOrder(Order & order)
 {
 	try 
-	{
+	{	
 		if (service.validateOrder(order))
 		{
 			Pizza tempPizza;
-			for (size_t i = 0; i < order.getPizzas().size(); i++) {
+				
+			for (size_t i = 0; i < order.getPizzas().size(); i++) 
+			{
+				//string title = "Order nr. " + to_string(i + 1);
+				//printMenu({"Test for", "a new", "feature"}, title, true);
+
 				tempPizza = order.getPizzas().at(i);
 				cout << "Order nr. " << (i + 1) << ": " << endl;
 				cout << "\t    Size: " << tempPizza.getPizzaSize().getName() << "  \t+" << (tempPizza.getPizzaSize().getPriceMod() - 1)*100 << " %" << endl;
