@@ -5,7 +5,7 @@ ManagerUI::ManagerUI() {}
 void ManagerUI::showMainMenu() {
 	string input;
 	while (true) {
-		printMenu({ "Toppings", "Locations", "Pizza Sizes", "Pizza Crusts", "Sides", "Offers", "Back" }, "Manager Menu");
+		printMenu({ "Toppings", "Locations", "Pizza Sizes", "Pizza Crusts", "Sides", "Offers", "Orders", "Back" }, "Manager Menu");
 		getInput(input);
 		clear();
 		if (input == "1") {
@@ -22,12 +22,14 @@ void ManagerUI::showMainMenu() {
 		}
 		else if (input == "5") {
 			showSidesMenu();
-
 		}
 		else if (input == "6") {
 			showOffersMenu();
 		}
 		else if (input == "7") {
+			showOrdersMenu();
+		}
+		else if (input == "8") {
 			return;
 		}
 		else {
@@ -1042,5 +1044,54 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 			clear();
 			printMessage("Not a valid option.");
 		}
+	}
+}
+
+void ManagerUI::showOrdersMenu() {
+	string input;
+	while (true) {
+		printMenu({ "See orders", "Delete order", "Back" }, "Orders Menu");
+		getInput(input);
+		clear();
+		if (input == "1") {
+			showOrders();
+		}
+		else if (input == "2") {
+		}
+		else if (input == "3") {
+			break;
+		}
+		else {
+			printMessage("Not a valid option.");
+		}
+	}
+}
+
+void ManagerUI::showOrders() {
+	string input;
+	try {
+		while (true) {
+			vector<Order> orders = service.getItems<Order>();
+			vector<string> names;
+			int orderCounter = orders.size();
+			for (size_t i = 0; i < orders.size(); ++i) {
+				names.push_back("Order " + to_string(orders.at(i).getID()));
+			}
+			names.push_back("Back");
+			printMenu(names, "All orders");
+			string message = "Total orders: " + to_string(orderCounter);
+			printMessage(message);
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
+				break;
+			}
+			else {
+				printMessage("Not a valid option.");
+			}
+		}
+	}
+	catch (EmptyVector) {
+		printMessage("There are currently no sides available.");
 	}
 }

@@ -8,7 +8,6 @@ using namespace std;
 class ManagerUI: public CommonUI
 {
 private:
-	//char input;
 	ManagerService service;
 	//Toppings
 	void showToppingsMenu();
@@ -37,7 +36,6 @@ private:
 	void showSidesCreationMenu();
 	void showSidesDeleteMenu();
 	void showSidesViewMenu();
-
 	//offers
 	void showOffersMenu();
 	void showOfferCreationMenu();
@@ -49,6 +47,9 @@ private:
 	void priceOption();
 	void locationOption();
 	void sideOrderOption();
+	//Orders
+	void showOrdersMenu();
+	void showOrders();
 public:
 	ManagerUI();
 	void showMainMenu();
