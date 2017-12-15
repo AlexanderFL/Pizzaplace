@@ -17,7 +17,7 @@ void CommonService::validateStringIsDigit(const string &str) const
 	}
 	for (i; i < str.length(); ++i)
 	{
-		if (!isdigit(str[i]))
+		if (str[i] > 255 || str[i] < -1 || !isdigit(str[i]))
 		{
 			throw InvalidString();
 		}
