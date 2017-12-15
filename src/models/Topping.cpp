@@ -14,32 +14,27 @@ Topping::Topping(string name, int price)
 	this->price = price;
 }
 
-string
-Topping::getName() const
+string Topping::getName() const
 {
 	return this->name;
 }
 
-int
-Topping::getPrice() const
+int Topping::getPrice() const
 {
 	return this->price;
 }
 
-void
-Topping::setName(const string &name)
+void Topping::setName(const string &name)
 {
 	this->name = name;
 }
 
-void
-Topping::setPrice(const int &price)
+void Topping::setPrice(const int &price)
 {
 	this->price = price;
 }
 
-istream &
-operator>>(istream &in, Topping &topping)
+istream &operator>>(istream &in, Topping &topping)
 {
 	if (&in != &cin)
 	{
@@ -61,8 +56,7 @@ operator>>(istream &in, Topping &topping)
 	return in;
 }
 
-ostream &
-operator<<(ostream &out, const Topping &topping)
+ostream &operator<<(ostream &out, const Topping &topping)
 {
 	if (&out != &cout)
 	{
@@ -78,8 +72,7 @@ operator<<(ostream &out, const Topping &topping)
 	return out;
 }
 
-bool
-operator==(const Topping &left, const Topping &right)
+bool operator==(const Topping &left, const Topping &right)
 {
 	return left.name == right.name;
 }

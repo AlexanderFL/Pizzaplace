@@ -14,26 +14,22 @@ PizzaSize::PizzaSize(const string &name, double pricemod)
 	setPriceMod(pricemod);
 }
 
-string
-PizzaSize::getName() const
+string PizzaSize::getName() const
 {
 	return this->name;
 }
 
-double
-PizzaSize::getPriceMod() const
+double PizzaSize::getPriceMod() const
 {
 	return this->pricemod;
 }
 
-void
-PizzaSize::setName(const string &name)
+void PizzaSize::setName(const string &name)
 {
 	this->name = name;
 }
 
-void
-PizzaSize::setPriceMod(const double &pricemod)
+void PizzaSize::setPriceMod(const double &pricemod)
 {
 	if (pricemod <= 35 && pricemod >= 1)
 	{
@@ -47,8 +43,7 @@ PizzaSize::setPriceMod(const double &pricemod)
 	}
 }
 
-ostream &
-operator<<(ostream &out, const PizzaSize &size)
+ostream &operator<<(ostream &out, const PizzaSize &size)
 {
 	if (&out != &cout)
 	{
@@ -60,8 +55,7 @@ operator<<(ostream &out, const PizzaSize &size)
 	return out;
 }
 
-istream &
-operator>>(istream &in, PizzaSize &size)
+istream &operator>>(istream &in, PizzaSize &size)
 {
 	if (&in != &cin)
 	{
@@ -76,8 +70,7 @@ operator>>(istream &in, PizzaSize &size)
 	return in;
 }
 
-bool
-operator==(const PizzaSize &left, const PizzaSize &right)
+bool operator==(const PizzaSize &left, const PizzaSize &right)
 {
 	return left.name == right.name && left.pricemod == right.pricemod;
 }

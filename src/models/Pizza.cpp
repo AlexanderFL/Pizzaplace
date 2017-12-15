@@ -3,7 +3,7 @@
 
 /*
 *************************************************
-PUBLIC FUNCTIONS
+			PUBLIC FUNCTIONS
 *************************************************
 */
 
@@ -22,68 +22,57 @@ Pizza::Pizza(string name, vector<Topping> toppings)
 	this->phase = PREPERATION;
 }
 
-vector<Topping>
-Pizza::getToppings() const
+vector<Topping> Pizza::getToppings() const
 {
 	return this->toppings;
 }
 
-PizzaCrust
-Pizza::getCrust() const
+PizzaCrust Pizza::getCrust() const
 {
 	return this->crust;
 }
 
-PizzaSize
-Pizza::getPizzaSize() const
+PizzaSize Pizza::getPizzaSize() const
 {
 	return this->size;
 }
 
-status
-Pizza::getPhase() const
+status Pizza::getPhase() const
 {
 	return this->phase;
 }
 
-size_t
-Pizza::getID() const
+size_t Pizza::getID() const
 {
 	return this->id;
 }
 
-void
-Pizza::addToppings(Topping topping)
+void Pizza::addToppings(Topping topping)
 {
 	this->toppings.push_back(topping);
 }
 
-void
-Pizza::setToppings(vector<Topping> toppings)
+void Pizza::setToppings(vector<Topping> toppings)
 {
 	this->toppings = toppings;
 }
 
-void
-Pizza::setCrust(PizzaCrust &crust)
+void Pizza::setCrust(PizzaCrust &crust)
 {
 	this->crust = crust;
 }
 
-void
-Pizza::setPizzaSize(const PizzaSize &size)
+void Pizza::setPizzaSize(const PizzaSize &size)
 {
 	this->size = size;
 }
 
-void
-Pizza::setPhase(const status &phase)
+void Pizza::setPhase(const status &phase)
 {
 	this->phase = phase;
 }
 
-void
-Pizza::setID(const size_t &id)
+void Pizza::setID(const size_t &id)
 {
 	this->id = id;
 }
@@ -98,11 +87,10 @@ Pizza::setID(const size_t &id)
 
 /*
 *************************************************
-FRIEND FUNCTIONS
+				FRIEND FUNCTIONS
 *************************************************
 */
-ostream &
-operator<<(ostream &out, const Pizza &pizza)
+ostream &operator<<(ostream &out, const Pizza &pizza)
 {
 	if (&out != &cout)
 	{
@@ -127,8 +115,7 @@ operator<<(ostream &out, const Pizza &pizza)
 	return out;
 }
 
-istream &
-operator>>(istream &in, Pizza &pizza)
+istream &operator>>(istream &in, Pizza &pizza)
 {
 	// TODO: Make this a function call to UI layer
 	if (&in != &cin)
@@ -173,8 +160,7 @@ operator>>(istream &in, Pizza &pizza)
 /*
 Compares whether the two pizzas have the same toppings
 */
-bool
-operator==(const Pizza &left, const Pizza &right)
+bool operator==(const Pizza &left, const Pizza &right)
 {
 	//if (left.size == right.size) {
 	Pizza pizza = left * right;
@@ -189,8 +175,7 @@ operator==(const Pizza &left, const Pizza &right)
 /*
 Compares whether the two pizzas do not have the same toppings
 */
-bool
-operator!=(const Pizza &left, const Pizza &right)
+bool operator!=(const Pizza &left, const Pizza &right)
 {
 	return !(left == right);
 }
@@ -198,8 +183,7 @@ operator!=(const Pizza &left, const Pizza &right)
 /*
 Returns a pizza with the intersection for the toppings of two Pizzas
 */
-Pizza
-operator*(const Pizza &left, const Pizza &right)
+Pizza operator*(const Pizza &left, const Pizza &right)
 {
 	Pizza pizza;
 	for (int i = 0; i < left.toppings.size(); ++i)
@@ -219,8 +203,7 @@ operator*(const Pizza &left, const Pizza &right)
 /*
 Returns a pizza with the compenation for the toppings of two Pizzas
 */
-Pizza
-operator+(const Pizza &left, const Pizza &right)
+Pizza operator+(const Pizza &left, const Pizza &right)
 {
 	Pizza pizza = left;
 	for (int i = 0; i < right.toppings.size(); ++i)
@@ -233,8 +216,7 @@ operator+(const Pizza &left, const Pizza &right)
 /*
 Returns a pizza with the compenation for the toppings of two Pizzas
 */
-Pizza
-operator-(const Pizza &left, const Pizza &right)
+Pizza operator-(const Pizza &left, const Pizza &right)
 {
 	Pizza pizza = left;
 	Pizza temp = right;

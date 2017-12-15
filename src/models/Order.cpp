@@ -3,7 +3,7 @@
 
 /*
 *************************************************
-PUBLIC FUNCTIONS
+			PUBLIC FUNCTIONS
 *************************************************
 */
 
@@ -40,132 +40,113 @@ Order::Order(vector<Pizza> pizzas,
 	this->paidFor = isPaid;
 }
 
-vector<Pizza>
-Order::getPizzas() const
+vector<Pizza> Order::getPizzas() const
 {
 	return this->pizzas;
 }
 
-vector<SideOrder>
-Order::getSides() const
+vector<SideOrder> Order::getSides() const
 {
 	return this->sides;
 }
 
-status
-Order::getStatus() const
+status Order::getStatus() const
 {
 	return this->_status;
 }
 
-Location
-Order::getLocation() const
+Location Order::getLocation() const
 {
 	return this->location;
 }
 
-string
-Order::getComment() const
+string Order::getComment() const
 {
 	return this->comment;
 }
 
-string
-Order::getHomeAddress() const
+string Order::getHomeAddress() const
 {
 	return this->homeAddress;
 }
 
-deliveryMethod
-Order::getDeliveryMethod() const
+deliveryMethod Order::getDeliveryMethod() const
 {
 	return _deliveryMethod;
 }
 
-bool
-Order::isPaidFor() const
+bool Order::isPaidFor() const
 {
 	return paidFor;
 }
 
-size_t
-Order::getID() const
+size_t Order::getID() const
 {
 	return this->id;
 }
 
-void
-Order::setPizzas(const vector<Pizza> &pizzas)
+void Order::setPizzas(const vector<Pizza> &pizzas)
 {
 	this->pizzas = pizzas;
 }
 
-void
-Order::setSides(const vector<SideOrder> &sides)
+void Order::setSides(const vector<SideOrder> &sides)
 {
 	this->sides = sides;
 }
 
-void
-Order::setStatus(const status &orderStatus)
+void Order::setStatus(const status &orderStatus)
 {
 	this->_status = orderStatus;
 }
 
-void
-Order::setLocation(const Location &location)
+void Order::setLocation(const Location &location)
 {
 	this->location = location;
 }
 
-void
-Order::setComment(const string &comment)
+void Order::setComment(const string &comment)
 {
 	this->comment = comment;
 }
 
-void
-Order::setHomeAddress(const string &homeAddress)
+void Order::setHomeAddress(const string &homeAddress)
 {
 	this->homeAddress = homeAddress;
 }
 
-void
-Order::setDeliveryMethod(const deliveryMethod &orderDeliveryMethod)
+void Order::setDeliveryMethod(const deliveryMethod &orderDeliveryMethod)
 {
 	this->_deliveryMethod = orderDeliveryMethod;
 }
 
-void
-Order::setOrderAsPaidFor(bool isPaid)
+void Order::setOrderAsPaidFor(bool isPaid)
 {
 	this->paidFor = isPaid;
 }
 
-void
-Order::setID(const size_t &id)
+void Order::setID(const size_t &id)
 {
 	this->id = id;
 }
 
 /*
 *************************************************
-PRIVATE FUNCTIONS
+			PRIVATE FUNCTIONS
 *************************************************
 */
 
 
 /*
 *************************************************
-OVERLOAD FUNCTIONS
+			OVERLOAD FUNCTIONS
 *************************************************
 */
 
 /*
 Prints the order from a user.
 */
-ostream &
-operator<<(ostream &out, const Order &order)
+ostream &operator<<(ostream &out, const Order &order)
 {
 	if (&out != &cout)
 	{
@@ -206,8 +187,7 @@ operator<<(ostream &out, const Order &order)
 	return out;
 }
 
-istream &
-operator>>(istream &in, Order &order)
+istream &operator>>(istream &in, Order &order)
 {
 	if (&in != &cin)
 	{
@@ -248,29 +228,25 @@ operator>>(istream &in, Order &order)
 	return in;
 }
 
-bool
-operator==(const Order &left, const Order &right)
+bool operator==(const Order &left, const Order &right)
 {
 	Order order = left * right;
 	return left.pizzas.size() == order.pizzas.size() && left.sides.size() == order.sides.size()
 		&& right.pizzas.size() == order.pizzas.size() && right.sides.size() == right.sides.size();
 }
 
-bool
-operator!=(const Order &left, const Order &right)
+bool operator!=(const Order &left, const Order &right)
 {
 	return !(left == right);
 }
 
-bool
-operator<=(const Order &left, const Order &right)
+bool operator<=(const Order &left, const Order &right)
 {
 	Order order = left * right;
 	return left == order;
 }
 
-Order
-operator*(const Order &left, const Order &right)
+Order operator*(const Order &left, const Order &right)
 {
 	Order order;
 	for (int i = 0; i < left.pizzas.size(); ++i)
@@ -299,8 +275,7 @@ operator*(const Order &left, const Order &right)
 }
 
 // The + operator ONLY adds together the vectors pizzas and sides
-Order
-operator+(const Order &left, const Order &right)
+Order operator+(const Order &left, const Order &right)
 {
 	Order newOrder;
 	// Copy left Order into newOrder
@@ -321,8 +296,7 @@ operator+(const Order &left, const Order &right)
 	return newOrder;
 }
 
-Order
-operator-(const Order &left, const Order &right)
+Order operator-(const Order &left, const Order &right)
 {
 	Order newOrder = left;
 	Order temp = right;
