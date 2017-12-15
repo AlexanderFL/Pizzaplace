@@ -40,6 +40,8 @@ private:
 	void deletePizza(Order& order, const int& index);
 	// Viewing and editing side orders
 	void showSides(Order& order, string& input);
+	void showSingleSide(Order& order, const int& index, string& input);
+	void deleteSide(Order& order, const int& index);
 	// Finishing order
 	void finishOrder(Order& order);
 	

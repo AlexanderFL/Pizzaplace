@@ -376,21 +376,26 @@ void SalesmanUI::showToppings(Pizza& pizza, string& input)
 	printMenu(makeStringVector(pizza.getToppings()), "Showing toppings");
 	catchStringInput(input, 0, 0);
 	clear();
-
 }
 
 void SalesmanUI::showCrust(Pizza& pizza, string& input)
 {
-
+	printMenu({pizza.getCrust().getName()});
+	catchStringInput(input, 0, 0);
+	clear();
 }
 
 void SalesmanUI::showSize(Pizza& pizza, string& input)
 {
+	printMenu({pizza.getPizzaSize().getName()});
+	catchStringInput(input, 0, 0);
+	clear();
 }
 
 void SalesmanUI::selectPizza(const int& index)
 {
 	_pizzaNumber = index;
+	clear();
 }
 
 void SalesmanUI::deletePizza(Order& order, const int& index)
@@ -410,7 +415,37 @@ void SalesmanUI::showSides(Order& order, string& input)
 	vector<string> stringify = makeStringVector(sides);
 	stringify.push_back("Back to menu");
 	printMenu(stringify, "Sides in your order");
-	catchStringInput(input, sides.size());
+	catchStringInput(input, sides.size()+1);
+
+	int inputToInt = convertToInt(input);
+
+	if (inputToInt != sides.size() + 1) 
+	{
+		showSingleSide(order, inputToInt-1, input);
+	}
+	clear();
+}
+
+void SalesmanUI::showSingleSide(Order& order, const int& index, string& input)
+{
+	SideOrder sideOrderThatIsBeingEdited = order.getSides().at(index);
+	
+	printMenu({"Delete side", "Back"}, sideOrderThatIsBeingEdited.getName());
+	catchStringInput(input, 2);
+	int inputToIndex = convertToInt(input);
+	if (inputToIndex != 2) {
+		deleteSide(order, index);
+	}
+	clear();
+}
+
+void SalesmanUI::deleteSide(Order& order, const int& index)
+{
+	vector<SideOrder> sides = order.getSides();
+	sides.erase(sides.begin() + index);
+	order.setSides(sides);
+	
+	clear();
 }
 
 void SalesmanUI::finishOrder(Order& order)
