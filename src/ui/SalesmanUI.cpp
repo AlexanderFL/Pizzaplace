@@ -581,6 +581,9 @@ void SalesmanUI::catchStringInput(string& input, const int& max, const int& min,
 		catch (out_of_range) {
 			printMessage("No numbers larger than int32!");
 		}
+		catch (InvalidString) {
+			printMessage("Input is invalid");
+		}
 	}
 }
 
