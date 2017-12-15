@@ -19,7 +19,7 @@ public:
     User();
     User(string username, string password, string name, profession job);
 
-    // Get functions
+    /*	Get Functions	*/
     //Gets the username
     string getUsername() const;
     //Gets the password
@@ -29,7 +29,7 @@ public:
     //Gets the job
     profession getJob() const;
 
-    // Set functions
+	/*	Set Functions	*/
     //Sets the username
     void setUsername(const string &username);
     //Sets the password
@@ -39,7 +39,7 @@ public:
     //Sets the job
     void setJob(const profession &job);
 
-    // Operator overloads
+	/*	Operator Overloads	*/
     friend ostream &operator<<(ostream &out, const User &user);
     friend istream &operator>>(istream &in, User &user);
     friend bool operator==(const User &first, const User &second);
