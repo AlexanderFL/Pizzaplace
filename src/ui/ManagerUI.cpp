@@ -509,7 +509,6 @@ void ManagerUI::showSizeMenu()
 
 void ManagerUI::showSizeCreationMenu()
 {
-	string input;
 	printMessage("Creating a new size");
 	try
 	{
