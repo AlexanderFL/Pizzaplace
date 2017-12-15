@@ -242,7 +242,6 @@ int SalesmanService::calculateCost(const Order& order) {
 			for (size_t i = 0; i < order.getSides().size(); ++i) {
 				total += order.getSides().at(i).getPrice();
 			}
-			total *= (comps.at(0).getPrice() / 100.0);
 			return total * (comps.at(0).getPrice() / 100.0);
 		}
 		//If the order is not the same but has all of the items of the order within it
@@ -269,7 +268,6 @@ int SalesmanService::calculateCost(const Order& order) {
 		}
 		//Add the cost of the offer to the total if the offer is unique
 		if (unique) {
-			ext.push_back(tempExt.at(0));
 			int exttotal = 0;
 			for (size_t i = 0; i < tempExt.at(0).getOrder().getPizzas().size(); ++i) {
 				exttotal += calculateSimpleCost(tempExt.at(0).getOrder().getPizzas().at(i));

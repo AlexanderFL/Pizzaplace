@@ -195,10 +195,11 @@ bool SalesmanUI::selectLocation(Order& order, string& input)
 	if (inputToInt != locations.size() + 1)
 	{
 		order.setLocation(locations.at(convertToInt(input)-1));
+		clear();
 		return false;
 	}
-	return true;
 	clear();
+	return true;
 }
 
 
@@ -326,7 +327,7 @@ void SalesmanUI::selectDeliveryMethod(Order & order, string& input)
 
 void SalesmanUI::addAnotherPizza(Order& order)
 {
-	_pizzaNumber += 1;
+	_pizzaNumber = order.getPizzas().size();
 	vector<Pizza> pizzas = order.getPizzas();
 	pizzas.push_back(Pizza());
 	order.setPizzas(pizzas);

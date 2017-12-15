@@ -17,6 +17,7 @@ private:
 	SideOrder _sides;
 public:
 	SalesmanService();
+	// Editing orders
 	void registerNewOrder(Order& order);
 	void appendToOrder(Order& firstOrder, Order& secondOrder);
 	void appendToOrder(Order& firstOrder, Pizza& pizza);
