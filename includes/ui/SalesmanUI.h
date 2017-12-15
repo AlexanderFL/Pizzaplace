@@ -19,8 +19,8 @@ public:
 private:
 	void makeYourOwnMenu(Order& order, string& input);
 
-	void selectLocation(Order& order, string& input);
-	void newOrderStart(Order& order, bool& pizzaFromMenu, string& input);
+	bool selectLocation(Order& order, string& input);
+	bool newOrderStart(Order& order, bool& pizzaFromMenu, string& input);
 	void pickFromMenu(Order& order, string& input);
 	void selectCrust(Order& order, string& input);
 	void selectSize(Order& order, string& input);
