@@ -10,16 +10,27 @@ class CommonService
 private:
 	Data repo;
 public:
+	//Validates that a string is digit
 	void validateStringIsDigit(const string& str) const;
+	//Converts a string to an int
 	int convertStringToInt(const string& str) const;
-	// Templates
+
+	// TEMPLATES
+	//Gets all the items from its file
 	template<class T> vector<T> getItems();
+	//Gets the names from the its file
 	template<class T> vector<string> getNames();
+	//Gets the names from a vector of items
 	template<class T> vector<string> getNames(vector<T>& items);
+	//Gets an item from its file at the index
 	template<class T> T getItem(int index);
+	//Adds an item to its file
 	template<class T> void addItem(T& item) const;
+	//Deletes an item from its file at the index
 	template<class T> void deleteItem(int index);
+	//Deletes an item from a given vector at the index
 	template<class T> vector<T> deleteItem(vector<T>& items, int index);
+	//Throws an error if an vector is empty
 	template<class T> void validateVectorNotEmpty(const vector<T>& items) const;
 };
 
