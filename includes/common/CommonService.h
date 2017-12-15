@@ -15,7 +15,7 @@ public:
 	//Converts a string to an int
 	int convertStringToInt(const string& str) const;
 
-	// TEMPLATES
+	/*	TEMPLATES	*/
 	//Gets all the items from its file
 	template<class T> vector<T> getItems();
 	//Gets the names from the its file

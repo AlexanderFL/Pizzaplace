@@ -13,23 +13,23 @@ private:
 	string name;
 	double pricemod;
 public:
-	// Constructors
+	/*	Constructors	*/
 	PizzaSize();
 	PizzaSize(const string& name, double pricemod);
 
-	// Get functions
+	/*	Get Functions	*/
 	//Gets the name
 	string getName() const;
 	//Gets the price modifier
 	double getPriceMod() const;
 
-	// Set funcitons
+	/*	Set Functions	*/
 	//Sets the name
 	void setName(const string& name);
 	//Sets the price modifier
 	void setPriceMod(const double& pricemod);
 
-	// Operator overloads
+	/*	Operator Overloads	*/
 	friend ostream& operator << (ostream& out, const PizzaSize& size);
 	friend istream& operator >> (istream& in, PizzaSize& size);
 	friend bool operator == (const PizzaSize& left, const PizzaSize& right);
