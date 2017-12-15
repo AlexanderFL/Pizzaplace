@@ -105,7 +105,6 @@ void CommonUI::printOptions(const vector<string>& options, size_t biggest, bool 
 				cout<<  " ";
 			}
 			cout <<  options.at(i);
-			size_t j;
 			/*if (!displayOnly) {
 				cout << i + 1 << ". " << options.at(i);
 			}
