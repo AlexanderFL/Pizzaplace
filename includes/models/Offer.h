@@ -20,13 +20,19 @@ public:
 	Offer(string name, Order order, int price);
 
 	// Get functions
+	//Gets the name
 	string getName() const;
+	//Gets the order
 	Order getOrder() const;
+	//Gets the price
 	int getPrice() const;
 
 	// Set functions
+	//Sets the name
 	void setName(const string& name);
+	//Sets the order
 	void setOrder(const Order& order);
+	//Sets the price
 	void setPrice(const int& price);
 
 	// Operator overloads
