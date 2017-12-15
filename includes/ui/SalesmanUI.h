@@ -49,6 +49,8 @@ private:
 	void showSides(Order& order, string& input);
 	void showSingleSide(Order& order, const int& index, string& input);
 	void deleteSide(Order& order, const int& index);
+	// Marking order as paid
+	void markOrderAsPaid(Order& order);
 	// Finishing order
 	void finishOrder(Order& order);
 	

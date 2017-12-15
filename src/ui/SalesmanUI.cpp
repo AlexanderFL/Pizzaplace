@@ -134,6 +134,7 @@ void SalesmanUI::makeYourOwnMenu(Order& order, string& input, const bool& isFrom
 		"Add comment",
 		"Add another pizza", 
 		"See order", 
+		"Mark as paid",
 		"Finish",
 		"Cancel order"
 	};
@@ -181,9 +182,13 @@ void SalesmanUI::makeYourOwnMenu(Order& order, string& input, const bool& isFrom
 			showTotalOrder(order, input);
 			break;
 		case 9:
+			markOrderAsPaid(order);
+			printMessage("Order has been marked as paid.");
+			break;
+		case 10:
 			finishOrder(order);
 			return;
-		case 10:
+		case 11:
 			clear();
 			return;
 		default:
@@ -534,6 +539,11 @@ void SalesmanUI::deleteSide(Order& order, const int& index)
 	order.setSides(sides);
 	
 	clear();
+}
+
+void SalesmanUI::markOrderAsPaid(Order & order)
+{
+	order.setOrderAsPaidFor(true);
 }
 
 void SalesmanUI::finishOrder(Order& order)
