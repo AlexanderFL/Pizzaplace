@@ -20,14 +20,20 @@ void SalesmanUI::makeNewOrder(){
 	string input;
 	int nrOfOrder = 1;
 	
-	selectLocation(order, input);
 	clear();
 	while (true) {
 		try
 		{
+			if (selectLocation(order, input)) {
+				break;
+			}
 			// Prompt the user to make a new order by either
 			// selecting from menu or making his own pizza
-			newOrderStart(order, pizzaFromMenu, input);
+			while (true) {
+				if (newOrderStart(order, pizzaFromMenu, input)) {
+					break;
+				}
+			}
 		}
 		catch (FailedOpenFile) {
 			cout << "Failed to open a critical file...";
@@ -72,9 +78,16 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 			}
 			cout << "TOTAL: " << service.getPriceOfOrder(offers.at(inputInInt).getOrder()) << " kr.- " << endl;
 			cout << "TOTAL: " << offers.at(inputInInt).getPrice() << " kr.- " << endl << endl << endl;
-			printMenu({ "Go back" }, "More info about offer");
+			printMenu({ "Choose offer", "Go back" }, "More info about offer");
 			getInput(input);
-			if (input == "1") {
+			if (input == "1") 
+			{
+				order = offers.at(inputInInt).getOrder();
+				makeYourOwnMenu(order, input, true);
+				break;
+			}
+			if (input == "2")
+			{
 				clear();
 				break;
 			}
@@ -82,26 +95,28 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 	}
 }
 
-void SalesmanUI::makeYourOwnMenu(Order& order, string& input)
+void SalesmanUI::makeYourOwnMenu(Order& order, string& input, const bool& isFromMenu)
 {
 	clear();
-	Pizza newPizza;
-	vector<Pizza> allOrderPizzas = order.getPizzas();
-	allOrderPizzas.push_back(newPizza);
-	order.setPizzas(allOrderPizzas);
+	if(!isFromMenu){
+		Pizza newPizza;
+		vector<Pizza> allOrderPizzas = order.getPizzas();
+		allOrderPizzas.push_back(newPizza);
+		order.setPizzas(allOrderPizzas);
+	}
 	vector<string> makeYourOwnStringVector = 
-		{
-			"Select crust", 
-			"Select size", 
-			"Select toppings",
-			"Add sides", 
-			"Select delivery method",
-			"Add comment",
-			"Add another pizza", 
-			"See order", 
-			"Finish",
-			"Cancel order"
-		};
+	{
+		"Select crust", 
+		"Select size", 
+		"Select toppings",
+		"Add sides", 
+		"Select delivery method",
+		"Add comment",
+		"Add another pizza", 
+		"See order", 
+		"Finish",
+		"Cancel order"
+	};
 	while (true)
 	{
 		printMenu(
@@ -157,33 +172,52 @@ void SalesmanUI::makeYourOwnMenu(Order& order, string& input)
 	}
 }
 
-void SalesmanUI::selectLocation(Order& order, string& input)
+bool SalesmanUI::selectLocation(Order& order, string& input)
 {
+	
 	vector<Location> locations = service.getItems<Location>();
 	vector<string> stringifyLocations;
 	for (size_t i = 0; i < locations.size(); i++) {
 		stringifyLocations.push_back(locations.at(i).getAddress());
 	}
+	stringifyLocations.push_back("Go back");
 	printMenu({stringifyLocations}, "Please A Select Location");
-	catchStringInput(input, locations.size());
-	order.setLocation(locations.at(convertToInt(input)-1));
+	catchStringInput(input, locations.size() + 1);
+	int inputToInt = convertToInt(input);
+	if (inputToInt != locations.size() + 1)
+	{
+		order.setLocation(locations.at(convertToInt(input)-1));
+		return false;
+	}
+	return true;
+	clear();
 }
 
 
-void SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, string& input)
+bool SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, string& input)
 {
-	printMenu({"Select from menu", "Make your own pizza!"}, "Make a new order");
-
-	catchStringInput(input, 2, 1);
-	if (input == "1") {
-		pickFromMenu(order, input);
-		pizzaFromMenu = true;
-	}
-	else if (input == "2") {
-		makeYourOwnMenu(order, input);
-		pizzaFromMenu = false;
+	while (true)
+	{
+		printMenu({"Select from menu", "Make your own pizza!", "Go back"}, "Make a new order");
+	
+		catchStringInput(input, 3, 1);
+		if (input == "1") {
+			pickFromMenu(order, input);
+			pizzaFromMenu = true;
+			return false;
+		}
+		else if (input == "2") {
+			makeYourOwnMenu(order, input);
+			pizzaFromMenu = false;
+			return false;
+		}
+		else if (input == "3") {
+			clear();
+			return true;
+		}
 	}
 	clear();
+	return false;
 }
 
 void SalesmanUI::selectCrust(Order& order, string& input)
@@ -275,7 +309,9 @@ void SalesmanUI::selectDeliveryMethod(Order & order, string& input)
 	}
 	else if (input == "2") {
 		service.setOrderToDelivery(order);
-		// TODO: Ask user for address
+		
+		getInput("Home address", input);
+		order.setHomeAddress(input);
 	}
 	clear();
 }
