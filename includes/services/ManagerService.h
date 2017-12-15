@@ -3,8 +3,6 @@
 #include "CommonService.h"
 #include "NumberInString.h"
 #include "InvalidPrice.h"
-#include "Offer.h"
-#include "EmptyVector.h"
 #include "NumberInString.h"
 #include "InvalidString.h"
 #include "InvalidOffer.h"

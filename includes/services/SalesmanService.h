@@ -1,13 +1,9 @@
 #pragma once
 
-#include <iostream>
-#include <string>
 #include "CommonService.h"
-#include "Offer.h"
 #include "InvalidOrder.h"
 #include "InvalidAddress.h"
 #include "InvalidInput.h"
-using namespace std;
 
 class SalesmanService : public CommonService
 {
