@@ -120,7 +120,7 @@ void SalesmanService::validInput(const string& input, const int& max, const int&
 }
 
 void SalesmanService::setOrderToDelivery(Order& order) {
-	order.setDeliveryMethod(SEND);
+	order.setDeliveryMethod(SEND); 
 }
 
 void SalesmanService::setOrderToPickUp(Order& order) {
