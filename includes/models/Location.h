@@ -17,11 +17,13 @@ public:
 	explicit Location(string address);
 
 	/*		Get functions		*/
+	// Gets the address of the Location
 	string getAddress() const;
-	// Just for a template
+	// Just for a template, does the same as getAddress
 	string getName() const;
 
 	/*		Set functions		*/
+	// Sets the address
 	void setAddress(const string& address);
 
 	/*		Operator overloads		*/

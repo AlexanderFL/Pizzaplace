@@ -10,6 +10,7 @@ class CommonUI
 public:
 	//Clears the screen
 	void clear() const;
+
 	//Prints a menu to the screen with the options in it
 	void printMenu(const vector<string>& options) const;
 	//Prints a menu to the screen with the options in it and a title
@@ -18,12 +19,14 @@ public:
 	void printArrow(const string& str) const;
 	//Prints a meesage with the string
 	void printMessage(const string& str) const;
+
 	//Gets the input from the user
 	void getInput(string& str) const;
 	//Gets the input from the user with custom text
 	void getInput(const string& text, string& str) const;
 	//Gets the input from the user with custom text, char edtion
 	void getInput(const string& text, char& input) const;
+
 	//printing orders
 	//Prints info about a pizza in a short format
 	void showPizzaInfoShort(const Pizza& pizza) const;
@@ -31,6 +34,7 @@ public:
 	void showOrderInfo(const Order& order) const;
 	//Prints info about a order in a short format
 	void showOrderInfoShort(const Order& order) const;
+
 private:
 	//Prints the meny with the options
 	void printOptions(const vector<string>& options, size_t biggest, bool displayOnly=false) const;
