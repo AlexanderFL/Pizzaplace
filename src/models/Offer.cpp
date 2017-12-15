@@ -11,7 +11,8 @@ Offer::Offer() {
 Offer::Offer(string name, Order order, int price)
 	:name(name), order(order), price(price) {}
 
-string Offer::getName() const {
+string Offer::getName() const 
+{
 	return this->name;
 }
 
