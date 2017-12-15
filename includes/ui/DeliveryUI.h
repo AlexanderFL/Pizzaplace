@@ -13,6 +13,7 @@ private:
 public:
 	DeliveryUI();
 	void deliveryMenu();
+private:
 	void allOrdersMenu();
 	void ordersMenu();
 	void orderMenu(int index, vector<Order>& orders, int loc);
