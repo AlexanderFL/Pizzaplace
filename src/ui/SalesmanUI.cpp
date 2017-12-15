@@ -28,10 +28,6 @@ void SalesmanUI::makeNewOrder(){
 			// Prompt the user to make a new order by either
 			// selecting from menu or making his own pizza
 			newOrderStart(order, pizzaFromMenu, input);
-			if (!pizzaFromMenu) {
-				makeYourOwnMenu(order, input);
-				break;
-			}
 		}
 		catch (FailedOpenFile) {
 			cout << "Failed to open a critical file...";
