@@ -133,6 +133,10 @@ void ManagerUI::showToppingCreationMenu()
 		clear();
 		printMessage("Invalid price.");
 	}
+	catch (out_of_range) {
+		clear();
+		printMessage("Invalid price.");
+	}
 }
 
 void ManagerUI::showToppingDeleteMenu()
@@ -224,6 +228,10 @@ void ManagerUI::showToppingViewMenu()
 			clear();
 			printMessage("Invalid input.");
 		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
 		catch (EmptyVector)
 		{
 			clear();
@@ -290,6 +298,10 @@ void ManagerUI::editTopping(int index)
 				{
 					clear();
 					printMessage("Number can't contain a character");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Invalid price.");
 				}
 			}
 			else if (input == "3")
@@ -458,6 +470,10 @@ void ManagerUI::showLocationViewMenu()
 			clear();
 			printMessage("Invalid input.");
 		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
 		catch (EmptyVector)
 		{
 			clear();
@@ -538,6 +554,10 @@ void ManagerUI::showSizeCreationMenu()
 	}
 	catch (InvalidString)
 	{
+		clear();
+		printMessage("Invalid size.");
+	}
+	catch (out_of_range) {
 		clear();
 		printMessage("Invalid size.");
 	}
@@ -636,6 +656,10 @@ void ManagerUI::showSizeViewMenu()
 			clear();
 			printMessage("Invalid input");
 		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
 		catch (EmptyVector)
 		{
 			clear();
@@ -718,6 +742,10 @@ void ManagerUI::showCrustCreationMenu()
 		printMessage("Invalid price.");
 	}
 	catch (InvalidPrice) {
+		clear();
+		printMessage("Invalid price.");
+	}
+	catch (out_of_range) {
 		clear();
 		printMessage("Invalid price.");
 	}
@@ -811,6 +839,11 @@ void ManagerUI::showCrustViewMenu()
 			clear();
 			printMessage("Invalid input");
 		}
+		catch (out_of_range)
+		{
+			clear();
+			printMessage("Invalid input");
+		}
 		catch (EmptyVector)
 		{
 			clear();
@@ -896,6 +929,11 @@ ManagerUI::showSidesCreationMenu()
 	{
 		clear();
 		printMessage("Invalid price.");
+	}
+	catch (out_of_range)
+	{
+		clear();
+		printMessage("Invalid Price.");
 	}
 }
 
