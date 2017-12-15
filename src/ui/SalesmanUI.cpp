@@ -90,7 +90,9 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 				getInput(input);
 				if (input == "1")
 				{
+					Location temp = order.getLocation();
 					order = offers.at(inputInInt).getOrder();
+					order.setLocation(temp);
 					makeYourOwnMenu(order, input, true);
 					break;
 				}
