@@ -12,7 +12,7 @@ void CommonUI::printMenu(const vector<string> &options) const
 	printOptions(options, biggestStringSize(options));
 }
 
-void CommonUI::printMenu(const vector<string> &options, const string &title, const bool &displayOnly) const
+void CommonUI::printMenu(const vector<string> &options, const string &title) const
 {
 	vector<string> temp = options;
 	temp.push_back(title);
@@ -24,7 +24,7 @@ void CommonUI::printMenu(const vector<string> &options, const string &title, con
 		cout << " ";
 	}
 	cout << "          |\n";
-	printOptions(options, biggest, displayOnly);
+	printOptions(options, biggest);
 }
 
 void CommonUI::printArrow(const string &str) const
@@ -81,7 +81,7 @@ void CommonUI::printLines(size_t size) const
 	cout << "-------------\n";
 }
 
-void CommonUI::printOptions(const vector<string> &options, size_t biggest, bool displayOnly) const
+void CommonUI::printOptions(const vector<string> &options, size_t biggest) const
 {
 	for (size_t i = 0; i < options.size(); i++)
 	{
@@ -92,12 +92,6 @@ void CommonUI::printOptions(const vector<string> &options, size_t biggest, bool 
 			cout << " ";
 		}
 		cout << options.at(i);
-		/*if (!displayOnly) {
-		cout << "\t| " << i + 1 << ". " << options.at(i);
-		}
-		else {
-		cout << "\t| " << options.at(i);
-		}*/
 		for (size_t j = 0; j < (biggest - options.at(i).size()); j++)
 		{
 			cout << " ";
@@ -113,10 +107,6 @@ void CommonUI::printOptions(const vector<string> &options, size_t biggest, bool 
 			{
 				cout << " ";
 			}
-			if (displayOnly)
-			{
-				cout << "   ";
-			}
 		}
 		else
 		{
@@ -126,12 +116,6 @@ void CommonUI::printOptions(const vector<string> &options, size_t biggest, bool 
 				cout << " ";
 			}
 			cout << options.at(i);
-			/*if (!displayOnly) {
-			cout << i + 1 << ". " << options.at(i);
-			}
-			else {
-			cout << options.at(i) << "\t   ";
-			}*/
 			for (size_t j = 0; j < (biggest - options.at(i).size()); j++)
 			{
 				cout << " ";
@@ -165,7 +149,6 @@ void CommonUI::showPizzaInfoShort(const Pizza &pizza) const
 
 void CommonUI::showOrderInfo(const Order &order) const
 {
-	//TODO: FIX
 	cout << "\n\t\tPizza Place " << endl;
 	cout << "------------------------------------------------------" << endl;
 	cout << "Order ID: " << order.getID() << endl;

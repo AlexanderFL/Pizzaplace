@@ -14,7 +14,7 @@ public:
     //Prints a menu to the screen with the options in it
     void printMenu(const vector<string> &options) const;
     //Prints a menu to the screen with the options in it and a title
-    void printMenu(const vector<string> &options, const string &title, const bool &displayOnly = false) const;
+    void printMenu(const vector<string> &options, const string &title) const;
     //Prints an arrow with the string
     void printArrow(const string &str) const;
     //Prints a meesage with the string
@@ -38,7 +38,7 @@ public:
 
 private:
     //Prints the menu with the options
-    void printOptions(const vector<string> &options, size_t biggest, bool displayOnly = false) const;
+    void printOptions(const vector<string> &options, size_t biggest) const;
     //Prints lines
     void printLines(size_t size) const;
     //Finds the biggest string size from the vector
