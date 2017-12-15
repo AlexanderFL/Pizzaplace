@@ -18,11 +18,15 @@ public:
 	PizzaSize(const string& name, double pricemod);
 
 	// Get functions
+	//Gets the name
 	string getName() const;
+	//Gets the price modifier
 	double getPriceMod() const;
 
 	// Set funcitons
+	//Sets the name
 	void setName(const string& name);
+	//Sets the price modifier
 	void setPriceMod(const double& pricemod);
 
 	// Operator overloads

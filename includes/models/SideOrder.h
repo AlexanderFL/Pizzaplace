@@ -17,11 +17,15 @@ public:
 	SideOrder(const string& name, int price);
 
 	// Get functions
+	//Gets the name
 	string getName() const;
+	//Gets the price
 	int getPrice() const;
 
 	// Set functions
+	//Sets the name
 	void setName(const string& name);
+	//Sets the price
 	void setPrice(const int& price);
 
 	// Operator overloads
