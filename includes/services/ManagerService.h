@@ -4,7 +4,6 @@
 #include "NumberInString.h"
 #include "InvalidPrice.h"
 #include "NumberInString.h"
-#include "InvalidString.h"
 #include "InvalidOffer.h"
 
 class ManagerService : public CommonService

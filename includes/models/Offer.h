@@ -1,9 +1,6 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include "Order.h"
 
-using namespace std;
+#include "Order.h"
 
 class Offer
 {

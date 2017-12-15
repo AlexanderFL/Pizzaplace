@@ -374,6 +374,7 @@ void ManagerUI::showLocationCreationMenu()
 
 void ManagerUI::showLocationDeleteMenu()
 {
+	string input;
 	while (true)
 	{
 		try
