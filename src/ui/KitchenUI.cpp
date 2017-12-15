@@ -75,7 +75,7 @@ void KitchenUI::showMainMenu()
 							}
 							else
 							{
-								printMenu({ "Set as Ready", "Back" }, "Pizza things menu");
+								printMenu({ "Set as Ready", "Back" }, "Select option");
 								getInput(input);
 								if (input == "1")
 								{

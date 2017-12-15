@@ -209,7 +209,7 @@ void DeliveryUI::ordersMenu()
 					vector<Order> orders = service.getOrders(locations.at(index));
 					for (size_t i = 0; i < orders.size(); ++i)
 					{
-						names.push_back("Pizza " + to_string(orders.at(i).getID()));
+						names.push_back("Order " + to_string(orders.at(i).getID()));
 					}
 					names.push_back("Back");
 					printMenu(names, "Delivery from " + locations.at(index).getAddress());
@@ -223,7 +223,21 @@ void DeliveryUI::ordersMenu()
 							break;
 						}
 						clear();
-						orderMenu(service.convertStringToInt(input) - 1, orders, index);
+						try
+						{
+							clear();
+							orderMenu(service.convertStringToInt(input) - 1, orders, -1);
+						}
+						catch (InvalidString)
+						{
+							clear();
+							printMessage("Invalid input.");
+						}
+						catch (out_of_range)
+						{
+							clear();
+							printMessage("Invalid input.");
+						}
 					}
 					catch (InvalidString)
 					{
