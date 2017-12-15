@@ -7,7 +7,6 @@
 #include "EmptyVector.h"
 #include "NumberInString.h"
 #include "InvalidString.h"
-#include "InvalidInt.h"
 #include "InvalidOffer.h"
 
 class ManagerService : public CommonService
