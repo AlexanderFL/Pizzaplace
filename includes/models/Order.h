@@ -42,77 +42,51 @@ public:
 
     /*	Get Functions	*/
     //Gets all the pizzas
-    vector<Pizza>
-    getPizzas() const;
+    vector<Pizza> getPizzas() const;
     //Gets all the side orders
-    vector<SideOrder>
-    getSides() const;
+    vector<SideOrder> getSides() const;
     //Gets the status
-    status
-    getStatus() const;
+    status getStatus() const;
     //Gets the location
-    Location
-    getLocation() const;
+    Location getLocation() const;
     //Gets the comment
-    string
-    getComment() const;
+    string getComment() const;
     //Gets the home address
-    string
-    getHomeAddress() const;
+    string getHomeAddress() const;
     //Gets the delivery method
-    deliveryMethod
-    getDeliveryMethod() const;
+    deliveryMethod getDeliveryMethod() const;
     //Returs true if it is paid otherwise false
-    bool
-    isPaidFor() const;
+    bool isPaidFor() const;
     //Gets the ID
-    size_t
-    getID() const;
+    size_t getID() const;
 
     /* 	Set Functions	*/
     //Sets the pizzas
-    void
-    setPizzas(const vector<Pizza> &pizzas);
+    void setPizzas(const vector<Pizza> &pizzas);
     //Sets the side orders
-    void
-    setSides(const vector<SideOrder> &sides);
+    void setSides(const vector<SideOrder> &sides);
     //Sets the status
-    void
-    setStatus(const status &orderStatus);
+    void setStatus(const status &orderStatus);
     //Sets the location
-    void
-    setLocation(const Location &location);
+    void setLocation(const Location &location);
     //Sets the comments
-    void
-    setComment(const string &comment);
+    void setComment(const string &comment);
     //Sets the home address
-    void
-    setHomeAddress(const string &homeAddress);
+    void setHomeAddress(const string &homeAddress);
     //Sets the delivery method
-    void
-    setDeliveryMethod(const deliveryMethod &orderDeliveryMethod);
+    void setDeliveryMethod(const deliveryMethod &orderDeliveryMethod);
     //Sets it as paid or not
-    void
-    setOrderAsPaidFor(bool isPaid);
+    void setOrderAsPaidFor(bool isPaid);
     //Sets the ID
-    void
-    setID(const size_t &id);
+    void setID(const size_t &id);
 
     /*	Operator overloads	*/
-    friend ostream &
-    operator<<(ostream &out, const Order &order);
-    friend istream &
-    operator>>(istream &in, Order &order);
-    friend bool
-    operator==(const Order &left, const Order &right);
-    friend bool
-    operator!=(const Order &left, const Order &right);
-    friend bool
-    operator<=(const Order &left, const Order &right);
-    friend Order
-    operator*(const Order &left, const Order &right);
-    friend Order
-    operator+(const Order &left, const Order &right);
-    friend Order
-    operator-(const Order &left, const Order &right);
+    friend ostream &operator<<(ostream &out, const Order &order);
+    friend istream &operator>>(istream &in, Order &order);
+    friend bool operator==(const Order &left, const Order &right);
+    friend bool operator!=(const Order &left, const Order &right);
+    friend bool operator<=(const Order &left, const Order &right);
+    friend Order operator*(const Order &left, const Order &right);
+    friend Order operator+(const Order &left, const Order &right);
+    friend Order operator-(const Order &left, const Order &right);
 };

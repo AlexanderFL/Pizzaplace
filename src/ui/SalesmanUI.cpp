@@ -369,7 +369,13 @@ void SalesmanUI::selectSides(Order &order, string &input)
 
 	//Set the selected side order in service
 	int index = convertToInt(input) - 1;
-	service.appendToOrder(order, sideOrder.at(index));
+	try
+	{
+		service.appendToOrder(order, sideOrder.at(index));
+	}
+	catch (InvalidOrder) {
+		printMessage("Order cannot be empty");
+	}
 
 	clear();
 }
@@ -395,8 +401,18 @@ void SalesmanUI::selectDeliveryMethod(Order &order, string &input)
 	{
 		service.setOrderToDelivery(order);
 
-		getInput("Home address", input);
-		order.setHomeAddress(input);
+		while (true)
+		{
+			try
+			{
+				getInput("Home address", input);
+				service.assignHomeAddress(order, input);
+				break;
+			}
+			catch (InvalidAddress) {
+				printMessage("Address must contain one number and one letter.");
+			}
+		}
 	}
 	clear();
 }
@@ -598,7 +614,14 @@ void SalesmanUI::markOrderAsPaid(Order &order)
 
 void SalesmanUI::finishOrder(Order &order)
 {
-	service.registerNewOrder(order);
+	try
+	{
+		service.registerNewOrder(order);
+	}
+	catch (InvalidOrder)
+	{
+		printMessage("Offer cannot be empty");
+	}
 }
 
 /*

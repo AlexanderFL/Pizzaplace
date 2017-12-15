@@ -19,40 +19,29 @@ public:
     User();
     User(string username, string password, string name, profession job);
 
-    // Get functions
+    /*	Get Functions	*/
     //Gets the username
-    string
-    getUsername() const;
+    string getUsername() const;
     //Gets the password
-    string
-    getPassword() const;
+    string getPassword() const;
     //Gets the name
-    string
-    getName() const;
+    string getName() const;
     //Gets the job
-    profession
-    getJob() const;
+    profession getJob() const;
 
-    // Set functions
+	/*	Set Functions	*/
     //Sets the username
-    void
-    setUsername(const string &username);
+    void setUsername(const string &username);
     //Sets the password
-    void
-    setPassword(const string &password);
+    void setPassword(const string &password);
     //Sets the name
-    void
-    setName(const string &name);
+    void setName(const string &name);
     //Sets the job
-    void
-    setJob(const profession &job);
+    void setJob(const profession &job);
 
-    // Operator overloads
-    friend ostream &
-    operator<<(ostream &out, const User &user);
-    friend istream &
-    operator>>(istream &in, User &user);
-    friend bool
-    operator==(const User &first, const User &second);
+	/*	Operator Overloads	*/
+    friend ostream &operator<<(ostream &out, const User &user);
+    friend istream &operator>>(istream &in, User &user);
+    friend bool operator==(const User &first, const User &second);
 };
 
