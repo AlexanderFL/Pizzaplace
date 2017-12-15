@@ -289,7 +289,7 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 			}
 		}
 	}
-	if (index == -1 || sim < 75) {
+	if (index == -1 && sim < 75) {
 		//normal
 		return calculateSimpleCost(pizza);
 	}

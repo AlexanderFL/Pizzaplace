@@ -71,10 +71,11 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 				vector<Topping> tempToppings = tempPizza.at(i).getToppings();
 				for (size_t j = 0; j < tempToppings.size(); ++j) {
 					cout << "\t  " << tempToppings.at(j).getName() << "    \t" << tempToppings.at(j).getPrice() << " kr.-" << endl;
-					cout << "TOTAL: " << service.getPriceOfOrder(offers.at(j).getOrder()) << " kr.- " << endl;
-					cout << "TOTAL: " << offers.at(j).getPrice() << " kr.- " << endl << endl << endl;
+					
 				}
 			}
+			cout << "TOTAL: " << service.getPriceOfOrder(offers.at(inputInInt).getOrder()) << " kr.- " << endl;
+			cout << "TOTAL: " << offers.at(inputInInt).getPrice() << " kr.- " << endl << endl << endl;
 			printMenu({ "Go back" }, "More info about offer");
 			getInput(input);
 			if (input == "1") {
