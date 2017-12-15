@@ -533,11 +533,6 @@ void SalesmanUI::catchStringInput(string& input, const int& max, const int& min,
 	}
 }
 
-Pizza SalesmanUI::getCurrentPizza(Order& order)
-{
-	return order.getPizzas().at(_pizzaNumber);
-}
-
 int SalesmanUI::convertToInt(string& input)
 {
 	return std::atoi(input.c_str());
