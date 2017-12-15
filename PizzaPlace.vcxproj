@@ -184,6 +184,7 @@
     <ClCompile Include="src\exceptions\InvalidInput.cpp" />
     <ClCompile Include="src\exceptions\Canceled.cpp" />
     <ClCompile Include="src\common\CommonService.cpp" />
+    <ClCompile Include="src\exceptions\InvalidInt.cpp" />
     <ClCompile Include="src\exceptions\InvalidString.cpp" />
     <ClCompile Include="src\exceptions\InvalidAddress.cpp" />
     <ClCompile Include="src\exceptions\InvalidOrder.cpp" />

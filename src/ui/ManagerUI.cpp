@@ -349,7 +349,6 @@ void ManagerUI::showLocationsMenu()
 
 void ManagerUI::showLocationCreationMenu()
 {
-	string input;
 	printMessage("Creating a new Location");
 	try
 	{
@@ -375,7 +374,6 @@ void ManagerUI::showLocationCreationMenu()
 
 void ManagerUI::showLocationDeleteMenu()
 {
-	string input;
 	while (true)
 	{
 		try
@@ -687,7 +685,6 @@ void ManagerUI::showCrustMenu()
 
 void ManagerUI::showCrustCreationMenu()
 {
-	string input;
 	printMessage("Creating a new crust");
 	try
 	{
@@ -861,7 +858,6 @@ void ManagerUI::showSidesMenu()
 void
 ManagerUI::showSidesCreationMenu()
 {
-	string input;
 	printMessage("Creating a new side");
 	try
 	{
@@ -993,7 +989,7 @@ void ManagerUI::showSidesViewMenu()
 
 /*
 ******************************************
-OFFERS
+			OFFERS
 ******************************************
 */
 
@@ -1267,8 +1263,7 @@ void ManagerUI::showOfferCreationMenu()
 	}
 }
 
-void
-ManagerUI::showOfferViewMenu()
+void ManagerUI::showOfferViewMenu()
 {
 	string input;
 	while (true)
@@ -1317,8 +1312,7 @@ ManagerUI::showOfferViewMenu()
 	}
 }
 
-void
-ManagerUI::showOfferDeleteMenu()
+void ManagerUI::showOfferDeleteMenu()
 {
 	string input;
 	while (true)
@@ -1367,8 +1361,7 @@ ManagerUI::showOfferDeleteMenu()
 	}
 }
 
-void
-ManagerUI::showCreatePizzaMenu(Pizza &pizza)
+void ManagerUI::showCreatePizzaMenu(Pizza &pizza)
 {
 	string input;
 	while (true)
@@ -1486,8 +1479,7 @@ ManagerUI::showCreatePizzaMenu(Pizza &pizza)
 	}
 }
 
-void
-ManagerUI::showOrders()
+void ManagerUI::showOrders()
 {
 	string input;
 

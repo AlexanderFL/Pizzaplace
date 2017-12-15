@@ -209,12 +209,9 @@ void DeliveryUI::ordersMenu()
 					vector<Order> orders = service.getOrders(locations.at(index));
 					for (size_t i = 0; i < orders.size(); ++i)
 					{
-						//cout << i + 1 << ": " << showPizzaInfoShort(pizzas.at(i)) << endl
 						names.push_back("Pizza " + to_string(orders.at(i).getID()));
 					}
 					names.push_back("Back");
-
-					//ADD NAME OF PLACE HERE
 					printMenu(names, "Delivery from " + locations.at(index).getAddress());
 					getInput(input);
 					try
