@@ -24,15 +24,18 @@ void SalesmanUI::makeNewOrder(){
 	while (true) {
 		try
 		{
-			if (selectLocation(order, input)) {
-				break;
-			}
-			// Prompt the user to make a new order by either
-			// selecting from menu or making his own pizza
-			while (true) {
-				if (newOrderStart(order, pizzaFromMenu, input)) {
-					break;
+			if (!selectLocation(order, input)) {
+				// Prompt the user to make a new order by either
+				// selecting from menu or making his own pizza
+				while (true) {
+					if (newOrderStart(order, pizzaFromMenu, input)) {
+						break;
+					}
 				}
+			}
+			else
+			{
+				break;
 			}
 		}
 		catch (FailedOpenFile) {
