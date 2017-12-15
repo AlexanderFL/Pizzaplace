@@ -1,7 +1,6 @@
 #pragma once
 
 #include "CommonService.h"
-#include "Order.h"
 
 class KitchenService : public CommonService
 {

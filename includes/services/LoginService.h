@@ -3,7 +3,6 @@
 #include "CommonService.h"
 #include "User.h"
 #include "InvalidLogin.h"
-#include "EmptyVector.h"
 
 class LoginService : public CommonService
 {
