@@ -101,88 +101,84 @@ void ManagerUI::showToppingCreationMenu() {
 
 void ManagerUI::showToppingDeleteMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<Topping> toppings = service.getItems<Topping>();
-				vector<string> names;
-				for (size_t i = 0; i < toppings.size(); ++i) {
-					names.push_back(toppings.at(i).getName());
-				}
-				names.push_back("Back");
-				printMenu(names, "Toppings");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					try {
-						service.deleteItem<Topping>(index - 1);
-						clear();
-						printMessage("Topping deleted.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Invalid input.");
-					}
-				}
+	while (true) {
+		try {
+			vector<Topping> toppings = service.getItems<Topping>();
+			vector<string> names;
+			for (size_t i = 0; i < toppings.size(); ++i) {
+				names.push_back(toppings.at(i).getName());
 			}
-			catch (InvalidString) {
+			names.push_back("Back");
+			printMenu(names, "Toppings");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
 				clear();
-				printMessage("Invalid input");
+				break;
+			}
+			else {
+				service.deleteItem<Topping>(index - 1);
+				clear();
+				printMessage("Topping deleted.");
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no toppings.");
-	}
-	catch (FailedOpenFile) {
-		clear();
-		printMessage("There are currently no toppings.");
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input");
+		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no toppings.");
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no toppings.");
+		}
 	}
 }
 
 void ManagerUI::showToppingViewMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<Topping> toppings = service.getItems<Topping>();
-				vector<string> names = service.getNames<Topping>();
-				names.push_back("Back");
-				printMenu(names, "Toppings");
-				getInput(input);
-				int index = service.convertStringToInt(input);
+	while (true) {
+		try {
+			vector<Topping> toppings = service.getItems<Topping>();
+			vector<string> names = service.getNames<Topping>();
+			names.push_back("Back");
+			printMenu(names, "Toppings");
+			getInput(input);
+			int index = service.convertStringToInt(input);
 
-				if (index < names.size()) {
-					clear();
-					editTopping(index - 1);
-				}
-				else if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					clear();
-					printMessage("Invalid input.");
-				}
+			if (index < names.size()) {
+				clear();
+				editTopping(index - 1);
 			}
-			catch (InvalidString) {
+			else if (index == names.size()) {
+				clear();
+				break;
+			}
+			else {
 				clear();
 				printMessage("Invalid input.");
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no toppings.");
-	}
-	catch (FailedOpenFile) {
-		clear();
-		printMessage("There are currently no toppings.");
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no toppings.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no toppings.");
+			break;
+		}
 	}
 }
 
@@ -302,82 +298,83 @@ void ManagerUI::showLocationCreationMenu() {
 
 void ManagerUI::showLocationDeleteMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<Location> locations = service.getItems<Location>();
-				vector<string> names = service.getNames<Location>();
-				names.push_back("Back");
-				printMenu(names, "Deleting a location");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					try {
-						clear();
-						service.deleteItem<Location>(index - 1);
-						printMessage("Location deleted.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Invalid input.");
-					}
-				}
-			}
-			catch (InvalidString) {
+	while (true) {
+		try {
+			vector<Location> locations = service.getItems<Location>();
+			vector<string> names = service.getNames<Location>();
+			names.push_back("Back");
+			printMenu(names, "Deleting a location");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
 				clear();
-				printMessage("Invalid input.");
+				break;
+			}
+			else {
+				clear();
+				service.deleteItem<Location>(index - 1);
+				printMessage("Location deleted.");	
+				break;
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no locations available.");
-	}
-	catch (FailedOpenFile) {
-		clear();
-		printMessage("There are currently no locations available.");
-	}
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no locations available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no locations available.");
+			break;
+		}
+	}	
 }
 
 void ManagerUI::showLocationViewMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<Location> locations = service.getItems<Location>();
-				vector<string> names;
-				for (size_t i = 0; i < locations.size(); ++i) {
-					names.push_back(locations.at(i).getAddress());
-				}
-				names.push_back("Back");
-				printMenu(names, "Locations");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					clear();
-					printMessage("Not a valid option.");
-				}
+	while (true) {
+		try {
+			vector<Location> locations = service.getItems<Location>();
+			vector<string> names;
+			for (size_t i = 0; i < locations.size(); ++i) {
+				names.push_back(locations.at(i).getAddress());
 			}
-			catch (InvalidString) {
+			names.push_back("Back");
+			printMenu(names, "Locations");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
 				clear();
-				printMessage("Invalid input.");
+				break;
+			}
+			else {
+				clear();
+				printMessage("Not a valid option.");
 			}
 		}
-	}
-	catch (EmptyVector) {
-		printMessage("There are currently no locations available.");
-	}
-	catch (FailedOpenFile) {
-		printMessage("There are currently no locations available.");
-	}
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no locations available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no locations available.");
+			break;
+		}
+	}	
 }
 /*
 ******************************************
@@ -442,83 +439,85 @@ void ManagerUI::showSizeCreationMenu() {
 
 void ManagerUI::showSizesDeleteMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<PizzaSize> sizes = service.getItems<PizzaSize>();
-				vector<string> names;
-				for (size_t i = 0; i < sizes.size(); ++i) {
-					names.push_back(sizes.at(i).getName() + " " + to_string(sizes.at(i).getPriceMod()));
-				}
-				names.push_back("Back");
-				printMenu(names, "Deleting a size");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					try {
-						clear();
-						service.deleteItem<PizzaSize>(index - 1);
-						printMessage("Size deleted.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Invalid input.");
-					}
-				}
+	while (true) {
+		try {
+			vector<PizzaSize> sizes = service.getItems<PizzaSize>();
+			vector<string> names;
+			for (size_t i = 0; i < sizes.size(); ++i) {
+				names.push_back(sizes.at(i).getName() + " " + to_string(sizes.at(i).getPriceMod()));
 			}
-			catch (InvalidString) {
+			names.push_back("Back");
+			printMenu(names, "Deleting a size");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
 				clear();
-				printMessage("Invalid input");
+				break;
+			}
+			else {
+				clear();
+				service.deleteItem<PizzaSize>(index - 1);
+				printMessage("Size deleted.");
+				break;
 			}
 		}
-	}
-	catch (EmptyVector) {
-		printMessage("There are currently no sizes available.");
-	}
-	catch (FailedOpenFile) {
-		printMessage("There are currently no sizes available.");
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input");
+		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no sizes available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no sizes available.");
+			break;
+		}
 	}
 }
 
 void ManagerUI::showSizeViewMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<PizzaSize> sizes = service.getItems<PizzaSize>();
-				vector<string> names;
-				for (size_t i = 0; i < sizes.size(); ++i) {
-					names.push_back(sizes.at(i).getName() + " " + to_string(sizes.at(i).getPriceMod()));
-				}
-				names.push_back("Back");
-				printMenu(names, "Pizza sizes");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					clear();
-					printMessage("Invalid input.");
-				}
+	while (true) {
+		try {
+			vector<PizzaSize> sizes = service.getItems<PizzaSize>();
+			vector<string> names;
+			for (size_t i = 0; i < sizes.size(); ++i) {
+				names.push_back(sizes.at(i).getName() + " " + to_string(sizes.at(i).getPriceMod()));
 			}
-			catch (InvalidString) {
+			names.push_back("Back");
+			printMenu(names, "Pizza sizes");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
 				clear();
-				printMessage("Invalid input");
+				break;
+			}
+			else {
+				clear();
+				printMessage("Invalid input.");
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no sizes available.");
-	}
-	catch (FailedOpenFile) {
-		printMessage("There are currently no sizes available.");
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no sizes available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no sizes available.");
+			break;
+		}
 	}
 }
 
@@ -583,86 +582,85 @@ void ManagerUI::showCrustCreationMenu() {
 
 void ManagerUI::showCrustDeleteMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
-				vector<string> names;
-				for (size_t i = 0; i < crusts.size(); ++i) {
-					names.push_back(crusts.at(i).getName() + " " + to_string(crusts.at(i).getPrice()));
-				}
-				names.push_back("Back");
-				printMenu(names, "Deleting pizza crust");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					try {
-						clear();
-						service.deleteItem<PizzaCrust>(index - 1);
-						printMessage("Crust deleted.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Invalid input.");
-					}
-				}
+	while (true) {
+		try {
+			vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
+			vector<string> names;
+			for (size_t i = 0; i < crusts.size(); ++i) {
+				names.push_back(crusts.at(i).getName() + " " + to_string(crusts.at(i).getPrice()));
 			}
-			catch (InvalidString) {
+			names.push_back("Back");
+			printMenu(names, "Deleting pizza crust");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
 				clear();
-				printMessage("Invalid input");
+				break;
+			}
+			else {
+				clear();
+				service.deleteItem<PizzaCrust>(index - 1);
+				printMessage("Crust deleted.");
+				break;
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no crusts available.");
-	}
-	catch (FailedOpenFile) {
-		clear();
-		printMessage("There are currently no crusts available.");
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input");
+		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no crusts available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no crusts available.");
+			break;
+		}
 	}
 }
 
 void ManagerUI::showCrustViewMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
-				vector<string> names;
-				for (size_t i = 0; i < crusts.size(); ++i) {
-					names.push_back(crusts.at(i).getName() + " " + to_string(crusts.at(i).getPrice()));
-				}
-				names.push_back("Back");
-				printMenu(names, "Pizza crusts");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					clear();
-					printMessage("Invalid input");
-				}
+	while (true) {
+		try {
+			vector<PizzaCrust> crusts = service.getItems<PizzaCrust>();
+			vector<string> names;
+			for (size_t i = 0; i < crusts.size(); ++i) {
+				names.push_back(crusts.at(i).getName() + " " + to_string(crusts.at(i).getPrice()));
 			}
-			catch (InvalidString) {
+			names.push_back("Back");
+			printMenu(names, "Pizza crusts");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
+				clear();
+				break;
+			}
+			else {
 				clear();
 				printMessage("Invalid input");
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no crusts available.");
-	}
-	catch (FailedOpenFile) {
-		clear();
-		printMessage("There are currently no crusts available.");
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no crusts available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no crusts available.");
+			break;
+		}
 	}
 }
 
@@ -727,78 +725,86 @@ void ManagerUI::showSidesCreationMenu() {
 
 void ManagerUI::showSidesDeleteMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<SideOrder> sides = service.getItems<SideOrder>();
-				vector<string> names;
-				for (size_t i = 0; i < sides.size(); ++i) {
-					names.push_back(sides.at(i).getName() + " " + to_string(sides.at(i).getPrice()));
-				}
-				names.push_back("Back");
-				printMenu(names, "Sides");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					try {
-						clear();
-						service.deleteItem<SideOrder>(index - 1);
-						printMessage("Side deleted.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Invalid input.");
-					}
-				}
+	while (true) {
+		try {
+			vector<SideOrder> sides = service.getItems<SideOrder>();
+			vector<string> names;
+			for (size_t i = 0; i < sides.size(); ++i) {
+				names.push_back(sides.at(i).getName() + " " + to_string(sides.at(i).getPrice()));
 			}
-			catch (InvalidString) {
+			names.push_back("Back");
+			printMenu(names, "Sides");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
 				clear();
-				printMessage("Invalid input.");
+				break;
+			}
+			else {
+				clear();
+				service.deleteItem<SideOrder>(index - 1);
+				printMessage("Side deleted.");
+				break;
 			}
 		}
-	}
-	catch (EmptyVector) {
-		printMessage("There are currently no sides available.");
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no sides available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no sides available.");
+			break;
+		}
 	}
 }
 
 void ManagerUI::showSidesViewMenu() {
 	string input;
-	try {
-		while (true) {
-			try {
-				vector<SideOrder> sides = service.getItems<SideOrder>();
-				vector<string> names;
-				for (size_t i = 0; i < sides.size(); ++i) {
-					names.push_back(sides.at(i).getName() + " " + to_string(sides.at(i).getPrice()));
-				}
-				names.push_back("Back");
-				printMenu(names, "Sides");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					clear();
-					printMessage("Invalid input.");
-				}
+	while (true) {
+		try {
+			vector<SideOrder> sides = service.getItems<SideOrder>();
+			vector<string> names;
+			for (size_t i = 0; i < sides.size(); ++i) {
+				names.push_back(sides.at(i).getName() + " " + to_string(sides.at(i).getPrice()));
 			}
-			catch (InvalidString) {
+			names.push_back("Back");
+			printMenu(names, "Sides");
+			getInput(input);
+			int index = service.convertStringToInt(input);
+			if (index == names.size()) {
+				clear();
+				break;
+			}
+			else {
 				clear();
 				printMessage("Invalid input.");
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no sides available.");
-	}
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no sides available.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no sides available.");
+			break;
+		}
+	}	
 }
 
 /*
@@ -851,7 +857,7 @@ void ManagerUI::showOfferCreationMenu() {
 			clear();
 		}
 		else if (input == "2") {
-			getInput("Procent Discount", input);
+			getInput("Procent Discount (1-100)", input);
 			try {
 				int price = service.convertStringToInt(input);
 				service.validProcent(price);
@@ -882,89 +888,117 @@ void ManagerUI::showOfferCreationMenu() {
 		}
 		else if (input == "4") {
 			clear();
-			try {
-				vector<string> names;
-				for (size_t i = 0; i < pizzas.size(); ++i) {
-					names.push_back("Pizza with " + to_string(pizzas.at(i).getToppings().size()) + " toppings");
-				}
-				names.push_back("Back");
-				printMenu(names, "Current Pizzas");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-				}
-				else {
-					try {
+			while (true) {
+				try {
+					vector<string> names;
+					for (size_t i = 0; i < pizzas.size(); ++i) {
+						names.push_back("Pizza with " + to_string(pizzas.at(i).getToppings().size()) + " toppings");
+					}
+					service.validateVectorNotEmpty(names);
+					names.push_back("Back");
+					printMenu(names, "Current Pizzas");
+					getInput(input);
+					int index = service.convertStringToInt(input);
+					if (index == names.size()) {
+						clear();
+						break;
+					}
+					else {
 						pizzas = service.deleteItem(pizzas, index - 1);
 						clear();
 						printMessage("Pizza removed.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Not a valid option.");
+						break;
 					}
 				}
-			}
-			catch (EmptyVector) {
-				clear();
-				printMessage("No pizzas available.");
+				catch (InvalidString) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (EmptyVector) {
+					clear();
+					printMessage("No pizzas available.");
+					break;
+				}
 			}
 		}
 		else if (input == "5") {
 			clear();
-			try {
-				vector<string> names = service.getNames<SideOrder>();
-				names.push_back("Back");
-				printMenu(names, "Sides");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-				}
-				else {
-					try {
+			while (true) {
+				try {
+					vector<string> names = service.getNames<SideOrder>();
+					names.push_back("Back");
+					printMenu(names, "Sides");
+					getInput(input);
+					int index = service.convertStringToInt(input);
+					if (index == names.size()) {
+						clear();
+						break;
+					}
+					else {
 						sides.push_back(service.getItem<SideOrder>(index - 1));
 						clear();
 						printMessage("Side added.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Not a valid option.");
+						break;
 					}
 				}
-			}
-			catch (EmptyVector) {
-				clear();
-				printMessage("No toppings available.");
+				catch (InvalidString) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (EmptyVector) {
+					clear();
+					printMessage("No sides available.");
+					break;
+				}
+				catch (FailedOpenFile) {
+					clear();
+					printMessage("No sides available.");
+					break;
+				}
 			}
 		}
 		else if (input == "6") {
 			clear();
-			try {
-				vector<string> names = service.getNames(sides);
-				names.push_back("Back");
-				printMenu(names, "Current Sides");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-				}
-				else {
-					try {
+			while (true) {
+				try {
+					vector<string> names = service.getNames(sides);
+					service.validateVectorNotEmpty(names);
+					names.push_back("Back");
+					printMenu(names, "Current Sides");
+					getInput(input);
+					int index = service.convertStringToInt(input);
+					if (index == names.size()) {
+						clear();
+						break;
+					}
+					else {
 						sides = service.deleteItem(sides, index - 1);
 						clear();
 						printMessage("Side removed.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Not a valid option.");
+						break;
 					}
 				}
-			}
-			catch (EmptyVector) {
-				clear();
-				printMessage("No sides available.");
+				catch (InvalidString) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (EmptyVector) {
+					clear();
+					printMessage("No sides available.");
+					break;
+				}
 			}
 		}
 		else if (input == "7") {
@@ -999,8 +1033,8 @@ void ManagerUI::showOfferCreationMenu() {
 
 void ManagerUI::showOfferViewMenu() {
 	string input;
-	try {
-		while (true) {
+	while (true) {
+		try {
 			vector<Offer> offers = service.getItems<Offer>();
 			vector<string> names = service.getNames<Offer>();
 			names.push_back("Back");
@@ -1016,17 +1050,31 @@ void ManagerUI::showOfferViewMenu() {
 				printMessage("Not a valid option.");
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no toppings.");
-	}
+		catch (InvalidString) {
+			clear();
+			printMessage("Not a valid option.");
+		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Not a valid option.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no offers.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no offers.");
+			break;
+		}
+	}	
 }
 
 void ManagerUI::showOfferDeleteMenu() {
 	string input;
-	try {
-		while (true) {
+	while (true) {
+		try {
 			vector<string> names = service.getNames<Offer>();
 			names.push_back("Back");
 			printMenu(names, "Offers");
@@ -1037,21 +1085,29 @@ void ManagerUI::showOfferDeleteMenu() {
 				return;
 			}
 			else {
-				try {
-					service.deleteItem<Offer>(index - 1);
-					clear();
-					printMessage("Topping deleted.");
-				}
-				catch (out_of_range) {
-					clear();
-					printMessage("Not a valid option.");
-				}
+				service.deleteItem<Offer>(index - 1);
+				clear();
+				printMessage("Offer deleted.");
 			}
 		}
-	}
-	catch (EmptyVector) {
-		clear();
-		printMessage("There are currently no toppings.");
+		catch (InvalidString) {
+			clear();
+			printMessage("Not a valid option.");
+		}
+		catch (out_of_range) {
+			clear();
+			printMessage("Not a valid option.");
+		}
+		catch (EmptyVector) {
+			clear();
+			printMessage("There are currently no offers.");
+			break;
+		}
+		catch (FailedOpenFile) {
+			clear();
+			printMessage("There are currently no offers.");
+			break;
+		}
 	}
 }
 
@@ -1062,60 +1118,78 @@ void ManagerUI::showCreatePizzaMenu(Pizza& pizza) {
 		getInput(input);
 		if (input == "1") {
 			clear();
-			try {
-				vector<string> names = service.getNames<Topping>();
-				names.push_back("Back");
-				printMenu(names, "Toppings");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					try {
+			while (true) {
+				try {
+					vector<string> names = service.getNames<Topping>();
+					names.push_back("Back");
+					printMenu(names, "Toppings");
+					getInput(input);
+					int index = service.convertStringToInt(input);
+					if (index == names.size()) {
+						clear();
+						break;
+					}
+					else {
 						pizza.addToppings(service.getItem<Topping>(index - 1));
 						clear();
 						printMessage("Topping added.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Not a valid option.");
+						break;
 					}
 				}
-			}
-			catch (EmptyVector) {
-				clear();
-				printMessage("No toppings available.");
+				catch (InvalidString) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (EmptyVector) {
+					clear();
+					printMessage("No toppings available.");
+					break;
+				}
+				catch (FailedOpenFile) {
+					clear();
+					printMessage("No toppings available.");
+					break;
+				}
 			}
 		}
 		else if (input == "2") {
 			clear();
-			try {
-				vector<string> names = service.getNames(pizza.getToppings());
-				names.push_back("Back");
-				printMenu(names, "Toppings");
-				getInput(input);
-				int index = service.convertStringToInt(input);
-				if (index == names.size()) {
-					clear();
-					break;
-				}
-				else {
-					try {
+			while (true) {
+				try {
+					vector<string> names = service.getNames(pizza.getToppings());
+					service.validateVectorNotEmpty(names);
+					names.push_back("Back");
+					printMenu(names, "Toppings");
+					getInput(input);
+					int index = service.convertStringToInt(input);
+					if (index == names.size()) {
+						clear();
+						break;
+					}
+					else {
 						pizza.setToppings(service.deleteItem(pizza.getToppings(), index - 1));
 						clear();
 						printMessage("Topping removed.");
-					}
-					catch (out_of_range) {
-						clear();
-						printMessage("Not a valid option.");
+						break;
 					}
 				}
-			}
-			catch (EmptyVector) {
-				clear();
-				printMessage("No toppings available.");
+				catch (InvalidString) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (out_of_range) {
+					clear();
+					printMessage("Not a valid option.");
+				}
+				catch (EmptyVector) {
+					clear();
+					printMessage("No toppings available.");
+					break;
+				}
 			}
 		}
 		else if (input == "3") {
