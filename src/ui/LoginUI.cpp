@@ -4,9 +4,6 @@
 #include "KitchenUI.h"
 #include "SalesmanUI.h"
 #include "DeliveryUI.h"
-#include <iostream>
-
-using namespace std;
 
 void LoginUI::startUI()
 {

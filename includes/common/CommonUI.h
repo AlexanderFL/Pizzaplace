@@ -25,8 +25,6 @@ public:
     void getInput(string &str) const;
     //Gets the input from the user with custom text
     void getInput(const string &text, string &str) const;
-    //Gets the input from the user with custom text, char edtion
-    void getInput(const string &text, char &input) const;
 
     /*		Printing info		*/
     //Prints info about a pizza in a short format
