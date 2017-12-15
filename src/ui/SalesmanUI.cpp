@@ -310,6 +310,8 @@ void SalesmanUI::selectDeliveryMethod(Order & order, string& input)
 	else if (input == "2") {
 		service.setOrderToDelivery(order);
 		// TODO: Ask user for address
+		getInput("Home address", input);
+		order.setHomeAddress(input);
 	}
 	clear();
 }
