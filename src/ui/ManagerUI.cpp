@@ -993,7 +993,7 @@ void ManagerUI::showSidesViewMenu()
 
 /*
 ******************************************
-OFFERS
+			OFFERS
 ******************************************
 */
 
@@ -1267,8 +1267,7 @@ void ManagerUI::showOfferCreationMenu()
 	}
 }
 
-void
-ManagerUI::showOfferViewMenu()
+void ManagerUI::showOfferViewMenu()
 {
 	string input;
 	while (true)
@@ -1317,8 +1316,7 @@ ManagerUI::showOfferViewMenu()
 	}
 }
 
-void
-ManagerUI::showOfferDeleteMenu()
+void ManagerUI::showOfferDeleteMenu()
 {
 	string input;
 	while (true)
@@ -1367,8 +1365,7 @@ ManagerUI::showOfferDeleteMenu()
 	}
 }
 
-void
-ManagerUI::showCreatePizzaMenu(Pizza &pizza)
+void ManagerUI::showCreatePizzaMenu(Pizza &pizza)
 {
 	string input;
 	while (true)
@@ -1486,8 +1483,7 @@ ManagerUI::showCreatePizzaMenu(Pizza &pizza)
 	}
 }
 
-void
-ManagerUI::showOrders()
+void ManagerUI::showOrders()
 {
 	string input;
 
