@@ -87,6 +87,7 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 
 void SalesmanUI::makeYourOwnMenu(Order& order, string& input)
 {
+	clear();
 	Pizza newPizza;
 	vector<Pizza> allOrderPizzas = order.getPizzas();
 	allOrderPizzas.push_back(newPizza);
@@ -180,6 +181,10 @@ void SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, string& input)
 	if (input == "1") {
 		pickFromMenu(order, input);
 		pizzaFromMenu = true;
+	}
+	else if (input == "2") {
+		makeYourOwnMenu(order, input);
+		pizzaFromMenu = false;
 	}
 	clear();
 }
