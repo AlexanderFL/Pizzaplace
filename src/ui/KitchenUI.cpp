@@ -45,7 +45,7 @@ void KitchenUI::showMainMenu() {
 										getInput(input);
 										if (input == "1") {
 											clear();
-											service.setOrderAsBaking(pizzas.at(index - 1).getID());
+											service.setPizzaAsBaking(pizzas.at(index - 1).getID());
 											pizzas = service.getPizzas(locations.at(place));
 											printMessage("Pizza set to baking.");
 										}
@@ -63,7 +63,7 @@ void KitchenUI::showMainMenu() {
 										getInput(input);
 										if (input == "1") {
 											clear();
-											service.setOrderAsReady(pizzas.at(index - 1).getID());
+											service.setPizzaAsReady(pizzas.at(index - 1).getID());
 											pizzas = service.getPizzas(locations.at(place));
 											printMessage("Pizza set to ready.");
 											break;
