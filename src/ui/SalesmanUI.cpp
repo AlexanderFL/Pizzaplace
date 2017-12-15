@@ -567,7 +567,7 @@ void SalesmanUI::catchStringInput(string& input, const int& max, const int& min,
 		try
 		{
 			getInput(msg, input);
-			// If max is equal to min, then don't bother check if input is valid
+			// If max is equal to 0 and min is set to 0, then don't bother check if input is valid
 			if (max != 0 && min != 0)
 			{
 				service.validInput(input, max, min);
