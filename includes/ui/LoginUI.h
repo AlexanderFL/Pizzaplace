@@ -7,9 +7,8 @@
 class LoginUI : public CommonUI
 {
 private:
-    LoginService service;
+	LoginService service;
 public:
-    void
-    startUI();
+	void startUI();
 };
 

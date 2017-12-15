@@ -1,6 +1,7 @@
 #include "MainUI.h"
 
-int main() {
+int main()
+{
 	MainUI mainUI;
 	mainUI.startUI();
 

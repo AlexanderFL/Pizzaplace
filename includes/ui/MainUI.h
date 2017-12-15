@@ -5,7 +5,5 @@
 class MainUI : public CommonUI
 {
 public:
-    void
-    startUI();
+	void startUI();
 };
-	

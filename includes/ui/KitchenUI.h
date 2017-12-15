@@ -6,15 +6,12 @@
 class KitchenUI : public CommonUI
 {
 private:
-    KitchenService service;
+	KitchenService service;
 public:
-    KitchenUI();
-    void
-    showMainMenu();
+	KitchenUI();
+	void showMainMenu();
 private:
-    string
-    showPizzaInfo(const Pizza &pizza) const;
-    string
-    showPizzaInfoShort(const Pizza &pizza) const;
+	string showPizzaInfo(const Pizza &pizza) const;
+	string showPizzaInfoShort(const Pizza &pizza) const;
 };
 
