@@ -15,32 +15,27 @@ PizzaCrust::PizzaCrust(const string name, int price)
 
 }
 
-string
-PizzaCrust::getName() const
+string PizzaCrust::getName() const
 {
 	return this->name;
 }
 
-int
-PizzaCrust::getPrice() const
+int PizzaCrust::getPrice() const
 {
 	return this->price;
 }
 
-void
-PizzaCrust::setName(const string &name)
+void PizzaCrust::setName(const string &name)
 {
 	this->name = name;
 }
 
-void
-PizzaCrust::setPrice(const int &price)
+void PizzaCrust::setPrice(const int &price)
 {
 	this->price = price;
 }
 
-ostream &
-operator<<(ostream &out, const PizzaCrust &crust)
+ostream &operator<<(ostream &out, const PizzaCrust &crust)
 {
 	if (&out != &cout)
 	{
@@ -52,8 +47,7 @@ operator<<(ostream &out, const PizzaCrust &crust)
 	return out;
 }
 
-istream &
-operator>>(istream &in, PizzaCrust &crust)
+istream &operator>>(istream &in, PizzaCrust &crust)
 {
 	if (&in != &cin)
 	{

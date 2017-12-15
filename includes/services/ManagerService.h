@@ -17,20 +17,15 @@ private:
 public:
     ManagerService();
     //Replaces the topping in the file at the index
-    void
-    replaceToppingInFile(const Topping &topping, int index);
+    void replaceToppingInFile(const Topping &topping, int index);
 
     //Validation
     //Checks if the string only contains alpha characters
-    void
-    containsOnlyAlpha(string s);
+    void containsOnlyAlpha(string s);
     //Checks if the price is aboce 0
-    void
-    validPrice(int p);
+    void validPrice(int p);
     //Checks if the int is above 0 or below 100
-    void
-    validProcent(int p);
+    void validProcent(int p);
     //Validates that the offer isn't emppty and has a price and name set
-    void
-    validateOffer(const Offer &offer);
+    void validateOffer(const Offer &offer);
 };

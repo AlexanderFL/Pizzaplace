@@ -2,14 +2,13 @@
 
 /*
 *************************************************
-PUBLIC FUNCTIONS
+			PUBLIC FUNCTIONS
 *************************************************
 */
 
 ManagerUI::ManagerUI() {}
 
-void
-ManagerUI::showMainMenu()
+void ManagerUI::showMainMenu()
 {
 	string input;
 	while (true)
@@ -59,18 +58,17 @@ ManagerUI::showMainMenu()
 
 /*
 *************************************************
-PRIVATE FUNCTIONS
+				PRIVATE FUNCTIONS
 *************************************************
 */
 
 /*
 ******************************************
-TOPPINGS
+		   	TOPPINGS
 ******************************************
 */
 
-void
-ManagerUI::showToppingsMenu()
+void ManagerUI::showToppingsMenu()
 {
 	string input;
 	while (true)
@@ -102,8 +100,7 @@ ManagerUI::showToppingsMenu()
 	}
 }
 
-void
-ManagerUI::showToppingCreationMenu()
+void ManagerUI::showToppingCreationMenu()
 {
 	string input;
 	printMessage("Creating a new Topping");
@@ -138,8 +135,7 @@ ManagerUI::showToppingCreationMenu()
 	}
 }
 
-void
-ManagerUI::showToppingDeleteMenu()
+void ManagerUI::showToppingDeleteMenu()
 {
 	string input;
 	while (true)
@@ -191,8 +187,7 @@ ManagerUI::showToppingDeleteMenu()
 	}
 }
 
-void
-ManagerUI::showToppingViewMenu()
+void ManagerUI::showToppingViewMenu()
 {
 	string input;
 	while (true)
@@ -242,8 +237,7 @@ ManagerUI::showToppingViewMenu()
 	}
 }
 
-void
-ManagerUI::editTopping(int index)
+void ManagerUI::editTopping(int index)
 {
 	string input;
 	try
@@ -317,12 +311,11 @@ ManagerUI::editTopping(int index)
 
 /*
 ******************************************
-LOCATIONS
+			LOCATIONS
 ******************************************
 */
 
-void
-ManagerUI::showLocationsMenu()
+void ManagerUI::showLocationsMenu()
 {
 	string input;
 	while (true)
@@ -354,8 +347,7 @@ ManagerUI::showLocationsMenu()
 	}
 }
 
-void
-ManagerUI::showLocationCreationMenu()
+void ManagerUI::showLocationCreationMenu()
 {
 	string input;
 	printMessage("Creating a new Location");
@@ -381,8 +373,7 @@ ManagerUI::showLocationCreationMenu()
 	}
 }
 
-void
-ManagerUI::showLocationDeleteMenu()
+void ManagerUI::showLocationDeleteMenu()
 {
 	string input;
 	while (true)
@@ -433,8 +424,7 @@ ManagerUI::showLocationDeleteMenu()
 	}
 }
 
-void
-ManagerUI::showLocationViewMenu()
+void ManagerUI::showLocationViewMenu()
 {
 	string input;
 	while (true)
@@ -483,11 +473,10 @@ ManagerUI::showLocationViewMenu()
 }
 /*
 ******************************************
-SIZES
+			SIZES
 ******************************************
 */
-void
-ManagerUI::showSizeMenu()
+void ManagerUI::showSizeMenu()
 {
 	string input;
 	while (true)
@@ -519,8 +508,7 @@ ManagerUI::showSizeMenu()
 	}
 }
 
-void
-ManagerUI::showSizeCreationMenu()
+void ManagerUI::showSizeCreationMenu()
 {
 	string input;
 	printMessage("Creating a new size");
@@ -556,8 +544,7 @@ ManagerUI::showSizeCreationMenu()
 	}
 }
 
-void
-ManagerUI::showSizesDeleteMenu()
+void ManagerUI::showSizesDeleteMenu()
 {
 	string input;
 	while (true)
@@ -612,8 +599,7 @@ ManagerUI::showSizesDeleteMenu()
 	}
 }
 
-void
-ManagerUI::showSizeViewMenu()
+void ManagerUI::showSizeViewMenu()
 {
 	string input;
 	while (true)
@@ -663,12 +649,11 @@ ManagerUI::showSizeViewMenu()
 
 /*
 ******************************************
-CRUST
+				CRUST
 ******************************************
 */
 
-void
-ManagerUI::showCrustMenu()
+void ManagerUI::showCrustMenu()
 {
 	string input;
 	while (true)
@@ -700,8 +685,7 @@ ManagerUI::showCrustMenu()
 	}
 }
 
-void
-ManagerUI::showCrustCreationMenu()
+void ManagerUI::showCrustCreationMenu()
 {
 	string input;
 	printMessage("Creating a new crust");
@@ -732,8 +716,7 @@ ManagerUI::showCrustCreationMenu()
 	}
 }
 
-void
-ManagerUI::showCrustDeleteMenu()
+void ManagerUI::showCrustDeleteMenu()
 {
 	string input;
 	while (true)
@@ -788,8 +771,7 @@ ManagerUI::showCrustDeleteMenu()
 	}
 }
 
-void
-ManagerUI::showCrustViewMenu()
+void ManagerUI::showCrustViewMenu()
 {
 	string input;
 	while (true)
@@ -839,11 +821,10 @@ ManagerUI::showCrustViewMenu()
 
 /*
 ******************************************
-SIDES
+				SIDES
 ******************************************
 */
-void
-ManagerUI::showSidesMenu()
+void ManagerUI::showSidesMenu()
 {
 	string input;
 	clear();
@@ -907,8 +888,7 @@ ManagerUI::showSidesCreationMenu()
 	}
 }
 
-void
-ManagerUI::showSidesDeleteMenu()
+void ManagerUI::showSidesDeleteMenu()
 {
 	string input;
 	while (true)
@@ -963,8 +943,7 @@ ManagerUI::showSidesDeleteMenu()
 	}
 }
 
-void
-ManagerUI::showSidesViewMenu()
+void ManagerUI::showSidesViewMenu()
 {
 	string input;
 	while (true)
@@ -1019,13 +998,12 @@ OFFERS
 */
 
 
-void
-ManagerUI::showOffersMenu()
+void ManagerUI::showOffersMenu()
 {
 	string input;
 	while (true)
 	{
-		printMenu({ "Create Offer", "View Offers", "Delete Offer", "Back" }, "Offers Menu");
+		printMenu({ "Create Offer", "Delete Offer", "View Offers", "Back" }, "Offers Menu");
 		getInput(input);
 
 		if (input == "1")
@@ -1036,12 +1014,14 @@ ManagerUI::showOffersMenu()
 		else if (input == "2")
 		{
 			clear();
-			showOfferViewMenu();
+			showOfferDeleteMenu();
+			
 		}
 		else if (input == "3")
 		{
 			clear();
-			showOfferDeleteMenu();
+			showOfferViewMenu();
+
 		}
 		else if (input == "4")
 		{
@@ -1056,8 +1036,7 @@ ManagerUI::showOffersMenu()
 	}
 }
 
-void
-ManagerUI::showOfferCreationMenu()
+void ManagerUI::showOfferCreationMenu()
 {
 	string input;
 	Offer offer;

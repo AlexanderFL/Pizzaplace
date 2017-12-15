@@ -5,7 +5,7 @@ const string Location::filename = "locations.dat";
 
 /*
 *************************************************
-PUBLIC FUNCTIONS
+			PUBLIC FUNCTIONS
 *************************************************
 */
 
@@ -15,28 +15,24 @@ Location::Location() {}
 Location::Location(const string address)
 	: address(address) {}
 
-string
-Location::getAddress() const
+string Location::getAddress() const
 {
 	return this->address;
 }
 
-string
-Location::getName() const
+string Location::getName() const
 {
 	return this->address;
 }
 
 /*		Set functions		*/
-void
-Location::setAddress(const string &address)
+void Location::setAddress(const string &address)
 {
 	this->address = address;
 }
 
 /*		Operator overloads		*/
-ostream &
-operator<<(ostream &out, const Location &loc)
+ostream &operator<<(ostream &out, const Location &loc)
 {
 	if (&out != &cout)
 	{
@@ -47,8 +43,7 @@ operator<<(ostream &out, const Location &loc)
 	return out;
 }
 
-istream &
-operator>>(istream &in, Location &loc)
+istream &operator>>(istream &in, Location &loc)
 {
 	if (&in != &cin)
 	{
@@ -66,8 +61,7 @@ operator>>(istream &in, Location &loc)
 	return in;
 }
 
-bool
-operator==(const Location &left, const Location &right)
+bool operator==(const Location &left, const Location &right)
 {
 	if (left.address == right.address)
 	{

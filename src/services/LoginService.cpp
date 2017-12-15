@@ -2,8 +2,7 @@
 
 LoginService::LoginService() {}
 
-profession
-LoginService::login(string username, string password)
+profession LoginService::login(string username, string password)
 {
 	vector<User> users = repo.RetrieveAllFromFile<User>();
 	for (int i = 0; i < users.size(); ++i)
@@ -16,8 +15,7 @@ LoginService::login(string username, string password)
 	throw InvalidLogin();
 }
 
-void
-LoginService::checkForUsers()
+void LoginService::checkForUsers()
 {
 	vector<User> users = getItems<User>();
 }

@@ -12,26 +12,22 @@ Offer::Offer()
 Offer::Offer(string name, Order order, int price)
 	: name(name), order(order), price(price) {}
 
-string
-Offer::getName() const
+string Offer::getName() const
 {
 	return this->name;
 }
 
-Order
-Offer::getOrder() const
+Order Offer::getOrder() const
 {
 	return this->order;
 }
 
-int
-Offer::getPrice() const
+int Offer::getPrice() const
 {
 	return this->price;
 }
 
-void
-Offer::setName(const string &name)
+void Offer::setName(const string &name)
 {
 	this->name = name;
 }
@@ -42,14 +38,12 @@ Offer::setOrder(const Order &order)
 	this->order = order;
 }
 
-void
-Offer::setPrice(const int &price)
+void Offer::setPrice(const int &price)
 {
 	this->price = price;
 }
 
-ostream &
-operator<<(ostream &out, const Offer &offer)
+ostream &operator<<(ostream &out, const Offer &offer)
 {
 	if (&out != &cout)
 	{
@@ -67,8 +61,7 @@ operator<<(ostream &out, const Offer &offer)
 	return out;
 }
 
-istream &
-operator>>(istream &in, Offer &offer)
+istream &operator>>(istream &in, Offer &offer)
 {
 	if (&in != &cin)
 	{

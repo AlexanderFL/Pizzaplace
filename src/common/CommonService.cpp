@@ -1,7 +1,6 @@
 #include "CommonService.h"
 
-void
-CommonService::validateStringIsDigit(const string &str) const
+void CommonService::validateStringIsDigit(const string &str) const
 {
 	if (str.length() == 0)
 	{
@@ -25,8 +24,7 @@ CommonService::validateStringIsDigit(const string &str) const
 	}
 }
 
-int
-CommonService::convertStringToInt(const string &str) const
+int CommonService::convertStringToInt(const string &str) const
 {
 	validateStringIsDigit(str);
 	return stoi(str);

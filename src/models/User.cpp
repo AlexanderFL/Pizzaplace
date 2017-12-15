@@ -16,58 +16,49 @@ User::User(string username, string password, string name, profession job)
 	this->job = job;
 }
 
-string
-User::getUsername() const
+string User::getUsername() const
 {
 	return this->username;
 }
 
-string
-User::getPassword() const
+string User::getPassword() const
 {
 	return this->password;
 }
 
-string
-User::getName() const
+string User::getName() const
 {
 	return this->name;
 }
 
-profession
-User::getJob() const
+profession User::getJob() const
 {
 	return this->job;
 }
 
-void
-User::setUsername(const string &username)
+void User::setUsername(const string &username)
 {
 	this->username = username;
 }
 
-void
-User::setPassword(const string &password)
+void User::setPassword(const string &password)
 {
 	std::hash<std::string> str_hash;
 	size_t tempStor = str_hash(password);
 	this->password = to_string(tempStor);
 }
 
-void
-User::setName(const string &name)
+void User::setName(const string &name)
 {
 	this->name = name;
 }
 
-void
-User::setJob(const profession &job)
+void User::setJob(const profession &job)
 {
 	this->job = job;
 }
 
-ostream &
-operator<<(ostream &out, const User &user)
+ostream &operator<<(ostream &out, const User &user)
 {
 	if (&out != &cout)
 	{
@@ -85,8 +76,7 @@ operator<<(ostream &out, const User &user)
 	return out;
 }
 
-istream &
-operator>>(istream &in, User &user)
+istream &operator>>(istream &in, User &user)
 {
 	if (&in != &cin)
 	{
@@ -111,8 +101,7 @@ operator>>(istream &in, User &user)
 	return in;
 }
 
-bool
-operator==(const User &first, const User &second)
+bool operator==(const User &first, const User &second)
 {
 	if (first.getName() == second.getName())
 	{

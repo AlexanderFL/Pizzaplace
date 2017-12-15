@@ -2,8 +2,7 @@
 
 DeliveryUI::DeliveryUI() {}
 
-void
-DeliveryUI::deliveryMenu()
+void DeliveryUI::deliveryMenu()
 {
 	string input;
 	while (true)
@@ -33,8 +32,7 @@ DeliveryUI::deliveryMenu()
 	}
 }
 
-void
-DeliveryUI::allOrdersMenu()
+void DeliveryUI::allOrdersMenu()
 {
 	string input;
 	while (true)
@@ -95,8 +93,7 @@ DeliveryUI::allOrdersMenu()
 	}
 }
 
-void
-DeliveryUI::orderMenu(int index, vector<Order> &orders, int loc)
+void DeliveryUI::orderMenu(int index, vector<Order> &orders, int loc)
 {
 	string input;
 	while (true)
@@ -180,8 +177,7 @@ DeliveryUI::orderMenu(int index, vector<Order> &orders, int loc)
 	}
 }
 
-void
-DeliveryUI::ordersMenu()
+void DeliveryUI::ordersMenu()
 {
 	string input;
 	while (true)

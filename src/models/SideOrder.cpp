@@ -14,32 +14,28 @@ SideOrder::SideOrder(const string &name, int price)
 	this->name = name;
 	this->price = price;
 }
-string
-SideOrder::getName() const
+
+string SideOrder::getName() const
 {
 	return this->name;
 }
 
-int
-SideOrder::getPrice() const
+int SideOrder::getPrice() const
 {
 	return this->price;
 }
 
-void
-SideOrder::setName(const string &name)
+void SideOrder::setName(const string &name)
 {
 	this->name = name;
 }
 
-void
-SideOrder::setPrice(const int &price)
+void SideOrder::setPrice(const int &price)
 {
 	this->price = price;
 }
 
-ostream &
-operator<<(ostream &out, const SideOrder &side)
+ostream &operator<<(ostream &out, const SideOrder &side)
 {
 	if (&out != &cout)
 	{
@@ -55,8 +51,7 @@ operator<<(ostream &out, const SideOrder &side)
 	return out;
 }
 
-istream &
-operator>>(istream &in, SideOrder &side)
+istream &operator>>(istream &in, SideOrder &side)
 {
 	if (&in != &cin)
 	{
@@ -78,8 +73,7 @@ operator>>(istream &in, SideOrder &side)
 	return in;
 }
 
-bool
-operator==(const SideOrder &left, const SideOrder &right)
+bool operator==(const SideOrder &left, const SideOrder &right)
 {
 	return left.name == right.name && left.price == right.price;
 }

@@ -2,8 +2,7 @@
 
 KitchenService::KitchenService() {}
 
-void
-KitchenService::setPizzaAsBaking(const size_t &id)
+void KitchenService::setPizzaAsBaking(const size_t &id)
 {
 	vector<Order> orders = getItems<Order>();
 	for (size_t i = 0; i < orders.size(); ++i)
@@ -22,8 +21,7 @@ KitchenService::setPizzaAsBaking(const size_t &id)
 	}
 }
 
-void
-KitchenService::setPizzaAsReady(const size_t &id)
+void KitchenService::setPizzaAsReady(const size_t &id)
 {
 	vector<Order> orders = getItems<Order>();
 	for (size_t i = 0; i < orders.size(); ++i)
@@ -54,8 +52,7 @@ KitchenService::setPizzaAsReady(const size_t &id)
 	}
 }
 
-vector<Pizza>
-KitchenService::getPizzas(const Location &location)
+vector<Pizza> KitchenService::getPizzas(const Location &location)
 {
 	vector<Pizza> pizzas;
 	vector<Order> orders = getItems<Order>();

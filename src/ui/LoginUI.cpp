@@ -8,8 +8,7 @@
 
 using namespace std;
 
-void
-LoginUI::startUI()
+void LoginUI::startUI()
 {
 	char input;
 	try
