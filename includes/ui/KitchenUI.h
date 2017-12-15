@@ -12,6 +12,4 @@ public:
 	void showMainMenu();
 private:
 	string showPizzaInfo(const Pizza &pizza) const;
-	string showPizzaInfoShort(const Pizza &pizza) const;
 };
-

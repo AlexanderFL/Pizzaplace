@@ -168,21 +168,3 @@ string KitchenUI::showPizzaInfo(const Pizza &pizza) const
 	}
 	return info;
 }
-
-string KitchenUI::showPizzaInfoShort(const Pizza &pizza) const
-{
-	string info = "Pizza ";
-	info += pizza.getID() + " - ";
-	info += pizza.getToppings().size() + " toppings, ";
-	info += pizza.getPizzaSize().getName() + " ";
-	info += pizza.getCrust().getName() + " pizza - ";
-	if (pizza.getPhase() == PREPERATION)
-	{
-		info += "in preperation";
-	}
-	else if (pizza.getPhase() == BAKING)
-	{
-		info += "baking";
-	}
-	return info;
-}
