@@ -4,11 +4,12 @@
 #include "LoginService.h"
 
 /*NOT IN USE*/
-class LoginUI: public CommonUI
+class LoginUI : public CommonUI
 {
 private:
-	LoginService service;
+    LoginService service;
 public:
-	void startUI();
+    void
+    startUI();
 };
 

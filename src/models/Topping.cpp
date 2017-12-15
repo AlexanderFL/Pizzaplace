@@ -2,7 +2,8 @@
 
 const string Topping::filename = "toppings.dat";
 
-Topping::Topping() {
+Topping::Topping()
+{
 	name = "";
 	price = 0;
 }
@@ -13,33 +14,45 @@ Topping::Topping(string name, int price)
 	this->price = price;
 }
 
-string Topping::getName() const {
+string
+Topping::getName() const
+{
 	return this->name;
 }
 
-int Topping::getPrice() const{
+int
+Topping::getPrice() const
+{
 	return this->price;
 }
 
-void Topping::setName(const string& name) {
+void
+Topping::setName(const string &name)
+{
 	this->name = name;
 }
 
-void Topping::setPrice(const int& price) {
+void
+Topping::setPrice(const int &price)
+{
 	this->price = price;
 }
 
-istream& operator >> (istream& in, Topping& topping) {
-	if (&in != &cin) {
+istream &
+operator>>(istream &in, Topping &topping)
+{
+	if (&in != &cin)
+	{
 		size_t len;
-		in.read((char*)(&len), sizeof(size_t));
-		char* str = new char[len];
+		in.read((char *)(&len), sizeof(size_t));
+		char *str = new char[len];
 		in.read(str, len);
 		topping.name = str;
-		in.read((char*)(&topping.price), sizeof(int));
+		in.read((char *)(&topping.price), sizeof(int));
 		delete[] str;
 	}
-	else {
+	else
+	{
 		cout << "\nName: ";
 		in >> topping.name;
 		cout << "Price: ";
@@ -48,20 +61,25 @@ istream& operator >> (istream& in, Topping& topping) {
 	return in;
 }
 
-ostream& operator<< (ostream& out, const Topping& topping)
+ostream &
+operator<<(ostream &out, const Topping &topping)
 {
-	if (&out != &cout) {
+	if (&out != &cout)
+	{
 		size_t len = topping.name.length() + 1;
-		out.write((char*)(&len), sizeof(size_t));
+		out.write((char *)(&len), sizeof(size_t));
 		out.write(topping.name.c_str(), len);
-		out.write((char*)(&topping.price), sizeof(int));
+		out.write((char *)(&topping.price), sizeof(int));
 	}
-	else {
+	else
+	{
 		out << "Name: " << topping.name << " | Price: " << topping.price << " Kr.";
 	}
-    return out;
+	return out;
 }
 
-bool operator == (const Topping& left, const Topping& right) {
+bool
+operator==(const Topping &left, const Topping &right)
+{
 	return left.name == right.name;
 }

@@ -2,9 +2,10 @@
 
 #include "CommonUI.h"
 
-class MainUI: public CommonUI
+class MainUI : public CommonUI
 {
-    public:
-        void startUI();
+public:
+    void
+    startUI();
 };
 	
