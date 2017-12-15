@@ -24,14 +24,12 @@ vector<Order> DeliveryService::getOrders(const Location& location) {
 			orders.push_back(allorders.at(i));
 		}
 	}
-	//TODO validate
 	validateVectorNotEmpty(orders);
 	return orders;
 }
 
 void DeliveryService::setOrderPaid(const size_t& id) {
 	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
-	//TODO validate
 	for (size_t i = 0; i < orders.size(); ++i) {
 		if (orders.at(i).getID() == id) {
 			orders.at(i).setOrderAsPaidFor(true);
@@ -43,7 +41,6 @@ void DeliveryService::setOrderPaid(const size_t& id) {
 
 void DeliveryService::setOrderDelivered(const size_t& id) {
 	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
-	//TODO validate
 	for (size_t i = 0; i < orders.size(); ++i) {
 		if (orders.at(i).getID() == id) {
 			orders.at(i).setStatus(SENT);

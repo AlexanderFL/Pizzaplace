@@ -3,49 +3,47 @@
 #include "CommonUI.h"
 #include "Canceled.h"
 
-using namespace std;
-
 class ManagerUI: public CommonUI
 {
 private:
 	ManagerService service;
-	//Toppings
+public:
+	ManagerUI();
+	void showMainMenu();
+private:
+	/*		Toppings		*/
 	void showToppingsMenu();
 	void showToppingCreationMenu();
 	void showToppingDeleteMenu();
 	void showToppingViewMenu();
 	void editTopping(int index);
-	//Locations
+	/*		Locations		*/
 	void showLocationsMenu();
 	void showLocationCreationMenu();
 	void showLocationDeleteMenu();
 	void showLocationViewMenu();
-	//Sizes
+	/*		Sizes			*/
 	void showSizeMenu();
 	void showSizeCreationMenu();
 	void showSizesDeleteMenu();
 	void showSizeViewMenu();
-	//Crust
+	/*		Crusts			*/
 	void showCrustMenu();
 	void showCrustCreationMenu();
 	void showCrustDeleteMenu();
 	void showCrustViewMenu();
-	//Sides
+	/*		Sides			*/
 	void showSidesMenu();
 	void showSidesCreationMenu();
 	void showSidesDeleteMenu();
 	void showSidesViewMenu();
-	//offers
+	/*		Offers			*/
 	void showOffersMenu();
 	void showOfferCreationMenu();
 	void showOfferViewMenu();
 	void showOfferDeleteMenu();
 	void showCreatePizzaMenu(Pizza& pizza);
-	//Orders
+	/*		Orders			*/
 	void showOrders();
-public:
-	ManagerUI();
-	void showMainMenu();
-	void managerMenu();
 };
 
