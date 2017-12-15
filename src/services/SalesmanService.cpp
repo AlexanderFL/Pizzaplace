@@ -144,11 +144,14 @@ vector<string> SalesmanService::getOfferNames(const Order& order) {
 	vector<Offer> comps = getCompOffers();
 	vector<Offer> extras;
 	Order temp = order;
+	//Looks if the order consists of any compination offers
 	while (comps.size() > 0) {
+		//If the order is exactly the same as the offer
 		if (comps.at(0).getOrder() == order) {
 			offernames.push_back(comps.at(0).getName());
 			return offernames;
 		}
+		//If the order is not the same but has all of the items of the order within it
 		else if (comps.at(0).getOrder() <= order) {
 			extras.push_back(comps.at(0));
 		}
@@ -156,7 +159,9 @@ vector<string> SalesmanService::getOfferNames(const Order& order) {
 	}
 	while (extras.size() > 0) {
 		bool unique = true;
+		//Filters the found offers so that they aren't sharing the same items in the offer
 		for (size_t i = 1; i < extras.size(); ++i) {
+			//Find the most similar one to the order
 			if (orderSimularity(extras.at(0).getOrder(), extras.at(i).getOrder()) != 0) {
 				if (orderSimularity(extras.at(0).getOrder(), order) < orderSimularity(extras.at(i).getOrder(), order)) {
 					extras.erase(extras.begin());
@@ -168,12 +173,14 @@ vector<string> SalesmanService::getOfferNames(const Order& order) {
 				break;
 			}
 		}
+		//Add the name of the offer if it is unique
 		if (unique) {
 			offernames.push_back(extras.at(0).getName());
 			temp = temp - extras.at(0).getOrder();
 			extras.erase(extras.begin());
 		}
 	}
+	//Add leftover pizzas to the offernames
 	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
 		offernames.push_back(getSingleOfferName(temp.getPizzas().at(i)));
 	}
@@ -184,6 +191,7 @@ string SalesmanService::getSingleOfferName(const Pizza& pizza) {
 	vector<Offer> singles = getSinglePizzaOffers();
 	int index = -1;
 	double sim = 0;
+	//Find the most similar pizza offer to the passed pizza
 	for (size_t i = 0; i < singles.size(); ++i) {
 		Pizza comp = singles.at(i).getOrder().getPizzas().at(0) * pizza;
 		if (comp.getToppings().size() >= singles.at(i).getOrder().getPizzas().at(0).getToppings().size()) {
@@ -194,16 +202,19 @@ string SalesmanService::getSingleOfferName(const Pizza& pizza) {
 			}
 		}
 	}
+	//If a pizza offer was found and was over 75% similar
 	if (index != -1 && sim >= 0.75) {
 		Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
-		Pizza specials = pizza - extras;
+		//If the pizza has extra toppings return the name of the offer with a plus
 		if (!extras.getToppings().empty()) {
 			return singles.at(index).getName() + "+";
 		}
+		//Return the name of the offer
 		else {
 			return singles.at(index).getName();
 		}
 	}
+	//If no pizza offer was found return Custom Pizza
 	else {
 		return "Custom Pizza";
 	}
@@ -221,7 +232,9 @@ int SalesmanService::calculateCost(const Order& order) {
 	vector<Offer> tempExt;
 	vector<Offer> ext;
 	Order temp = order;
+	//Looks if the order consists of any compination offers
 	while (comps.size() > 0) {
+		//If the order is exactly the same as the offer
 		if (comps.at(0).getOrder() == order) {
 			for (size_t i = 0; i < order.getPizzas().size(); ++i) {
 				total += calculateSimpleCost(order.getPizzas().at(i));
@@ -232,6 +245,7 @@ int SalesmanService::calculateCost(const Order& order) {
 			total *= (comps.at(0).getPrice() / 100.0);
 			return total * (comps.at(0).getPrice() / 100.0);
 		}
+		//If the order is not the same but has all of the items of the order within it
 		else if (comps.at(0).getOrder() <= order) {
 			tempExt.push_back(comps.at(0));
 		}
@@ -239,7 +253,9 @@ int SalesmanService::calculateCost(const Order& order) {
 	}
 	while (tempExt.size() > 0) {
 		bool unique = true;
+		//Filters the found offers so that they aren't sharing the same items in the offer
 		for (size_t i = 1; i < tempExt.size(); ++i) {
+			//Find the most similar one to the order
 			if (orderSimularity(tempExt.at(0).getOrder(), tempExt.at(i).getOrder()) != 0) {
 				if (orderSimularity(tempExt.at(0).getOrder(), order) < orderSimularity(tempExt.at(i).getOrder(), order)) {
 					tempExt.erase(tempExt.begin());
@@ -251,6 +267,7 @@ int SalesmanService::calculateCost(const Order& order) {
 				break;
 			}
 		}
+		//Add the cost of the offer to the total if the offer is unique
 		if (unique) {
 			ext.push_back(tempExt.at(0));
 			int exttotal = 0;
@@ -265,9 +282,14 @@ int SalesmanService::calculateCost(const Order& order) {
 			tempExt.erase(tempExt.begin());
 		}
 	}
+
+	//Calculate leftovers
+
+	//Add leftover pizzas to the total
 	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
 		total += calculateCost(temp.getPizzas().at(i));
 	}
+	//Add leftover sides to the total
 	for (size_t i = 0; i < temp.getSides().size(); ++i) {
 		total += temp.getSides().at(i).getPrice();
 	}
@@ -279,6 +301,7 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 	vector<Offer> singles = getSinglePizzaOffers();
 	int index = -1;
 	double sim = 0;
+	//Find the most similar pizza offer to the passed pizza
 	for (size_t i = 0; i < singles.size(); ++i) {
 		Pizza comp = singles.at(i).getOrder().getPizzas().at(0) * pizza;
 		if (comp.getToppings().size() >= singles.at(i).getOrder().getPizzas().at(0).getToppings().size()) {
@@ -289,17 +312,24 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 			}
 		}
 	}
-	if (index == -1 && sim < 75) {
+	//If no pizza offer was found or it was below 75% similarity
+	if (index == -1 && sim < 0.75) {
 		//normal
 		return calculateSimpleCost(pizza);
 	}
+	//If a pizza offer was found
 	else {
+		//Filter the extra toppings that are not a part of the offer
 		Pizza extras = pizza - singles.at(index).getOrder().getPizzas().at(0);
+		//Filter the toppings that are a part of the offer
 		Pizza specials = pizza - extras;
-		total += calculateSimpleCost(pizza);
+		//Calculate the cost
+		total += calculateSimpleCost(specials);
+		//Add the discount
 		total *= (singles.at(index).getPrice() / 100.0);
+		//Add all leftover toppings to the total
 		for (size_t i = 0; i < extras.getToppings().size(); ++i) {
-			total += extras.getToppings().at(i).getPrice();
+			total += extras.getToppings().at(i).getPrice() * pizza.getPizzaSize().getPriceMod();
 		}
 		return total;
 	}
@@ -308,6 +338,7 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 vector<Offer> SalesmanService::getSinglePizzaOffers() {
 	vector<Offer> offers;
 	vector<Offer> alloffers = getItems<Offer>();
+	//Adds all the offers that have only a single pizza
 	for (size_t i = 0; i < alloffers.size(); ++i) {
 		if (alloffers.at(i).getOrder().getPizzas().size() == 1 && alloffers.at(i).getOrder().getSides().size() == 0) {
 			offers.push_back(alloffers.at(i));
@@ -319,6 +350,7 @@ vector<Offer> SalesmanService::getSinglePizzaOffers() {
 vector<Offer> SalesmanService::getCompOffers() {
 	vector<Offer> offers;
 	vector<Offer> alloffers = getItems<Offer>();
+	//Adds all the offers that don't have a single pizza
 	for (size_t i = 0; i < alloffers.size(); ++i) {
 		if (!(alloffers.at(i).getOrder().getPizzas().size() == 1 && alloffers.at(i).getOrder().getSides().size() == 0)) {
 			offers.push_back(alloffers.at(i));
@@ -336,7 +368,7 @@ double SalesmanService::orderSimularity(const Order& left, const Order& right) {
 double SalesmanService::pizzaSimularity(const Pizza& left, const Pizza& right) {
 	double top = (left * right).getToppings().size();
 	double bottom = (sqrt(left.getToppings().size()) * sqrt(right.getToppings().size()));
-	return  top / bottom;
+	return top / bottom;
 }
 
 /*			Returns total cost for the order		*/
@@ -392,11 +424,15 @@ void SalesmanService::assignID(Order& order) {
 	try {
 		vector<Order> orders = getItems<Order>();
 		size_t id = 1;
+		//If there are no orders
 		if (orders.size() == 0) {
 			order.setID(1);
 		}
+		//If there are orders
 		else {
+			//Find the latest order ID
 			order.setID(orders.at(orders.size() - 1).getID() + 1);
+			//Find the latest pizza ID
 			for (size_t i = orders.size(); i > 0; --i) {
 				if (orders.at(i - 1).getPizzas().size() > 0) {
 					id = orders.at(i - 1).getPizzas().at(orders.at(i - 1).getPizzas().size() - 1).getID() + 1;
@@ -404,18 +440,20 @@ void SalesmanService::assignID(Order& order) {
 				}
 			}
 		}
+		//Set the ID for the pizzas in the order
 		for (size_t i = 0; i < order.getPizzas().size(); ++i) {
 			vector<Pizza> pizzas = order.getPizzas();
 			pizzas.at(i).setID(id++);
 			order.setPizzas(pizzas);
 		}
 	}
+	//If the orders file doesn't exist
 	catch (FailedOpenFile) {
 		order.setID(1);
-		size_t id = 1;
+		//Set the ID for the pizzas in the order
 		for (size_t i = 0; i < order.getPizzas().size(); ++i) {
 			vector<Pizza> pizzas = order.getPizzas();
-			pizzas.at(i).setID(id++);
+			pizzas.at(i).setID(i + 1);
 			order.setPizzas(pizzas);
 		}
 	}
