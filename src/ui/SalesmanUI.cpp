@@ -545,7 +545,7 @@ void SalesmanUI::deleteSide(Order& order, const int& index)
 
 void SalesmanUI::markOrderAsPaid(Order & order)
 {
-	order.setOrderAsPaidFor(true);
+	service.setOrderAsPaid(order);
 }
 
 void SalesmanUI::finishOrder(Order& order)
@@ -569,7 +569,7 @@ void SalesmanUI::catchStringInput(string& input, const int& max, const int& min,
 		try
 		{
 			getInput(msg, input);
-			// If max is equal to min, then don't bother check if input is valid
+			// If max is equal to 0 and min is set to 0, then don't bother check if input is valid
 			if (max != 0 && min != 0)
 			{
 				service.validInput(input, max, min);
@@ -582,6 +582,9 @@ void SalesmanUI::catchStringInput(string& input, const int& max, const int& min,
 		}
 		catch (out_of_range) {
 			printMessage("No numbers larger than int32!");
+		}
+		catch (InvalidString) {
+			printMessage("Input is invalid");
 		}
 	}
 }
