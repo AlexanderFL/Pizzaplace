@@ -7,33 +7,20 @@ using namespace std;
 class Data
 {
 public:
-    template<class Repos>
-    void
-    WriteToFile(Repos rep) const;
+    template<class Repos> void WriteToFile(Repos rep) const;
 
-    template<class Repos>
-    void
-    WriteMultipleLinesToFile(vector<Repos> rep) const;
+    template<class Repos> void WriteMultipleLinesToFile(vector<Repos> rep) const;
 
-    template<class Repos>
-    Repos
-    RetrieveFromFile(int index);
+    template<class Repos> Repos RetrieveFromFile(int index);
 
-    template<class Repos>
-    vector<Repos>
-    RetrieveAllFromFile();
+    template<class Repos> vector<Repos> RetrieveAllFromFile();
 
-    template<class Repos>
-    void
-    RemoveFromFileAtIndex(int index);
+    template<class Repos> void RemoveFromFileAtIndex(int index);
 
-    template<class Repos>
-    void
-    ModifyFileAtIndex(int index, Repos modification);
+    template<class Repos> void ModifyFileAtIndex(int index, Repos modification);
 };
 
-template<class Repos>
-inline void
+template<class Repos>inline void
 Data::WriteToFile(Repos rep) const
 {
     ofstream fout(rep.filename, ios::binary | ios::app);

@@ -17,41 +17,31 @@ public:
 
     /*	TEMPLATES	*/
     //Gets all the items from its file
-    template<class T> vector<T>
-    getItems();
+    template<class T> vector<T>getItems();
     //Gets the names from the its file
-    template<class T> vector<string>
-    getNames();
+    template<class T> vector<string> getNames();
     //Gets the names from a vector of items
-    template<class T> vector<string>
-    getNames(vector<T> &items);
+    template<class T> vector<string> getNames(vector<T> &items);
     //Gets an item from its file at the index
-    template<class T> T
-    getItem(int index);
+    template<class T> T getItem(int index);
     //Adds an item to its file
-    template<class T> void
-    addItem(T &item) const;
+    template<class T> void addItem(T &item) const;
     //Deletes an item from its file at the index
-    template<class T> void
-    deleteItem(int index);
+    template<class T> void deleteItem(int index);
     //Deletes an item from a given vector at the index
-    template<class T> vector<T>
-    deleteItem(vector<T> &items, int index);
+    template<class T> vector<T> deleteItem(vector<T> &items, int index);
     //Throws an error if an vector is empty
-    template<class T> void
-    validateVectorNotEmpty(const vector<T> &items) const;
+    template<class T> void validateVectorNotEmpty(const vector<T> &items) const;
 };
 
-template<class T> vector<T>
-CommonService::getItems()
+template<class T> vector<T>CommonService::getItems()
 {
     vector<T> items = repo.RetrieveAllFromFile<T>();
     validateVectorNotEmpty(items);
     return items;
 }
 
-template<class T> vector<string>
-CommonService::getNames()
+template<class T> vector<string>CommonService::getNames()
 {
     vector<string> vec;
     vector<T> items = getItems<T>();
@@ -62,8 +52,7 @@ CommonService::getNames()
     return vec;
 }
 
-template<class T> vector<string>
-CommonService::getNames(vector<T> &items)
+template<class T> vector<string>CommonService::getNames(vector<T> &items)
 {
     vector<string> vec;
     for (size_t i = 0; i < items.size(); ++i)
@@ -73,27 +62,23 @@ CommonService::getNames(vector<T> &items)
     return vec;
 }
 
-template<class T> T
-CommonService::getItem(int index)
+template<class T> T CommonService::getItem(int index)
 {
     vector<T> items = getItems<T>();
     return items.at(index);
 }
 
-template<class T> void
-CommonService::addItem(T &item) const
+template<class T> void CommonService::addItem(T &item) const
 {
     repo.WriteToFile(item);
 }
 
-template<class T> void
-CommonService::deleteItem(int index)
+template<class T> void CommonService::deleteItem(int index)
 {
     repo.RemoveFromFileAtIndex<T>(index);
 }
 
-template<class T> vector<T>
-CommonService::deleteItem(vector<T> &items, int index)
+template<class T> vector<T> CommonService::deleteItem(vector<T> &items, int index)
 {
     if (index < 0 || index >= items.size())
     {
@@ -103,8 +88,7 @@ CommonService::deleteItem(vector<T> &items, int index)
     return items;
 }
 
-template<class T> void
-CommonService::validateVectorNotEmpty(const vector<T> &items) const
+template<class T> void CommonService::validateVectorNotEmpty(const vector<T> &items) const
 {
     if (items.size() == 0)
     {

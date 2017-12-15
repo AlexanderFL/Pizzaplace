@@ -6,7 +6,6 @@ vector<Order> DeliveryService::getOrders()
 {
 	vector<Order> orders;
 	vector<Order> allorders = getItems<Order>();
-	//TODO validate
 	for (size_t i = 0; i < allorders.size(); i++)
 	{
 		if (allorders.at(i).getStatus() == READY)
