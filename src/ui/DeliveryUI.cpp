@@ -33,10 +33,10 @@ void DeliveryUI::allOrdersMenu() {
 			vector<Order> orders = service.getOrders();
 			vector<string> names;
 			for (size_t i = 0; i < orders.size(); ++i) {
-				names.push_back("Pizza " + to_string(orders.at(i).getID()));
+				names.push_back("Order " + to_string(orders.at(i).getID()));
 			}
 			names.push_back("Back");
-			printMenu(names, "Pizzas ready to be delivered");
+			printMenu(names, "Orders ready to be delivered");
 			getInput(input);
 			try {
 				int index = service.convertStringToInt(input);
