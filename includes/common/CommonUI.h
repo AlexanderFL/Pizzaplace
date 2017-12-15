@@ -20,6 +20,7 @@ public:
 	//Prints a meesage with the string
 	void printMessage(const string& str) const;
 
+	/*	Get Functions	*/
 	//Gets the input from the user
 	void getInput(string& str) const;
 	//Gets the input from the user with custom text
@@ -27,7 +28,7 @@ public:
 	//Gets the input from the user with custom text, char edtion
 	void getInput(const string& text, char& input) const;
 
-	//printing orders
+	/*		Printing info		*/	
 	//Prints info about a pizza in a short format
 	void showPizzaInfoShort(const Pizza& pizza) const;
 	//Prints info about a order
@@ -36,7 +37,7 @@ public:
 	void showOrderInfoShort(const Order& order) const;
 
 private:
-	//Prints the meny with the options
+	//Prints the menu with the options
 	void printOptions(const vector<string>& options, size_t biggest, bool displayOnly=false) const;
 	//Prints lines
 	void printLines(size_t size) const;

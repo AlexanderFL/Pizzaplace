@@ -29,11 +29,11 @@ private:
 	bool paidFor;
 	size_t id;
 public:
-	// Constructors
+	/*	Constructors	*/
 	Order();
 	Order(vector<Pizza> pizzas, vector<SideOrder> sides, status orderStatus, Location location, string comment, string homeAddress, deliveryMethod orderDeliveryMethod, bool isPaid);
 
-	// Get functions
+	/*	Get Functions	*/
 	//Gets all the pizzas
 	vector<Pizza> getPizzas() const;
 	//Gets all the side orders
@@ -53,7 +53,7 @@ public:
 	//Gets the ID
 	size_t getID() const;
 
-	// Set functions
+	/* 	Set Functions	*/
 	//Sets the pizzas
 	void setPizzas(const vector<Pizza>& pizzas);
 	//Sets the side orders
@@ -73,7 +73,7 @@ public:
 	//Sets the ID
 	void setID(const size_t& id);
 
-	// Operator overloads
+	/*	Operator overloads	*/
 	friend ostream& operator << (ostream& out, const Order& order);
 	friend istream& operator >> (istream& in, Order& order);
 	friend bool operator == (const Order& left, const Order& right);

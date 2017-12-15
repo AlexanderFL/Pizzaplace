@@ -15,11 +15,11 @@ private:
 	Order order;
 	int price;
 public:
-	// Constructors
+	/*	Constructor	 */
 	Offer();
 	Offer(string name, Order order, int price);
 
-	// Get functions
+	/*	Get Functions	*/	
 	//Gets the name
 	string getName() const;
 	//Gets the order
@@ -27,7 +27,7 @@ public:
 	//Gets the price
 	int getPrice() const;
 
-	// Set functions
+	/*	Set Functions	*/
 	//Sets the name
 	void setName(const string& name);
 	//Sets the order
@@ -35,7 +35,7 @@ public:
 	//Sets the price
 	void setPrice(const int& price);
 
-	// Operator overloads
+	/*	Operator Overloads	*/
 	friend ostream& operator << (ostream& out, const Offer& offer);
 	friend istream& operator >> (istream& in, Offer& offer);
 };

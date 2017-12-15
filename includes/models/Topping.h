@@ -14,23 +14,23 @@ private:
 	string name;
 	int price;
 public:
-	// Constructors
+	/*	Constructors	*/
 	Topping();
 	Topping(string name, int price);
 
-	// Get functions
+	/*	Get Functions	*/
 	//Gets the name
 	string getName() const;
 	//Gets the price
 	int getPrice() const;
 
-	// Set functions
+	/*	Set Functions	*/
 	//Sets the name
 	void setName(const string& name);
 	//Sets the price
 	void setPrice(const int& price);
 
-	// Operator overloads
+	/*	Operator Overloads	*/
 	friend istream& operator >> (istream& in, Topping& topping);
 	friend ostream& operator << (ostream& out, const Topping& topping);
 	friend bool operator == (const Topping& left, const Topping& right);

@@ -17,11 +17,11 @@ private:
 	status phase;
 	size_t id;
 public:
-	// Constructors
+	/*	Constructors	*/
 	Pizza();
 	Pizza(string name, vector<Topping> toppings);
 
-	// Get functions
+	/*	Get Functions	*/
 	//Gets all the toppings
 	vector<Topping> getToppings() const;
 	//Gets the pizza crust
@@ -33,9 +33,10 @@ public:
 	//Gets the ID
 	size_t getID() const;
 
-	// Set Functions
 	//Adds a topping to the toppings
 	void addToppings(Topping topping);
+
+	/*	Set Functions	*/
 	//Sets the toppings
 	void setToppings(vector<Topping> toppings);
 	//Sets the pizza crust
@@ -47,7 +48,7 @@ public:
 	//Sets the ID
 	void setID(const size_t& id);
 
-	// Operator overloads
+	/*	Operator Overloads	*/
 	friend ostream& operator<< (ostream& out, const Pizza& pizza);
 	friend istream& operator>> (istream& in, Pizza& pizza);
 	friend bool operator == (const Pizza& left, const Pizza& right);
