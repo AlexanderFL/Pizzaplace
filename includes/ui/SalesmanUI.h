@@ -17,7 +17,7 @@ public:
 	void salesmanMenu();
 	void makeNewOrder();
 private:
-	void makeYourOwnMenu(Order& order, string& input);
+	void makeYourOwnMenu(Order& order, string& input, const bool& isFromMenu=false);
 
 	bool selectLocation(Order& order, string& input);
 	bool newOrderStart(Order& order, bool& pizzaFromMenu, string& input);

@@ -78,9 +78,16 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 			}
 			cout << "TOTAL: " << service.getPriceOfOrder(offers.at(inputInInt).getOrder()) << " kr.- " << endl;
 			cout << "TOTAL: " << offers.at(inputInInt).getPrice() << " kr.- " << endl << endl << endl;
-			printMenu({ "Go back" }, "More info about offer");
+			printMenu({ "Choose offer", "Go back" }, "More info about offer");
 			getInput(input);
-			if (input == "1") {
+			if (input == "1") 
+			{
+				order = offers.at(inputInInt).getOrder();
+				makeYourOwnMenu(order, input, true);
+				break;
+			}
+			if (input == "2")
+			{
 				clear();
 				break;
 			}
@@ -88,26 +95,28 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 	}
 }
 
-void SalesmanUI::makeYourOwnMenu(Order& order, string& input)
+void SalesmanUI::makeYourOwnMenu(Order& order, string& input, const bool& isFromMenu)
 {
 	clear();
-	Pizza newPizza;
-	vector<Pizza> allOrderPizzas = order.getPizzas();
-	allOrderPizzas.push_back(newPizza);
-	order.setPizzas(allOrderPizzas);
+	if(!isFromMenu){
+		Pizza newPizza;
+		vector<Pizza> allOrderPizzas = order.getPizzas();
+		allOrderPizzas.push_back(newPizza);
+		order.setPizzas(allOrderPizzas);
+	}
 	vector<string> makeYourOwnStringVector = 
-		{
-			"Select crust", 
-			"Select size", 
-			"Select toppings",
-			"Add sides", 
-			"Select delivery method",
-			"Add comment",
-			"Add another pizza", 
-			"See order", 
-			"Finish",
-			"Cancel order"
-		};
+	{
+		"Select crust", 
+		"Select size", 
+		"Select toppings",
+		"Add sides", 
+		"Select delivery method",
+		"Add comment",
+		"Add another pizza", 
+		"See order", 
+		"Finish",
+		"Cancel order"
+	};
 	while (true)
 	{
 		printMenu(
