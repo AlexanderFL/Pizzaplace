@@ -349,7 +349,6 @@ void ManagerUI::showLocationsMenu()
 
 void ManagerUI::showLocationCreationMenu()
 {
-	string input;
 	printMessage("Creating a new Location");
 	try
 	{
@@ -375,7 +374,6 @@ void ManagerUI::showLocationCreationMenu()
 
 void ManagerUI::showLocationDeleteMenu()
 {
-	string input;
 	while (true)
 	{
 		try
@@ -687,7 +685,6 @@ void ManagerUI::showCrustMenu()
 
 void ManagerUI::showCrustCreationMenu()
 {
-	string input;
 	printMessage("Creating a new crust");
 	try
 	{
@@ -861,7 +858,6 @@ void ManagerUI::showSidesMenu()
 void
 ManagerUI::showSidesCreationMenu()
 {
-	string input;
 	printMessage("Creating a new side");
 	try
 	{
