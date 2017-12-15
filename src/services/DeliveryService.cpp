@@ -2,8 +2,7 @@
 
 DeliveryService::DeliveryService() {}
 
-vector<Order>
-DeliveryService::getOrders()
+vector<Order> DeliveryService::getOrders()
 {
 	vector<Order> orders;
 	vector<Order> allorders = getItems<Order>();
@@ -19,8 +18,7 @@ DeliveryService::getOrders()
 	return orders;
 }
 
-vector<Order>
-DeliveryService::getOrders(const Location &location)
+vector<Order> DeliveryService::getOrders(const Location &location)
 {
 	vector<Order> orders;
 	vector<Order> allorders = getItems<Order>();
@@ -35,8 +33,7 @@ DeliveryService::getOrders(const Location &location)
 	return orders;
 }
 
-void
-DeliveryService::setOrderPaid(const size_t &id)
+void DeliveryService::setOrderPaid(const size_t &id)
 {
 	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
 	for (size_t i = 0; i < orders.size(); ++i)
@@ -50,8 +47,7 @@ DeliveryService::setOrderPaid(const size_t &id)
 	}
 }
 
-void
-DeliveryService::setOrderDelivered(const size_t &id)
+void DeliveryService::setOrderDelivered(const size_t &id)
 {
 	vector<Order> orders = repo.RetrieveAllFromFile<Order>();
 	for (size_t i = 0; i < orders.size(); ++i)
