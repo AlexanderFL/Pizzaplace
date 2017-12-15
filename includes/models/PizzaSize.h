@@ -19,26 +19,19 @@ public:
 
     /*	Get Functions	*/
     //Gets the name
-    string
-    getName() const;
+    string getName() const;
     //Gets the price modifier
-    double
-    getPriceMod() const;
+    double getPriceMod() const;
 
     /*	Set Functions	*/
     //Sets the name
-    void
-    setName(const string &name);
+    void setName(const string &name);
     //Sets the price modifier
-    void
-    setPriceMod(const double &pricemod);
+    void setPriceMod(const double &pricemod);
 
     /*	Operator Overloads	*/
-    friend ostream &
-    operator<<(ostream &out, const PizzaSize &size);
-    friend istream &
-    operator>>(istream &in, PizzaSize &size);
-    friend bool
-    operator==(const PizzaSize &left, const PizzaSize &right);
+    friend ostream &operator<<(ostream &out, const PizzaSize &size);
+    friend istream &operator>>(istream &in, PizzaSize &size);
+    friend bool operator==(const PizzaSize &left, const PizzaSize &right);
 };
 

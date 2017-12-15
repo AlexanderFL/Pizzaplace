@@ -20,23 +20,17 @@ public:
 
     /*	Get Functions	*/
     //Gets the name
-    string
-    getName() const;
+    string getName() const;
     //Gets the price
-    int
-    getPrice() const;
+    int getPrice() const;
 
     /*	Set Functions	*/
     //Sets the name
-    void
-    setName(const string &name);
+    void setName(const string &name);
     //Sets the price
-    void
-    setPrice(const int &price);
+    void setPrice(const int &price);
 
     /*	Operator Overloads	*/
-    friend ostream &
-    operator<<(ostream &out, const PizzaCrust &crust);
-    friend istream &
-    operator>>(istream &in, PizzaCrust &crust);
+    friend ostream &operator<<(ostream &out, const PizzaCrust &crust);
+    friend istream &operator>>(istream &in, PizzaCrust &crust);
 };

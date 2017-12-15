@@ -18,23 +18,17 @@ public:
 
     /*		Get functions		*/
     // Gets the address of the Location
-    string
-    getAddress() const;
+    string getAddress() const;
     // Just for a template, does the same as getAddress
-    string
-    getName() const;
+    string getName() const;
 
     /*		Set functions		*/
     // Sets the address
-    void
-    setAddress(const string &address);
+    void setAddress(const string &address);
 
     /*		Operator overloads		*/
-    friend ostream &
-    operator<<(ostream &out, const Location &loc);
-    friend istream &
-    operator>>(istream &in, Location &loc);
-    friend bool
-    operator==(const Location &left, const Location &right);
+    friend ostream &operator<<(ostream &out, const Location &loc);
+    friend istream &operator>>(istream &in, Location &loc);
+    friend bool operator==(const Location &left, const Location &right);
 };
 
