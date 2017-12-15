@@ -16,9 +16,7 @@ public:
     vector<Order>
     getOrders(const Location &location);
     //Sets the order of the ID as paid
-    void
-    setOrderPaid(const size_t &id);
+    void setOrderPaid(const size_t &id);
     //Sets the order of the ID as delivered
-    void
-    setOrderDelivered(const size_t &id);
+    void setOrderDelivered(const size_t &id);
 };
