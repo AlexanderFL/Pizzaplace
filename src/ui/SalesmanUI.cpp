@@ -345,6 +345,16 @@ void SalesmanUI::showTotalOrder(Order& order, string& input)
 		stringify.push_back("Next");
 		stringify.push_back("Back");
 		printMenu(stringify, "Pizzas in this order (enter number to enter)");
+		string ordercontent = "Order consists of ";
+		vector<string> orderoffers = service.getOfferNames(order);
+		for (size_t i = 0; i < orderoffers.size(); i++)
+		{
+			ordercontent += orderoffers.at(i);
+			if (i != orderoffers.size() - 1) {
+				ordercontent += ", ";
+			}
+		}
+		printMessage(ordercontent);
 		printMessage("Total: " + to_string(service.getPriceOfOrder(order)) + " kr.-");
 		catchStringInput(input, pizzas.size() + 2);
 
