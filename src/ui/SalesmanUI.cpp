@@ -482,10 +482,17 @@ void SalesmanUI::selectPizza(const int& index)
 void SalesmanUI::deletePizza(Order& order, const int& index)
 {
 	vector<Pizza> pizzas = order.getPizzas();
+	if (pizzas.size() == 1) {
+		clear();
+		printMessage("You must at least have one pizza");
+		return;
+	}
 	// Removes the selected pizza at index
 	pizzas.erase(pizzas.begin() + index);
 	order.setPizzas(pizzas);
-	_pizzaNumber -= 1;
+	if (_pizzaNumber != 0) {
+		_pizzaNumber -= 1;
+	}
 	clear();
 }
 
@@ -560,6 +567,9 @@ void SalesmanUI::catchStringInput(string& input, const int& max, const int& min,
 		catch (const InvalidInput& ex)
 		{
 			printMessage(ex.getMessage());
+		}
+		catch (out_of_range) {
+			printMessage("No numbers larger than int32!");
 		}
 	}
 }
