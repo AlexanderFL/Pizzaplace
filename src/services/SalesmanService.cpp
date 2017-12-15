@@ -184,6 +184,9 @@ vector<string> SalesmanService::getOfferNames(const Order& order) {
 	for (size_t i = 0; i < temp.getPizzas().size(); ++i) {
 		offernames.push_back(getSingleOfferName(temp.getPizzas().at(i)));
 	}
+	if (!temp.getSides().empty()) {
+		offernames.push_back("Some sides");
+	}
 	return offernames;
 }
 
