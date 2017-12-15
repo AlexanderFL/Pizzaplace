@@ -4,8 +4,7 @@
 #include "SalesmanUI.h"
 #include "KitchenUI.h"
 
-void
-MainUI::startUI()
+void MainUI::startUI()
 {
 	cout << " _____ _                _____  _\n"
 		<< "|  __ (_)              |  __ \\| |\n"
