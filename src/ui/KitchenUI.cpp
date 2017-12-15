@@ -2,8 +2,7 @@
 
 KitchenUI::KitchenUI() {}
 
-void
-KitchenUI::showMainMenu()
+void KitchenUI::showMainMenu()
 {
 	string input;
 	while (true)
@@ -142,8 +141,7 @@ KitchenUI::showMainMenu()
 	}
 }
 
-string
-KitchenUI::showPizzaInfo(const Pizza &pizza) const
+string KitchenUI::showPizzaInfo(const Pizza &pizza) const
 {
 	string info = "A ";
 	info += pizza.getPizzaSize().getName() + " pizza with ";
@@ -171,8 +169,7 @@ KitchenUI::showPizzaInfo(const Pizza &pizza) const
 	return info;
 }
 
-string
-KitchenUI::showPizzaInfoShort(const Pizza &pizza) const
+string KitchenUI::showPizzaInfoShort(const Pizza &pizza) const
 {
 	string info = "Pizza ";
 	info += pizza.getID() + " - ";
