@@ -98,10 +98,7 @@ void SalesmanService::assignHomeAddress(Order& order, string address){
 /*			Validate the Order			*/
 bool SalesmanService::validateOrder(Order order) {
 	// Just check if both pizzas and sides vectors are emtpy
-	if (order.getPizzas().empty() && order.getSides().empty()) {
-		return false;
-	}
-	return true;
+	return !(order.getPizzas().empty() && order.getSides().empty());
 }
 
 void SalesmanService::validInput(const string& input, const int& max, const int& min) const{
@@ -300,7 +297,6 @@ int SalesmanService::calculateCost(const Order& order) {
 }
 
 int SalesmanService::calculateCost(const Pizza& pizza) {
-	int total = 0;
 	vector<Offer> singles = getSinglePizzaOffers();
 	int index = -1;
 	double sim = 0;
@@ -327,7 +323,7 @@ int SalesmanService::calculateCost(const Pizza& pizza) {
 		//Filter the toppings that are a part of the offer
 		Pizza specials = pizza - extras;
 		//Calculate the cost
-		total += calculateSimpleCost(specials);
+		int total = calculateSimpleCost(specials);
 		//Add the discount
 		total *= (singles.at(index).getPrice() / 100.0);
 		//Add all leftover toppings to the total

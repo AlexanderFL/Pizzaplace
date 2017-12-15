@@ -76,8 +76,13 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 					
 				}
 			}
+			cout << "Sides: " << endl;
+			vector<SideOrder> tempSides = offers.at(inputInInt).getOrder().getSides();
+			for (size_t i = 0; i < tempSides.size(); ++i) {
+				cout << "\t  " << tempSides.at(i).getName() << "    \t" << tempSides.at(i).getPrice() << " kr.-" << endl;
+
+			}
 			cout << "TOTAL: " << service.getPriceOfOrder(offers.at(inputInInt).getOrder()) << " kr.- " << endl;
-			cout << "TOTAL: " << offers.at(inputInInt).getPrice() << " kr.- " << endl << endl << endl;
 			printMenu({ "Choose offer", "Go back" }, "More info about offer");
 			getInput(input);
 			if (input == "1") 
