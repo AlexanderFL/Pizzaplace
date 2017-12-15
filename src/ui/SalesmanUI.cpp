@@ -395,8 +395,18 @@ void SalesmanUI::selectDeliveryMethod(Order &order, string &input)
 	{
 		service.setOrderToDelivery(order);
 
-		getInput("Home address", input);
-		order.setHomeAddress(input);
+		while (true)
+		{
+			try
+			{
+				getInput("Home address", input);
+				service.assignHomeAddress(order, input);
+				break;
+			}
+			catch (InvalidAddress) {
+				printMessage("Address must contain one number and one letter.");
+			}
+		}
 	}
 	clear();
 }

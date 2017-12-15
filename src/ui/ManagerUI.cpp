@@ -262,6 +262,7 @@ void ManagerUI::editTopping(int index)
 				}
 				catch (NumberInString)
 				{
+					clear();
 					printMessage("Number in string name is not valid");
 				}
 			}
