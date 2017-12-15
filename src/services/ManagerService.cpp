@@ -22,7 +22,7 @@ ManagerService::containsOnlyAlpha(string s)
 {
 	for (int i = 0; i < s.length(); i++)
 	{
-		if (!isalpha(s[i]))
+		if (s[i] > 255 || s[i] < -1 || !isalpha(s[i]))
 		{
 			throw NumberInString();
 		}
