@@ -543,7 +543,7 @@ void SalesmanUI::deleteSide(Order& order, const int& index)
 
 void SalesmanUI::markOrderAsPaid(Order & order)
 {
-	order.setOrderAsPaidFor(true);
+	service.setOrderAsPaid(order);
 }
 
 void SalesmanUI::finishOrder(Order& order)
