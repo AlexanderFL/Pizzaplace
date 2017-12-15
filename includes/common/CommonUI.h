@@ -2,7 +2,6 @@
 
 #include "Order.h"
 
-using namespace std;
 class CommonUI
 {
 public:
