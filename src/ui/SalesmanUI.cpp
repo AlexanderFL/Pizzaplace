@@ -39,66 +39,78 @@ void SalesmanUI::makeNewOrder(){
 			}
 		}
 		catch (FailedOpenFile) {
-			cout << "Failed to open a critical file...";
+			printMessage("Failed to open a critical file...");
 			break;
 		}
 	}
-	clear();
 }
 
 void SalesmanUI::pickFromMenu(Order& order, string& input) {
 	clear();
 	while (true) {
-		vector<string> names;
-		vector <Offer> offers = service.getItems<Offer>();
-		for (size_t i = 0; i < offers.size(); i++) {
-			names.push_back(offers.at(i).getName());
-		}
-		names.push_back("Go back");
-		printMenu(names, "Pizza Menu");
-		//See more about the order
-		getInput(input);
-		int inputInInt = service.convertStringToInt(input) - 1;
-		clear();
-		//Go back
-		if (inputInInt + 1 == names.size()) {
-			break;
-		}
-		while (true) {
-			cout << "Offer: " << offers.at(inputInInt).getName() << endl;
-			cout << "-----------------------------------" << endl;
-			
- 			vector<Pizza> tempPizza = offers.at(inputInInt).getOrder().getPizzas();
-			for (size_t i = 0; i < tempPizza.size(); ++i) {
-				cout << "   Crust: " << tempPizza.at(i).getCrust().getName() << "  \t" << tempPizza.at(i).getCrust().getPrice() << " kr.-" << endl;
-				cout << "    Size: " << tempPizza.at(i).getPizzaSize().getName() << " \t+" << (tempPizza.at(i).getPizzaSize().getPriceMod() - 1) * 100 << " %" << endl;
-				cout << "Toppings: " << endl;
-				vector<Topping> tempToppings = tempPizza.at(i).getToppings();
-				for (size_t j = 0; j < tempToppings.size(); ++j) {
-					cout << "\t  " << tempToppings.at(j).getName() << "    \t" << tempToppings.at(j).getPrice() << " kr.-" << endl;
-					
+		try {
+			vector<string> names;
+			vector <Offer> offers = service.getItems<Offer>();
+			for (size_t i = 0; i < offers.size(); i++) {
+				names.push_back(offers.at(i).getName());
+			}
+			names.push_back("Go back");
+			printMenu(names, "Pizza Menu");
+			//See more about the order
+			getInput(input);
+			int inputInInt = service.convertStringToInt(input) - 1;
+			clear();
+			//Go back
+			if (inputInInt + 1 == names.size()) {
+				break;
+			}
+			while (true) {
+				cout << "Offer: " << offers.at(inputInInt).getName() << endl;
+				cout << "-----------------------------------" << endl;
+
+				vector<Pizza> tempPizza = offers.at(inputInInt).getOrder().getPizzas();
+				for (size_t i = 0; i < tempPizza.size(); ++i) {
+					cout << "   Crust: " << tempPizza.at(i).getCrust().getName() << "  \t" << tempPizza.at(i).getCrust().getPrice() << " kr.-" << endl;
+					cout << "    Size: " << tempPizza.at(i).getPizzaSize().getName() << " \t+" << (tempPizza.at(i).getPizzaSize().getPriceMod() - 1) * 100 << " %" << endl;
+					cout << "Toppings: " << endl;
+					vector<Topping> tempToppings = tempPizza.at(i).getToppings();
+					for (size_t j = 0; j < tempToppings.size(); ++j) {
+						cout << "\t  " << tempToppings.at(j).getName() << "    \t" << tempToppings.at(j).getPrice() << " kr.-" << endl;
+
+					}
+				}
+				cout << "Sides: " << endl;
+				vector<SideOrder> tempSides = offers.at(inputInInt).getOrder().getSides();
+				for (size_t i = 0; i < tempSides.size(); ++i) {
+					cout << "\t  " << tempSides.at(i).getName() << "    \t" << tempSides.at(i).getPrice() << " kr.-" << endl;
+
+				}
+				cout << "TOTAL: " << service.getPriceOfOrder(offers.at(inputInInt).getOrder()) << " kr.- " << endl;
+				printMenu({ "Choose offer", "Go back" }, "More info about offer");
+				getInput(input);
+				if (input == "1")
+				{
+					order = offers.at(inputInInt).getOrder();
+					makeYourOwnMenu(order, input, true);
+					break;
+				}
+				if (input == "2")
+				{
+					clear();
+					break;
+				}
+				else {
+					clear();
+					printMessage("Invalid input");
 				}
 			}
-			cout << "Sides: " << endl;
-			vector<SideOrder> tempSides = offers.at(inputInInt).getOrder().getSides();
-			for (size_t i = 0; i < tempSides.size(); ++i) {
-				cout << "\t  " << tempSides.at(i).getName() << "    \t" << tempSides.at(i).getPrice() << " kr.-" << endl;
-
-			}
-			cout << "TOTAL: " << service.getPriceOfOrder(offers.at(inputInInt).getOrder()) << " kr.- " << endl;
-			printMenu({ "Choose offer", "Go back" }, "More info about offer");
-			getInput(input);
-			if (input == "1") 
-			{
-				order = offers.at(inputInInt).getOrder();
-				makeYourOwnMenu(order, input, true);
-				break;
-			}
-			if (input == "2")
-			{
-				clear();
-				break;
-			}
+		}
+		catch (out_of_range) {
+			printMessage("Invalid input");
+		}
+		catch (InvalidString) {
+			clear();
+			printMessage("Invalid input");
 		}
 	}
 }
@@ -182,24 +194,35 @@ void SalesmanUI::makeYourOwnMenu(Order& order, string& input, const bool& isFrom
 
 bool SalesmanUI::selectLocation(Order& order, string& input)
 {
-	
-	vector<Location> locations = service.getItems<Location>();
-	vector<string> stringifyLocations;
-	for (size_t i = 0; i < locations.size(); i++) {
-		stringifyLocations.push_back(locations.at(i).getAddress());
+	while (true) {
+		try {
+			vector<Location> locations = service.getItems<Location>();
+			vector<string> stringifyLocations;
+			for (size_t i = 0; i < locations.size(); i++) {
+				stringifyLocations.push_back(locations.at(i).getAddress());
+			}
+			stringifyLocations.push_back("Go back");
+			printMenu({ stringifyLocations }, "Please A Select Location");
+			catchStringInput(input, locations.size() + 1);
+			int inputToInt = convertToInt(input);
+			if (inputToInt != locations.size() + 1)
+			{
+				order.setLocation(locations.at(convertToInt(input) - 1));
+				clear();
+				return false;
+			}
+			clear();
+			return true;
+		}
+		catch (EmptyVector) {
+			printMessage("No locations available");
+			return true;
+		}
+		catch (FailedOpenFile) {
+			printMessage("Failed to open file");
+			return true;
+		}
 	}
-	stringifyLocations.push_back("Go back");
-	printMenu({stringifyLocations}, "Please A Select Location");
-	catchStringInput(input, locations.size() + 1);
-	int inputToInt = convertToInt(input);
-	if (inputToInt != locations.size() + 1)
-	{
-		order.setLocation(locations.at(convertToInt(input)-1));
-		clear();
-		return false;
-	}
-	clear();
-	return true;
 }
 
 
@@ -208,12 +231,19 @@ bool SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, string& input)
 	while (true)
 	{
 		printMenu({"Select from menu", "Make your own pizza!", "Go back"}, "Make a new order");
-	
 		catchStringInput(input, 3, 1);
 		if (input == "1") {
-			pickFromMenu(order, input);
-			pizzaFromMenu = true;
-			return false;
+			try {
+				pickFromMenu(order, input);
+				pizzaFromMenu = true;
+				return false;
+			}
+			catch (EmptyVector) {
+				printMessage("No offers available");
+			}
+			catch (FailedOpenFile) {
+				printMessage("Failed to open file.");
+			}
 		}
 		else if (input == "2") {
 			makeYourOwnMenu(order, input);
@@ -521,7 +551,7 @@ void SalesmanUI::catchStringInput(string& input, const int& max, const int& min,
 		{
 			getInput(msg, input);
 			// If max is equal to min, then don't bother check if input is valid
-			if (max != min)
+			if (max != 0 && min != 0)
 			{
 				service.validInput(input, max, min);
 			}

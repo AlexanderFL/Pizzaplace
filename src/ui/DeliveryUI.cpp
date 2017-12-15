@@ -172,9 +172,13 @@ void DeliveryUI::ordersMenu() {
 
 					//ADD NAME OF PLACE HERE
 					printMenu(names, "Delivery from " + locations.at(index).getAddress());
-
 					getInput(input);
 					try {
+						int index = service.convertStringToInt(input);
+						if (index == names.size()) {
+							clear();
+							break;
+						}
 						clear();
 						orderMenu(service.convertStringToInt(input) - 1, orders, index);
 					}
