@@ -50,9 +50,9 @@ void ManagerService::validProcent(int p)
 
 void ManagerService::validateOffer(const Offer &offer)
 {
-	if (offer.getOrder().getPizzas().empty() && offer.getOrder().getSides().empty())
+	if (offer.getOrder().getPizzas().empty())
 	{
-		throw InvalidOffer("Offer needs to have a pizza or side in it.");
+		throw InvalidOffer("Offer needs to have a pizza in it.");
 	}
 	if (offer.getPrice() == 0)
 	{

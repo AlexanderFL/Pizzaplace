@@ -178,11 +178,13 @@ void ManagerUI::showToppingDeleteMenu()
 		{
 			clear();
 			printMessage("There are currently no toppings.");
+			break;
 		}
 		catch (FailedOpenFile)
 		{
 			clear();
 			printMessage("There are currently no toppings.");
+			break;
 		}
 	}
 }
@@ -521,9 +523,13 @@ void ManagerUI::showSizeCreationMenu()
 		int sizeInInt = service.convertStringToInt(size);
 		//validating size
 		service.validPrice(sizeInInt);
-		service.addItem<PizzaSize>(PizzaSize(name, sizeInInt / 100));
+		service.addItem<PizzaSize>(PizzaSize(name, sizeInInt));
 		clear();
 		printMessage("Pizza size was created.");
+	}
+	catch (InvalidPrice) {
+		clear();
+		printMessage("Invalid price");
 	}
 	catch (NumberInString)
 	{
@@ -711,6 +717,10 @@ void ManagerUI::showCrustCreationMenu()
 		clear();
 		printMessage("Invalid price.");
 	}
+	catch (InvalidPrice) {
+		clear();
+		printMessage("Invalid price.");
+	}
 }
 
 void ManagerUI::showCrustDeleteMenu()
@@ -878,6 +888,11 @@ ManagerUI::showSidesCreationMenu()
 		printMessage("Invalid name");
 	}
 	catch (InvalidString)
+	{
+		clear();
+		printMessage("Invalid price.");
+	}
+	catch (InvalidPrice)
 	{
 		clear();
 		printMessage("Invalid price.");
@@ -1064,12 +1079,17 @@ void ManagerUI::showOfferCreationMenu()
 			catch (InvalidString)
 			{
 				clear();
-				printMessage("Invalid Price. (1-100)");
+				printMessage("Invalid Price. (1-99)");
 			}
 			catch (InvalidPrice)
 			{
 				clear();
-				printMessage("Invalid Price. (1-100)");
+				printMessage("Invalid Price. (1-99)");
+			}
+			catch (out_of_range)
+			{
+				clear();
+				printMessage("Invalid Price. (1-99)");
 			}
 		}
 		else if (input == "3")
