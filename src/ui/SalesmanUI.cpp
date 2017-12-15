@@ -75,7 +75,7 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 	cin >> input;
 	int inputInInt = convertToInt(input);
 	
-	order = offers.at(inputInInt).getOrder();
+	order = offers.at(inputInInt - 1).getOrder();
 }
 
 void SalesmanUI::makeYourOwnMenu(Order& order, string& input)
@@ -171,7 +171,7 @@ void SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, string& input)
 
 	catchStringInput(input, 2, 1);
 
-	if (convertToInt(input) == '1') {
+	if (convertToInt(input) == 1) {
 		pickFromMenu(order, input);
 		pizzaFromMenu = true;
 	}
