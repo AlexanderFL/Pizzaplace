@@ -3,12 +3,17 @@
 
 const string Location::filename = "locations.dat";
 
+/*
+*************************************************
+				PUBLIC FUNCTIONS
+*************************************************
+*/
+
 Location::Location() {}
 
+/*		Get functions		*/
 Location::Location(const string address)
-	:address(address)
-{
-}
+	:address(address) {}
 
 string Location::getAddress() const {
 	return this->address;
@@ -18,10 +23,12 @@ string Location::getName() const {
 	return this->address;
 }
 
+/*		Set functions		*/
 void Location::setAddress(const string& address) {
 	this->address = address;
 }
 
+/*		Operator overloads		*/
 ostream& operator << (ostream& out, const Location& loc) {
 	if (&out != &cout) {
 		size_t len = loc.address.length() + 1;

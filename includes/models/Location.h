@@ -12,19 +12,19 @@ public:
 private:
 	string address;
 public:
-	// Constructors
+	/*		Constructors		*/
 	Location();
 	explicit Location(string address);
 
-	// Get functions
+	/*		Get functions		*/
 	string getAddress() const;
 	// Just for a template
 	string getName() const;
 
-	// Set functions
+	/*		Set functions		*/
 	void setAddress(const string& address);
 
-	// Operator overloads
+	/*		Operator overloads		*/
 	friend ostream& operator << (ostream& out, const Location& loc);
 	friend istream& operator >> (istream& in, Location& loc);
 	friend bool operator == (const Location& left, const Location& right);

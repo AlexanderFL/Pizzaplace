@@ -16,21 +16,11 @@ private:
 	Data repo;
 public:
 	ManagerService();
-	void addTopping(Topping& topping);
-	void addSideOrder(SideOrder& side);
-	void addCrust(PizzaCrust& crust);
-	void addSpecialOrder(string ordername, const Order& order);
-	void addDeliveryPlace(string place);
-	void addLocation(Location& location);
-	int getOrderTotalCost(const Order& order);
 	void replaceToppingInFile(const Topping& topping, int index);
-	//Order
-	void addOffer(Offer& offer);
+
 	//Validation
 	void containsOnlyAlpha(string s);
 	void validPrice(int p);
 	void validProcent(int p);
 	void validateOffer(const Offer& offer);
-private:
-	void validateString(const string& str);
 };

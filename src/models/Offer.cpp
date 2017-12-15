@@ -6,13 +6,10 @@ const string Offer::filename = "offers.dat";
 Offer::Offer() {
 	name = "Unnamed";
 	price = 0;
-	fixed = true;
 }
 
-Offer::Offer(string name, Order order, int price, bool fixed)
-	:name(name), order(order), price(price), fixed(fixed)
-{
-}
+Offer::Offer(string name, Order order, int price)
+	:name(name), order(order), price(price) {}
 
 string Offer::getName() const {
 	return this->name;
@@ -24,10 +21,6 @@ Order Offer::getOrder()const {
 
 int Offer::getPrice() const {
 	return this->price;
-}
-
-bool Offer::getFixed() const {
-	return this->fixed;
 }
 
 void Offer::setName(const string& name) {
@@ -42,10 +35,6 @@ void Offer::setPrice(const int& price) {
 	this->price = price;
 }
 
-void Offer::setFixed(const bool& fixed) {
-	this->fixed = fixed;
-}
-
 ostream& operator << (ostream& out, const Offer& offer) {
 	if (&out != &cout) {
 		size_t len = offer.name.length() + 1;
@@ -53,7 +42,6 @@ ostream& operator << (ostream& out, const Offer& offer) {
 		out.write(offer.name.c_str(), len);
 		out << offer.order;
 		out.write((char*)(&offer.price), sizeof(int));
-		out.write((char*)(&offer.fixed), sizeof(bool));
 	}
 	else {
 		cout << "Name: " << offer.name << endl;
@@ -72,7 +60,6 @@ istream& operator >> (istream& in, Offer& offer) {
 		delete[] str;
 		in >> offer.order;
 		in.read((char*)(&offer.price), sizeof(int));
-		in.read((char*)(&offer.fixed), sizeof(bool));
 	}
 	else {
 		cout << "\nName: ";
