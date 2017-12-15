@@ -4,8 +4,7 @@
 #include "SalesmanService.h"
 #include <stdlib.h>
 
-SalesmanUI::SalesmanUI()
-{
+SalesmanUI::SalesmanUI(){
 	_pizzaNumber = 0;
 }
 
@@ -14,8 +13,7 @@ void SalesmanUI::salesmanMenu() {
 }
 
 //Let the user pick from menu
-void SalesmanUI::makeNewOrder()
-{
+void SalesmanUI::makeNewOrder(){
 	Order order;
 	SalesmanService service;
 	bool pizzaFromMenu = false;
@@ -30,9 +28,7 @@ void SalesmanUI::makeNewOrder()
 			// Prompt the user to make a new order by either
 			// selecting from menu or making his own pizza
 			newOrderStart(order, pizzaFromMenu, input);
-
 			if (!pizzaFromMenu) {
-
 				makeYourOwnMenu(order, input);
 				break;
 			}
@@ -46,36 +42,42 @@ void SalesmanUI::makeNewOrder()
 }
 
 void SalesmanUI::pickFromMenu(Order& order, string& input) {
-	system("CLS");
-	vector <Offer> offers = service.getItems<Offer>();
-	cout <<"\n\t\tPIZZA MENU!" << endl;
-
-	for (size_t i = 0; i < offers.size(); i++) {
-		cout << endl;
-		cout << "-------------------------" << endl << endl;
-		cout << "Order nr." << i + 1 << ": ";
-		cout << offers.at(i).getName() << endl;
-		
-		vector<Pizza> tempPizza = offers.at(i).getOrder().getPizzas();
-		for (size_t j = 0; j < tempPizza.size(); j++) {
-			cout << "Pizza nr." << j+1 << endl; 
-			cout << "   Crust: " << tempPizza.at(j).getCrust().getName() << "  \t" << tempPizza.at(j).getCrust().getPrice() << " kr.-" << endl;
-			cout << "    Size: " << tempPizza.at(j).getPizzaSize().getName() << " \t+" << (tempPizza.at(j).getPizzaSize().getPriceMod()-1)*100 << " %" << endl;
+	clear();
+	while (true) {
+		vector<string> names;
+		vector <Offer> offers = service.getItems<Offer>();
+		for (size_t i = 0; i < offers.size(); i++) {
+			names.push_back(offers.at(i).getName());
+		}
+		names.push_back("Go back");
+		printMenu(names, "Pizza Menu");
+		//See more about the order
+		getInput(input);
+		int inputInInt = service.convertStringToInt(input) - 1;
+		clear();
+		//Go back
+		if (inputInInt + 1 == names.size()) {
+			break;
+		}
+		while (true) {
+			cout << "Offer: " << offers.at(inputInInt).getName() << endl;
+			cout << "-----------------------------------" << endl;
+ 			vector<Pizza> tempPizza = offers.at(inputInInt).getOrder().getPizzas();
+			cout << "   Crust: " << tempPizza.at(inputInInt).getCrust().getName() << "  \t" << tempPizza.at(inputInInt).getCrust().getPrice() << " kr.-" << endl;
+			cout << "    Size: " << tempPizza.at(inputInInt).getPizzaSize().getName() << " \t+" << (tempPizza.at(inputInInt).getPizzaSize().getPriceMod() - 1) * 100 << " %" << endl;
 			cout << "Toppings: " << endl;
-			vector<Topping> tempToppings = tempPizza.at(j).getToppings();
-			for (size_t k = 0; k < tempToppings.size(); k++) {
-				cout << "\t  " << tempToppings.at(k).getName() << "    \t" << tempToppings.at(k).getPrice() << " kr.-" << endl;
+			vector<Topping> tempToppings = tempPizza.at(inputInInt).getToppings();
+			cout << "\t  " << tempToppings.at(inputInInt).getName() << "    \t" << tempToppings.at(inputInInt).getPrice() << " kr.-" << endl;
+			cout << "TOTAL: " << service.getPriceOfOrder(offers.at(inputInInt).getOrder()) << " kr.- " << endl;
+			cout << "TOTAL: " << offers.at(inputInInt).getPrice() << " kr.- " << endl << endl << endl;
+			printMenu({ "Go back" }, "More info about offer");
+			getInput(input);
+			if (input == "1") {
+				clear();
+				break;
 			}
 		}
-		cout << "TOTAL: " << service.getPriceOfOrder(offers.at(i).getOrder()) << " kr.- " << endl;
-		cout << "TOTAL: " << offers.at(i).getPrice() << " kr.- " << endl;
 	}
-	cout << endl;
-	cout << "Which order would you like?\nInput order number: ";
-	cin >> input;
-	int inputInInt = convertToInt(input);
-	
-	order = offers.at(inputInInt).getOrder();
 }
 
 void SalesmanUI::makeYourOwnMenu(Order& order, string& input)
@@ -166,7 +168,7 @@ void SalesmanUI::newOrderStart(Order& order, bool& pizzaFromMenu, string& input)
 
 	catchStringInput(input, 2, 1);
 
-	if (tolower(convertToInt(input)) == '1') {
+	if (input == "1") {
 		pickFromMenu(order, input);
 		pizzaFromMenu = true;
 	}
@@ -287,11 +289,9 @@ void SalesmanUI::showTotalOrder(Order & order)
 
 			for (size_t i = 0; i < order.getPizzas().size(); i++)
 			{
-				//string title = "Order nr. " + to_string(i + 1);
+				string title = "Order nr. " + to_string(i + 1);
 				//printMenu({"Test for", "a new", "feature"}, title, true);
-
 				tempPizza = order.getPizzas().at(i);
-				cout << "Pizza nr. " << (i + 1) << ": " << endl;
 				cout << "\t    Size: " << tempPizza.getPizzaSize().getName() << "  \t+" << (tempPizza.getPizzaSize().getPriceMod() - 1) * 100 << " %" << endl;
 				cout << "\t   Crust: " << tempPizza.getCrust().getName() << "  \t" << tempPizza.getCrust().getPrice() << " kr.-" << endl;
 				cout << "\tToppings: " << endl;
