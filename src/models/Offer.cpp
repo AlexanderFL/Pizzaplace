@@ -32,8 +32,7 @@ void Offer::setName(const string &name)
 	this->name = name;
 }
 
-void
-Offer::setOrder(const Order &order)
+void Offer::setOrder(const Order &order)
 {
 	this->order = order;
 }
