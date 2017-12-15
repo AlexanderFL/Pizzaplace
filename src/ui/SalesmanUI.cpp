@@ -62,16 +62,19 @@ void SalesmanUI::pickFromMenu(Order& order, string& input) {
 		while (true) {
 			cout << "Offer: " << offers.at(inputInInt).getName() << endl;
 			cout << "-----------------------------------" << endl;
-			// Vantar for lykkju til að sýna pizzurnar ekki nota inputInInt
+			
  			vector<Pizza> tempPizza = offers.at(inputInInt).getOrder().getPizzas();
-			cout << "   Crust: " << tempPizza.at(inputInInt).getCrust().getName() << "  \t" << tempPizza.at(inputInInt).getCrust().getPrice() << " kr.-" << endl;
-			cout << "    Size: " << tempPizza.at(inputInInt).getPizzaSize().getName() << " \t+" << (tempPizza.at(inputInInt).getPizzaSize().getPriceMod() - 1) * 100 << " %" << endl;
-			cout << "Toppings: " << endl;
-			// Vantar aðra for lykkju til að sýna toppings ekki nota inputInInt
-			vector<Topping> tempToppings = tempPizza.at(inputInInt).getToppings();
-			cout << "\t  " << tempToppings.at(inputInInt).getName() << "    \t" << tempToppings.at(inputInInt).getPrice() << " kr.-" << endl;
-			cout << "TOTAL: " << service.getPriceOfOrder(offers.at(inputInInt).getOrder()) << " kr.- " << endl;
-			cout << "TOTAL: " << offers.at(inputInInt).getPrice() << " kr.- " << endl << endl << endl;
+			for (size_t i = 0; i < tempPizza.size(); ++i) {
+				cout << "   Crust: " << tempPizza.at(i).getCrust().getName() << "  \t" << tempPizza.at(i).getCrust().getPrice() << " kr.-" << endl;
+				cout << "    Size: " << tempPizza.at(i).getPizzaSize().getName() << " \t+" << (tempPizza.at(i).getPizzaSize().getPriceMod() - 1) * 100 << " %" << endl;
+				cout << "Toppings: " << endl;
+				vector<Topping> tempToppings = tempPizza.at(i).getToppings();
+				for (size_t j = 0; j < tempToppings.size(); ++j) {
+					cout << "\t  " << tempToppings.at(j).getName() << "    \t" << tempToppings.at(j).getPrice() << " kr.-" << endl;
+					cout << "TOTAL: " << service.getPriceOfOrder(offers.at(j).getOrder()) << " kr.- " << endl;
+					cout << "TOTAL: " << offers.at(j).getPrice() << " kr.- " << endl << endl << endl;
+				}
+			}
 			printMenu({ "Go back" }, "More info about offer");
 			getInput(input);
 			if (input == "1") {
