@@ -2,20 +2,17 @@
 #include <iomanip> //setw
 #include <stdlib.h>
 
-void
-CommonUI::clear() const
+void CommonUI::clear() const
 {
 	system("CLS");
 }
 
-void
-CommonUI::printMenu(const vector<string> &options) const
+void CommonUI::printMenu(const vector<string> &options) const
 {
 	printOptions(options, biggestStringSize(options));
 }
 
-void
-CommonUI::printMenu(const vector<string> &options, const string &title, const bool &displayOnly) const
+void CommonUI::printMenu(const vector<string> &options, const string &title, const bool &displayOnly) const
 {
 	vector<string> temp = options;
 	temp.push_back(title);
@@ -30,14 +27,12 @@ CommonUI::printMenu(const vector<string> &options, const string &title, const bo
 	printOptions(options, biggest, displayOnly);
 }
 
-void
-CommonUI::printArrow(const string &str) const
+void CommonUI::printArrow(const string &str) const
 {
 	cout << "\t|\n\t-->" << str << ": ";
 }
 
-void
-CommonUI::printMessage(const string &str) const
+void CommonUI::printMessage(const string &str) const
 {
 	cout << "\t";
 	for (unsigned int i = 0; i < str.size() + 4; i++)
@@ -52,24 +47,21 @@ CommonUI::printMessage(const string &str) const
 	cout << endl;
 }
 
-void
-CommonUI::getInput(string &str) const
+void CommonUI::getInput(string &str) const
 {
 	printArrow("Input");
 	cin >> ws;
 	getline(cin, str);
 }
 
-void
-CommonUI::getInput(const string &text, string &str) const
+void CommonUI::getInput(const string &text, string &str) const
 {
 	printArrow(text);
 	cin >> ws;
 	getline(cin, str);
 }
 
-void
-CommonUI::getInput(const string &text, char &input) const
+void CommonUI::getInput(const string &text, char &input) const
 {
 	printArrow(text);
 	input = _getwche();
@@ -79,8 +71,7 @@ CommonUI::getInput(const string &text, char &input) const
 //Private functions
 
 //print out minus signs (for lines)
-void
-CommonUI::printLines(size_t size) const
+void CommonUI::printLines(size_t size) const
 {
 	cout << "\t";
 	for (unsigned int i = 0; i < size * 2; i++)
@@ -90,8 +81,7 @@ CommonUI::printLines(size_t size) const
 	cout << "-------------\n";
 }
 
-void
-CommonUI::printOptions(const vector<string> &options, size_t biggest, bool displayOnly) const
+void CommonUI::printOptions(const vector<string> &options, size_t biggest, bool displayOnly) const
 {
 	for (size_t i = 0; i < options.size(); i++)
 	{
@@ -152,8 +142,7 @@ CommonUI::printOptions(const vector<string> &options, size_t biggest, bool displ
 	printLines(biggest);
 }
 
-size_t
-CommonUI::biggestStringSize(const vector<string> &vec) const
+size_t CommonUI::biggestStringSize(const vector<string> &vec) const
 {
 	size_t biggest = 0;
 	for (size_t i = 0; i < vec.size(); i++)
@@ -167,16 +156,14 @@ CommonUI::biggestStringSize(const vector<string> &vec) const
 }
 
 //Printing the order
-void
-CommonUI::showPizzaInfoShort(const Pizza &pizza) const
+void CommonUI::showPizzaInfoShort(const Pizza &pizza) const
 {
 	cout << pizza.getToppings().size() << " toppings, ";
 	cout << pizza.getPizzaSize().getName() << " ";
 	cout << pizza.getCrust().getName() << " pizza.";
 }
 
-void
-CommonUI::showOrderInfo(const Order &order) const
+void CommonUI::showOrderInfo(const Order &order) const
 {
 	//TODO: FIX
 	cout << "\n\t\tPizza Place " << endl;
@@ -231,8 +218,7 @@ CommonUI::showOrderInfo(const Order &order) const
 	cout << endl;
 }
 
-void
-CommonUI::showOrderInfoShort(const Order &order) const
+void CommonUI::showOrderInfoShort(const Order &order) const
 {
 	cout << order.getPizzas().size() << " pizzas, ";
 	cout << order.getSides().size() << " side orders, ";

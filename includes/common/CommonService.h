@@ -11,11 +11,9 @@ private:
     Data repo;
 public:
     //Validates that a string is digit
-    void
-    validateStringIsDigit(const string &str) const;
+    void validateStringIsDigit(const string &str) const;
     //Converts a string to an int
-    int
-    convertStringToInt(const string &str) const;
+    int convertStringToInt(const string &str) const;
 
     /*	TEMPLATES	*/
     //Gets all the items from its file
