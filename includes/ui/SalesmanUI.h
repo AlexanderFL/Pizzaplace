@@ -15,75 +15,47 @@ private:
 public:
     SalesmanUI();
     // Starts the UI
-    void
-    salesmanMenu();
-    void
-    makeNewOrder();
+    void salesmanMenu();
+    void makeNewOrder();
 private:
-
     // Start by selecting pizza location
-    bool
-    selectLocation(Order &order, string &input);
+    bool selectLocation(Order &order, string &input);
     // Asks if user wants to make his own pizza or select from menu
-    bool
-    newOrderStart(Order &order, bool &pizzaFromMenu, string &input);
+    bool newOrderStart(Order &order, bool &pizzaFromMenu, string &input);
     // Picking pizzas from menu
-    void
-    pickFromMenu(Order &order, string &input);
+    void pickFromMenu(Order &order, string &input);
     // Order menu
-    void
-    makeYourOwnMenu(Order &order, string &input, const bool &isFromMenu = false);
+    void makeYourOwnMenu(Order &order, string &input, const bool &isFromMenu = false);
     // Pizza menu's
-    void
-    selectCrust(Order &order, string &input);
-    void
-    selectSize(Order &order, string &input);
-    void
-    selectToppings(Order &order, string &input);
-    void
-    selectSides(Order &order, string &input);
+    void selectCrust(Order &order, string &input);
+    void selectSize(Order &order, string &input);
+    void selectToppings(Order &order, string &input);
+    void selectSides(Order &order, string &input);
     // Order menu's 
-    void
-    addComment(Order &order);
-    void
-    selectDeliveryMethod(Order &order, string &input);
-    void
-    addAnotherPizza(Order &order);
+    void addComment(Order &order);
+    void selectDeliveryMethod(Order &order, string &input);
+    void addAnotherPizza(Order &order);
     // Viewing and editing Order
-    void
-    showTotalOrder(Order &order, string &input);
+    void showTotalOrder(Order &order, string &input);
     // Viewing and editing a single pizza
-    void
-    showSinglePizza(Order &order, const int &index, string &input);
-    void
-    showToppings(Pizza &pizza, string &input);
-    void
-    showCrust(Pizza &pizza, string &input);
-    void
-    showSize(Pizza &pizza, string &input);
-    void
-    selectPizza(const int &index);
-    void
-    deletePizza(Order &order, const int &index);
+    void showSinglePizza(Order &order, const int &index, string &input);
+    void showToppings(Pizza &pizza, string &input);
+    void showCrust(Pizza &pizza, string &input);
+    void showSize(Pizza &pizza, string &input);
+    void selectPizza(const int &index);
+    void deletePizza(Order &order, const int &index);
     // Viewing and editing side orders
-    void
-    showSides(Order &order, string &input);
-    void
-    showSingleSide(Order &order, const int &index, string &input);
-    void
-    deleteSide(Order &order, const int &index);
+    void showSides(Order &order, string &input);
+    void showSingleSide(Order &order, const int &index, string &input);
+    void deleteSide(Order &order, const int &index);
     // Marking order as paid
-    void
-    markOrderAsPaid(Order &order);
+    void markOrderAsPaid(Order &order);
     // Finishing order
-    void
-    finishOrder(Order &order);
+    void finishOrder(Order &order);
 
     // Use for try-catching input from user
-    void
-    catchStringInput(string &input, const int &max, const int &min = 1, const std::string &msg = "Input");
-    int
-    convertToInt(string &input);
+    void catchStringInput(string &input, const int &max, const int &min = 1, const std::string &msg = "Input");
+    int convertToInt(string &input);
 
     // Make a string vector for the printMenu functions
     // PizzaSize has a unique price modifier so we need a special function for it.
