@@ -1,11 +1,8 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include <stdlib.h>
+
 #include "Pizza.h"
 #include "SideOrder.h"
 #include "Location.h"
-using namespace std;
 
 /*
 	Keeps the user order, which can be multiple pizzas 

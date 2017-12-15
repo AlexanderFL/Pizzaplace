@@ -1,5 +1,5 @@
-#include <fstream>
 #include "SideOrder.h"
+#include <fstream>
 
 const string SideOrder::filename = "sideorders.dat";
 

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 enum profession { ADMIN, MANAGER, SALESMAN, KITCHEN, DELIVERY };
